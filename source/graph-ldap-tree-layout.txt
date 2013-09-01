@@ -1,0 +1,37 @@
+.. graphviz::
+
+    digraph tree
+    {
+
+        charset="latin1";
+        fixedsize=true;
+        node [style="rounded", width=0, height=0, shape=box, concentrate=true]
+
+        "dc=holding,dc=inc" [shape=box] {
+                rank=same
+                "path-point-groups" [shape=point]
+                "ou=Groups"
+            }
+
+        "dc=holding,dc=inc" -> "path-point-groups" [arrowhead=none]
+
+        "path-point-groups" -> "ou=Groups" {
+                rank=same
+                "path-point-people" [shape=point]
+                "ou=People"
+            }
+
+        "path-point-groups" -> "path-point-people" [arrowhead=none]
+
+        "path-point-people" -> "ou=People" {
+                rank=same
+                "path-point-specialusers" [shape=point]
+                "ou=Special Users"
+            }
+
+        "path-point-people" -> "path-point-specialusers" [arrowhead=none]
+
+        "path-point-specialusers" -> "ou=Special Users"
+
+    }
+
