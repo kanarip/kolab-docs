@@ -15,9 +15,9 @@ Packages come in three categories:
 #.  Additional dependencies not supplied by or out-dated in the base platform;
 
     These packages we strive to keep to an absolute minimum.
-    
+
 We tend to create packages disabled for all repositories by default, and
-therefore each package creation includes a segment:
+therefore each package creation includes a segment by default:
 
 .. parsed-literal::
 
@@ -33,13 +33,15 @@ cyrus-imapd
     # :command:`osc meta pkg Kolab:Development cyrus-imapd -F -` << EOF
     <package name="cyrus-imapd">
         <title>cyrus-imapd</title>
-        <description></description>
-        <url>http://kolab.org/about/cyrus-imapd</url>
+        <description>Cyrus IMAP server</description>
+        <url>http://www.cyrusimap.org</url>
     </package>
     EOF
 
 httpd
--------
+-----
+
+Version 2.4 or later is required for :term:`Perfect Forward Secrecy`.
 
 .. parsed-literal::
 
@@ -172,8 +174,42 @@ libkolabxml
     </package>
     EOF
 
+nginx
+-----
+
+The version of NGINX in Enterprise Linux 6 is rather outdated (1.0.15 at the
+time of this writing).
+
+.. parsed-literal::
+
+    # :command:`osc meta pkg Kolab:Development nginx -F -` << EOF
+    <package name="nginx">
+        <title>nginx</title>
+        <description></description>
+        <url>http://kolab.org/about/nginx</url>
+        <build>
+            <disable repository="CentOS_6"/>
+            <disable repository="Debian_6.0"/>
+            <disable repository="Debian_7.0"/>
+            <disable repository="Fedora_18"/>
+            <disable repository="Fedora_19"/>
+            <disable repository="openSUSE_12.1"/>
+            <disable repository="openSUSE_12.2"/>
+            <disable repository="openSUSE_12.3"/>
+            <disable repository="Ubuntu_12.04"/>
+            <disable repository="Ubuntu_12.10"/>
+            <disable repository="Ubuntu_13.04"/>
+            <disable repository="Ubuntu_13.10"/>
+            <disable repository="UCS_3.0"/>
+            <disable repository="UCS_3.1"/>
+        </build>
+    </package>
+    EOF
+
 openssl
 -------
+
+Version 1.0.1 or later is required for :term:`Perfect Forward Secrecy`.
 
 .. parsed-literal::
 

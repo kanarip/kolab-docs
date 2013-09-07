@@ -173,6 +173,10 @@ Glossary
         the parent domain (i.e. an :term:`alias domain name space` or
         :term:`child domain name space`).
 
+    Perfect Forward Secrecy
+
+        *Perfect Forward Secrecy* or PFS (...)
+
     primary domain
 
         A primary domain is (...)
