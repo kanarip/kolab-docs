@@ -2,9 +2,80 @@
 Upgrading from Kolab 3.0
 ========================
 
-.. todo::
+This chapter contains the upgrade notes for moving forward from Kolab 3.0 to
+Kolab 3.1.
 
-    No procedure has been authored yet.
+ChangeLog
+=========
+
+Kolab 3.1 compared to Kolab 3.0 ships the following additional components:
+
+#.  **iRony**
+
+    A DAV access provider for groupware, including WebDAV with help of the
+    **chwala** API, and CardDAV and CalDAV.
+
+#.  **chwala**
+
+    A properly designed and integrated file storage management layer, primarily
+    for integration in to other web applications through it's self-reliant
+    UI component builder functions (JavaScript) obtaining information from its
+    own API.
+
+#.  ``kolab_files`` for **roundcubemail-plugins-kolab**
+
+    One implementation of the integration of **chwala** in to the Roundcube
+    web client.
+
+Further software updates address the following issues:
+
+#.  The Kolab Web Administration Panel has been enhanced to address duplicate
+    surname issues, which in Kolab 3.0 would generate duplicate ``uid``
+    attributes.
+
+#.  The way the ``uid`` is composed can now be configured with the introduction
+    of a ``policy_uid`` setting in the ``[kolab_wap]`` section of
+    :manpage:`kolab.conf(5)`.
+
+#.  The **postfix** MTA is now configured to strip the ``Received from:``
+    headers that could otherwise disclose a user's geographical location.
+
+#.  The **postfix** MTA is now configured to reject inbound email traffic that
+    already has headers set to indicate a spam message.
+
+#.  The **postfix** MTA is now configured to strip additional ``Received from:
+    localhost [127.0.0.1] headers`` from emails that pass through Amavis.
+
+#.  A new annotation ``/vendor/kolab/displayname`` was introduced to provide a
+    compatibility layer with CardDAV and CalDAV access layers, neither of which
+    understand IMAP folder hierarchy.
+
+#.  A new annotation ``/vendor/kolab/uniqueid`` was introducted to provide a
+    compatibility layer with CardDAV and CalDAV access layers, neither of which
+    would have otherwise allowed an IMAP folder to be renamed or relocated in
+    the IMAP folder hierarchy.
+
+    .. NOTE::
+
+        This annotation is only used if ``/vendor/cmu/cyrus-imapd/uniqueid`` is
+        not available. This Cyrus IMAP annotation became available in Cyrus IMAP
+        2.5.
+
+#.  The ``kolab_auth`` plugin for Roundcube was enhanced to allow the use of a
+    placeholder ``%dc`` to be substituted by the root dn for a supplied domain
+    name.
+
+    This enhances the Hosted Kolab Groupware deployment capabilities
+    significantly.
+
+#.  The **kolab-webadmin** software was enhanced to allow input of *KB*, *MB*
+    and *GB* input for ``mailQuota``.
+
+#.  The **kolab-webadmin** software was enhanced to allow *Shared Folders* to be
+    created through the web administration panel.
+
+#.  The **kolab-webadmin** software was enhanced to allow the configuration of
+    *Dynamic Mail-enabled Distribution Groups*.
 
 Updates to Cyrus IMAP
 =====================
@@ -136,7 +207,7 @@ Removing old and Adding new Plugins for Roundcube
 
 The following plugins are no longer included:
 
-* kolab_core
+* ``kolab_core``
 
 .. todo::
 
@@ -144,7 +215,7 @@ The following plugins are no longer included:
 
 The following plugins are new:
 
-* kolab_files
+* ``kolab_files``
 
 .. todo::
 
