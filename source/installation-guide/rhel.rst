@@ -11,13 +11,13 @@ Installation on Red Hat Enterprise Linux
 
     .. parsed-literal::
 
-        # rpm -Uhv http://url/to/epel-release.rpm
+        # :command:`rpm -Uhv http://url/to/epel-release.rpm`
 
 3.  Install the **yum-plugin-priorities** package:
 
     .. parsed-literal::
 
-        # yum install yum-plugin-priorities
+        # :command:`yum install yum-plugin-priorities`
 
 
 4.  Install the Kolab Groupware repository configuration using the RPM package
@@ -25,7 +25,7 @@ Installation on Red Hat Enterprise Linux
 
     .. parsed-literal::
 
-        # rpm -Uvh http://url/to/kolab-community-release.rpm
+        # :command:`rpm -Uvh http://url/to/kolab-community-release.rpm`
 
     .. tip::
 
@@ -37,6 +37,6 @@ Installation on Red Hat Enterprise Linux
 
     .. parsed-literal::
 
-        # yum install kolab
+        # :command:`yum install kolab`
 
 Continue to :ref:`install-setup-kolab`.

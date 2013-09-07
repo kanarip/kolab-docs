@@ -8,13 +8,13 @@ Installation on CentOS
 
     .. parsed-literal::
 
-        # rpm -Uhv http://url/to/epel-release.rpm
+        # :command:`rpm -Uhv http://url/to/epel-release.rpm`
 
 2.  Install the **yum-plugin-priorities** package:
 
     .. parsed-literal::
 
-        # yum install yum-plugin-priorities
+        # :command:`yum install yum-plugin-priorities`
 
 
 3.  Install the Kolab Groupware repository configuration using the RPM package
@@ -22,7 +22,7 @@ Installation on CentOS
 
     .. parsed-literal::
 
-        # rpm -Uvh http://url/to/kolab-community-release.rpm
+        # :command:`rpm -Uvh http://url/to/kolab-community-release.rpm`
 
     .. tip::
 
@@ -34,6 +34,6 @@ Installation on CentOS
 
     .. parsed-literal::
 
-        # yum install kolab
+        # :command:`yum install kolab`
 
 Continue to :ref:`install-setup-kolab`.

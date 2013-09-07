@@ -6,7 +6,7 @@ Installation on Fedora
 
     .. parsed-literal::
 
-        # yum install yum-plugin-priorities
+        # :command:`yum install yum-plugin-priorities`
 
 
 2.  Install the Kolab Groupware repository configuration using the RPM package
@@ -14,7 +14,7 @@ Installation on Fedora
 
     .. parsed-literal::
 
-        # rpm -Uvh http://url/to/kolab-community-release.rpm
+        # :command:`rpm -Uvh http://url/to/kolab-community-release.rpm`
 
     .. tip::
 
@@ -26,6 +26,6 @@ Installation on Fedora
 
     .. parsed-literal::
 
-        # yum install kolab
+        # :command:`yum install kolab`
 
 Continue to :ref:`install-setup-kolab`.

@@ -32,13 +32,13 @@ Installation on Ubuntu
 
     .. parsed-literal::
 
-        # apt-get update
+        # :command:`apt-get update`
 
 4. Start the installation of the base package as follows:
 
     .. parsed-literal::
 
-        # aptitude install kolab
+        # :command:`aptitude install kolab`
 
 5.  When asked to confirm you want to install the package and its dependencies, press Enter.
 
