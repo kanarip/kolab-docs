@@ -14,32 +14,32 @@ you could read on :ref:`dev-packaging-why_private_obs` if you are interested.
 
 .. toctree::
     :maxdepth: 2
-    
+
     generic-macros-and-conditions
     webserver-applications
 
-Setup and Structure
-===================
-
-#.  Create a Logical Volume to hold the virtual machine:
-
-    .. parsed-literal::
-
-        :command:`lvcreate -L 20G -n guest_obs01 vg_kvm02`
-
-#.  Refresh the storage pool:
-
-    .. parsed-literal::
-    
-        :command:`virsh pool-refresh vg_kvm02`
-
-#.  Download the raw server appliance image, and xzcat it in to the logical
-    volume:
-
-    .. parsed-literal::
-
-        :command:`xzcat /path/to/raw/xz/image > /dev/vg_kvm02/guest_obs01`
-
+.. Setup and Structure
+.. ===================
+..
+.. #.  Create a Logical Volume to hold the virtual machine:
+..
+..     .. parsed-literal::
+..
+..         :command:`lvcreate -L 20G -n guest_obs01 vg_kvm02`
+..
+.. #.  Refresh the storage pool:
+..
+..     .. parsed-literal::
+..
+..         :command:`virsh pool-refresh vg_kvm02`
+..
+.. #.  Download the raw server appliance image, and xzcat it in to the logical
+..     volume:
+..
+..     .. parsed-literal::
+..
+..         :command:`xzcat /path/to/raw/xz/image > /dev/vg_kvm02/guest_obs01`
+..
 .. #.  Start the VM
 .. #.  Load the correct certificates
 .. #.  Set the hostname, IP address, gateway and DNS servers
