@@ -110,6 +110,9 @@ Forking off Kolab 3.0
 
     .. parsed-literal::
 
+        # :command:`osc api -X POST \\
+            /source/Kolab:3.0?cmd=copy&oproject=Kolab:Development&makeolder=1&withhistory=1&withbinaries=1`
+
 #.  Set the corresponding attributes on the new Kolab:3.0 project:
 
     .. parsed-literal::
@@ -118,7 +121,7 @@ Forking off Kolab 3.0
             --attribute "OBS:RejectRequests" \\
             --set "Please submit to Kolab:Development and/or Kolab:3.0:Updates"
         # :command:`osc meta attribute Kolab:3.0 \\
-            --atribute "OBS:UpdateProject" \\
+            --attribute "OBS:UpdateProject" \\
             --set "Kolab:3.0:Updates"
 
 #.  Lock the base maintenance repository:
@@ -266,5 +269,5 @@ Forking off Kolab 3.0
             --attribute "OBS:Maintained" \\
             --set ""
         # :command:`osc meta attribute Kolab:3.0:Updates \\
-            --atribute "OBS:BranchTarget" \\
+            --attribute "OBS:BranchTarget" \\
             --set ""
