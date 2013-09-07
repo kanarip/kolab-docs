@@ -4,8 +4,8 @@ Administrator Guide
 .. toctree::
     :maxdepth: 2
 
-    upgrading-from-kolab2.3
-    upgrading-from-kolab3.0
+    upgrading-from-kolab-2.3
+    upgrading-from-kolab-3.0
 
     verifying-the-installation
 
