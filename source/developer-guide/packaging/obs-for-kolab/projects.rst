@@ -106,8 +106,165 @@ This is the latest and greatest Kolab.
 Forking off Kolab 3.0
 ---------------------
 
-Suggested on http://opensuse.14.x6.nabble.com/the-best-way-to-clone-entire-project-td4990396.html:
+#.  Copy all of Kolab:Development to a new project Kolab:3.0:
 
-    osc api -X POST /source/NEW_PROJECT?cmd=copy&oproject=OLD_PROJECT&...
+    .. parsed-literal::
 
-    "see api.txt for more details"
+#.  Set the corresponding attributes on the new Kolab:3.0 project:
+
+    .. parsed-literal::
+
+        # :command:`osc meta attribute Kolab:3.0 \\
+            --attribute "OBS:RejectRequests" \\
+            --set "Please submit to Kolab:Development and/or Kolab:3.0:Updates"
+        # :command:`osc meta attribute Kolab:3.0 \\
+            --atribute "OBS:UpdateProject" \\
+            --set "Kolab:3.0:Updates"
+
+#.  Lock the base maintenance repository:
+
+    .. parsed-literal::
+
+        # :command:`osc meta prj Kolab:3.0 > Kolab:3.0.prj`
+
+    #.  Check the contents of ``Kolab:3.0.prj``:
+
+        .. parsed-literal::
+
+            <project name="Kolab:3.0">
+                <title>Kolab 3.0</title>
+                <description>Kolab 3.0 Community Edition</description>
+                <person userid="Admin" role="maintainer"/>
+                <repository name="CentOS_6">
+                    <path project="Kolab:3.0" repository="CentOS_6"/>
+                    <arch>i586</arch>
+                    <arch>x86_64</arch>
+                </repository>
+                (... snip ...)
+            </project>
+            EOF
+
+    #.  Add the lock:
+
+        .. parsed-literal::
+
+            (... snip ...)
+            <lock>
+                <enable/>
+            </lock>
+            (... snip ...)
+
+        .. WARNING::
+
+            You can only take this step after the initial rebuilds are
+            completed.
+
+    #. Push it back:
+
+        .. parsed-literal::
+
+            # :command:`osc meta prj Kolab:3.0 -F -` < Kolab\:3.0.prj
+
+#.  Create the Kolab:3.0:Updates project as a subproject:
+
+    .. parsed-literal::
+
+        # :command:`osc meta prj Kolab:3.0:Updates -F -` << EOF
+        <project name="Kolab:3.0:Updates" kind="maintenance_release">
+            <title>Updates for Kolab 3.0</title>
+            <description></description>
+            <link project="Kolab:3.0"/>
+            <person userid="Admin" role="maintainer"/>
+            <person userid="Admin" role="bugowner"/>
+            <build>
+                <disable/>
+            </build>
+            <publish>
+                <disable/>
+            </publish>
+            <debuginfo>
+                <enable/>
+            </debuginfo>
+            <repository name="CentOS_6">
+                <path project="Kolab:3.0" repository="CentOS_6"/>
+                <arch>i586</arch>
+                <arch>x86_64</arch>
+            </repository>
+            <repository name="Debian_6.0">
+                <path project="Kolab:3.0" repository="Debian_6.0"/>
+                <arch>i586</arch>
+                <arch>x86_64</arch>
+            </repository>
+            <repository name="Debian_7.0">
+                <path project="Kolab:3.0" repository="Debian_7.0"/>
+                <arch>i586</arch>
+                <arch>x86_64</arch>
+            </repository>
+            <repository name="Fedora_18">
+                <path project="Kolab:3.0" repository="Fedora_18"/>
+                <arch>i586</arch>
+                <arch>x86_64</arch>
+            </repository>
+            <repository name="Fedora_19">
+                <path project="Kolab:3.0" repository="Fedora_19"/>
+                <arch>i586</arch>
+                <arch>x86_64</arch>
+            </repository>
+            <repository name="openSUSE_12.1">
+                <path project="Kolab:3.0" repository="openSUSE_12.1"/>
+                <arch>i586</arch>
+                <arch>x86_64</arch>
+            </repository>
+            <repository name="openSUSE_12.2">
+                <path project="Kolab:3.0" repository="openSUSE_12.2"/>
+                <arch>i586</arch>
+                <arch>x86_64</arch>
+            </repository>
+            <repository name="openSUSE_12.3">
+                <path project="Kolab:3.0" repository="openSUSE_12.3"/>
+                <arch>i586</arch>
+                <arch>x86_64</arch>
+            </repository>
+            <repository name="Ubuntu_12.04">
+                <path project="Kolab:3.0" repository="Ubuntu_12.04"/>
+                <arch>i586</arch>
+                <arch>x86_64</arch>
+            </repository>
+            <repository name="Ubuntu_12.10">
+                <path project="Kolab:3.0" repository="Ubuntu_12.10"/>
+                <arch>i586</arch>
+                <arch>x86_64</arch>
+            </repository>
+            <repository name="Ubuntu_13.04">
+                <path project="Kolab:3.0" repository="Ubuntu_13.04"/>
+                <arch>i586</arch>
+                <arch>x86_64</arch>
+            </repository>
+            <repository name="Ubuntu_13.10">
+                <path project="Kolab:3.0" repository="Ubuntu_13.10"/>
+                <arch>i586</arch>
+                <arch>x86_64</arch>
+            </repository>
+            <repository name="UCS_3.0">
+                <path project="Kolab:3.0" repository="UCS_3.0"/>
+                <arch>i586</arch>
+                <arch>x86_64</arch>
+            </repository>
+            <repository name="UCS_3.1">
+                <path project="Kolab:3.0" repository="UCS_3.1"/>
+                <arch>i586</arch>
+                <arch>x86_64</arch>
+            </repository>
+        </project>
+        EOF
+
+#.  Set the maintenance attributes on Kolab:3.0:Updates
+
+    .. parsed-literal::
+
+        # :command:`osc meta attribute Kolab:3.0:Updates \\
+            --attribute "OBS:Maintained" \\
+            --set ""
+        # :command:`osc meta attribute Kolab:3.0:Updates \\
+            --atribute "OBS:BranchTarget" \\
+            --set ""
