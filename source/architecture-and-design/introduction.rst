@@ -72,7 +72,7 @@ Data Storage Layer & Primary Access Protocol
 A data storage layer for groupware environments must be fast, efficient,
 scalable and secure.
 
-A single system can only scale up as far as the its local resources allow it to.
+A single system can only scale up as far as its local resources allow it to.
 It is therefore a pre-requisite the storage layer can be spread out over
 multiple individual systems, while maintaining a transparent access methodology
 for users - whom do not know what data is where, and even if they did, tend to
@@ -104,7 +104,7 @@ backend systems.
 Desktop Clients
 ---------------
 
-Although, the Kolab web client is powerful and fast, some users might want to use
+Although the Kolab web client is powerful and fast, some users might want to use
 native Desktop clients. There is a variety of Desktop clients compatible with the
 Kolab Groupware solution. They include:
 
