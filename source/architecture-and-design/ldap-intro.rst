@@ -16,7 +16,7 @@ Kolab Groupware uses, by default, the Light-weight Directory Access Protocol
 Information about users, groups, and possibly much more, is contained within a
 hierarchical tree of objects, known as a Directory Information Tree (DIT). In
 this way, a DIT is built as a tree -- starting at the root, branches articulate
-the structure of the tree, and ultimately hold many leafs.
+the structure of the tree, and ultimately hold many leaves.
 
 A DIT is composed of strictly defined objects, each of which has one or more
 [#]_ *types* or *classes*, and each *class* may allow one or more *attributes* to be
@@ -124,7 +124,7 @@ Searching and Listing Objects
 
 To seek out a particular object or a list of objects of a particular type, one
 uses a *base dn* to search against, a *filter* to search with, and a *scope* to
-determine the depth of nested object levels to descend in to, starting from
+determine the depth of nested object levels to descend into, starting from
 the *base dn*.
 
 The users, groups and other groupware objects stored in these databases have
