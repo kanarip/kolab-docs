@@ -25,7 +25,7 @@ volumes, leaving about 10% of raw disk space in the volume group unallocated:
 
 Should you decide to partition only after the packages have already been
 installed, or after the deployment has already been used, first mount the
-filesystems somewhere else and synchronize the contents over from the original
+filesystems somewhere else and synchronize the contents from the original
 directories over to the new filesystem hierarchy. Please note services should be
 stopped before doing so, or only corrupt data will be transfered. Remove the
 original contents of the filesystem after having synchronized, then mount the
