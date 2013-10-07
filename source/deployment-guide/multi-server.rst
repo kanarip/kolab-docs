@@ -210,7 +210,7 @@ Internal Mail Exchanger
         *   Relay outbound messages to the external mail exchanger(s),
         *   Relay inbound messages to the appropriate backend mail exchanger(s),
         *   Relay messages to appropriate third party groupware or services,
-        *   Expansion of distribution groups in to its individual member
+        *   Expansion of distribution groups into its individual member
             recipient addresses,
 
     *   Optionally responsible for the application of anti-virus.
