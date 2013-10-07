@@ -14,7 +14,7 @@ IMAP
 
     The IMAP server component of Kolab Groupware, including a daemon which synchronizes user accounts from LDAP with IMAP mailboxes.
 
-    To install the IMAP component, use the kolab-imap meta-package. This meta-packages pulls in cyrus-imapd and kolab-server.
+    To install the IMAP component, use the kolab-imap meta-package. This meta-package pulls in cyrus-imapd and kolab-server.
 
 LDAP
 
@@ -26,19 +26,19 @@ MTA
 
     The MTA, including spam-filter, virus-scanner, Kolab SMTP Access Policy and the Kolab content-filter.
 
-    To install the MTA component, use meta-package kolab-mta, which installs Postfix, Amavisd, SpamAssassin, ClamAV, postfix-kolab and Wallace.
+    To install the MTA component, use the kolab-mta meta-package, which installs Postfix, Amavisd, SpamAssassin, ClamAV, postfix-kolab and Wallace.
 
 Web Administration Panel
 
     The Kolab web-based administration panel and API.
 
-    To install the Web Administration Panel and API, install the kolab-webadmin package.
+    To install the Web Administration Panel and API, use the kolab-webadmin package.
 
 Web Client
 
     The web-based client for Kolab, based on Roundcube.
 
-    To install the Kolab web-client, use meta-package kolab-webclient. This meta-package pulls in Roundcube, the default MySQL database driver packages, and the Kolab plugins for Roundcube.
+    To install the Kolab web-client, use the kolab-webclient meta-package. This meta-package pulls in Roundcube, the default MySQL database driver packages, and the Kolab plugins for Roundcube.
 
 Databases
 
