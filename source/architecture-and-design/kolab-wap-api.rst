@@ -26,7 +26,9 @@ For GET requests, the parameters (the payload) are appended to the URI requested
 
 .. NOTE::
 
-    This restricts GET requests to specifying key-value pairs of payload information only, even though a GET parameter key can be specified more then one, creating a list of values.
+    This restricts GET requests to specifying key-value pairs of payload
+    information only, even though a GET parameter key can be specified more then
+    once, creating a list of values.
 
 Some read-only operations, such as user.find_by_attributes require the request to pass along multiple attributes with, potentially, multiple search parameters. These types read-only requests are the exception to the rule of using GET for read-only requests, and use POST instead.
 

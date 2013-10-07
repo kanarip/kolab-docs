@@ -71,12 +71,12 @@ Kolab Groupware uses LDAP for the following purposes:
     for,
 *   As the authoritative list of individual resources to create and maintain
     mailboxes for,
-*   As the source for static distribution group expansion in to its individual
+*   As the source for static distribution group expansion into its individual
     members,
-*   As the source for dynamic distribution group expansion in to its individual
+*   As the source for dynamic distribution group expansion into its individual
     members,
 *   Authentication of users and services,
-*   Translation of the authentication ID in to the authorization ID (a process
+*   Translation of the authentication ID into the authorization ID (a process
     called canonification),
 *   To determine whether IMAP access control identifiers are valid,
 *   Delegation of control over directory tree contents,
@@ -182,7 +182,7 @@ name space.
 
 Using the parent domain name space, as follows:
 
-    #.  Explode the parent domain name space in to its components as they are
+    #.  Explode the parent domain name space into its components as they are
         divided by dot (.) characters.
 
         For a parent domain name space of ``example.org``, this should give you
@@ -191,7 +191,7 @@ Using the parent domain name space, as follows:
     #.  Implode the components using ``,dc=`` as the delimiter.
 
         For an exploded domain name space of ``example.org``, this should turn
-        the list resulting from the previous step ([``example``, ``org``]) in to
+        the list resulting from the previous step ([``example``, ``org``]) into
         a string ``example,dc=org``.
 
     #.  Prepend the string ``dc=``.

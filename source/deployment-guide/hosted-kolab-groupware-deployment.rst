@@ -180,7 +180,7 @@ Multiple Parent Domain Root DNs and Access Levels
 
 When using roles to establish access to applications or features including the
 Kolab Web Client, any of its plugins, Chwala, iRony and/or Syncroton, an
-environment with multiple parent domain name spaces must take in to account the
+environment with multiple parent domain name spaces must take into account the
 names or roles are variable.
 
 The **kolab_auth** plugin for the Kolab Web Client, responsible for using roles
@@ -211,7 +211,7 @@ their full email address.
 
 Should a customer require a dedicated SSL certificate to their domain, so that
 the customer's users can use https://webmail.example.org and/or
-imaps://imap.example.org, it is important to take in to account that therefore
+imaps://imap.example.org, it is important to take into account that therefore
 the domain name space needs to be associated with a dedicated public IP address.
 
 While modern browsers can deal with the HTTP host header negotiation prior to

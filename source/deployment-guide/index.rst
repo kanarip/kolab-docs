@@ -40,7 +40,7 @@ Generic Statements
 *   Contrary to popular belief, larger numbers of users make capacity planning
     more unpredictable, up to next to near impossible. Here, you require the
     ability to scale up and down as *turns out to be needed*, and not be locked
-    in to a certain scale with limited options to break out. You are likely
+    into a certain scale with limited options to break out. You are likely
     looking for :ref:`deployment_multi-server-for-each-service`.
 
 *   The larger the (potential) data footprint, the more important it becomes to
@@ -58,7 +58,7 @@ A Couple of Users
 In terms of capacity, for a family server, SOHO situation or micro-entity, it is
 probably more than sufficient to run :doc:`localhost`.
 
-If the data is really important, and you do not have data redundancy built in to
+If the data is really important, and you do not have data redundancy built into
 the single server (through RAID, or regular backups that are easy to restore),
 such an environment might want to opt for a :doc:`redundant-server`.
 
@@ -108,7 +108,7 @@ To illustrate why this is important:
     interfaces on that, if not simply for the fact that public IP space is
     limited.
 
-Other considerations come in to play deploying Kolab Groupware, and those are
+Other considerations come into play deploying Kolab Groupware, and those are
 included in the following sections:
 
 *   :ref:`deployment-hundreds-redundancy`
@@ -153,7 +153,7 @@ manageable, but should your users (be allowed to) have larger mailboxes and/or
 use the File Storage features in Kolab, you are more likely speaking to the tune
 of several terabytes (if not right from the start, you'll get there over time).
 
-**This** is were scalability comes in to play. One could start with a single
+**This** is were scalability comes into play. One could start with a single
 Cyrus IMAP server, like so:
 
 .. graphviz::
@@ -220,7 +220,7 @@ window, and despite what other groupware vendors might tell you, it is near to
 impossible to accurately plan for the capacity required.
 
 It is also important to appreciate any existing infrastructure and network
-topology, and for Kolab to integrate in to that environment.
+topology, and for Kolab to integrate into that environment.
 
 Ranging from small and medium-sized business, large enterprise and service
 provider deployments, the number of users involved ranges from 50 to anywhere in
