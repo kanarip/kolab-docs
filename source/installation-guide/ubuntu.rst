@@ -42,6 +42,6 @@ Installation on Ubuntu
 
 5.  When asked to confirm you want to install the package and its dependencies, press Enter.
 
-6.  When asked to confirm you want to continue installing the packages of which the integrity nor source can be securely verified, press y then Enter.
+6.  When asked to confirm you want to continue installing the packages of which the integrity nor source can be securely verified, press Enter.
 
 Continue to :ref:`install-setup-kolab`.

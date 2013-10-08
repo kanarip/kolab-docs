@@ -88,7 +88,7 @@ mail exchanger with all features enabled.
 
 **3rd Party Groupware**
 
-    3rd Party Groupware solutions may be integrated in to the Kolab Groupware
+    3rd Party Groupware solutions may be integrated into the Kolab Groupware
     environment up to and including the split of a single domain name space.
 
 .. _and_mta_postfix:
@@ -156,7 +156,7 @@ of domain name spaces.
 
 As such, a corporate board or directors for example, may have a distribution
 group 'board@example.com' to which only the members of the board of directors
-are allowed to send messages, but no-one else.
+are allowed to send messages, but no one else.
 
 Note that this is slightly different from a mailing list such as implemented
 with Majordomo or Mailman. While these technologies could require approved,
@@ -265,7 +265,7 @@ Policy has no interest in blocking at this stage, and will always return DUNNO.
 
 It is not until the very last policy request in the DATA protocol state, that
 Postfix allows the Kolab SMTP Access Policy to iterate over the information
-received so far, and let's the Kolab SMTP Access Policy know the parts of the
+received so far, and let the Kolab SMTP Access Policy know the parts of the
 complete message submission that involves sender and one or more recipients is
 over.
 
