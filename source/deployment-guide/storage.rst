@@ -24,9 +24,9 @@ be used, although the following considerations are important:
     read and get written).
 *   The IMAP spool consists of many small files.
 
-As such, we recommend you take in to account;
+As such, we recommend you take into account;
 
-*   The available bandwith between the IMAP server and the storage provider,
+*   The available bandwidth between the IMAP server and the storage provider,
 *   The protocol overhead if file-level read and/or write locking is required.
 
 Volume
@@ -161,7 +161,7 @@ but only using a cluster filesystem.
 
 This, however, means the storage **clients** need to negotiate amongst
 themselves, who's turn it is to write to what (i.e. locking), similar to NFS
-where the clients negiotiate with the server.
+where the clients negotiate with the server.
 
 Alternatively, a second file-sharing protocol (with its own locking
 negotiation mechanism) could be used for multiple nodes to be able to write to
