@@ -33,7 +33,7 @@ you could read on :ref:`dev-packaging-why_private_obs` if you are interested.
 ..
 ..         :command:`virsh pool-refresh vg_kvm02`
 ..
-.. #.  Download the raw server appliance image, and xzcat it in to the logical
+.. #.  Download the raw server appliance image, and xzcat it into the logical
 ..     volume:
 ..
 ..     .. parsed-literal::

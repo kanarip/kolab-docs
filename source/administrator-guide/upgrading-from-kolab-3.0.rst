@@ -18,13 +18,13 @@ Kolab 3.1 compared to Kolab 3.0 ships the following additional components:
 #.  **chwala**
 
     A properly designed and integrated file storage management layer, primarily
-    for integration in to other web applications through it's self-reliant
+    for integration into other web applications through it's self-reliant
     UI component builder functions (JavaScript) obtaining information from its
     own API.
 
 #.  ``kolab_files`` for **roundcubemail-plugins-kolab**
 
-    One implementation of the integration of **chwala** in to the Roundcube
+    One implementation of the integration of **chwala** into the Roundcube
     web client.
 
 Further software updates address the following issues:
@@ -188,7 +188,7 @@ named **cyrus.squat** from your IMAP spools:
 -----------------------------------------------------
 
 A few additional settings are needed for Cyrus IMAP to feature message traffic
-directly in to shared folders.
+directly into shared folders.
 
 If not already set, add the following setting to :file:`/etc/imapd.conf`:
 

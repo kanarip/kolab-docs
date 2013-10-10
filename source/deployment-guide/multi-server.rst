@@ -132,7 +132,7 @@ little and define the functional components by their role:
     *   External Mail Exchanger
     *   Internal Mail Exchanger
 
-.. To illustrate how this would look like when put in to a diagram:
+.. To illustrate how this would look like when put into a diagram:
 ..
 .. .. graphviz::
 ..

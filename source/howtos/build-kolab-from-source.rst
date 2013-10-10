@@ -478,7 +478,7 @@ Installing Roundcube and Kolab Plugins from Source
         # mysql -p roundcube_git < calendar/drivers/kolab/SQL/mysql.initial.sql
         # mysql -p roundcube_git < libkolab/SQL/mysql.initial.sql
 
-9.  Put the Kolab plugins in to the Roundcube plugins/ directory:
+9.  Put the Kolab plugins into the Roundcube plugins/ directory:
 
     .. parsed-literal::
 
