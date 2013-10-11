@@ -15,6 +15,7 @@ you could read on :ref:`dev-packaging-why_private_obs` if you are interested.
 .. toctree::
     :maxdepth: 2
 
+    howto-get-started
     generic-macros-and-conditions
     webserver-applications
 
