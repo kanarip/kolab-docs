@@ -48,8 +48,8 @@ The case for system administrators goes further, as -- as a part of their
 profession -- they have access to information that is mostly private, sometimes
 sensitive, but otherwise still not their own.
 
-You would want to prevent one of your system administrators being forced in to
-the awkward disposition of needing to choose between logging in to your systems
+You would want to prevent one of your system administrators being forced into
+the awkward disposition of needing to choose between logging into your systems
 to retrieve the data requested, and jail.
 
 Using Forward Secrecy

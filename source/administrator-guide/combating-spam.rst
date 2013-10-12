@@ -128,7 +128,7 @@ Setting a Trap for Spam
 
     .. NOTE::
 
-        Take in to account the use of unixhierarchysep in imapd.conf(5). If it
+        Take into account the use of unixhierarchysep in imapd.conf(5). If it
         is not enabled, the recipient address should be
         bb+shared.blah@example.org for the folder shared.blah@example.org.
 

@@ -128,7 +128,7 @@ They include the following settings:
     Setting ``email`` to ``true`` indicates this user type is to register for an
     email address.
 
-    The form will morph the ``uid`` field in to a ``uid`` form field and an
+    The form will morph the ``uid`` field into a ``uid`` form field and an
     appended select list of available domains. Upon submission of the form, the
     ``uid`` attribute value is extracted directly from the corresponding form
     field, and the ``mail`` attribute value is composed from the ``uid`` and the

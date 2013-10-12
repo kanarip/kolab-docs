@@ -11,7 +11,7 @@ Backup
 A backup procedure for 389 Directory Server consists of three separate steps:
 
 #.  The exection of a pre-script to export the databases.
-#.  The inclusion of the exported databases in to the backup, along with the
+#.  The inclusion of the exported databases into the backup, along with the
     directory server configuration directory :file:`/etc/dirsrv/`.
 #.  Clean-up using a post-script.
 
