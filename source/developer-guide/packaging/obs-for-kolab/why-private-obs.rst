@@ -44,7 +44,7 @@ Repository and Build Target Configuration
 
 Kolab Systems heavily relies on the expertise of its in-house packagers, all of
 whom very experienced with Fedora and Enterprise Linux packaging. For inclusion
-of the packaging work in to upstream distributions, certain conditions known as
+of the packaging work into upstream distributions, certain conditions known as
 Packaging Guidelines need to be met -- and they need to be met across
 distributions.
 

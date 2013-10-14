@@ -304,8 +304,12 @@ and -d 8 for program level step tracing.
 Wallace Daemon
 ^^^^^^^^^^^^^^
 
-Running the Wallace daemon (wallaced) directly from source allows you to test fixes and enhancements otherwise not available, and develop your own.
-You probably want some level of increased verbosity when running the Wallace daemon from source. Use the -d 9 command-line option for protocol level tracing, and -d 8 for program level step tracing.
+Running the Wallace daemon (wallaced) directly from source allows you to test
+fixes and enhancements otherwise not available, and develop your own.
+
+You probably want some level of increased verbosity when running the Wallace
+daemon from source. Use the -d 9 command-line option for protocol level tracing,
+and -d 8 for program level step tracing.
 
 .. rubric:: Running wallace.py from Source
 
@@ -325,8 +329,12 @@ You probably want some level of increased verbosity when running the Wallace dae
 Kolab SMTP Access Policy
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-Running the Kolab SMTP Access Policy directly from source allows you to test fixes and enhancements otherwise not available, and develop your own.
-You probably want some level of increased verbosity when running the Wallace daemon from source. Use the -d 9 command-line option for protocol level tracing, and -d 8 for program level step tracing.
+Running the Kolab SMTP Access Policy directly from source allows you to test
+fixes and enhancements otherwise not available, and develop your own.
+
+You probably want some level of increased verbosity when running the Wallace
+daemon from source. Use the -d 9 command-line option for protocol level tracing,
+and -d 8 for program level step tracing.
 
 .. rubric:: Running the Kolab SMTP Access Policy from Source
 
@@ -470,7 +478,7 @@ Installing Roundcube and Kolab Plugins from Source
         # mysql -p roundcube_git < calendar/drivers/kolab/SQL/mysql.initial.sql
         # mysql -p roundcube_git < libkolab/SQL/mysql.initial.sql
 
-9.  Put the Kolab plugins in to the Roundcube plugins/ directory:
+9.  Put the Kolab plugins into the Roundcube plugins/ directory:
 
     .. parsed-literal::
 

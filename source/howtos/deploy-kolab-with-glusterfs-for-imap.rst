@@ -3,7 +3,7 @@ HOWTO: Use GlusterFS for IMAP Spools
 ====================================
 
 GlusterFS is a distributed filesystem with built-in redundancy and self-healing
-features, that allows invidual storage volumes to be aggregated in to larger
+features, that allows individual storage volumes to be aggregated into larger
 storage volumes.
 
 This HOWTO sets up a single Kolab server using an IMAP spool mounted over
@@ -353,7 +353,7 @@ What happens when a GlusterFS node fails?
 In a replica *n* volume, *n*-1 nodes can fail. For each individual brick, at
 least one replica must stay alive.
 
-In situations where you might expect or are required take in to account the
+In situations where you might expect or are required take into account the
 failure of multiple nodes (that are replicas) simultaneously, such as might be
 the case when using old desktop PCs for your storage, you should increase the
 number of replicas.
