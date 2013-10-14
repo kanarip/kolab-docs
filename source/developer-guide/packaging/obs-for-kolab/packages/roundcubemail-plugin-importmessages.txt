@@ -1,0 +1,6 @@
+.. table:: Version Table for roundcubemail-plugin-importmessages
+
+    +-------------------+---------------+--------------------------------------+
+    | Kolab Version(s)  | Platform(s)   | Version                              |
+    +===================+===============+======================================+
+    | Kolab:Development |

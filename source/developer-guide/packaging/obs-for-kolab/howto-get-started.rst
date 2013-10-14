@@ -2,7 +2,14 @@
 Getting Started with the Kolab Groupware OBS
 ============================================
 
-Step 1: Install **osc**
+Step 1: Register your Username with the Kolab OBS
+=================================================
+
+Navigate to the following URL to register:
+
+    https://obs.kolabsys.com/user/register_user
+
+Step 2: Install **osc**
 =======================
 
 The openSUSE build system is interacted with using a command-line utility called
@@ -13,6 +20,13 @@ To download **osc** for your platform, please visit:
     http://software.opensuse.org/download?package=osc&project=openSUSE%3ATools
 
 Select your Linux distribution, and follow the instructions.
+
+.. WARNING::
+
+    The openSUSE Build System does not include updates to packages for the
+    distributions it builds packages for. As such, sometimes the **osc** package
+    might depend on, or be built, or have been built against old packages in a
+    way that is incompatible with the current state of your system.
 
 Initial configuration for the **osc** command-line utility would be created when
 you first run it, but the configuration defaults to using build.opensuse.org
@@ -30,7 +44,7 @@ Consider seeding your configuration by putting the following in
     user=doe
     pass=VerySecret
 
-Step 2: Create your Home Project
+Step 3: Create your Home Project
 ================================
 
 To be able to submit updates for review and approval, we recommend you first
@@ -151,7 +165,7 @@ Alternatively, use the following command:
     </project>
     EOF
 
-Step 3: Pick your Poison
+Step 4: Pick your Poison
 ========================
 
 At the time of this writing, the Kolab Groupware OBS maintains the following
@@ -178,7 +192,7 @@ projects:
         This project provides users of Kolab Groupware with updates to the
         base release of Kolab 3.0, and is no longer actively supported.
 
-Step 4: Branch off a Package
+Step 5: Branch off a Package
 ============================
 
 Having chosen your target destination for the update your are going to be
@@ -215,7 +229,7 @@ working on, branch off the appropriate package:
     configured as part of the ``home:vanmeeuwen`` home project (for user
     vanmeeuwen).
 
-Step 5: Update the Packaging & Testing the Changes
+Step 6: Update the Packaging & Testing the Changes
 ==================================================
 
 First off, you are going to make some changes most likely.
@@ -244,7 +258,7 @@ where:
     is one of the local package specifications, i.e. either the :file:`.dsc` or
     :file:`.spec` of the package.
 
-Step 6: Make Sure the Package is Actually an Update
+Step 7: Make Sure the Package is Actually an Update
 ===================================================
 
 When you are satisfied with the results of your test build(s), bump the version
@@ -256,7 +270,7 @@ numbers and release numbers as appropriate, in at least the following files:
 
     #. The :file:`.spec` for the package, if applicable.
 
-Step 7: Commit the Changes
+Step 8: Commit the Changes
 ==========================
 
 Once step 1 through 6 are completed, continue with commiting the changes back to
@@ -277,7 +291,7 @@ and other such actions.
     Please make sure everything builds correctly on the Kolab Groupware OBS as
     well, and consider testing the updates before continuing with Step 8.
 
-Step 8: Submit the Package Update Request
+Step 9: Submit the Package Update Request
 =========================================
 
 .. WARNING::

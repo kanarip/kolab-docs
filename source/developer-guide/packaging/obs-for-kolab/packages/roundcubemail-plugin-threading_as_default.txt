@@ -1,0 +1,6 @@
+.. table:: Version Table for roundcubemail-plugin-threading_as_default
+
+    +-------------------+---------------+--------------------------------------+
+    | Kolab Version(s)  | Platform(s)   | Version                              |
+    +===================+===============+======================================+
+    | Kolab:3.0         |    | Kolab:3.1         |    | Kolab:Development |

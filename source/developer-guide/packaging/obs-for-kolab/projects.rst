@@ -118,11 +118,11 @@ Forking off Kolab 3.0
     .. parsed-literal::
 
         # :command:`osc meta attribute Kolab:3.0 \\
-            --attribute "OBS:RejectRequests" \\
+            --attribute "OBS:RejectRequests"` \\
             --set "Please submit to Kolab:Development and/or Kolab:3.0:Updates"
         # :command:`osc meta attribute Kolab:3.0 \\
             --attribute "OBS:UpdateProject" \\
-            --set "Kolab:3.0:Updates"
+            --set "Kolab:3.0:Updates"`
 
 #.  Lock the base maintenance repository:
 
@@ -267,7 +267,7 @@ Forking off Kolab 3.0
 
         # :command:`osc meta attribute Kolab:3.0:Updates \\
             --attribute "OBS:Maintained" \\
-            --set ""
+            --set ""`
         # :command:`osc meta attribute Kolab:3.0:Updates \\
             --attribute "OBS:BranchTarget" \\
-            --set ""
+            --set ""`
