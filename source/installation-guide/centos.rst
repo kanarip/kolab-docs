@@ -3,8 +3,8 @@ Installation on CentOS
 ======================
 
 1.  Install the `EPEL repository <http://fedoraproject.org/wiki/EPEL>`_
-    configuration using the RPM package linked to from
-    `this page <http://download.fedoraproject.org/pub/epel/6/i386/repoview/epel-release.html>`_.
+    configuration using the RPM package linked to from the
+    `epel-release repository view page <http://download.fedoraproject.org/pub/epel/6/i386/repoview/epel-release.html>`_.
 
     .. parsed-literal::
 
@@ -17,18 +17,13 @@ Installation on CentOS
         # :command:`yum install yum-plugin-priorities`
 
 
-3.  Install the Kolab Groupware repository configuration using the RPM package
-    linked to from `this page <http://mirror.kolabsys.com/pub/redhat/kolab-3.1/el6/development/i386/repoview/kolab-3.1-community-release.html>`_
+3.  Install the Kolab Groupware repository configuration:
 
     .. parsed-literal::
 
-        # :command:`rpm -Uvh http://url/to/kolab-community-release.rpm`
-
-    .. tip::
-
-        Prior to the stable release of Kolab 3.1, you must also install the
-        development repository using the package linked to from
-        `this page <http://mirror.kolabsys.com/pub/redhat/kolab-3.1/el6/development/i386/repoview/kolab-3.1-community-release-development.html>`_
+        # :command:`cd /etc/yum.repos.d/`
+        # :command:`wget http://obs.kolabsys.com:82/Kolab:/3.1/CentOS_6/Kolab:3.1.repo`
+        # :command:`wget http://obs.kolabsys.com:82/Kolab:/3.1:/Updates/CentOS_6/Kolab:3.1:Updates.repo`
 
 4.  Install Kolab Groupware:
 

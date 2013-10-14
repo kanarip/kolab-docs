@@ -9,18 +9,23 @@ Installation on Fedora
         # :command:`yum install yum-plugin-priorities`
 
 
-2.  Install the Kolab Groupware repository configuration using the RPM package
-    linked to from `this page <http://mirror.kolabsys.com/pub/fedora/kolab-3.1/f19/development/i386/repoview/kolab-3.1-community-release.html>`_
+2.  Install the Kolab Groupware repository configuration:
 
-    .. parsed-literal::
+    *   For Fedora 18:
 
-        # :command:`rpm -Uvh http://url/to/kolab-community-release.rpm`
+        .. parsed-literal::
 
-    .. tip::
+            # :command:`cd /etc/yum.repos.d/`
+            # :command:`wget http://obs.kolabsys.com:82/Kolab:/3.1/Fedora_18/Kolab:3.1.repo`
+            # :command:`wget http://obs.kolabsys.com:82/Kolab:/3.1:/Updates/Fedora_18/Kolab:3.1:Updates.repo`
 
-        Prior to the stable release of Kolab 3.1, you must also install the
-        development repository using the package linked to from
-        `this page <http://mirror.kolabsys.com/pub/fedora/kolab-3.1/f19/development/i386/repoview/kolab-3.1-community-release-development.html>`_
+    *   For Fedora 19:
+
+        .. parsed-literal::
+
+            # :command:`cd /etc/yum.repos.d/`
+            # :command:`wget http://obs.kolabsys.com:82/Kolab:/3.1/Fedora_19/Kolab:3.1.repo`
+            # :command:`wget http://obs.kolabsys.com:82/Kolab:/3.1:/Updates/Fedora_19/Kolab:3.1:Updates.repo`
 
 3.  Install Kolab Groupware:
 
