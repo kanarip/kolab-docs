@@ -12,15 +12,31 @@ various components included, and how they interact.
     If you are new to groupware environments in general, or Kolab Groupware
     specifically, we recommend you read the :ref:`and_intro` first.
 
+Kolab Functional Components
+===========================
+
 .. toctree::
     :maxdepth: 2
 
     introduction
     ldap
     mta
-    kolab-wap-api
 
+Kolab Software Components
+=========================
+
+.. toctree::
+    :maxdepth: 2
+
+    kolab-daemon
+    kolab-wap-api
     kolab-hkccp
+
+General Documentation
+=====================
+
+.. toctree::
+    :maxdepth: 2
 
     ../glossary
 
