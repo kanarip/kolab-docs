@@ -27,6 +27,10 @@ Glossary
             *   :term:`child domain name space`
             *   :term:`parent domain name space`
 
+    authorization realm
+
+        The authorization realm (...)
+
     child domain
     child domain name space
     child domain name spaces
@@ -156,6 +160,16 @@ Glossary
 
         A management domain is (...)
 
+    msa
+    Mail Submission Agent
+
+        The Mail Submission Agent (*MSA*) (...)
+
+    mua
+    Mail User Agent
+
+        The Mail User Agent (*MUA*) (...)
+
     parent domain
     parent domain name space
     parent domain name spaces
@@ -178,6 +192,7 @@ Glossary
         *Perfect Forward Secrecy* or PFS (...)
 
     primary domain
+    primary domain name space
 
         A primary domain is (...)
 
@@ -195,7 +210,7 @@ Glossary
 
         A primary hosted domain is (...)
 
-    relative distinguised name
+    relative distinguished name
 
         A relative distinguished name (...)
 
