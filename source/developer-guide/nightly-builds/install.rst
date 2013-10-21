@@ -13,22 +13,23 @@ It is recommended to do a fresh install of the machine, when you want to go back
 CentOS 6
 =================================================
 
-First the usual steps, that you do for installing Kolab3 (see also the Kolab Community Installation Guide):
+First the usual steps, that you do for installing Kolab3 (see also :ref:`installation-centos`):
 
 .. parsed-literal::
 
     wget http://ftp.uni-kl.de/pub/linux/fedora-epel/6/i386/epel-release-6-8.noarch.rpm
     yum -y localinstall --nogpgcheck epel-release-6-8.noarch.rpm
-    wget http://mirror.kolabsys.com/pub/redhat/kolab-3.1/el6/development/x86_64/kolab-3.1-community-release-6-2.el6.kolab_3.1.noarch.rpm
-    wget http://mirror.kolabsys.com/pub/redhat/kolab-3.1/el6/development/x86_64/kolab-3.1-community-release-development-6-2.el6.kolab_3.1.noarch.rpm
-    yum -y localinstall kolab-3*.rpm
+    cd /etc/yum.repos.d/
+    wget http://obs.kolabsys.com:82/Kolab:/3.1/CentOS_6/Kolab:3.1.repo
+    wget http://obs.kolabsys.com:82/Kolab:/3.1:/Updates/CentOS_6/Kolab:3.1:Updates.repo
+    cd -
 
 Now also install the repo for the `obs.kolabsys.com tpokorra Project <https://obs.kolabsys.com/project/show?project=home%3Atpokorra%3Abranches%3AKolab%3ADevelopment>`_:
 
 .. parsed-literal::
 
     wget http://obs.kolabsys.com:82/home:/tpokorra:/branches:/Kolab:/Development/CentOS_6/home:tpokorra:branches:Kolab:Development.repo \\
-              -O /etc/yum.repos.d/obs-tpokorra-nightly-kolab.repo --no-check-certificate
+              -O /etc/yum.repos.d/obs-tpokorra-nightly-kolab.repo
 
 Now run:
 
