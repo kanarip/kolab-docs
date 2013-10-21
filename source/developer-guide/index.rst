@@ -6,3 +6,4 @@ Kolab Developer Guide
     :maxdepth: 2
 
     packaging/index
+    nightly-builds/index

@@ -1,3 +1,5 @@
+.. _dev-packaging-howto_get_started:
+
 ============================================
 Getting Started with the Kolab Groupware OBS
 ============================================
