@@ -30,20 +30,26 @@ This is an example for the package kolab-syncroton:
 
 Furthermore you need to modify the build files to reference the new tar.gz file, and to find the extracted code in the right place.
 
-For CentOS, those changes are required in the .spec file:
+For **CentOS**, those changes are required in the .spec file:
 
 .. parsed-literal::
 
     -Source0:        http://mirror.kolabsys.com/pub/releases/%{name}-%{version}.tar.gz
     +Source0:        %{name}-master.tar.gz
     -%setup -q -n %{name}-%{version}
-    +%setup -q -n %{name}-master    
+    +%setup -q -n %{name}-master 
+
+For **Debian**, you need to change the .dsc file:
+
+.. parsed-literal::
+    - 00000000000000000000000000000000 0 kolab-syncroton-2.2.2.tar.gz
+    + 00000000000000000000000000000000 0 kolab-syncroton-git-master.tar.gz
 
 Adjust the release numbers
 --------------------------
 One other issue: in order for the :ref:`installation of the nightly packages <dev-packaging-install_nightly>` to work properly, you need to adjust the release number of the packages.
 
-For CentOS, you need to add the following line to the top of your .spec file:
+For **CentOS**, you need to add the following line to the top of your .spec file:
 
 .. parsed-literal::
     %define release_prefix dev%(date +%%Y%%m%%d)
@@ -54,6 +60,22 @@ And in the settings of your project, go to "Advanced" / "Project Config", and en
     Release: 99.%%{?release_prefix}.<CI_CNT>.<B_CNT>
 
 For more details, see http://en.opensuse.org/openSUSE:Build_Service_prjconf
+
+For **Debian**, you need to change the .dsc file:
+
+.. parsed-literal::
+    -Version: 2.2.2-0~kolab1
+    +Version: 2.2.2-0~kolab1-dev20131023
+
+And also the debian.changelog file:
+
+.. parsed-literal::
+    +kolab-syncroton (2.2.2-0~kolab1-dev20131023) unstable; urgency=low
+    +  * nightly build
+    + -- Timotheus Pokorra (TBits.net) <tp@tbits.net>  Wed, 23 Oct 2013 15:13:40 +0200
+    +
+
+.. note:: for Debian, the debian.changelog and the .dsc file need to be updated each time when a new release should be built! See below for the script that does the nightly builds.
 
 Commit the changes
 ------------------
