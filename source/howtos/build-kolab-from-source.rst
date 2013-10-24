@@ -534,6 +534,16 @@ Installing the Kolab WAP Client and API from Source
         # cd kolab-webadmin/
         # chmod 777 cache logs
 
+4.  Consider setting the following two options in :file:`/etc/kolab/kolab.conf`:
+
+    .. parsed-literal::
+
+        [kolab_wap]
+        devel_mode = 1
+        debug_mode = trace
+
+    This will enable full debugging, and avoid the use of caching.
+
 Hosted Kolab Customer Control Panel
 ===================================
 
