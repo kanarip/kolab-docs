@@ -44,17 +44,18 @@ Debian 7.0
 See also the usual steps, that you do for installing Kolab3 (see also :ref:`installation-debian`). We are adding another repository for the nightly built packages.
 
 .. parsed-literal::
+    username=tpokorra
     cat > /etc/apt/sources.list.d/kolab.list <<FINISH
     deb http://obs.kolabsys.com:82/Kolab:/3.1/Debian_7.0/ ./
     deb http://obs.kolabsys.com:82/Kolab:/3.1:/Updates/Debian_7.0/ ./
-    deb http://obs.kolabsys.com:82/home:/tpokorra:/branches:/Kolab:/Development/Debian_7.0/ ./
+    deb http://obs.kolabsys.com:82/home:/$username:/branches:/Kolab:/Development/Debian_7.0/ ./
     FINISH
     
     wget http://obs.kolabsys.com:82/Kolab:/3.1/Debian_7.0/Release.key
     apt-key add Release.key; rm -rf Release.key
     wget http://obs.kolabsys.com:82/Kolab:/3.1:/Updates/Debian_7.0/Release.key
     apt-key add Release.key; rm -rf Release.key
-    wget http://obs.kolabsys.com:82/home:/tpokorra:/branches:/Kolab:/Development/Debian_7.0/Release.key
+    wget http://obs.kolabsys.com:82/home:/$username:/branches:/Kolab:/Development/Debian_7.0/Release.key
     apt-key add Release.key; rm -rf Release.key
     
     cat > /etc/apt/preferences.d/kolab <<FINISH
@@ -65,13 +66,6 @@ See also the usual steps, that you do for installing Kolab3 (see also :ref:`inst
     
     apt-get update
     apt-get install kolab
-
-Since there is a `problem during setup-kolab <https://issues.kolab.org/show_bug.cgi?id=2404>`_, at the moment you should run these commands as well:
-
-.. parsed-literal::
-    touch /etc/postfix/header_checks.inbound
-    touch /etc/postfix/header_checks.submission
-    touch /etc/postfix/header_checks.internal
 
 And then run
 
