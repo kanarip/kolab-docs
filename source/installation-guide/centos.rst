@@ -1,3 +1,5 @@
+.. _installation-centos:
+
 ======================
 Installation on CentOS
 ======================
