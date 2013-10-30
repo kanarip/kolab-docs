@@ -1,4 +1,4 @@
-.. table:: Version Table for roundcubemail-plugin-importmessages
+.. table:: Version Table for mysql
 
     +-------------------+---------------+--------------------------------------+
     | Kolab Version(s)  | Platform(s)   | Version                              |
