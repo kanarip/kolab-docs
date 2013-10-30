@@ -210,6 +210,10 @@ Glossary
 
         A primary hosted domain is (...)
 
+    recipient policy
+
+        The recipient policy (...)
+
     relative distinguished name
 
         A relative distinguished name (...)
