@@ -28,7 +28,7 @@ Installation on Debian
 
 3.  To ensure the Kolab packages have priority over the Debian packages, such as
     must be the case for PHP as well as Cyrus IMAP, please make sure the APT
-    preferences pin the mirror.kolabsys.com origin as a preferred source.
+    preferences pin the obs.kolabsys.com origin as a preferred source.
 
     Put the following in ``/etc/apt/preferences.d/kolab``:
 
@@ -51,7 +51,5 @@ Installation on Debian
         # :command:`aptitude install kolab`
 
 6.  When asked to confirm you want to install the package and its dependencies, press Enter.
-
-7.  When asked to confirm you want to continue installing the packages of which the integrity nor source can be securely verified, press y then Enter.
 
 Continue to :ref:`install-setup-kolab`.
