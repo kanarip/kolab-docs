@@ -130,19 +130,6 @@ while [ ${x} -lt ${#kolab_projects[@]} ]; do
         enabled_repositories=""
         target="source/developer-guide/packaging/obs-for-kolab/packages/${package}.txt"
 
-#         # Only include this separation line if we are already beyond the
-#         # original header.
-#         if [ -z "$(tail -n 1 ${target} | grep "==")" ]; then
-#             printf "%s" "    +-" >> ${target}
-#             printf "%*.*s" 0 ${project_column_width} $(printf '%0.1s' "-"{1..60}) >> ${target}
-#             printf "%s" "-+-" >> ${target}
-#             printf "%*.*s" 0 ${target_column_width} $(printf '%0.1s' "-"{1..60}) >> ${target}
-#             printf "%s" "-+-" >> ${target}
-#             printf "%*.*s" 0 ${version_column_width} $(printf '%0.1s' "-"{1..60}) >> ${target}
-#             printf "%s" "-+" >> ${target}
-#             echo "" >> ${target}
-#         fi
-
         if [ ! -f "osc-cache/${project}_${package}.meta" ]; then
             osc meta pkg ${project} ${package} > osc-cache/${project}_${package}.meta
         fi
@@ -188,7 +175,7 @@ while [ ${x} -lt ${#kolab_projects[@]} ]; do
             for enabled_repository in ${enabled_repositories}; do
                 # Here be version magic.
                 # osc buildinfo Kolab:3.1 389-admin Debian_7.0 x86_64 | awk '/<versrel>/,/<\/versrel>/' | sed -e 's/\s*<versrel>//g' -e 's/<\/versrel>//g'
-                if [ ! -f "osc-cache/${project}_${enabled_repository}_${package}.version" ]; then
+                if [ ! -s "osc-cache/${project}_${enabled_repository}_${package}.version" ]; then
                     osc buildinfo ${project} ${package} ${enabled_repository} x86_64 2>/dev/null | awk '/<versrel>/,/<\/versrel>/' | sed -e 's/\s*<versrel>//g' -e 's/<\/versrel>//g' > osc-cache/${project}_${enabled_repository}_${package}.version
                 fi
 
