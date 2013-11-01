@@ -89,6 +89,24 @@ kolab-freebusy
 
 .. include:: packages/kolab-freebusy.txt
 
+kolab-selinux
+===============
+
+.. parsed-literal::
+
+    # :command:`osc meta pkg Kolab:Development kolab-selinux -F -` << EOF
+    <package name="kolab-selinux">
+        <title>kolab-selinux</title>
+        <description></description>
+        <url>http://kolab.org/about/kolab-selinux</url>
+        <build>
+            <disable/>
+        </build>
+    </package>
+    EOF
+
+.. include:: packages/kolab-selinux.txt
+
 kolab-syncroton
 ===============
 
