@@ -290,4 +290,4 @@ epub_copyright = u'2013, Jeroen van Meeuwen'
 # Allow duplicate toc entries.
 #epub_tocdup = True
 
-todo_include_todos = True
+todo_include_todos = False
