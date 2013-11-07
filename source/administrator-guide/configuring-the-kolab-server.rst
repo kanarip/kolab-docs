@@ -93,6 +93,16 @@ things would happen:
 Unless intentionally so, it is also important to avoid entries holding the same
 secondary email address attribute value(s).
 
+To this end, for each generated value of either primary or secondary mail
+address attributes, a check is performed and -- if the address is already in
+use -- an integer is appended and incremented if necessary.
+
+For three people named *Marie Möller* for example, this would end up as:
+
+*   ``user/marie.moeller@example.org``
+*   ``user/marie.moeller2@example.org``
+*   ``user/marie.moeller3@example.org``
+
 Components that Apply the Recipient Policy
 ------------------------------------------
 
@@ -312,7 +322,8 @@ convention through this procedure:
 Setting the Secondary Recipient Email Address
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The secondary recipient email addresses can be changed to reflect your naming convention through this procedure:
+The secondary recipient email addresses can be changed to reflect your naming
+convention through this procedure:
 
 #.  Edit :file:`/etc/kolab/kolab.conf` and replace the value of the
     ``secondary_mail`` setting in the applicable domain section.
@@ -696,7 +707,29 @@ take on the following points:
 
         (&(associateddomain=%s)(associateddomain=*.*.*))
 
-.. rubric:: Example local_recipient_maps.cf with Templated Search Base
+.. rubric:: Example Templated Search Base
+
+The following depicts an example
+:file:`/etc/postfix/ldap/hosted_triplet_local_recipient_maps.cf`:
+
+.. parsed-literal::
+
+    server_host = localhost
+    server_port = 389
+    version = 3
+    **search_base = dc=%3,dc=%2,dc=%1**
+    scope = sub
+
+    domain = ldap:/etc/postfix/ldap/hosted_triplet_mydestination.cf
+
+    bind_dn = uid=kolab-service,ou=Special Users,dc=example,dc=org
+    bind_pw = pass
+
+    query_filter = (&(\|(mail=%s)(alias=%s))(\|(objectclass=kolabinetorgperson)(...)))
+    result_attribute = mail
+
+The following depicts an example
+:file:`/etc/postfix/ldap/hosted_duplet_local_recipient_maps.cf`:
 
 .. parsed-literal::
 
@@ -706,10 +739,19 @@ take on the following points:
     **search_base = dc=%2,dc=%1**
     scope = sub
 
-    domain = ldap:/etc/postfix/ldap/mydestination.cf
+    domain = ldap:/etc/postfix/ldap/hosted_duplet_mydestination.cf
 
     bind_dn = uid=kolab-service,ou=Special Users,dc=example,dc=org
     bind_pw = pass
 
     query_filter = (&(\|(mail=%s)(alias=%s))(\|(objectclass=kolabinetorgperson)(...)))
     result_attribute = mail
+
+.. rubric:: Example Postfix Configuration
+
+.. parsed-literal::
+
+    # :command:`postconf local_recipient_maps`
+    local_recipient_maps = \\
+        ldap:/etc/postfix/ldap/hosted_triplet_local_recipient_maps.cf \\
+        ldap:/etc/postfix/ldap/hosted_dupplet_local_recipient_maps.cf
