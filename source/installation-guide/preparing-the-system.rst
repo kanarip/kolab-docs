@@ -61,8 +61,9 @@ AVC denials occur so we can work on fixing the issue.
 
 .. WARNING::
 
-    The Kolab Web Administration Panel currently depends on SELinux not
-    enforcing the targeted policy.
+    The Kolab Web Administration Panel and Cyrus IMAP against the Kolab SASL
+    authentication daemon currently require SELinux **NOT** enforcing the
+    targeted policy.
 
 To view the current mode SELinux operates in, execute the following command::
 
