@@ -4,6 +4,12 @@
 Installation on Debian
 ======================
 
+.. note::
+
+   At the moment, the Debian packages are still in the process of being developed.
+   Therefore, the Updates Repository is quite outdated, and until the Debian packages are considered stable,
+   the community is invited to test the packages from the Development repository.
+
 1.  Add the following two lines to ``/etc/apt/sources.list.d/kolab.list``:
 
     For Debian Wheezy:
@@ -12,6 +18,7 @@ Installation on Debian
 
         deb http://obs.kolabsys.com:82/Kolab:/3.1/Debian_7.0/ ./
         deb http://obs.kolabsys.com:82/Kolab:/3.1:/Updates/Debian_7.0/ ./
+        deb http://obs.kolabsys.com:82/Kolab:/Development/Debian_7.0/ ./
 
 2.  Obtain and install the GPG keys for the archives:
 
@@ -23,6 +30,9 @@ Installation on Debian
         # :command:`apt-key add Release.key`
         # :command:`rm -rf Release.key`
         # :command:`wget http://obs.kolabsys.com:82/Kolab:/3.1:/Updates/Debian_7.0/Release.key`
+        # :command:`apt-key add Release.key`
+        # :command:`rm -rf Release.key`
+        # :command:`wget http://obs.kolabsys.com:82/Kolab:/Development/Debian_7.0/Release.key`
         # :command:`apt-key add Release.key`
         # :command:`rm -rf Release.key`
 
