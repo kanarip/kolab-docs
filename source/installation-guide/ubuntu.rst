@@ -2,6 +2,12 @@
 Installation on Ubuntu
 ======================
 
+.. note::
+
+   At the moment, the Ubuntu packages are still in the process of being developed.
+   Therefore, the Updates Repository is quite outdated, and until the Ubuntu packages are considered stable,
+   the community is invited to test the packages from the Development repository.
+
 1.  Add the following two lines to ``/etc/apt/sources.list.d/kolab.list``:
 
     For Ubuntu 12.04:
@@ -10,6 +16,7 @@ Installation on Ubuntu
 
         deb http://obs.kolabsys.com:82/Kolab:/3.1/Ubuntu_12.04/ ./
         deb http://obs.kolabsys.com:82/Kolab:/3.1:/Updates/Ubuntu_12.04/ ./
+        deb http://obs.kolabsys.com:82/Kolab:/Development/Ubuntu_12.04/ ./
 
     For Ubuntu 12.10:
 
@@ -17,6 +24,7 @@ Installation on Ubuntu
 
         deb http://obs.kolabsys.com:82/Kolab:/3.1/Ubuntu_12.10/ ./
         deb http://obs.kolabsys.com:82/Kolab:/3.1:/Updates/Ubuntu_12.10/ ./
+        deb http://obs.kolabsys.com:82/Kolab:/Development/Ubuntu_12.10/ ./
 
     For Ubuntu 13.04:
 
@@ -24,6 +32,7 @@ Installation on Ubuntu
 
         deb http://obs.kolabsys.com:82/Kolab:/3.1/Ubuntu_13.04/ ./
         deb http://obs.kolabsys.com:82/Kolab:/3.1:/Updates/Ubuntu_13.04/ ./
+        deb http://obs.kolabsys.com:82/Kolab:/Development/Ubuntu_13.04/ ./
 
     For Ubuntu 13.10:
 
@@ -31,6 +40,7 @@ Installation on Ubuntu
 
         deb http://obs.kolabsys.com:82/Kolab:/3.1/Ubuntu_13.10/ ./
         deb http://obs.kolabsys.com:82/Kolab:/3.1:/Updates/Ubuntu_13.10/ ./
+        deb http://obs.kolabsys.com:82/Kolab:/Development/Ubuntu_13.10/ ./
 
 2.  Obtain and install the GPG keys for the archives:
 
@@ -44,6 +54,9 @@ Installation on Ubuntu
         # :command:`wget http://obs.kolabsys.com:82/Kolab:/3.1:/Updates/Ubuntu_12.04/Release.key`
         # :command:`apt-key add Release.key`
         # :command:`rm -rf Release.key`
+        # :command:`wget http://obs.kolabsys.com:82/Kolab:/Development/Ubuntu_12.04/Release.key`
+        # :command:`apt-key add Release.key`
+        # :command:`rm -rf Release.key`
 
     For Ubuntu 12.10:
 
@@ -53,6 +66,9 @@ Installation on Ubuntu
         # :command:`apt-key add Release.key`
         # :command:`rm -rf Release.key`
         # :command:`wget http://obs.kolabsys.com:82/Kolab:/3.1:/Updates/Ubuntu_12.10/Release.key`
+        # :command:`apt-key add Release.key`
+        # :command:`rm -rf Release.key`
+        # :command:`wget http://obs.kolabsys.com:82/Kolab:/Development/Ubuntu_12.10/Release.key`
         # :command:`apt-key add Release.key`
         # :command:`rm -rf Release.key`
 
@@ -66,6 +82,9 @@ Installation on Ubuntu
         # :command:`wget http://obs.kolabsys.com:82/Kolab:/3.1:/Updates/Ubuntu_13.04/Release.key`
         # :command:`apt-key add Release.key`
         # :command:`rm -rf Release.key`
+        # :command:`wget http://obs.kolabsys.com:82/Kolab:/Development/Ubuntu_13.04/Release.key`
+        # :command:`apt-key add Release.key`
+        # :command:`rm -rf Release.key`
 
     For Ubuntu 13.10:
 
@@ -75,6 +94,9 @@ Installation on Ubuntu
         # :command:`apt-key add Release.key`
         # :command:`rm -rf Release.key`
         # :command:`wget http://obs.kolabsys.com:82/Kolab:/3.1:/Updates/Ubuntu_13.10/Release.key`
+        # :command:`apt-key add Release.key`
+        # :command:`rm -rf Release.key`
+        # :command:`wget http://obs.kolabsys.com:82/Kolab:/Development/Ubuntu_13.10/Release.key`
         # :command:`apt-key add Release.key`
         # :command:`rm -rf Release.key`
 
