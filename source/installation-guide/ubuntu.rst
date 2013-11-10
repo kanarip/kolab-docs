@@ -60,7 +60,7 @@ Installation on Ubuntu
     .. parsed-literal::
 
         # :command:`wget -qO - http://obs.kolabsys.com:82/Kolab:/3.1/Ubuntu_13.10/Release.key | apt-key add -`
-        # :command:`wget  -qO -http://obs.kolabsys.com:82/Kolab:/3.1:/Updates/Ubuntu_13.10/Release.key | apt-key add -`
+        # :command:`wget -qO - http://obs.kolabsys.com:82/Kolab:/3.1:/Updates/Ubuntu_13.10/Release.key | apt-key add -`
 
 3.  To ensure the Kolab packages have priority over the Ubuntu packages, such as
     must be the case for PHP as well as Cyrus IMAP, please make sure the APT
