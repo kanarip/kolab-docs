@@ -38,7 +38,7 @@ it also includes user and group membership information.
 The use of LDAP allows the structuring of information in such a way that it
 enables the delegation of authority over its entries, can prevent users from
 accessing certain attributes or entries, and allows the groupware solution to
-scale to over several millions of users.
+scale to over several millions of users -- ideal for groupware environments.
 
 For more information on LDAP integration in Kolab Groupware, please refer to:
 
@@ -167,3 +167,53 @@ Web Interfaces
 * Kolab Web Client
 * Chwala File Management
 * Mobile Device Synchronization
+
+Overview
+--------
+
+The following diagram provides a high-level overview of functional components
+and their connections and interactions with one another. For a fully detailed
+picture, ...
+
+.. graphviz::
+
+    digraph overview {
+            "Desktop Client";
+            "Mobile Device";
+            "Web Client";
+            "Administration Panel" [color=red];
+            "ActiveSync" [color=red];
+            "DAV Access" [color=red];
+
+            "LDAP", "MTA";
+
+            "IMAP", "LMTP";
+
+            "Daemon" [color=red]
+            "Resource Scheduler" [color=red];
+
+            "User" -> "Desktop Client", "Desktop Browser", "Mobile Device";
+            "Desktop Browser" -> "Web Client", "Administration Panel";
+            "Mobile Device" -> "ActiveSync", "DAV Access", "IMAP";
+
+            "Desktop Client" -> "IMAP", "LDAP", "MTA", "DAV Access" [color=purple];
+            "DAV Access" -> "IMAP", "LDAP", "MTA" [color=pink];
+            "Web Client" -> "IMAP", "LDAP", "MTA" [color=blue];
+            "ActiveSync" -> "IMAP", "LDAP", "MTA" [color=yellow];
+            "LMTP" -> "IMAP";
+            "MTA" -> "LDAP";
+            "LDAP" -> "Daemon" -> "IMAP";
+            "MTA" -> "Resource Scheduler" -> "MTA", "LDAP", "IMAP";
+
+            "Administration Panel" -> "LDAP";
+        }
+
+.. NOTE::
+
+    The web client Roundcube -- to which Kolab Systems is a very active
+    contributor -- provides Kolab Groupware capabilities through plugins.
+
+.. NOTE::
+
+    Desktop clients that Kolab Systems actively contributes to and supports
+    include Kontact (KDE PIM).
