@@ -80,6 +80,11 @@ Create a new calendar for user John Doe:
             --metadata=/shared/vendor/kolab/folder-type=event \\
             "user/john.doe/New Calendar@example.org"
 
+dam
+---
+
+Short-hand for :ref:`admin_cli_delete-mailbox-acl`
+
 delete-domain
 -------------
 
@@ -100,8 +105,10 @@ delete-mailbox (dm)
 
 Delete a mailbox.
 
-delete-mailbox-acl (dam)
-------------------------
+.. _admin_cli_delete-mailbox-acl:
+
+delete-mailbox-acl
+------------------
 
 Delete an ACE for a mailbox.
 
@@ -111,11 +118,16 @@ Delete an ACE for a mailbox.
 
 .. option:: pattern
 
-    Delete the ACE from mailboxes matching the specified pattern.
+    Delete the ACE from mailboxes matching the specified :term:`pattern`.
 
-.. option:: aci
+.. option:: subject
 
-    Delete the ACE for this ACI.
+    Delete the ACE for this subject.
+
+.. rubric:: See Also
+
+*   :ref:`admin_cli_list-mailbox-acl`
+*   :ref:`admin_cli_set-mailbox-acl`
 
 delete-user
 -----------
@@ -132,33 +144,58 @@ edit-user
 
 Not yet implemented.
 
+lam
+---
+
+Short-hand for :ref:`admin_cli_list-mailbox-acl`
+
 list-deleted-mailboxes
 ----------------------
 
+.. rubric:: Synopsis
+
+.. parsed-literal::
+
+    kolab list-deleted-mailboxes [pattern]
+
 .. rubric:: Command-Line Options
+
+.. program:: list-deleted-mailboxes
 
 .. option:: pattern
 
-    List deleted mailboxes matching the specified pattern.
+    List deleted mailboxes matching the specified :term:`pattern`.
 
 .. option:: --server server
 
     Connect to the IMAP server at address <SERVER> instead of the configured
     IMAP server.
 
-list-mailbox-acl (lam)
-----------------------
+.. _admin_cli_list-mailbox-acl:
+
+list-mailbox-acl
+----------------
 
 .. rubric:: Command-Line Options
 
+.. program:: list-mailbox-acl
+
 .. option:: pattern
 
-    List the ACL for mailboxes matching the specified pattern.
+    List the ACL for mailboxes matching the specified :term:`pattern`.
+
+.. rubric:: See Also
+
+*   :ref:`admin_cli_delete-mailbox-acl`
+*   :ref:`admin_cli_set-mailbox-acl`
+*   :ref:`admin_imap-access-rights-reference`
 
 list-mailbox-metadata
 ---------------------
 
 .. rubric:: Command-Line Options
+
+.. program:: list-mailbox-metadata
 
 .. option:: --user user
 
@@ -169,6 +206,8 @@ list-mailboxes (lm)
 -------------------
 
 .. rubric:: Command-Line Options
+
+.. program:: list-mailboxes
 
 .. option:: --server server
 
@@ -193,13 +232,107 @@ list-user-subscriptions
 rename-mailbox
 --------------
 
-set-mailbox-acl (sam)
----------------------
+sam
+---
+
+Short-hand for :ref:`admin_cli_set-mailbox-acl`
+
+.. _admin_cli_set-mailbox-acl:
+
+set-mailbox-acl
+---------------
+
+Sets an access control entry (ACE) for a given subject.
+
+.. rubric:: Synopsis
+
+.. parsed-literal::
+
+    kolab set-mailbox-acl <pattern> <subject> <rights>
+
+.. rubric:: Command-Line Options
+
+.. program:: set-mailbox-acl
+
+.. option:: pattern
+
+    Apply the ACE to mailboxes matching the specified :term:`pattern`.
+
+.. option:: subject
+
+    Set the ACE for the subject specified.
+
+.. option:: rights
+
+    The ACE subject is getting these rights.
+
+    In addition to the regular IMAP access right identifiers, the kolab command-
+    line takes the following rights:
+
+    **all**
+
+        Full rights, including administration. The IMAP equivalent is
+        ``lrswipkxtecda``.
+
+    **read-only**
+
+        Read-only rights, with the IMAP equivalent being ``lrs``.
+
+    **read-write**
+
+        Permissions most suitable for access to a (shared) groupware folder.
+
+        The rights allow a subject to modify groupware contents, such as marking
+        tasks as completed.
+
+        The IMAP equivalent is ``lrswited``.
+
+    **semi-full**
+
+        Allow the subject to insert new message (copies), such as groupware
+        content, and flag current messages as deleted.
+
+        Also allow the subject to maintain flags other than the system flags
+        ``\Seen`` and ``\Deleted`` (such as ``\Flagged``).
+
+        Note that the rights do not include the right to EXPUNGE the folder,
+        meaning that messages therein remain available.
+
+        The IMAP equivalent is ``lrswit``.
+
+    **full**
+
+        Everything but administrator rights, so that the subject cannot modify
+        the access control on the folder.
+
+.. rubric:: Examples
+
+Set the access rights for ``john.doe@example.org`` to administer a folder
+``shared/contacts@example.org``:
+
+.. parsed-literal::
+
+    # :command:`kolab sam shared/contacts@example.org john.doe@example.org all`
+
+Give access to ``jane.doe@example.org`` to read and write contacts in a folder
+``shared/contacts@example.org``:
+
+.. parsed-literal::
+
+    # :command:`kolab sam shared/contacts@example.org jane.doe@example.org read-write`
+
+.. rubric:: See Also
+
+*   :ref:`admin_cli_list-mailbox-acl`
+*   :ref:`admin_cli_delete-mailbox-acl`
+*   :ref:`admin_imap-access-rights-reference`
 
 set-mailbox-metadata
 --------------------
 
 .. rubric:: Command-Line Options
+
+.. program:: set-mailbox-metadata
 
 .. option:: --user user
 
@@ -213,6 +346,8 @@ Summarize all quota allocation for all mailboxes.
 
 .. rubric:: Command-Line Options
 
+.. program:: summarize-quota-allocation
+
 .. option:: --server server
 
     Connect to the IMAP server at address <SERVER> instead of the configured
@@ -225,7 +360,7 @@ transfer-mailbox
 
 .. option:: pattern
 
-    Transfer mailboxes matching the specified pattern.
+    Transfer mailboxes matching the specified :term:`pattern`.
 
 .. option:: server
 

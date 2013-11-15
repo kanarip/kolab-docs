@@ -32,6 +32,8 @@ Administrator Guide
     tweaking-postfix
     tweaking-roundcube
 
+    imap-access-rights-reference
+
     ../glossary
 
 .. todo::

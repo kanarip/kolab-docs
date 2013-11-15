@@ -170,6 +170,26 @@ Glossary
 
         The Mail User Agent (*MUA*) (...)
 
+    pattern
+
+        A pattern for mailboxes can be specified using ``%`` and ``*``
+        wildcards.
+
+        The ``%`` wildcard matches mailboxes on a single level only, while the
+        ``*`` wildcard matches mailboxes in all depth levels.
+
+        To list INBOX folders for users in the example.org domain, use:
+
+        .. parsed-literal::
+
+            # :command:`kolab lm user/%@example.org`
+
+        but to list all user folders in the example.org domain:
+
+        .. parsed-literal::
+
+            # :command:`kolab lm user/*@example.org`
+
     parent domain
     parent domain name space
     parent domain name spaces
