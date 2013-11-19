@@ -118,7 +118,40 @@ as described.
         EECDH+ECDSA+SHA256 EECDH+aRSA+SHA384 EECDH+aRSA+SHA256 EECDH+aRSA+RC4 \
         EECDH EDH+aRSA RC4 !aNULL !eNULL !LOW !3DES !MD5 !EXP !PSK !SRP !DSS"
 
+Setting up SSL on Apache and securing roundcubemail and kolab-webadmin by flixi
+======================================================================
 
+Use this Tutorial to generate your SSL-Certificates
+http://softwareinabottle.wordpress.com/2011/12/18/setting-up-apache-http-server-with-ssl-support-on-ubuntudebian/
+Step 2, Step 3, Step 4. After you have completed Step 4, do not disable the port!
+
+You now have a self-signed-certificate and it works!
+
+Now you have to restart the Apache, if t should fail try this.
+
+.. code::
+    vim /etc/apache2/ports.conf
+and edit the line
+    NameVirtualHost *:80
+to read
+    NameVirtualHost *:443
+
+In order to send both roundcubemail and kolab webadmin to the https versions of your site, do the following, enable the rewrite mod in apache2.
+
+    a2enmod rewrite
+
+Go to the respective public_html folders of both roundcube and the kolab-webadmin, typically yuo can find these under /usr/share/roundcubemail/ and /usr/share/kolab-webadmin/public_html/
+
+In both directories you should create .htaccess-files, or edit them if they are already there.
+Insert this into the files:
+    RewriteEngine On
+    RewriteCond %{HTTPS} off
+    RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI}
+    
+Now you should be unable to access yourserver/roundcubemail and yourserver/kolab-webadmin without being redirected to the https-version of both webpages.
+
+How to get ssl for postfix, cyrus imap and the ldap service will be updated later.
+Best, flixi
 .. rubric:: Footnotes
 
 .. [#] http://en.wikipedia.org/wiki/PRISM_%28surveillance_program%29
