@@ -1,6 +1,6 @@
-=======================================
-HOWTO: Enable SSL on all Kolab Services
-=======================================
+================================
+HOWTO: Secure all Kolab Services
+================================
 
 This howto is based on Centos 6.4. The configuration on Debian is similar, just
 the base path for the certifcates storage is a different one and that Debian 
@@ -300,25 +300,30 @@ chawla can talk via ssl.
 
         # :command:`sed -i -e '/kolab_ssl/d' /etc/roundcubemail/libkolab.inc.php`
 
-#.  Enable SSL verification against our extended ca-bundle.
-
-    .. parsed-literal::
-
-        # :command:`cat >> /etc/roundcubemail/config.inc.php << EOF
-        <?
-        \\$config['kolab_http_request'] = array(
-                'ssl_verify_peer'       => true,
-                'ssl_verify_host'       => true,
-                'ssl_cafile'            => '/etc/pki/tls/certs/ca-bundle.crt'
-        );
-        ?>
-        EOF`
-
 #.  Change chwala api url in the kolab_files plugin
 
     .. parsed-literal::
 
         # :command:`sed -i -e 's/http:/https:/' /etc/roundcubemail/kolab_files.inc.php`
+
+#.  Lets remove the php-close tag line as a quick hack to make it easier for us 
+    to extend the :file:`/etc/roundcube/config.inc.php`:
+
+    .. parsed-literal::
+
+        # :command:`sed -i -e '/^\?>/d' /etc/roundcubemail/config.inc.php`
+
+#.  Enable SSL verification against our extended ca-bundle.
+
+    .. parsed-literal::
+
+        # :command:`cat >> /etc/roundcubemail/config.inc.php << EOF
+        \\$config['kolab_http_request'] = array(
+                'ssl_verify_peer'       => true,
+                'ssl_verify_host'       => true,
+                'ssl_cafile'            => '/etc/pki/tls/certs/ca-bundle.crt'
+        );
+        EOF`
 
 #.  Tell the webclient the ssl irony urls for caldav and carddav
 

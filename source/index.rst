@@ -33,6 +33,7 @@ protocols.
     :maxdepth: 1
 
     howtos/multi-domain
+    howtos/secure-kolab-server
     howtos/nginx-webserver
     howtos/nginx-imap-proxy
     howtos/build-kolab-from-source
