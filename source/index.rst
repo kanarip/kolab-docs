@@ -37,5 +37,6 @@ protocols.
     howtos/build-kolab-from-source
     howtos/deploy-kolab-with-glusterfs-for-imap
     howtos/deploy-high-available-and-load-balanced-ldap
+    howtos/secure-kolab-server
 
 .. todolist::
