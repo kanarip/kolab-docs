@@ -311,10 +311,10 @@ that does not contain a realm identifier (i.e., something without an '@' in it),
 such as the ``uid`` attribute, which by default does not include a domain name
 space. This would create the following mailboxes:
 
-*   user/doe
-*   user/smith
 *   user/average
+*   user/doe
 *   user/roe
+*   user/smith
 
 You may also consider setting ``virtdomains`` to ``off`` in **imapd.conf(5)**,
 although this implies only the null realm is ever going to be used.
@@ -322,7 +322,6 @@ although this implies only the null realm is ever going to be used.
 For larger deployments, we also recommend reading about
 :ref:`deployment_imap_cyrus-imap-murder`.
 
-See Also
---------
+.. seealso::
 
 *   :ref:`admin_organizations-with-multiple-domain-namespaces`.
