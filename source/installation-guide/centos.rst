@@ -12,14 +12,7 @@ Installation on CentOS
 
         # :command:`rpm -Uhv http://url/to/epel-release.rpm`
 
-2.  Install the **yum-plugin-priorities** package:
-
-    .. parsed-literal::
-
-        # :command:`yum install yum-plugin-priorities`
-
-
-3.  Install the Kolab Groupware repository configuration:
+2.  Install the Kolab Groupware repository configuration:
 
     .. parsed-literal::
 
@@ -27,7 +20,7 @@ Installation on CentOS
         # :command:`wget http://obs.kolabsys.com:82/Kolab:/3.1/CentOS_6/Kolab:3.1.repo`
         # :command:`wget http://obs.kolabsys.com:82/Kolab:/3.1:/Updates/CentOS_6/Kolab:3.1:Updates.repo`
 
-4.  Install Kolab Groupware:
+3.  Install Kolab Groupware:
 
     .. parsed-literal::
 
