@@ -13,6 +13,10 @@ The following functional components make up a groupware environment:
 #. One or more :ref:`and_intro_mobile-clients`.
 #. One or more :ref:`and_intro_web-interfaces`.
 
+This chapter also includes a high-level
+:ref:`and_intro_overview-functional-components` (but we recommend you keep on
+reading).
+
 .. #. Instant Messaging
 .. #. Voice and Video (-Conferencing)
 
@@ -20,10 +24,10 @@ Furthermore, a groupware environment offers functionality beyond the exchange of
 regular email messages, such as calendaring, maintaining address books, task
 management, journaling, and more.
 
-All of this should be secure, scalable and flexible. It must also use Open
-Standards for protocols and storage formats to provide the user the freedom to
-walk away with their data, respect the privacy of its users, meanwhile protect
-organizations' interests.
+All of this should be secure [#]_, scalable [#]_ and flexible [#]_. It must also
+use Open Standards for protocols and storage formats to provide the user the
+freedom to walk away with their data, respect the privacy of its users,
+meanwhile protect organizations' interests.
 
 Welcome to Kolab Groupware!
 
@@ -72,7 +76,10 @@ Data Storage Layer & Primary Access Protocol
 A data storage layer for groupware environments must be fast, efficient,
 scalable and secure.
 
-A single system can only scale up as far as its local resources allow it to.
+A single system can only scale up as far as its local resources allow it to --
+called vertical scaling -- not unlike physical mass, there can only be a finite
+amount of resources in one place at any given one point in time.
+
 It is therefore a pre-requisite the storage layer can be spread out over
 multiple individual systems, while maintaining a transparent access methodology
 for users - whom do not know what data is where, and even if they did, tend to
@@ -168,29 +175,30 @@ Web Interfaces
 * Chwala File Management
 * Mobile Device Synchronization
 
-Overview
---------
+.. _and_intro_overview-functional-components:
+
+Overview of Functional Components
+---------------------------------
 
 The following diagram provides a high-level overview of functional components
 and their connections and interactions with one another. For a fully detailed
-picture, ...
+picture, we'll need to zoom in to the level of functional components themselves,
+and their individual interactions with other functional components.
 
 .. graphviz::
 
     digraph overview {
             "Desktop Client";
             "Mobile Device";
-            "Web Client";
-            "Administration Panel" [color=red];
-            "ActiveSync" [color=red];
-            "DAV Access" [color=red];
-
-            "LDAP", "MTA";
-
-            "IMAP", "LMTP";
-
-            "Daemon" [color=red]
-            "Resource Scheduler" [color=red];
+            "Web Client" [fontcolor=darkgreen];
+            "Administration Panel" [color=red,fontcolor=darkgreen];
+            "ActiveSync" [color=red,fontcolor=darkgreen];
+            "DAV Access" [color=red,fontcolor=darkgreen];
+            "IMAP" [fontcolor=darkgreen];
+            "LDAP" [fontcolor=darkgreen];
+            "MTA" [fontcolor=darkgreen];
+            "Daemon" [color=red,fontcolor=darkgreen];
+            "Resource Scheduler" [fontcolor=darkgreen];
 
             "User" -> "Desktop Client", "Desktop Browser", "Mobile Device";
             "Desktop Browser" -> "Web Client", "Administration Panel";
@@ -200,20 +208,58 @@ picture, ...
             "DAV Access" -> "IMAP", "LDAP", "MTA" [color=pink];
             "Web Client" -> "IMAP", "LDAP", "MTA" [color=blue];
             "ActiveSync" -> "IMAP", "LDAP", "MTA" [color=yellow];
-            "LMTP" -> "IMAP";
-            "MTA" -> "LDAP";
+            "MTA" -> "LDAP", "IMAP";
             "LDAP" -> "Daemon" -> "IMAP";
             "MTA" -> "Resource Scheduler" -> "MTA", "LDAP", "IMAP";
 
             "Administration Panel" -> "LDAP";
         }
 
+Legend:
+
+*   The Red circles indicate components provided exclusively as part of Kolab
+    Groupware.
+
+*   Components in a Dark Green font color are server-side components.
+
 .. NOTE::
 
-    The web client Roundcube -- to which Kolab Systems is a very active
-    contributor -- provides Kolab Groupware capabilities through plugins.
+    The web client -- Roundcube, to which Kolab Systems contributes
+    substantially -- provides Kolab Groupware capabilities in addition to the
+    Roundcube core capabilities through plugins.
 
 .. NOTE::
 
     Desktop clients that Kolab Systems actively contributes to and supports
     include Kontact (KDE PIM).
+
+.. rubric:: Footnotes
+
+.. [#] **Security**
+
+    **Beware of snake-oil vendors**, whom may tempt you to choose for a model
+    that encrypts data on the server using a fundamentally flawed model,
+    sometimes called *"the averting eyes promise"*, more clearly explained on
+    http://arstechnica.com/security/2013/11/op-ed-a-critique-of-lavabit/.
+
+.. [#] **Scalability**
+
+    Both vertical as well as horizontal scalability are features of an elastic
+    computing environment -- whether automatic (aka "cloud") or manual.
+
+    The scaling of a deployed solution is best applied to each individual
+    functional component separately, for the number of web servers your
+    deployment needs at any given point does not directly correspond with the
+    amount of mail exchangers your deployment needs (at that point or
+    otherwise).
+
+.. [#] **Flexibility**
+
+    While, contrary to popular belief, most environments could run the majority
+    of their infrastructure on standard systems and with standard applications,
+    in contradiction not even two such standard environments are alike.
+
+    A solution that is capable of adapting to the new environment is clearly
+    much more flexible -- this does require a good understanding of the intended
+    architecture of the solution, and a well-defined deployment use-case to
+    adapt to.
