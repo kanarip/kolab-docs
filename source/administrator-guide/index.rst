@@ -21,6 +21,7 @@ Administrator Guide
     setup-kolab-cli-reference
 
     combating-spam
+    faq
 
     monitoring-389ds
     monitoring-cyrus-imapd

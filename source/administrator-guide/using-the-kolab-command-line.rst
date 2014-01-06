@@ -19,6 +19,12 @@ add-domain
 
 This command adds a new domain name space to Kolab Groupware.
 
+.. rubric:: Synopsis
+
+.. parsed-literal::
+
+    kolab add-domain [options] <domain>
+
 .. rubric:: Command-Line Options
 
 .. program:: add-domain
@@ -29,7 +35,9 @@ This command adds a new domain name space to Kolab Groupware.
 
 .. option:: --alias domain
 
-    Add the domain as an alias for the domain.
+    Add the domain as an alias for the domain specified as ``--alias``.
+
+.. seealso::
 
 add-group-admin
 ---------------
@@ -46,10 +54,23 @@ add-user
 
 Not yet implemented.
 
-create-mailbox (cm)
--------------------
+cm
+--
+
+Short-hand for :ref:`admin_cli_create-mailbox`.
+
+.. _admin_cli_create-mailbox:
+
+create-mailbox
+--------------
 
 Create a mailbox or mail folder.
+
+.. rubric:: Synopsis
+
+.. parsed-literal::
+
+    kolab cm [options] <mailbox>
 
 .. rubric:: Command-Line Options
 
@@ -68,17 +89,32 @@ Create a mailbox or mail folder.
 
 Create a new mail folder for user John Doe:
 
-    .. parsed-literal::
+.. parsed-literal::
 
-        # :command:`kolab create-mailbox` "user/john.doe/New@example.org"
+    # :command:`kolab create-mailbox` "user/john.doe/New@example.org"
 
 Create a new calendar for user John Doe:
 
-    .. parsed-literal::
+.. parsed-literal::
 
-        # :command:`kolab create-mailbox` \\
-            --metadata=/shared/vendor/kolab/folder-type=event \\
-            "user/john.doe/New Calendar@example.org"
+    # :command:`kolab create-mailbox` \\
+        --metadata=/shared/vendor/kolab/folder-type=event \\
+        "user/john.doe/New Calendar@example.org"
+
+Create a new default calendar folder for user John Doe.
+
+.. NOTE::
+
+    Only one default calendar folder may exist.
+
+.. parsed-literal::
+
+    # :command:`kolab create-mailbox` \\
+        --user john.doe@example.org \\
+        --metadata=/private/vendor/kolab/folder-type=event.default \\
+        "New Calendar"
+
+.. seealso::
 
 dam
 ---
@@ -124,7 +160,7 @@ Delete an ACE for a mailbox.
 
     Delete the ACE for this subject.
 
-.. rubric:: See Also
+.. seealso::
 
 *   :ref:`admin_cli_list-mailbox-acl`
 *   :ref:`admin_cli_set-mailbox-acl`
@@ -184,7 +220,7 @@ list-mailbox-acl
 
     List the ACL for mailboxes matching the specified :term:`pattern`.
 
-.. rubric:: See Also
+.. seealso::
 
 *   :ref:`admin_cli_delete-mailbox-acl`
 *   :ref:`admin_cli_set-mailbox-acl`
@@ -305,7 +341,7 @@ Sets an access control entry (ACE) for a given subject.
         Everything but administrator rights, so that the subject cannot modify
         the access control on the folder.
 
-.. rubric:: Examples
+.. rubric:: Example Usage
 
 Set the access rights for ``john.doe@example.org`` to administer a folder
 ``shared/contacts@example.org``:
@@ -321,11 +357,11 @@ Give access to ``jane.doe@example.org`` to read and write contacts in a folder
 
     # :command:`kolab sam shared/contacts@example.org jane.doe@example.org read-write`
 
-.. rubric:: See Also
+.. seealso::
 
-*   :ref:`admin_cli_list-mailbox-acl`
-*   :ref:`admin_cli_delete-mailbox-acl`
-*   :ref:`admin_imap-access-rights-reference`
+    *   :ref:`admin_cli_list-mailbox-acl`
+    *   :ref:`admin_cli_delete-mailbox-acl`
+    *   :ref:`admin_imap-access-rights-reference`
 
 set-mailbox-metadata
 --------------------
