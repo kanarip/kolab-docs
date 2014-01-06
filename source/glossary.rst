@@ -120,6 +120,15 @@ Glossary
 
         The domain result attribute is (...)
 
+    EPEL
+
+        EPEL stands for Extra Packages for Enterprise Linux, and is a software
+        repository maintained by the Fedora Project community.
+
+        It contains packages that are supplementary to a base RHEL subscription
+        including the *optional* software repository, such as **amavisd-new**
+        and **clamav**.
+
     external email address
 
         An external email address is intended to be additional user information,
