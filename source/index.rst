@@ -32,10 +32,12 @@ protocols.
 .. toctree::
     :maxdepth: 1
 
+    howtos/multi-domain
     howtos/nginx-webserver
     howtos/nginx-imap-proxy
     howtos/build-kolab-from-source
     howtos/deploy-kolab-with-glusterfs-for-imap
     howtos/deploy-high-available-and-load-balanced-ldap
+    howtos/kolab-webadmin-create-user
 
 .. todolist::
