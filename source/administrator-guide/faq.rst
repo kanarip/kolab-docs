@@ -2,6 +2,15 @@
 Frequently Answered Questions
 =============================
 
+.. _faq-no-add-user-button-or-link:
+
+No "Add User" Button or Link
+============================
+
+If this link is not there (you would also not have been presented with a form),
+you do not have permissions, you did not configure SELinux the way it was
+documented, firewall, DNS.
+
 Log Messages
 ============
 

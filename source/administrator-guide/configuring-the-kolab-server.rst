@@ -1,6 +1,10 @@
+.. _admin-config:
+
 ======================================
 Configuring the Kolab Groupware Server
 ======================================
+
+.. _admin_rcpt-policy:
 
 Recipient Policy
 ================
