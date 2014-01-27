@@ -183,6 +183,15 @@ More Complex Installation
 
                 client_max_body_size 30M; # set maximum upload size
 
+                # Make Apple Calendar.app and Contacts.app happy:
+                rewrite ^/.well-known/caldav / last;
+                rewrite ^/.well-known/carddav / last;
+
+                # If Nginx was built with http_dav_module:
+                dav_methods  PUT DELETE MKCOL COPY MOVE; # PROPFIND;
+                # Required Nginx to be built with nginx-dav-ext-module:
+                dav_ext_methods PROPFIND OPTIONS;
+
                 include fastcgi_params;
                 fastcgi_index index.php;
                 fastcgi_pass unix:/var/run/php-fpm/kolab.example.org_iRony.sock;
@@ -379,7 +388,7 @@ More Complex Installation
         $config['file_api_url'] = 'https://kolab.example.org:8443/chwala/api/';
 
 #.  Ensure, if you are using HTTPS, that the Chwala URL (``kolab_files_url``)
-    in :file:`/etc/roundcubemail/kolab_files.inc.php` is also set to 
+    in :file:`/etc/roundcubemail/kolab_files.inc.php` is also set to
     ``https`` rather than ``http``,  or most browsers will be unable to access
     the files component in Roundcube.
 
