@@ -3,19 +3,19 @@ HOWTO: Secure all Kolab Services
 ================================
 
 This howto is based on Centos 6.4. The configuration on Debian is similar, just
-the base path for the certifcates storage is a different one and that Debian 
-already has a group called ssl-cert where applications like cyrus or postfix 
+the base path for the certifcates storage is a different one and that Debian
+already has a group called ssl-cert where applications like cyrus or postfix
 are added by default.
 
 Prerequirements
 ===============
 
 Prepare your certificates! You'll need your certificate, your key, the CA and
-intermediate CA certificates. This tutorial is based on the StartCom SSL CA. 
+intermediate CA certificates. This tutorial is based on the StartCom SSL CA.
 Feel free to use any other Certificate Authority to your liking.
 
-In this case the certificate is a wildcard \*.example.org certificate, which 
-makes it easier to cover various hostnames (like smtp.example.org imap.example.org 
+In this case the certificate is a wildcard \*.example.org certificate, which
+makes it easier to cover various hostnames (like smtp.example.org imap.example.org
 webmail.example.org).
 
 #.  Transfer/Copy your personal ssl certificates on your new kolab server.
@@ -23,14 +23,14 @@ webmail.example.org).
     On Debian the default location is /etc/ssl/ instead of /etc/pki/tls/
 
     .. parsed-literal::
-    
+
         # :command:`scp example.org.key kolab.example.org:/etc/pki/tls/private/`
         # :command:`scp example.org.crt kolab.example.org:/etc/pki/tls/private/`
-    
+
 #.  Download root and chain certificates from your certification auhority.
 
     .. parsed-literal::
-    
+
         # :command:`wget --no-check-certificate https://www.startssl.com/certs/ca.pem \\
             -O /etc/pki/tls/private/startcom-ca.pem`
         # :command:`wget --no-check-certificate https://www.startssl.com/certs/sub.class2.server.ca.pem \\
@@ -39,7 +39,7 @@ webmail.example.org).
 #.  Lets build some bundle files we can use later
 
     .. parsed-literal::
-    
+
         # :command:`cat /etc/pki/tls/private/example.org.crt \\
               /etc/pki/tls/private/example.org.key \\
               /etc/pki/tls/private/startcom-sub.class2.server.ca.pem \\
@@ -61,13 +61,13 @@ webmail.example.org).
 
 #.  Add you CA to system cabundle
 
-    Other applications and scripts that want to communicate via SSL should point 
+    Other applications and scripts that want to communicate via SSL should point
     to the cabundle in case they want check if your own certificate is trusted.
 
     .. parsed-literal::
 
         # :command:`cat /etc/pki/tls/private/startcom-ca.pem >> /etc/pki/tls/certs/ca-bundle.crt`
-    
+
 
 Applications
 ============
@@ -90,7 +90,7 @@ Cyrus IMAPD
               -e 's|^tls_key_file:.*|tls_key_file: /etc/pki/tls/private/example.org.key|g' \\
               -e 's|^tls_ca_file:.*|tls_ca_file: /etc/pki/tls/private/example.org.ca-chain.pem|g' \\
               /etc/imapd.conf`
-            
+
 #.  Restart and verify
 
     .. parsed-literal::
@@ -120,12 +120,12 @@ Postfix
     .. parsed-literal::
 
         # :command:`service postfix restart`
-        
+
 Apache
 ------
 
-Apache offers 2 modules that provide SSL support. The wildly used mod_ssl and 
-mod_nss. Since mod_nss was already installed and loaded through some dependency 
+Apache offers 2 modules that provide SSL support. The wildly used mod_ssl and
+mod_nss. Since mod_nss was already installed and loaded through some dependency
 I'll cover this. Feel free to use mod_ssl.
 
 mod_nss
@@ -150,7 +150,7 @@ I configures mod_nss because it was already installed. If you prefer mod_ssl nob
         # :command:`pk12util -i /tmp/example.p12 -d /etc/httpd/alias -w /tmp/foo -k /dev/null`
         # :command:`rm /tmp/foo`
         # :command:`rm /tmp/example.p12`
-    
+
 #.  You should now be able to see all the imported certificates
 
     .. parsed-literal::
@@ -170,7 +170,7 @@ I configures mod_nss because it was already installed. If you prefer mod_ssl nob
     .. parsed-literal::
 
         # :command:`cat >> /etc/httpd/conf/httpd.conf << EOF
-        
+
         <VirtualHost _default_:80>
             RewriteEngine On
             RewriteRule ^(.*)$ https://%{HTTP_HOST}$1 [R=301,L]
@@ -228,7 +228,7 @@ If you really want/need you can also add SSL support to your LDAP Server
          +rsa_des_sha,+rsa_fips_des_sha,+rsa_3des_sha,+rsa_fips_3des_sha,+fortezza,
          +fortezza_rc4_128_sha,+fortezza_null,+tls_rsa_export1024_with_rc4_56_sha,
          +tls_rsa_export1024_with_des_cbc_sha
-        
+
         dn: cn=config
         changetype: modify
         add: nsslapd-security
@@ -239,7 +239,7 @@ If you really want/need you can also add SSL support to your LDAP Server
         -
         replace: nsslapd-secureport
         nsslapd-secureport: 636
-        
+
         dn: cn=RSA,cn=encryption,cn=config
         changetype: add
         objectclass: top
@@ -259,14 +259,14 @@ If you really want/need you can also add SSL support to your LDAP Server
 #.  You can test if your ldaps is configured correctly either via openssl s_client or just making a query via ldapsearch
 
     Test non-ssl connection
-    
+
     .. parsed-literal::
 
         # :command:`ldapsearch -x -H ldap://kolab.example.org -b "cn=kolab,cn=config" -D "cn=Directory Manager" \\
             -w "$(grep ^bind_pw /etc/kolab/kolab.conf | cut -d ' ' -f3-)"`
-    
+
     Test ssl connection
-    
+
     .. parsed-literal::
 
         # :command:`ldapsearch -x -H ldaps://kolab.example.org -b "cn=kolab,cn=config" -D "cn=Directory Manager" \\
@@ -278,7 +278,7 @@ Kolab Components
 kolab-cli
 ---------
 
-With the HTTP Service configured to force ssl communication you must add/update 
+With the HTTP Service configured to force ssl communication you must add/update
 your kolab-cli api url.
 
     .. parsed-literal::
@@ -291,7 +291,7 @@ your kolab-cli api url.
 Roundcube/Plugins
 -----------------
 
-Set correct ssl parameters for HTTP_Request2. This will ensure the kolab_files and 
+Set correct ssl parameters for HTTP_Request2. This will ensure the kolab_files and
 chawla can talk via ssl.
 
 #.  Remove old-style ssl configuration parameters
@@ -306,7 +306,7 @@ chawla can talk via ssl.
 
         # :command:`sed -i -e 's/http:/https:/' /etc/roundcubemail/kolab_files.inc.php`
 
-#.  Lets remove the php-close tag line as a quick hack to make it easier for us 
+#.  Lets remove the php-close tag line as a quick hack to make it easier for us
     to extend the :file:`/etc/roundcube/config.inc.php`:
 
     .. parsed-literal::
