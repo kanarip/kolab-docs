@@ -85,6 +85,13 @@ Create a mailbox or mail folder.
     Set the metadata KEY for the mailbox or mail folder to VALUE. Specify once
     for each pair of KEY=VALUE.
 
+.. option:: --partition=PARTITION
+
+    .. versionadded:: pykolab-0.6.11
+        Specify the Cyrus IMAP partition on which to create the mailbox. If not
+        specified, uses the ``defaultpartition`` configured in
+        :manpage:`imapd.conf(5)`.
+
 .. rubric:: Example Usage
 
 Create a new mail folder for user John Doe:
