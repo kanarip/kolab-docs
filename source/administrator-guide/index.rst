@@ -35,6 +35,8 @@ Administrator Guide
     tweaking-postfix
     tweaking-roundcube
 
+    dav-autodiscovery
+
     imap-access-rights-reference
 
     ../glossary
