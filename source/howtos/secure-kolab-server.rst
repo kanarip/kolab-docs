@@ -25,29 +25,29 @@ webmail.example.org).
     .. parsed-literal::
 
         # :command:`scp example.org.key kolab.example.org:/etc/pki/tls/private/`
-        # :command:`scp example.org.crt kolab.example.org:/etc/pki/tls/private/`
+        # :command:`scp example.org.crt kolab.example.org:/etc/pki/tls/certs/`
 
 #.  Download root and chain certificates from your certification auhority.
 
     .. parsed-literal::
 
         # :command:`wget --no-check-certificate https://www.startssl.com/certs/ca.pem \\
-            -O /etc/pki/tls/private/startcom-ca.pem`
+            -O /etc/pki/tls/certs/startcom-ca.pem`
         # :command:`wget --no-check-certificate https://www.startssl.com/certs/sub.class2.server.ca.pem \\
-            -O /etc/pki/tls/private/startcom-sub.class2.server.ca.pem`
+            -O /etc/pki/tls/certs/startcom-sub.class2.server.ca.pem`
 
 #.  Lets build some bundle files we can use later
 
     .. parsed-literal::
 
-        # :command:`cat /etc/pki/tls/private/example.org.crt \\
+        # :command:`cat /etc/pki/tls/certs/example.org.crt \\
               /etc/pki/tls/private/example.org.key \\
-              /etc/pki/tls/private/startcom-sub.class2.server.ca.pem \\
-              /etc/pki/tls/private/startcom-ca.pem \\
+              /etc/pki/tls/certs/startcom-sub.class2.server.ca.pem \\
+              /etc/pki/tls/certs/startcom-ca.pem \\
               > /etc/pki/tls/private/example.org.bundle.pem`
-        # :command:`cat /etc/pki/tls/private/startcom-ca.pem \\
-              /etc/pki/tls/private/startcom-sub.class2.server.ca.pem \\
-              > /etc/pki/tls/private/example.org.ca-chain.pem`
+        # :command:`cat /etc/pki/tls/certs/startcom-ca.pem \\
+              /etc/pki/tls/certs/startcom-sub.class2.server.ca.pem \\
+              > /etc/pki/tls/certs/example.org.ca-chain.pem`
 
 #.  Add a ssl group. Only members of this group should be able to access your private key, etc.
 
@@ -64,9 +64,19 @@ webmail.example.org).
     Other applications and scripts that want to communicate via SSL should point
     to the cabundle in case they want check if your own certificate is trusted.
 
+    For RedHat/Centos based systems:
+
     .. parsed-literal::
 
-        # :command:`cat /etc/pki/tls/private/startcom-ca.pem >> /etc/pki/tls/certs/ca-bundle.crt`
+        # :command:`cat /etc/pki/tls/certs/startcom-ca.pem >> /etc/pki/tls/certs/ca-bundle.crt`
+
+    On Debian based systems it's even easier. The command update-ca-certificates takes
+    care of the ca-bundle file.
+
+    .. parsed-literal::
+
+        # :command:`cp /etc/ssl/private/startcom-ca.pem /usr/local/share/ca-certificates/startcom-ca.crt`
+        # :command:`update-ca-certificates`
 
 
 Applications
@@ -86,9 +96,9 @@ Cyrus IMAPD
     .. parsed-literal::
 
         # :command:`sed -r -i \\
-              -e 's|^tls_cert_file:.*|tls_cert_file: /etc/pki/tls/private/example.org.crt|g' \\
+              -e 's|^tls_cert_file:.*|tls_cert_file: /etc/pki/tls/certs/example.org.crt|g' \\
               -e 's|^tls_key_file:.*|tls_key_file: /etc/pki/tls/private/example.org.key|g' \\
-              -e 's|^tls_ca_file:.*|tls_ca_file: /etc/pki/tls/private/example.org.ca-chain.pem|g' \\
+              -e 's|^tls_ca_file:.*|tls_ca_file: /etc/pki/tls/certs/example.org.ca-chain.pem|g' \\
               /etc/imapd.conf`
 
 #.  Restart and verify
@@ -138,13 +148,13 @@ I configures mod_nss because it was already installed. If you prefer mod_ssl nob
     .. parsed-literal::
 
         # :command:`certutil -d /etc/httpd/alias -A  -t "CT,," -n "StartCom Certification Authority" \\
-            -i /etc/pki/tls/private/startcom-ca.pem`
+            -i /etc/pki/tls/certs/startcom-ca.pem`
 
 #.  Convert and import your personal certificate into NSS DB
 
     .. parsed-literal::
 
-        # :command:`openssl pkcs12 -export -in /etc/ssl/private/example.org.crt -inkey /etc/ssl/private/example.org.key \\
+        # :command:`openssl pkcs12 -export -in /etc/tls/pki/certs/example.org.crt -inkey /etc/tls/pki/private/example.org.key \\
             -out /tmp/example.p12 -name Server-Cert -passout pass:foo`
         # :command:`echo "foo" > /tmp/foo`
         # :command:`pk12util -i /tmp/example.p12 -d /etc/httpd/alias -w /tmp/foo -k /dev/null`
@@ -200,8 +210,8 @@ If you really want/need you can also add SSL support to your LDAP Server
     .. parsed-literal::
 
         # :command:`certutil -d /etc/dirsrv/slapd-kolab/ -A  -t "CT,," -n "StartCom Certification Authority" \\
-            -i /etc/pki/tls/private/startcom-ca.pem`
-        # :command:`openssl pkcs12 -export -in /etc/ssl/private/example.org.crt -inkey /etc/ssl/private/example.org.key \\
+            -i /etc/pki/tls/certs/startcom-ca.pem`
+        # :command:`openssl pkcs12 -export -in /etc/tls/pki/certs/example.org.crt -inkey /etc/tls/pki/private/example.org.key \\
             -out /tmp/example.p12 -name Server-Cert -passout pass:foo`
         # :command:`echo "foo" > /tmp/foo`
         # :command:`pk12util -i /tmp/example.p12 -d /etc/dirsrv/slapd-kolab/ -w /tmp/foo -k /dev/null`
@@ -285,7 +295,7 @@ your kolab-cli api url.
 
         # :command:`sed -r -i \\
               -e '/api_url/d' \\
-              -e "s#\[kolab_wap\]#[kolab_wap]\napi_url = https://kolab.example.org/kolab-webadmin/api#g" \\
+              -e "s#\\[kolab_wap\\]#[kolab_wap]\\napi_url = https://kolab.example.org/kolab-webadmin/api#g" \\
               /etc/kolab/kolab.conf`
 
 Roundcube/Plugins
