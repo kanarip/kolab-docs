@@ -64,9 +64,19 @@ webmail.example.org).
     Other applications and scripts that want to communicate via SSL should point
     to the cabundle in case they want check if your own certificate is trusted.
 
+    For RedHat/Centos based systems:
+
     .. parsed-literal::
 
         # :command:`cat /etc/pki/tls/certs/startcom-ca.pem >> /etc/pki/tls/certs/ca-bundle.crt`
+
+    On Debian based systems it's even easier. The command update-ca-certificates takes
+    care of the ca-bundle file.
+
+    .. parsed-literal::
+
+        # :command:`cp /etc/ssl/private/startcom-ca.pem /usr/local/share/ca-certificates/startcom-ca.crt`
+        # :command:`update-ca-certificates`
 
 
 Applications
