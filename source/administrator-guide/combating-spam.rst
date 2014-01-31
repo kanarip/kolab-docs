@@ -175,7 +175,7 @@ Adjusting the Score for BAYES_99
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 1.  Edit /etc/mail/spamassassin/local.cf, and make sure the following line is
-    present::
+    present
 
     .. parsed-literal::
 
