@@ -152,6 +152,76 @@ This means the following event notifications are lacking:
 
 #.  METADATA change notification
 
+It is possible to run Cyrus IMAP 2.5 notifications in a blocking fashion,
+allowing the (post-)processing operation(s) to complete in full before the IMAP
+session is allowed to continue / confirms the modification/mutation.
+
+Application Logic and Database Design Considerations
+====================================================
+
+Users are Volatile and Groups do not Exist
+------------------------------------------
+
+Usernames as issued by Cyrus IMAP 2.5 notifications are volatile, in that the
+same physical human being (jane.gi@example.org) could change email addresses for
+any of many unrelated causes (jane.doe@example.org).
+
+It is therefore mandatory to:
+
+*   resolve IMAP login usernames to canonified IMAP login usernames,
+
+    User ``jdoe2`` could in fact be the same physical human being as
+    ``j.doe2@example.org`` and ``jane.doe@example.org``.
+
+*   relate canonified IMAP login usernames to persistent user attribute values,
+*   relate mail folder names, paths and URIs in personal namespaces to
+    persistent user attribute values,
+*   resolve IMAP ACE subject entries to their persistent attribute values, for
+    both users and groups,
+*   store membership information about groups at the time of an event,
+*   store roles attached to users.
+
+This needs to happen in a timely fashion, for intermediate changes to the
+authoritative, canonical user and group information database, in the period of
+time between the event notification and the collection of information, could
+invalidate the permanent record.
+
+.. graphviz::
+
+    digraph bonnie_user {
+            splines = true;
+            overlap = prism;
+
+            edge [color=gray50, fontname=Calibri, fontsize=11]
+            node [shape=record, fontname=Calibri, fontsize=11]
+
+            subgraph cluster_dbuser {
+                    label = "User (Database)";
+                    dbuser_id [label="ID", color=blue, fontcolor=blue];
+                    dbuser_uniqueid [label="UniqueID", color=blue, fontcolor=blue];
+                }
+
+            subgraph cluster_ldapuser {
+                    label = "User (LDAP)";
+                    ldapuser_dn [label="Entry DN", color=blue, fontcolor=blue];
+                    ldapuser_uniqueid [label="UniqueID", color=blue, fontcolor=blue];
+                }
+
+            subgraph cluster_dbdata {
+                    label = "Database Data";
+                    dbcolumn_dbuser_id [label="UserID", color=blue, fontcolor=blue];
+                }
+
+            dbuser_id -> dbuser_uniqueid [label="resolves to"];
+            dbuser_id -> dbcolumn_dbuser_id [label="FOREIGN KEY",dir=back];
+            dbuser_uniqueid -> ldapuser_uniqueid [label="equals"];
+        }
+
+Queries and Information Distribution
+====================================
+
+
+
 .. rubric:: Footnotes
 
 .. [#]
