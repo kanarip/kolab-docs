@@ -123,6 +123,8 @@ Create a new default calendar folder for user John Doe.
 
 .. seealso::
 
+    *   :ref:`admin_cli_subscribe-user`
+
 dam
 ---
 
@@ -382,6 +384,35 @@ set-mailbox-metadata
     Set the mailbox metadata logged in as the user, enabling the modification of
     the /private metadata namespace annotation values.
 
+.. _admin_cli_subscribe-user:
+
+subscribe-user
+--------------
+
+.. rubric:: Synopsis
+
+.. parsed-literal::
+
+    kolab subscribe-user <user> <pattern>
+
+.. rubric:: Command-Line Options
+
+.. program:: subscribe-user
+
+.. option:: user
+
+    Subscribe the specified user.
+
+    .. NOTE::
+
+        The user will be subscribed only of the user also has rights to the
+        folder.
+
+.. option:: pattern
+
+    Subscribe the user specified to mailboxes matching the specified
+    :term:`pattern`.
+
 summarize-quota-allocation (sqa)
 --------------------------------
 
@@ -399,15 +430,35 @@ Summarize all quota allocation for all mailboxes.
 transfer-mailbox
 ----------------
 
+Transfer a mailbox from the server it is currently on, to the server you
+specify.
+
+.. rubric:: Synopsis
+
+.. parsed-literal::
+
+    kolab transfer-mailbox <mailbox> <server>
+
+.. rubric:: Command-Line Options
+
 .. program:: transfer-mailbox
 
-.. option:: pattern
+.. option:: mailbox
 
-    Transfer mailboxes matching the specified :term:`pattern`.
+    Transfer the mailbox specified, such as ``user/john.doe@example.org``.
 
 .. option:: server
 
-    Transfer mailboxes to this server.
+    Transfer the mailboxes to the server specified.
+
+.. rubric:: Example Usage
+
+Transfer mailbox ``user/john.doe@example.org`` currently on IMAP server
+``imap1.example.org`` over to IMAP server ``imap2.example.org``:
+
+.. parsed-literal::
+
+    # :command:`kolab transfer-mailbox user/john.doe@example.org imap2.example.org`
 
 .. .. option:: --server server
 ..
