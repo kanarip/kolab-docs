@@ -2,38 +2,51 @@
 HOWTO: Secure all Kolab Services
 ================================
 
-This howto is based on Centos 6.4. The configuration on Debian is similar, just
-the base path for the certifcates storage is a different one and that Debian
-already has a group called ssl-cert where applications like cyrus or postfix
-are added by default.
+This HOWTO is based on Centos 6.4.
 
-Prerequirements
-===============
+The configuration on Debian(-based distributions) is similar, but the base path
+for the certifcates storage is different, and Debian already has a group called
+``ssl-cert`` to which the user accounts for applications like Cyrus IMAP or
+Postfix are added by default.
+
+On CentOS, this group is called ``mail``.
+
+Prerequisites
+=============
 
 Prepare your certificates! You'll need your certificate, your key, the CA and
 intermediate CA certificates. This tutorial is based on the StartCom SSL CA.
 Feel free to use any other Certificate Authority to your liking.
 
 In this case the certificate is a wildcard \*.example.org certificate, which
-makes it easier to cover various hostnames (like smtp.example.org imap.example.org
-webmail.example.org).
+makes it easier to cover various hostnames (like ``smtp.example.org``,
+``imap.example.org`` and ``webmail.example.org``).
 
-#.  Transfer/Copy your personal ssl certificates on your new kolab server.
+#.  Copy your personal SSL certificates on your new Kolab server.
 
-    On Debian the default location is /etc/ssl/ instead of /etc/pki/tls/
+    On Debian the default location is :filename:`/etc/ssl/` instead of
+    :filename:`/etc/pki/tls/`.
 
     .. parsed-literal::
 
         # :command:`scp example.org.key kolab.example.org:/etc/pki/tls/private/`
         # :command:`scp example.org.crt kolab.example.org:/etc/pki/tls/certs/`
 
-#.  Download root and chain certificates from your certification auhority.
+#.  You should have obtained a CA certificate or CA certificate chain from your
+    SSL certificate issuer.
+
+    If you have not, obtain the root and chain certificates from your
+    certification authority. Make sure the source of the certificate is
+    verifiable and trusted.
+
+    For example:
 
     .. parsed-literal::
 
-        # :command:`wget --no-check-certificate https://www.startssl.com/certs/ca.pem \\
+        # :command:`wget https://www.startssl.com/certs/ca.pem \\
             -O /etc/pki/tls/certs/startcom-ca.pem`
-        # :command:`wget --no-check-certificate https://www.startssl.com/certs/sub.class2.server.ca.pem \\
+
+        # :command:`wget https://www.startssl.com/certs/sub.class2.server.ca.pem \\
             -O /etc/pki/tls/certs/startcom-sub.class2.server.ca.pem`
 
 #.  Lets build some bundle files we can use later
@@ -45,21 +58,24 @@ webmail.example.org).
               /etc/pki/tls/certs/startcom-sub.class2.server.ca.pem \\
               /etc/pki/tls/certs/startcom-ca.pem \\
               > /etc/pki/tls/private/example.org.bundle.pem`
+
         # :command:`cat /etc/pki/tls/certs/startcom-ca.pem \\
               /etc/pki/tls/certs/startcom-sub.class2.server.ca.pem \\
               > /etc/pki/tls/certs/example.org.ca-chain.pem`
 
-#.  Add a ssl group. Only members of this group should be able to access your private key, etc.
+#.  Add an SSL group. Only members of this group should be able to access your
+    private key, etc.
 
     On Debian the usergroup is not needed.
 
     .. parsed-literal::
 
-        # :command:`groupadd ssl`
-        # :command:`chmod 640 /etc/pki/tls/private/*`
-        # :command:`chown root:ssl /etc/pki/tls/private/*`
+        # :command:`chmod 640 /etc/pki/tls/private/* \\
+            /etc/pki/tls/certs/*`
 
-#.  Add you CA to system cabundle
+        # :command:`chown root:mail /etc/pki/tls/private/example.org.key`
+
+#.  Add the CA to system's CA bundle.
 
     Other applications and scripts that want to communicate via SSL should point
     to the cabundle in case they want check if your own certificate is trusted.
@@ -78,20 +94,13 @@ webmail.example.org).
         # :command:`cp /etc/ssl/private/startcom-ca.pem /usr/local/share/ca-certificates/startcom-ca.crt`
         # :command:`update-ca-certificates`
 
-
 Applications
 ============
 
 Cyrus IMAPD
 -----------
 
-#.  Allow cyrus user to access the ssl certificate
-
-    .. parsed-literal::
-
-        # :command:`usermod -G saslauth,ssl cyrus`
-
-#.  Configure ssl certificates
+#.  Configure SSL certificates
 
     .. parsed-literal::
 
@@ -111,12 +120,6 @@ Cyrus IMAPD
 Postfix
 -------
 
-#.  Allow postfix user to access the ssl certificate
-
-    .. parsed-literal::
-
-        # :command:`usermod -G mail,ssl postfix`
-
 #.  Configure SSL certificates
 
     .. parsed-literal::
@@ -134,9 +137,9 @@ Postfix
 Apache
 ------
 
-Apache offers 2 modules that provide SSL support. The wildly used mod_ssl and
-mod_nss. Since mod_nss was already installed and loaded through some dependency
-I'll cover this. Feel free to use mod_ssl.
+Apache offers 2 modules that provide SSL support. The wildly used **mod_ssl**,
+and **mod_nss**. Since **mod_nss** was already installed and loaded through some
+dependency I'll cover this. Feel free to use **mod_ssl**.
 
 mod_nss
 ^^^^^^^
@@ -147,15 +150,19 @@ I configures mod_nss because it was already installed. If you prefer mod_ssl nob
 
     .. parsed-literal::
 
-        # :command:`certutil -d /etc/httpd/alias -A  -t "CT,," -n "StartCom Certification Authority" \\
+        # :command:`certutil -d /etc/httpd/alias -A  -t "CT,," \\
+            -n "StartCom Certification Authority" \\
             -i /etc/pki/tls/certs/startcom-ca.pem`
 
 #.  Convert and import your personal certificate into NSS DB
 
     .. parsed-literal::
 
-        # :command:`openssl pkcs12 -export -in /etc/tls/pki/certs/example.org.crt -inkey /etc/tls/pki/private/example.org.key \\
+        # :command:`openssl pkcs12 -export \\
+            -in /etc/pki/tls/certs/example.org.crt \\
+            -inkey /etc/pki/tls/private/example.org.key \\
             -out /tmp/example.p12 -name Server-Cert -passout pass:foo`
+
         # :command:`echo "foo" > /tmp/foo`
         # :command:`pk12util -i /tmp/example.p12 -d /etc/httpd/alias -w /tmp/foo -k /dev/null`
         # :command:`rm /tmp/foo`
@@ -168,12 +175,14 @@ I configures mod_nss because it was already installed. If you prefer mod_ssl nob
         # :command:`certutil -L -d /etc/httpd/alias`
         # :command:`certutil -V -u V -d /etc/httpd/alias -n "Server-Cert"`
 
-#.  Move mod_nss from port 8443 to 443 and set the certificate which mod_nss should use.
+#.  Move mod_nss from port 8443 to 443 and configure the certificate that
+    mod_nss should use.
 
     .. parsed-literal::
 
         # :command:`sed -i -e 's/8443/443/' /etc/httpd/conf.d/nss.conf`
-        # :command:`sed -i -e 's/NSSNickname.*/NSSNickname Server-Cert/' /etc/httpd/conf.d/nss.conf`
+        # :command:`sed -i -e 's/NSSNickname.*/NSSNickname Server-Cert/' \\
+            /etc/httpd/conf.d/nss.conf`
 
 #.  Create a vhost for http (:80) to redirect everything to https
 
@@ -197,34 +206,43 @@ I configures mod_nss because it was already installed. If you prefer mod_ssl nob
 mod_ssl
 ^^^^^^^
 
-There're enough tutorials out there if you want to configure mod_ssl on your apacher.
-Maybe you want to take a look on the nginx configuration as well.
+There're enough tutorials out there if you want to configure **mod_ssl** on your
+Apache. Maybe you want to take a look on the nginx configuration as well.
 
 389 Directory Server
 --------------------
 
 If you really want/need you can also add SSL support to your LDAP Server
 
-#.  First you must import your PEM File into the certutil certificate store (identical to apache with mod_nss)
+#.  First you must import your PEM File into the certutil certificate store
+    (identical to Apache with **mod_nss**)
 
     .. parsed-literal::
 
-        # :command:`certutil -d /etc/dirsrv/slapd-kolab/ -A  -t "CT,," -n "StartCom Certification Authority" \\
+        # :command:`certutil -d /etc/dirsrv/slapd-kolab/ -A  -t "CT,," \\
+            -n "StartCom Certification Authority" \\
             -i /etc/pki/tls/certs/startcom-ca.pem`
-        # :command:`openssl pkcs12 -export -in /etc/tls/pki/certs/example.org.crt -inkey /etc/tls/pki/private/example.org.key \\
+
+        # :command:`openssl pkcs12 -export \\
+            -in /etc/pki/tls/certs/example.org.crt \\
+            -inkey /etc/pki/tls/private/example.org.key \\
             -out /tmp/example.p12 -name Server-Cert -passout pass:foo`
+
         # :command:`echo "foo" > /tmp/foo`
-        # :command:`pk12util -i /tmp/example.p12 -d /etc/dirsrv/slapd-kolab/ -w /tmp/foo -k /dev/null`
+        # :command:`pk12util -i /tmp/example.p12 -d /etc/dirsrv/slapd-kolab/ \\
+            -w /tmp/foo -k /dev/null`
         # :command:`rm /tmp/foo`
         # :command:`rm /tmp/example.p12`
 
 #.  Enable SSL Support
 
-    Since all the configuration for 389ds is being done live, changing and adding ssl support will require some LDAP commands to modify the server configuration.
+    Since all the configuration for 389ds is being done live, changing and adding SSL support will require some LDAP commands to modify the server configuration.
 
     .. parsed-literal::
 
-        # :command:`ldapmodify -x -h localhost -p 389 -D "cn=Directory Manager" -w "$(grep ^bind_pw /etc/kolab/kolab.conf | cut -d ' ' -f3-)" << EOF
+        # :command:`passwd=$(grep ^bind_pw /etc/kolab/kolab.conf | cut -d '=' -f2- | sed -e 's/\s*//g')`
+        # :command:`ldapmodify -x -h localhost -p 389 \\
+            -D "cn=Directory Manager" -w "${passwd}" << EOF
         dn: cn=encryption,cn=config
         changetype: modify
         replace: nsSSL3
@@ -260,27 +278,31 @@ If you really want/need you can also add SSL support to your LDAP Server
         nsSSLActivation: on
         EOF`
 
-#.  Now you can restart the service and test the new ssl support of your ldap server
+#.  Next, restart the LDAP service:
 
     .. parsed-literal::
 
         # :command:`service dirsrv restart`
 
-#.  You can test if your ldaps is configured correctly either via openssl s_client or just making a query via ldapsearch
+#.  You can test if your LDAP over SSL is configured correctly via the
+    ``openssl s_client -connect localhost:636`` command, or just making a query
+    using ``ldapsearch``:
 
-    Test non-ssl connection
-
-    .. parsed-literal::
-
-        # :command:`ldapsearch -x -H ldap://kolab.example.org -b "cn=kolab,cn=config" -D "cn=Directory Manager" \\
-            -w "$(grep ^bind_pw /etc/kolab/kolab.conf | cut -d ' ' -f3-)"`
-
-    Test ssl connection
+    Test non-SSL connection
 
     .. parsed-literal::
 
-        # :command:`ldapsearch -x -H ldaps://kolab.example.org -b "cn=kolab,cn=config" -D "cn=Directory Manager" \\
-            -w "$(grep ^bind_pw /etc/kolab/kolab.conf | cut -d ' ' -f3-)"`
+        # :command:`ldapsearch -x -H ldap://kolab.example.org \\
+            -b "cn=kolab,cn=config" -D "cn=Directory Manager" \\
+            -w "${passwd}"`
+
+    Test SSL connection
+
+    .. parsed-literal::
+
+        # :command:`ldapsearch -x -H ldaps://kolab.example.org \\
+            -b "cn=kolab,cn=config" -D "cn=Directory Manager" \\
+            -w "${passwd}"`
 
 Kolab Components
 ================
@@ -288,8 +310,8 @@ Kolab Components
 kolab-cli
 ---------
 
-With the HTTP Service configured to force ssl communication you must add/update
-your kolab-cli api url.
+With the HTTP Service configured to force SSL communication you must add/update
+your kolab-cli API url.
 
     .. parsed-literal::
 
@@ -301,29 +323,29 @@ your kolab-cli api url.
 Roundcube/Plugins
 -----------------
 
-Set correct ssl parameters for HTTP_Request2. This will ensure the kolab_files and
-chawla can talk via ssl.
+Set correct SSL parameters for HTTP_Request2. This will ensure the
+``kolab_files`` plugin and Chwala can talk over HTTPS.
 
-#.  Remove old-style ssl configuration parameters
+#.  Remove old-style SSL configuration parameters
 
     .. parsed-literal::
 
         # :command:`sed -i -e '/kolab_ssl/d' /etc/roundcubemail/libkolab.inc.php`
 
-#.  Change chwala api url in the kolab_files plugin
+#.  Change Chwala API url in the ``kolab_files`` plugin configuration:
 
     .. parsed-literal::
 
         # :command:`sed -i -e 's/http:/https:/' /etc/roundcubemail/kolab_files.inc.php`
 
 #.  Lets remove the php-close tag line as a quick hack to make it easier for us
-    to extend the :file:`/etc/roundcube/config.inc.php`:
+    to extend the :file:`/etc/roundcubemail/config.inc.php`:
 
     .. parsed-literal::
 
         # :command:`sed -i -e '/^\?>/d' /etc/roundcubemail/config.inc.php`
 
-#.  Enable SSL verification against our extended ca-bundle.
+#.  Enable SSL verification against our extended CA bundle.
 
     .. parsed-literal::
 
@@ -335,7 +357,7 @@ chawla can talk via ssl.
         );
         EOF`
 
-#.  Tell the webclient the ssl irony urls for caldav and carddav
+#.  Tell the webclient the SSL iRony URLs for CalDAV and CardDAV:
 
     .. parsed-literal::
 
