@@ -91,7 +91,7 @@ makes it easier to cover various hostnames (like ``smtp.example.org``,
 
     .. parsed-literal::
 
-        # :command:`cp /etc/ssl/private/startcom-ca.pem /usr/local/share/ca-certificates/startcom-ca.crt`
+        # :command:`cp /etc/ssl/certs/startcom-ca.pem /usr/local/share/ca-certificates/startcom-ca.crt`
         # :command:`update-ca-certificates`
 
 Applications
