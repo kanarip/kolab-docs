@@ -154,7 +154,7 @@ I configures mod_nss because it was already installed. If you prefer mod_ssl nob
 
     .. parsed-literal::
 
-        # :command:`openssl pkcs12 -export -in /etc/tls/pki/certs/example.org.crt -inkey /etc/tls/pki/private/example.org.key \\
+        # :command:`openssl pkcs12 -export -in /etc/pki/tls/certs/example.org.crt -inkey /etc/pki/tls/private/example.org.key \\
             -out /tmp/example.p12 -name Server-Cert -passout pass:foo`
         # :command:`echo "foo" > /tmp/foo`
         # :command:`pk12util -i /tmp/example.p12 -d /etc/httpd/alias -w /tmp/foo -k /dev/null`
@@ -211,7 +211,7 @@ If you really want/need you can also add SSL support to your LDAP Server
 
         # :command:`certutil -d /etc/dirsrv/slapd-kolab/ -A  -t "CT,," -n "StartCom Certification Authority" \\
             -i /etc/pki/tls/certs/startcom-ca.pem`
-        # :command:`openssl pkcs12 -export -in /etc/tls/pki/certs/example.org.crt -inkey /etc/tls/pki/private/example.org.key \\
+        # :command:`openssl pkcs12 -export -in /etc/pki/tls/certs/example.org.crt -inkey /etc/pki/tls/private/example.org.key \\
             -out /tmp/example.p12 -name Server-Cert -passout pass:foo`
         # :command:`echo "foo" > /tmp/foo`
         # :command:`pk12util -i /tmp/example.p12 -d /etc/dirsrv/slapd-kolab/ -w /tmp/foo -k /dev/null`
