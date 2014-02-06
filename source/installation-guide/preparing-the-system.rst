@@ -50,6 +50,8 @@ multiple, but separate, isolated IMAP servers are to be started.
         drwxr-x---. 20 cyrus mail  4096 May 11 17:04 /var/lib/imap/
         drwx------. 3  cyrus mail  4096 May 11 15:36 /var/spool/imap/
 
+.. _install-preparing_the_system-selinux:
+
 SELinux
 -------
 
@@ -78,6 +80,8 @@ To disable SELinux's enforcement of the targeted policy in a manner persistent
 across system restarts, edit ``/etc/selinux/config`` and set SELINUX to
 permissive rather than enforcing. Doing so also changes the Mode from ``config
 file:`` line in the output of sestatus.
+
+.. _install-preparing_the_system-firewall:
 
 System Firewall
 ---------------

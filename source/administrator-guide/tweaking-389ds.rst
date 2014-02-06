@@ -203,3 +203,10 @@ To allow 8-bit characters, disable the **7-bit check** plugin:
     nsslapd-pluginEnabled: off
 
     modifying entry "cn=7-bit check,cn=plugins,cn=config"
+
+A restart of the directory service is required for this change the become
+active:
+
+.. parsed-literal::
+
+    # :command:`service dirsrv restart`

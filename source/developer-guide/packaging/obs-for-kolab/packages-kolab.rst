@@ -62,6 +62,17 @@ iRony
 kolab
 =====
 
+The **kolab** package is a meta-package for mainstream distributions
+such as Debian, Enterprise Linux, Fedora, openSUSE and Ubuntu.
+
+It is used to enable a system administrator to quickly install a
+complete, default Kolab Groupware stack.
+
+For non-mainstream distributions, such as Univention Corporate Server,
+the **kolab** package, and/or any of its sub-packages, includes the
+routines needed to integrate in to the standing solution(s) for
+system management.
+
 .. parsed-literal::
 
     # :command:`osc meta pkg Kolab:Development kolab -F -` << EOF
@@ -109,6 +120,30 @@ kolab-selinux
 
 kolab-syncroton
 ===============
+
+ActiveSync server-side implementation, based on the Syncroton libraries.
+
+**kolab-syncroton** ships vendorized copies of the following:
+
+*   :file:`lib/ext/Roundcube/`
+
+    Originating as :file:`/usr/share/roundcubemail/program/lib/Roundcube/`,
+    :file:`lib/ext/Roundcube/` should be made a symbolic link to the
+    original path. Therefore, installing **kolab-syncroton** must also
+    install **roundcubemail**.
+
+*   :file:`lib/plugins/kolab_auth/`
+
+    The Roundcube plugin for Kolab Authentication originates at
+    :file:`/usr/share/roundcubemail/plugins/kolab_auth/`, from the
+    **roundcubemail-plugins-kolab** package. :file:`lib/plugins/kolab_auth/`
+    itself should not be made a symbolic link, however. Instead, its
+    contents should be. This would include :file:`kolab_auth.php`,
+    :file:`config.inc.php`, and other files and directories.
+
+*   :file:`lib/plugins/kolab_folders/`
+
+*   :file:`lib/plugins/libkolab/`
 
 .. parsed-literal::
 

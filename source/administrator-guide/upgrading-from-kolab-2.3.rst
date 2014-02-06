@@ -89,6 +89,33 @@ Login to kolab3.example.org to execute the steps in this procedure.
             /var/lib/imap/mailboxes.db
         (...)
 
+    If cyrus can't start with these files with a message like the following, you need to convert the files instead of copying.
+    
+    .. parsed-literal::
+    
+        skiplist: invalid magic header: /var/lib/imap/mailboxes.db
+        (...)
+        DBERROR: opening /var/lib/imap/mailboxes.db: cyrusdb error
+        (...)
+        
+    Use the following commands to convert the files from Berkeley DB to skiplist:
+    
+    .. parsed-literal::
+    
+        ssh root@kolab2.example.org "/kolab/bin/cvt_cyrusdb /kolab/var/imapd/annotations.db /tmp/annotations.db skiplist"
+        ssh root@kolab2.example.org "/kolab/bin/cvt_cyrusdb /kolab/var/imapd/mailboxes.db /tmp/mailboxes.db skiplist"
+        
+    After the conversion, copy the files to the new kolab3 server:
+    
+        .. parsed-literal::
+
+        # scp root@kolab2.example.org:/tmp/annotations.db \\
+            /var/lib/imap/annotations.db
+        (...)
+        # scp root@kolab2.example.org:/tmp/mailboxes.db \\
+            /var/lib/imap/mailboxes.db
+        (...)
+
 2.  Migrate the mail spool:
 
     .. parsed-literal::

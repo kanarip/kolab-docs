@@ -1,3 +1,5 @@
+.. _admin:
+
 Administrator Guide
 ===================
 
@@ -21,6 +23,7 @@ Administrator Guide
     setup-kolab-cli-reference
 
     combating-spam
+    faq
 
     monitoring-389ds
     monitoring-cyrus-imapd
@@ -31,6 +34,10 @@ Administrator Guide
     tweaking-cyrus-imapd
     tweaking-postfix
     tweaking-roundcube
+
+    dav-autodiscovery
+
+    imap-access-rights-reference
 
     ../glossary
 

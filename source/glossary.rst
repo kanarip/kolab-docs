@@ -120,6 +120,15 @@ Glossary
 
         The domain result attribute is (...)
 
+    EPEL
+
+        EPEL stands for Extra Packages for Enterprise Linux, and is a software
+        repository maintained by the Fedora Project community.
+
+        It contains packages that are supplementary to a base RHEL subscription
+        including the *optional* software repository, such as **amavisd-new**
+        and **clamav**.
+
     external email address
 
         An external email address is intended to be additional user information,
@@ -169,6 +178,26 @@ Glossary
     Mail User Agent
 
         The Mail User Agent (*MUA*) (...)
+
+    pattern
+
+        A pattern for mailboxes can be specified using ``%`` and ``*``
+        wildcards.
+
+        The ``%`` wildcard matches mailboxes on a single level only, while the
+        ``*`` wildcard matches mailboxes in all depth levels.
+
+        To list INBOX folders for users in the example.org domain, use:
+
+        .. parsed-literal::
+
+            # :command:`kolab lm user/%@example.org`
+
+        but to list all user folders in the example.org domain:
+
+        .. parsed-literal::
+
+            # :command:`kolab lm user/*@example.org`
 
     parent domain
     parent domain name space

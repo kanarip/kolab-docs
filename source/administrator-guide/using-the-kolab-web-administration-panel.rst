@@ -1,9 +1,18 @@
+.. _admin-webadmin:
+
 ========================================
 Using the Kolab Web Administration Panel
 ========================================
 
 The :ref:`figure-overview` lists object types the user that is logged in is
-eligible to list.
+eligible to list -- that is, the user has at least read and search access on the
+container of the type of object.
+
+For example, a user may have access to ``ou=People`` (the container for
+*Users*), but not ``cn=kolab,cn=config`` (for *Domains*).
+
+In such a case, the user would have a *Users* page to navigate to, but not a
+*Domains* page.
 
 This list can include:
 
@@ -14,10 +23,38 @@ This list can include:
         but also POSIX users, or even contacts.
 
 *   Groups
+
+        Groups are used for message distribution (called *distribution groups*),
+        can be used as POSIX groups, and could be used to assign permissions in
+        LDAP.
+
+        By default, group membership is not used to share information in IMAP
+        such as calendars or other payload. The default configuration uses roles
+        for IMAP group ACLs instead.
+
 *   Domains
+
+        This section allows you to control what namespaces the server will
+        receive email for, as well as whether that namespace is or is not a
+        completely separate and isolated organizational hierarchy.
+
 *   Roles
+
+        Roles are used to assign permissions to Kolab users. A role already
+        included in your installation is the one used for Kolab administration
+        (the **kolab-admin** role).
+
+        Roles can be used as IMAP group ACLs, and adjust, restrict or liberate
+        the use of plugins and/or settings in web services such as the Roundcube
+        web client, iRony (CardDAV/CalDAV), Syncroton (ActiveSync) and Chwala
+        (Files).
+
 *   Resources
+
 *   Shared Folders
+
+        This section allows the administration of shared folders, 
+
 *   Settings
 
 The **About** link is always there.
@@ -37,7 +74,7 @@ perspective of the Web Administration Panel server.
 
 .. _figure-overview:
 
-.. figure:: images/overview.png
+.. figure:: ../howtos/images/kolab-webadmin-objects.png
     :scale: 50%
 
     Overview page of the Kolab Web Administration Panel

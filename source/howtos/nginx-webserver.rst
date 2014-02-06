@@ -38,9 +38,9 @@ Simple Installation
                 index index.php;
             }
 
-            location ~ /roundcubemail/.*\.php\\$ {
-                if (\\$fastcgi_script_name ~ /roundcubemail(/.*\.php)\\$) {
-                    set \\$valid_fastcgi_script_name \\$1;
+            location ~ /roundcubemail/.*\\.php$ {
+                if ($fastcgi_script_name ~ /roundcubemail(/.*\\.php)$) {
+                    set $valid_fastcgi_script_name $1;
                 }
                 fastcgi_pass    unix:/var/run/php-fpm/php-fpm.sock;
                 fastcgi_index   index.php;
@@ -120,13 +120,13 @@ More Complex Installation
         # :command:`cat > /etc/nginx/conf.d/default.conf` << EOF
         fastcgi_cache_path /var/lib/nginx/fastcgi/ levels=1:2 keys_zone=kolab.example.org:16m max_size=256m inactive=1d;
         fastcgi_temp_path /var/lib/nginx/fastcgi/tmp 1 2;
-        fastcgi_cache_key "\\$scheme\\$request_method\\$host\\$request_uri";
+        fastcgi_cache_key "$scheme$request_method$host$request_uri";
         fastcgi_cache_use_stale error timeout invalid_header http_500;
 
         server {
             listen                      8080 default_server;
             server_name                 kolab.example.org;
-            rewrite                     ^ https://\\$server_name\\$request_uri permanent;  # enforce https
+            rewrite                     ^ https://$server_name$request_uri permanent;  # enforce https
         }
 
         server {
@@ -164,10 +164,10 @@ More Complex Installation
                 client_max_body_size 30M; # set maximum upload size
 
                 # enable php
-                location ~ \\.php\\$ {
+                location ~ \\.php$ {
                     include fastcgi_params;
                     fastcgi_pass unix:/var/run/php-fpm/kolab.example.org_chwala.sock;
-                    fastcgi_param SCRIPT_FILENAME \\$request_filename;
+                    fastcgi_param SCRIPT_FILENAME $request_filename;
                     # Without this, PHPSESSION is replaced by webadmin-api X-Session-Token
                     fastcgi_param PHP_VALUE "session.auto_start=0
                         session.use_cookies=0";
@@ -183,10 +183,19 @@ More Complex Installation
 
                 client_max_body_size 30M; # set maximum upload size
 
+                # Make Apple Calendar.app and Contacts.app happy:
+                rewrite ^/.well-known/caldav / last;
+                rewrite ^/.well-known/carddav / last;
+
+                # If Nginx was built with http_dav_module:
+                dav_methods  PUT DELETE MKCOL COPY MOVE; # PROPFIND;
+                # Required Nginx to be built with nginx-dav-ext-module:
+                dav_ext_methods PROPFIND OPTIONS;
+
                 include fastcgi_params;
                 fastcgi_index index.php;
                 fastcgi_pass unix:/var/run/php-fpm/kolab.example.org_iRony.sock;
-                fastcgi_param SCRIPT_FILENAME \\$request_filename;
+                fastcgi_param SCRIPT_FILENAME $request_filename;
             }
 
             ##
@@ -199,7 +208,7 @@ More Complex Installation
                 client_max_body_size 30M; # set maximum upload size for mail attachments
 
                 # Deny all attempts to access hidden files such as .htaccess, .htpasswd, .DS_Store (Mac).
-                location ~ ^/roundcubemail/(README(.md)?|INSTALL|LICENSE|CHANGELOG|UPGRADING)\\$ {
+                location ~ ^/roundcubemail/(README(.md)?|INSTALL|LICENSE|CHANGELOG|UPGRADING)$ {
                     deny all;
                 }
 
@@ -212,9 +221,9 @@ More Complex Installation
                 }
 
                 # enable php
-                location ~ \\.php\\$ {
+                location ~ \\.php$ {
                     include fastcgi_params;
-                    fastcgi_split_path_info ^(.+\\.php)(/.*)\\$;
+                    fastcgi_split_path_info ^(.+\\.php)(/.*)$;
                     fastcgi_pass unix:/var/run/php-fpm/kolab.example.org_roundcubemail.sock;
                     fastcgi_param SCRIPT_FILENAME \\$request_filename;
                 }
@@ -229,10 +238,10 @@ More Complex Installation
                 try_files \\$uri \\$uri/ @kolab-wapapi;
 
                 # enable php
-                location ~ \\.php\\$ {
+                location ~ \\.php$ {
                     include fastcgi_params;
                     fastcgi_pass unix:/var/run/php-fpm/kolab.example.org_kolab-webadmin.sock;
-                    fastcgi_param SCRIPT_FILENAME \\$request_filename;
+                    fastcgi_param SCRIPT_FILENAME $request_filename;
                     # Without this, PHPSESSION is replaced by webadmin-api X-Session-Token
                     fastcgi_param PHP_VALUE "session.auto_start=0
                         session.use_cookies=0";
@@ -242,7 +251,7 @@ More Complex Installation
 
             # kolab-webadmin api
             location @kolab-wapapi {
-                rewrite ^/kolab-webadmin/api/(.*)\\.(.*)\\$ /kolab-webadmin/api/index.php?service=\\$1&method=\\$2 last;
+                rewrite ^/kolab-webadmin/api/(.*)\\.(.*)$ /kolab-webadmin/api/index.php?service=$1&method=$2 last;
             }
 
             ##
@@ -377,6 +386,11 @@ More Complex Installation
     .. parsed-literal::
 
         $config['file_api_url'] = 'https://kolab.example.org:8443/chwala/api/';
+
+#.  Ensure, if you are using HTTPS, that the Chwala URL (``kolab_files_url``)
+    in :file:`/etc/roundcubemail/kolab_files.inc.php` is also set to
+    ``https`` rather than ``http``,  or most browsers will be unable to access
+    the files component in Roundcube.
 
 #.  For configurations that use SSL, make sure to work around a known issue in
     PHP pear module HTTP_Request2, and include in

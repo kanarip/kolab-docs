@@ -31,5 +31,6 @@ Configuring Kolab Groupware:
     :maxdepth: 2
 
     setup-kolab
+    first-login
 
     ../glossary

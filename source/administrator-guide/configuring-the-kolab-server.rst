@@ -1,6 +1,10 @@
+.. _admin-config:
+
 ======================================
 Configuring the Kolab Groupware Server
 ======================================
+
+.. _admin_rcpt-policy:
 
 Recipient Policy
 ================
@@ -106,7 +110,7 @@ For three people named *Marie Möller* for example, this would end up as:
 Components that Apply the Recipient Policy
 ------------------------------------------
 
-The recipient policy is applied by two separate applications:
+By default, the recipient policy is applied by two separate applications:
 
 #.  The optional Kolab Web Administration Panel, often used for inputting new
     users and editing existing ones, so that this interface reflects the results
@@ -117,6 +121,18 @@ The recipient policy is applied by two separate applications:
 
 Both components use the configuration settings ``primary_mail`` and
 ``secondary_mail`` as their policy configuration.
+
+To prevent the Kolab daemon from applying the recipient policy, add the
+following setting to :manpage:`kolab.conf(5)`:
+
+.. parsed-literal::
+
+    [kolab]
+    daemon_rcpt_policy = False
+
+Having added this setting, the Kolab Web Administration Panel could be
+re-configured so that the ``mail`` attribute for user entries becomes
+``Generated`` instead of ``Generated (read-only)``.
 
 These configuration items consist of a Python notation for string formatting,
 along with a limited number of string operations.
@@ -467,6 +483,50 @@ Disabling the Recipient Policy
 
         You may have to log out and log back in of the Kolab Web Administration
         Panel for the changes to take effect.
+
+Storage Tiering of the IMAP Spool
+=================================
+
+Using Cyrus IMAP partitions, a single IMAP server can hold multiple spools in
+which mailboxes reside.
+
+A deployment can choose to have, for example, the INBOX and additional folders
+on fast, expensive storage, while an Archive folder may need to reside on slow,
+cheap storage.
+
+The configuration in :manpage:`imapd.conf(5)` would look like:
+
+.. parsed-literal::
+
+    (...)
+    defaultpartition: default
+    partition-default: /path/to/fast/storage
+    partition-archive: /path/to/slow/storage
+    (...)
+
+To have Archive folders for new users be created on the archive partition, use
+the ``autocreate_folders`` setting in :manpage:`kolab.conf(5)` and adjust:
+
+.. parsed-literal::
+
+    autocreate_folders = {
+            'Archive': {
+                    'quota': 0
+                },
+            (...)
+        }
+
+to:
+
+.. parsed-literal::
+
+    autocreate_folders = {
+            'Archive': {
+                    'quota': 0,
+                    'partition': 'archive'
+                },
+            (...)
+        }
 
 Adding Domains
 ==============
