@@ -39,20 +39,20 @@ This command adds a new domain name space to Kolab Groupware.
 
 .. seealso::
 
-add-group-admin
----------------
-
-Not yet implemented.
-
-add-group-member
-----------------
-
-Not yet implemented.
-
-add-user
---------
-
-Not yet implemented.
+.. add-group-admin
+.. ---------------
+..
+.. Not yet implemented.
+..
+.. add-group-member
+.. ----------------
+..
+.. Not yet implemented.
+..
+.. add-user
+.. --------
+..
+.. Not yet implemented.
 
 cm
 --
@@ -70,7 +70,7 @@ Create a mailbox or mail folder.
 
 .. parsed-literal::
 
-    kolab cm [options] <mailbox>
+    kolab create-mailbox [options] <mailbox>
 
 .. rubric:: Command-Line Options
 
@@ -85,12 +85,16 @@ Create a mailbox or mail folder.
     Set the metadata KEY for the mailbox or mail folder to VALUE. Specify once
     for each pair of KEY=VALUE.
 
+    See :file:`/etc/imapd.annotations.conf` for valid KEYs, the permissions
+    required to set them, namespaces and the format of the VALUE.
+
 .. option:: --partition=PARTITION
 
     .. versionadded:: pykolab-0.6.11
-        Specify the Cyrus IMAP partition on which to create the mailbox. If not
-        specified, uses the ``defaultpartition`` configured in
-        :manpage:`imapd.conf(5)`.
+
+    Specify the Cyrus IMAP partition on which to create the mailbox. If not
+    specified, uses the ``defaultpartition`` configured in
+    :manpage:`imapd.conf(5)`.
 
 .. rubric:: Example Usage
 
@@ -130,25 +134,53 @@ dam
 
 Short-hand for :ref:`admin_cli_delete-mailbox-acl`
 
-delete-domain
--------------
-
-Not yet implemented.
-
-delete-group-admin
-------------------
-
-Not yet implemented.
-
-delete-group-member
--------------------
-
-Not yet implemented.
+.. delete-domain
+.. -------------
+..
+.. Not yet implemented.
+..
+.. delete-group-admin
+.. ------------------
+..
+.. Not yet implemented.
+..
+.. delete-group-member
+.. -------------------
+..
+.. Not yet implemented.
 
 delete-mailbox (dm)
 -------------------
 
 Delete a mailbox.
+
+.. rubric:: Synopsis
+
+.. parsed-literal::
+
+    kolab delete-mailbox <pattern>
+
+.. rubric:: Command-Line Options
+
+.. program:: delete-mailbox
+
+.. option:: pattern
+
+    Delete all mailboxes matching :term:`pattern`.
+
+.. rubric:: Example Usage
+
+Delete a mail folder for user John Doe:
+
+.. parsed-literal::
+
+    # :command:`kolab delete-mailbox` "user/john.doe/Trash/Oops@example.org"
+
+Delete all non-INBOX folders for user John Doe:
+
+.. parsed-literal::
+
+    # :command:`kolab delete-mailbox` "user/jane.doe/%@example.org"
 
 .. _admin_cli_delete-mailbox-acl:
 
@@ -171,24 +203,24 @@ Delete an ACE for a mailbox.
 
 .. seealso::
 
-*   :ref:`admin_cli_list-mailbox-acl`
-*   :ref:`admin_cli_set-mailbox-acl`
+    *   :ref:`admin_cli_list-mailbox-acl`
+    *   :ref:`admin_cli_set-mailbox-acl`
 
-delete-user
------------
-
-Not yet implemented.
-
-edit-group
-----------
-
-Not yet implemented.
-
-edit-user
----------
-
-Not yet implemented.
-
+.. delete-user
+.. -----------
+..
+.. Not yet implemented.
+..
+.. edit-group
+.. ----------
+..
+.. Not yet implemented.
+..
+.. edit-user
+.. ---------
+..
+.. Not yet implemented.
+..
 lam
 ---
 
@@ -433,6 +465,16 @@ transfer-mailbox
 Transfer a mailbox from the server it is currently on, to the server you
 specify.
 
+.. WARNING::
+
+    Transferring mailboxes may take quite a bit of time, depending on the
+    connection speed between the two IMAP servers, and the size of a mailbox
+    (tree).
+
+    Make sure that despite your workstation's session possibly being
+    interrupted, the command can continue, by using :manpage:`screen(1)` for
+    example.
+
 .. rubric:: Synopsis
 
 .. parsed-literal::
@@ -471,6 +513,25 @@ undelete-mailbox
 
 user-info
 ---------
+
+This command retrieves information about a user from the Web Administration
+Panel API (places a ``user.info`` API call), and prints all attributes for the
+corresponding user type.
+
+.. rubric:: Synopsis
+
+.. parsed-literal::
+
+    kolab user-info <address>
+
+.. rubric:: Command-Line Options
+
+.. program:: user-info
+
+.. option:: address
+
+    The primary or secondary recipient email address for the user, that is
+    globally unique, such as ``john.doe@example.org``.
 
 Sieve Operations
 ================
