@@ -19,12 +19,8 @@ Installation on Debian
 
     .. parsed-literal::
 
-        # :command:`wget http://obs.kolabsys.com:82/Kolab:/3.1/Debian_7.0/Release.key`
-        # :command:`apt-key add Release.key`
-        # :command:`rm -rf Release.key`
-        # :command:`wget http://obs.kolabsys.com:82/Kolab:/3.1:/Updates/Debian_7.0/Release.key`
-        # :command:`apt-key add Release.key`
-        # :command:`rm -rf Release.key`
+        # :command:`wget -qO - http://obs.kolabsys.com:82/Kolab:/3.1/Debian_7.0/Release.key | apt-key add -`
+        # :command:`wget -qO - http://obs.kolabsys.com:82/Kolab:/3.1:/Updates/Debian_7.0/Release.key | apt-key add -`
 
 3.  To ensure the Kolab packages have priority over the Debian packages, such as
     must be the case for PHP as well as Cyrus IMAP, please make sure the APT

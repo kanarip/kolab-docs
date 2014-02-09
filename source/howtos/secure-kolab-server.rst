@@ -32,6 +32,10 @@ makes it easier to cover various hostnames (like ``smtp.example.org``,
         # :command:`scp example.org.key kolab.example.org:/etc/pki/tls/private/`
         # :command:`scp example.org.crt kolab.example.org:/etc/pki/tls/certs/`
 
+    On Debian: Make sure the files have the correct permissions:
+    * `/etc/ssl/private/example.org.key`: owner root, group ssl-cert and mode 0640
+    * `/etc/ssl/certs/example.org.crt`: owner root, group root and mode 0666
+
 #.  You should have obtained a CA certificate or CA certificate chain from your
     SSL certificate issuer.
 
@@ -110,6 +114,9 @@ Cyrus IMAPD
               -e 's|^tls_ca_file:.*|tls_ca_file: /etc/pki/tls/certs/example.org.ca-chain.pem|g' \\
               /etc/imapd.conf`
 
+    On Debian: Change the paths according to the Debian file structure (replace `/etc/pki/tls` with
+    `/etc/ssl`. Make sure that the user `cyrus` is part of the `ssl-certs` group.
+
 #.  Restart and verify
 
     .. parsed-literal::
@@ -127,6 +134,9 @@ Postfix
         # :command:`postconf -e smtpd_tls_key_file=/etc/pki/tls/private/example.org.key`
         # :command:`postconf -e smtpd_tls_cert_file=/etc/pki/tls/certs/example.org.crt`
         # :command:`postconf -e smtpd_tls_CAfile=/etc/pki/tls/certs/example.org.ca-chain.pem`
+
+    On Debian: Change the paths according to the Debian file structure (replace `/etc/pki/tls` with
+    `/etc/ssl`. Make sure that the user `postfix` is part of the `ssl-certs` group.
 
 #.  Restart
 
