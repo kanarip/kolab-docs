@@ -29,7 +29,28 @@ Glossary
 
     authorization realm
 
-        The authorization realm (...)
+        The authorization realm is the target user authorization ID's namespace.
+
+        When, for example, a user *John Doe* logs in with username ``doe`` (the
+        "authentication ID"), the original authorization realm (as specified in
+        the original username) is ``null``.
+
+        After user login name :term:`canonification` -- a process to translate
+        an authentication ID in to an authorization ID -- the resulting
+        authorization ID may have become ``john.doe@example.org``.
+
+        The canonification process is important, because it will also be the
+        authorization ID that is used to compose the mailbox path to the user's
+        INBOX.
+
+        Continuing our example user, the authorization ID having become
+        ``john.doe@example.org`` will result in the session using
+        ``user/john.doe@example.org`` as the INBOX.
+
+        The **authorization realm** at this point is one of ``example.org``. The
+        user will not be able to access any mailboxes outside this authorization
+        realm, meaning the user will be unable to access any mailboxes for which
+        the mailbox path does not end in ``@example.org``.
 
     child domain
     child domain name space
@@ -55,6 +76,12 @@ Glossary
 
     DN
     distinguished name
+
+        The *distinguished name* is the LDAP terminology for the location of an
+        object in a Directory Information Tree hierarchy.
+
+        The LDAP object for a user *John Doe* might have a distinguished name of
+        ``uid=doe,ou=People,dc=example,dc=org``.
 
         .. seealso::
 
@@ -110,15 +137,83 @@ Glossary
 
     domain_base_dn
 
-        The domain base dn is (...)
+        The domain base dn is the position in a Directory Information Tree's
+        hierarchy at which to start searching for domain name spaces.
+
+        .. seealso::
+
+            *   :term:`domain_filter`
+            *   :term:`domain_name_attribute`
+            *   :term:`domain_result_attribute`
+            *   :term:`domain_scope`
 
     domain_name_attribute
 
-        The domain name attribute is (...)
+        The domain name attribute is the name of the attribute that holds the
+        parent domain name space in LDAP.
+
+        By default, the domain name attribute is ``associateddomain``, for an
+        object with object class ``domainrelatedobject``.
+
+        The ``associateddomain`` attribute is specified as *multi-valued* in the
+        LDAP schema, and as such may contain one or more values.
+
+        LDAP stores these in order, so that the first associateddomain attribute
+        value is also the one that was the first to be added.
+
+        If you had a domain name space of ``example.org``, the LDAP object might
+        look as follows:
+
+        .. parsed-literal::
+
+            dn: associateddomain=example.org,cn=kolab,cn=config
+            objectclass: top
+            objectclass: domainrelatedobject
+            associateddomain: example.org
+
+        Then, when one or more :term:`alias domain name spaces` are added for
+        ``example.org``, the object may look as follows:
+
+        .. parsed-literal::
+
+            dn: associateddomain=example.org,cn=kolab,cn=config
+            objectclass: top
+            objectclass: domainrelatedobject
+            associateddomain: example.org
+            associateddomain: example.nl
+            associateddomain: example.de
 
     domain_result_attribute
 
-        The domain result attribute is (...)
+        The domain result attribute is used to allow the specification of a
+        custom :term:`root dn` for the Directory Information Tree hierarchy
+        associated with the domain name space.
+
+        In a default Kolab Groupware installation, when a domain of
+        ``example.org`` is added to the environment, a standard translation
+        routine is applied to the domain name space to define the associated
+        Directory Information Tree hierarchy root, the :term:`root dn`.
+
+        This routine makes ``example.org`` become ``dc=example,dc=org``.
+
+        Existing environments may already have LDAP available to their systems,
+        which does not necessarily have a standard root dn for the domain. As
+        such, an existing :term:`root dn` for domain ``example.org`` may have a
+        dn of ``o=example,c=de``.
+
+        .. parsed-literal::
+
+            dn: associateddomain=example.org,cn=kolab,cn=config
+            objectclass: top
+            objectclass: domainrelatedobject
+            objectclass: inetdomain
+            associateddomain: example.org
+            inetdomainbasedn: o=example,c=de
+
+    domain_scope
+
+        The domain scope is the level of depth the searches for domain name
+        spaces uses, and is one of ``base``, ``one`` or ``sub``.
 
     EPEL
 
@@ -164,6 +259,15 @@ Glossary
         divided by a dot (.) character -- exluding the implicit top-level dot
         (.), even if a domain (system environment) is comprised of a single
         system.
+
+    made-to-measure
+
+        A Made-to-Measure solution is designed to be altered and adjusted to
+        better fit one's needs.
+
+        This is in contrast with so-called Commercial-Off-the-Shelf solutions,
+        which allow for too little modification in the solution itself, or none
+        at all, and require one's needs to be flexible.
 
     management domain
 
@@ -253,7 +357,19 @@ Glossary
 
     root dn
 
-        A root dn
+        A root dn describes the path to the root of a Directory Information Tree
+        hierarchy.
+
+        It is commonly associated with LDAP databases, in that all entries
+        contained within one root dn are in databases that are separate from the
+        databases used for another root dn.
+
+    sealed system
+
+        A sealed system is a system where the users have access to the services
+        offered by the system, but not the system itself. In other words, a
+        Kolab Groupware user cannot normally login to a shell on the system and
+        start poking around.
 
     secondary email address
 
