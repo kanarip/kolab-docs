@@ -1,28 +1,33 @@
 .. _and_intro:
 
+============
 Introduction
 ============
 
-The following functional components make up a groupware environment:
+Kolab Groupware is a scalable, flexible and :term:`made-to-measure`
+collaboration suite and groupware solution, designed with security, privacy and
+integrity in mind.
 
-#. An :ref:`and_intro_authentication-and-authorization` database.
+Kolab Groupware is Free Software, uses other Free Software, and stores and
+accesses information using Open Standards.
+
+The design of Kolab distinguishes the following functional components to make up
+the groupware environment:
+
+#. An (centralized) :ref:`and_intro_authentication-and-authorization` database.
 #. A :ref:`and_intro_mail-exchanger` for the exchange of messages.
 #. A :ref:`and_intro_data-storage-layer`.
-#. One or more :ref:`and_intro_storage-layer-access-protocols`.
+#. One or more (additional) :ref:`and_intro_storage-layer-access-protocols`.
 #. One or more :ref:`and_intro_desktop-clients`.
 #. One or more :ref:`and_intro_mobile-clients`.
 #. One or more :ref:`and_intro_web-interfaces`.
 
-This chapter also includes a high-level
-:ref:`and_intro_overview-functional-components` (but we recommend you keep on
-reading).
-
 .. #. Instant Messaging
 .. #. Voice and Video (-Conferencing)
 
-Furthermore, a groupware environment offers functionality beyond the exchange of
-regular email messages, such as calendaring, maintaining address books, task
-management, journaling, and more.
+Furthermore, the Kolab Groupware environment offers functionality beyond the
+exchange of regular email messages, such as calendaring, maintaining address
+books, task management, journaling, and more.
 
 All of this should be secure [#]_, scalable [#]_ and flexible [#]_. It must also
 use Open Standards for protocols and storage formats to provide the user the
@@ -34,7 +39,7 @@ Welcome to Kolab Groupware!
 .. _and_intro_authentication-and-authorization:
 
 Authentication and Authorization
---------------------------------
+================================
 
 Kolab Groupware uses LDAP for authentication and authorization of users, while
 it also includes user and group membership information.
@@ -44,15 +49,27 @@ enables the delegation of authority over its entries, can prevent users from
 accessing certain attributes or entries, and allows the groupware solution to
 scale to over several millions of users -- ideal for groupware environments.
 
-For more information on LDAP integration in Kolab Groupware, please refer to:
+Please note that at the very core of the Kolab Groupware design is that Kolab
+**consumes** information in LDAP, but does not ship its own version of LDAP.
 
-* :ref:`and_ldap_389-directory-server`
-* :ref:`and_ldap_openldap`
+A default installation of Kolab Groupware includes LDAP schema extensions that
+provide additional functionality such as delegation and mandatory SMTP Access
+Policy enforcement, but does not require these extensions be loaded.
+
+It should also be noted that Kolab, in principle, runs on a
+:term:`sealed system`.
+
+.. seealso::
+
+    For more information on LDAP integration in Kolab Groupware, please refer to:
+
+    *   :ref:`and_ldap_389-directory-server`
+    *   :ref:`and_ldap_openldap`
 
 .. _and_intro_mail-exchanger:
 
 Mail Exchanger
---------------
+==============
 
 Integrated with the :ref:`and_intro_authentication-and-authorization` database,
 the mail exchanger in Kolab Groupware is in charge of exchanging messages
@@ -66,19 +83,25 @@ Kolab Groupware integrates `Postfix <http://postfix.org>`_ by default, and
 provides it with additional security and integrity checks, such as the
 :ref:`and_mta_kolab-smtp-access-policy`.
 
-* :ref:`and_mta_postfix`
+Kolab's default configuration of the mail exchanger includes the use of lookup
+ables against the :ref:`and_intro_authentication-and-authorization` database.
+
+.. seealso::
+
+    *   :ref:`and_mta_postfix`
+    *   :ref:`and_mta_kolab-smtp-access-policy`
 
 .. _and_intro_data-storage-layer:
 
 Data Storage Layer & Primary Access Protocol
---------------------------------------------
+============================================
 
 A data storage layer for groupware environments must be fast, efficient,
 scalable and secure.
 
 A single system can only scale up as far as its local resources allow it to --
-called vertical scaling -- not unlike physical mass, there can only be a finite
-amount of resources in one place at any given one point in time.
+called vertical scaling -- not unlike physical matter, there can only be a
+finite amount of resources in one place at any given one point in time.
 
 It is therefore a pre-requisite the storage layer can be spread out over
 multiple individual systems, while maintaining a transparent access methodology
@@ -102,42 +125,51 @@ This optional murder topology allows users of an environment to share groupware
 content amongst themselves, even though the content may reside on different
 backend systems.
 
-.. rubric:: Additional Reading
+.. seealso::
 
-* :ref:`deployment_imap_cyrus-imap-murder`
+    *   :ref:`deployment_imap_cyrus-imap-murder`
 
 .. _and_intro_desktop-clients:
 
 Desktop Clients
----------------
+===============
 
 Although the Kolab web client is powerful and fast, some users might want to use
 native Desktop clients. There is a variety of Desktop clients compatible with the
 Kolab Groupware solution. They include:
 
-* The Kolab Client `Kontact <http://kontact.org>`_
+*   The Kolab Client `Kontact <http://kontact.org>`_
 
-    * Available for Microsoft Windows, GNU/Linux and Apple Mac OS X
-    * With full Off-line support
-    * Automatic Configuration
-    * Thousands of features
-    * Mobile edition for touchscreen devices available
+    *   Available for Microsoft Windows, GNU/Linux and Apple Mac OS X
+    *   With full Off-line support
+    *   Automatic Configuration
+    *   Thousands of features
+    *   Mobile edition for touchscreen devices available
 
-* `Thunderbird <http://thunderbird.org>`_ with Lightning
+*   `Thunderbird <http://thunderbird.org>`_ with Lightning
 
-    * Available for Microsoft Windows, Apple Mac OS X and GNU/Linux
+    *   Available for Microsoft Windows, Apple Mac OS X and GNU/Linux
 
-* Apple Address book and Apple Calendar (previously iCal)
-* Microsoft Outlook
+.. versionadded:: Kolab 3.1
 
-    * using `Bynari connector <http://www.bynari.com>`_ or in recent versions ActiveSync
+    *   Apple Mail, Address book and Apple Calendar (previously iCal)
+
+*   Microsoft Outlook
+
+.. versionadded:: Kolab 3.0
+
+    *   using `Bynari connector <http://www.bynari.com>`_
+
+.. versionadded:: Kolab 3.1, Outlook 2013
+
+    *   ActiveSync
 
 * Evolution
 
 .. _and_intro_mobile-clients:
 
 Mobile Clients
----------------
+==============
 
 All ActiveSync capable devices can be used to connect to Kolab and retrieve groupware data.
 This includes Android and Apple as well as the latest Blackberry devices.
@@ -152,33 +184,39 @@ protocols can be used instead as a fall back.
 .. _and_intro_storage-layer-access-protocols:
 
 Storage Layer Access Protocols
-------------------------------
+==============================
 
 The following protocols provide access to the groupware data in a Kolab
 Groupware environment:
 
-* POP3
-* IMAP4
-* ActiveSync
-* CalDAV
-* CardDAV
-* WebDAV
+*   POP3
+*   IMAP4
+
+.. versionadded:: Kolab 3.0
+
+    *   ActiveSync
+
+.. versionadded:: Kolab 3.1
+
+    *   CalDAV
+    *   CardDAV
+    *   WebDAV
 
 .. _and_intro_web-interfaces:
 
 Web Interfaces
---------------
+==============
 
 * :ref:`and-kolab_wap_api`
-* Hosted Kolab Customer Control Panel
 * Kolab Web Client
+* Hosted Kolab Customer Control Panel
 * Chwala File Management
 * Mobile Device Synchronization
 
 .. _and_intro_overview-functional-components:
 
 Overview of Functional Components
----------------------------------
+=================================
 
 The following diagram provides a high-level overview of functional components
 and their connections and interactions with one another. For a fully detailed
@@ -210,6 +248,7 @@ and their individual interactions with other functional components.
             "ActiveSync" -> "IMAP", "LDAP", "MTA" [color=yellow];
             "MTA" -> "LDAP", "IMAP";
             "LDAP" -> "Daemon" -> "IMAP";
+            "Daemon" -> "LDAP";
             "MTA" -> "Resource Scheduler" -> "MTA", "LDAP", "IMAP";
 
             "Administration Panel" -> "LDAP";

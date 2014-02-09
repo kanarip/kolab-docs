@@ -159,6 +159,178 @@ session is allowed to continue / confirms the modification/mutation.
 Application Logic and Database Design Considerations
 ====================================================
 
+Database Technology
+-------------------
+
+NoSQL storing key value pairs, trick is to store as many keys as is necessary to
+get to the related value.
+
+Relationships problematic. Possibly for data only, use ORM for relationships.
+
+Object Relationship Manager
+---------------------------
+
+*   User
+
+    An individual human being with physical presence (in the here and now, past
+    and/or future).
+
+*   Group
+
+    A group of individual User objects.
+
+*   Role
+
+    A role attached to one or more User objects, functionally the inverse of
+    a Group.
+
+*   IMAP Folder
+
+    *   METADATA, including:
+
+        *   Unique ID (persistent)
+        *   Shared seen, important to Read/Unread status tracking,
+        *
+
+    *   ACL
+    *   Payload
+
+Change Recording in ORM
+-----------------------
+
+Rather than recording the changes to objects explicitly, it is more effective to
+define the objects themselves as volatile objects, in such a way that updates to
+them imply a changelog record be created.
+
+In summary, it is better to reduce the processor's workload and code base from:
+
+.. graphviz::
+
+    digraph event_notification {
+            rankdir = LR;
+            splines = true;
+            overlab = prism;
+
+            edge [color=gray50, fontname=Calibri, fontsize=11]
+            node [shape=record, fontname=Calibri, fontsize=11]
+
+            "object record";
+            "object changelog record";
+
+            "change" -> "processor";
+
+            "processor" -> "object record" [label="updates"];
+            "processor" -> "object changelog record" [label="creates"];
+
+        }
+
+to:
+
+.. graphviz::
+
+    digraph event_notification {
+            rankdir = LR;
+            splines = true;
+            overlab = prism;
+
+            edge [color=gray50, fontname=Calibri, fontsize=11]
+            node [shape=record, fontname=Calibri, fontsize=11]
+
+            "object record";
+            "object changelog record";
+
+            "change" -> "processor";
+
+            "processor" -> "object record" [label="updates"];
+            "object record" -> "object changelog record" [label="record change implies creation of"];
+
+        }
+
+The basis of this implementation is simple (in Python):
+
+*   Declare a class for individual change records,
+*   Declare a declarative class inherited by individual object table
+    definitions,
+*   Use the declarative class in addition to the declarative base class in the
+    definition of the individual object table class,
+*   Use ``__setattr__()`` to catch any changes to existing objects,
+*   Process the current value of the object that is being changed, if any,
+*   Record the object name, object id, current value (if any), and the value it
+    is about to change to,
+*   Insert the new changelog record in to the current transaction.
+
+.. code-block:: python
+
+    class Change(DeclarativeBase):
+        """
+            This object represents an entry of a ChangeLog-type table.
+        """
+
+        __tablename__ = 'changes'
+
+        # Depending on the size of these tables, adjust the following
+        # table name that updates automatically. This example does so monthly.
+        #
+        # Note that this only affects every initialization of the engine.
+        #
+
+        #__tablename__ = eval(
+        #        '"changes_%s"' % (
+        #                datetime.strftime(datetime.utcnow(), "%Y_%m")
+        #            )
+        #    )
+
+        id = Column(Integer, primary_key=True)
+        object_name = Column(String(64))
+        object_id = Column(Integer)
+        value_from = Column(Text)
+        value_to = Column(Text)
+
+        # Add:
+        #
+        #   - who
+        #   - when
+
+    class ChangeRecordDeclarativeBase(object):
+        """
+            This abstract base class must be used for DeclarativeBase class
+            definitions for which we want to record changes to individual entries.
+        """
+
+        def __setattr__(self, key, value):
+            current_value = None
+
+            if hasattr(self, key):
+                current_value = getattr(self, key)
+
+            if not current_value == None and not current_value == value:
+                # Record the change
+                change = Change()
+                change.object_name = self.__class__.__name__
+                change.object_id = self.id
+                change.value_from = current_value
+                change.value_to = value
+
+                DBSession.add(change)
+
+            DeclarativeBase.__setattr__(self, key, value)
+
+    class Folder(ChangeRecordDeclarativeBase, DeclarativeBase):
+        """
+            An IMAP folder.
+        """
+
+        __tablename__ = 'folders'
+
+        id = Column(Integer, primary_key=True)
+        path = Column(Text, nullable=False)
+        uniqueid = Column(String(16))
+        created = Column(DateTime)
+
+        _metadata = relation("FolderMetadata")
+        _acl = relation("FolderACL")
+
+
 Users are Volatile and Groups do not Exist
 ------------------------------------------
 
