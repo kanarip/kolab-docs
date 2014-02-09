@@ -148,10 +148,18 @@ Login to kolab3.example.org to execute the steps in this procedure.
 
     .. parsed-literal::
 
-        # find /var/lib/imap -type f -exec chmod 640 {} \;
-        # find /var/lib/imap -type d -exec chmod 750 {} \;
-        # find /var/spool/imap -type f -exec chmod 640 {} \;
-        # find /var/spool/imap -type d -exec chmod 750 {} \;
+        # find /var/lib/imap -type f -exec chmod 640 {} \\;
+        # find /var/lib/imap -type d -exec chmod 750 {} \\;
+        
+        # find /var/spool/imap -type f -print0 | xargs -0 chmod 640
+        # find /var/spool/imap -type d -print0 | xargs -0 chmod 750
+        
+    If your find doesn't have the -print0 option or your xargs command doesn't know -0, you can use the much slower commands below:
+    
+    .. parsed-literal::
+
+        # find /var/spool/imap -type f -exec chmod 640 {} \\;
+        # find /var/spool/imap -type d -exec chmod 750 {} \\;
 
 6.  As the seen databases are particularly hard for Cyrus IMAP 2.4 to upgrade real-time, convert the seen databases with, for example:
 
