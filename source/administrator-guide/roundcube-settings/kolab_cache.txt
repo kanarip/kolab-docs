@@ -1,0 +1,14 @@
+.. _admin_roundcube-settings-plugin_libkolab_kolab_cache:
+
+``kolab_cache``
+===============================
+
+This setting controls whether Kolab Groupware data and metadata is being cached.
+
+Caching helps, especially since the data is stored in a relation database. The
+structure of how information is cached accelerates views such as "this week", or
+"this month" in the Calendar, and sorting and pagination for address books.
+
+.. seealso::
+
+    *   :ref:`admin_roundcube-settings-plugin_libkolab_kolab_messages_cache_bypass`

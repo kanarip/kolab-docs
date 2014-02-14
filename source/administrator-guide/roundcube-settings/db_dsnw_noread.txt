@@ -1,0 +1,21 @@
+.. _admin_roundcube-settings_db_dsnw_noread:
+
+``db_dsnw_noread``
+==================
+
+Only applicable if :ref:`admin_roundcube-settings_db_dsnr` is set to a non-empty
+value not equal to :ref:`admin_roundcube-settings_db_dsnw`, this setting adjusts
+the default behaviour of Roundcube with regards to database read operations.
+
+By default, when Roundcube writes out to a database, subsequent read operations
+are executed over the same database connection.
+
+This may not be desirable in a replicated database environment, for most page
+hit (by far) include one or more write operations against the database,
+resulting in write vs. read operations being unfairly balanced between the write
+master(s) and read-only slave(s).
+
+Set ``db_dsnw_noread`` to ``true`` to ensure all read operations are executed
+against read slave(s) rather then write master(s), despite the potential
+overhead in needing to create a new database connection, and regardless of the
+read slave(s) potentially lagging in replication.

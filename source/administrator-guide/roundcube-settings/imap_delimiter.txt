@@ -1,0 +1,13 @@
+.. _admin_roundcube-settings_imap_delimiter:
+
+``imap_delimiter``
+==================
+
+Set the delimiter to use in IMAP.
+
+Be warned that the delimiter is a hierarchy element (i.e., for nested folders),
+and often has implications if configured incorrectly.
+
+The default is not configured, so that the results of the IMAP command NAMESPACE
+are interpreted. This is the recommended setting, and we suggest you only fiddle
+with this setting should your IMAP server not support the NAMESPACE command.

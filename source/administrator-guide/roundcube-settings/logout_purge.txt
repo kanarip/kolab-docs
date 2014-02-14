@@ -1,0 +1,7 @@
+.. _admin_roundcube-settings_logout_purge:
+
+``logout_purge``
+================
+
+Purge the Trash folder upon successful logout. Note that this requires a
+successful logout, and does not kick in when the browser (tab) is simply closed.

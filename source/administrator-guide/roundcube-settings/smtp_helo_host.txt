@@ -1,0 +1,8 @@
+.. _admin_roundcube-settings_smtp_helo_host:
+
+``smtp_helo_host``
+==================
+
+.. include:: roundcube-settings/needs-work.txt
+
+Sadly, this setting has not yet been documented.

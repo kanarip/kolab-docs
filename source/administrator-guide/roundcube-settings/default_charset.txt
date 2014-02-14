@@ -1,0 +1,8 @@
+.. _admin_roundcube-settings_default_charset:
+
+``default_charset``
+===================
+
+.. include:: roundcube-settings/needs-work.txt
+
+Sadly, this setting has not yet been documented.

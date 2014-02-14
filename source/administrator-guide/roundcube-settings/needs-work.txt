@@ -1,0 +1,12 @@
+.. |github| image:: https://s3.amazonaws.com/github/ribbons/forkme_left_red_aa0000.png
+    :alt: Fork me on GitHub
+    :target: https://github.com/kanarip/kolab-docs/
+    :width: 100px
+    :height: 100px
+
+.. sidebar:: This section needs you!
+
+    +----------+-------------------------------------------------------+
+    | |github| | Fork this project on GitHub to write about your use of|
+    |          | the this setting.                                     |
+    +----------+-------------------------------------------------------+

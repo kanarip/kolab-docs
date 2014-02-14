@@ -1,0 +1,17 @@
+.. _admin_roundcube-settings_sent_mbox:
+
+``sent_mbox``
+=============
+
+.. include:: roundcube-settings/needs-work.txt
+
+Sadly, this setting has not yet been documented.
+
+.. seealso::
+
+    *   :ref:`admin_roundcube-settings_create_default_folders`
+    *   :ref:`admin_roundcube-settings_default_folders`
+    *   :ref:`admin_roundcube-settings_junk_mbox`
+    *   :ref:`admin_roundcube-settings_reply_same_folder`
+    *   :ref:`admin_roundcube-settings_protect_default_folders`
+    *   :ref:`admin_roundcube-settings_trash_mbox`

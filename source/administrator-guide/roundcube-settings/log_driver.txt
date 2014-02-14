@@ -1,0 +1,8 @@
+.. _admin_roundcube-settings_log_driver:
+
+``log_driver``
+==============
+
+.. include:: roundcube-settings/needs-work.txt
+
+Sadly, this setting has not yet been documented.

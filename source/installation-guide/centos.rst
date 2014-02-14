@@ -17,8 +17,8 @@ Installation on CentOS
     .. parsed-literal::
 
         # :command:`cd /etc/yum.repos.d/`
-        # :command:`wget http://obs.kolabsys.com:82/Kolab:/3.1/CentOS_6/Kolab:3.1.repo`
-        # :command:`wget http://obs.kolabsys.com:82/Kolab:/3.1:/Updates/CentOS_6/Kolab:3.1:Updates.repo`
+        # :command:`wget http://obs.kolabsys.com:82/Kolab:/3.2/CentOS_6/Kolab:3.2.repo`
+        # :command:`wget http://obs.kolabsys.com:82/Kolab:/3.2:/Updates/CentOS_6/Kolab:3.2:Updates.repo`
 
 3.  Install Kolab Groupware:
 

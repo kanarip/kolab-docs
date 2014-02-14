@@ -8,29 +8,36 @@ Installation on Ubuntu
 
     .. parsed-literal::
 
-        deb http://obs.kolabsys.com:82/Kolab:/3.1/Ubuntu_12.04/ ./
-        deb http://obs.kolabsys.com:82/Kolab:/3.1:/Updates/Ubuntu_12.04/ ./
+        deb http://obs.kolabsys.com:82/Kolab:/3.2/Ubuntu_12.04/ ./
+        deb http://obs.kolabsys.com:82/Kolab:/3.2:/Updates/Ubuntu_12.04/ ./
 
     For Ubuntu 12.10:
 
     .. parsed-literal::
 
-        deb http://obs.kolabsys.com:82/Kolab:/3.1/Ubuntu_12.10/ ./
-        deb http://obs.kolabsys.com:82/Kolab:/3.1:/Updates/Ubuntu_12.10/ ./
+        deb http://obs.kolabsys.com:82/Kolab:/3.2/Ubuntu_12.10/ ./
+        deb http://obs.kolabsys.com:82/Kolab:/3.2:/Updates/Ubuntu_12.10/ ./
 
     For Ubuntu 13.04:
 
     .. parsed-literal::
 
-        deb http://obs.kolabsys.com:82/Kolab:/3.1/Ubuntu_13.04/ ./
-        deb http://obs.kolabsys.com:82/Kolab:/3.1:/Updates/Ubuntu_13.04/ ./
+        deb http://obs.kolabsys.com:82/Kolab:/3.2/Ubuntu_13.04/ ./
+        deb http://obs.kolabsys.com:82/Kolab:/3.2:/Updates/Ubuntu_13.04/ ./
 
     For Ubuntu 13.10:
 
     .. parsed-literal::
 
-        deb http://obs.kolabsys.com:82/Kolab:/3.1/Ubuntu_13.10/ ./
-        deb http://obs.kolabsys.com:82/Kolab:/3.1:/Updates/Ubuntu_13.10/ ./
+        deb http://obs.kolabsys.com:82/Kolab:/3.2/Ubuntu_13.10/ ./
+        deb http://obs.kolabsys.com:82/Kolab:/3.2:/Updates/Ubuntu_13.10/ ./
+
+    For Ubuntu 14.04:
+
+    .. parsed-literal::
+
+        deb http://obs.kolabsys.com:82/Kolab:/3.2/Ubuntu_14.04/ ./
+        deb http://obs.kolabsys.com:82/Kolab:/3.2:/Updates/Ubuntu_14.04/ ./
 
 2.  Obtain and install the GPG keys for the archives:
 
@@ -38,29 +45,36 @@ Installation on Ubuntu
 
     .. parsed-literal::
 
-        # :command:`wget -qO - http://obs.kolabsys.com:82/Kolab:/3.1/Ubuntu_12.04/Release.key | apt-key add -`
-        # :command:`wget -qO - http://obs.kolabsys.com:82/Kolab:/3.1:/Updates/Ubuntu_12.04/Release.key | apt-key add -`
+        # :command:`wget -qO - http://obs.kolabsys.com:82/Kolab:/3.2/Ubuntu_12.04/Release.key | apt-key add -`
+        # :command:`wget -qO - http://obs.kolabsys.com:82/Kolab:/3.2:/Updates/Ubuntu_12.04/Release.key | apt-key add -`
 
     For Ubuntu 12.10:
 
     .. parsed-literal::
 
-        # :command:`wget -qO - http://obs.kolabsys.com:82/Kolab:/3.1/Ubuntu_12.10/Release.key | apt-key add -`
-        # :command:`wget -qO - http://obs.kolabsys.com:82/Kolab:/3.1:/Updates/Ubuntu_12.10/Release.key | apt-key add -`
+        # :command:`wget -qO - http://obs.kolabsys.com:82/Kolab:/3.2/Ubuntu_12.10/Release.key | apt-key add -`
+        # :command:`wget -qO - http://obs.kolabsys.com:82/Kolab:/3.2:/Updates/Ubuntu_12.10/Release.key | apt-key add -`
 
     For Ubuntu 13.04:
 
     .. parsed-literal::
 
-        # :command:`wget -qO - http://obs.kolabsys.com:82/Kolab:/3.1/Ubuntu_13.04/Release.key | apt-key add -`
-        # :command:`wget -qO - http://obs.kolabsys.com:82/Kolab:/3.1:/Updates/Ubuntu_13.04/Release.key | apt-key add -`
+        # :command:`wget -qO - http://obs.kolabsys.com:82/Kolab:/3.2/Ubuntu_13.04/Release.key | apt-key add -`
+        # :command:`wget -qO - http://obs.kolabsys.com:82/Kolab:/3.2:/Updates/Ubuntu_13.04/Release.key | apt-key add -`
 
     For Ubuntu 13.10:
 
     .. parsed-literal::
 
-        # :command:`wget -qO - http://obs.kolabsys.com:82/Kolab:/3.1/Ubuntu_13.10/Release.key | apt-key add -`
-        # :command:`wget -qO - http://obs.kolabsys.com:82/Kolab:/3.1:/Updates/Ubuntu_13.10/Release.key | apt-key add -`
+        # :command:`wget -qO - http://obs.kolabsys.com:82/Kolab:/3.2/Ubuntu_13.10/Release.key | apt-key add -`
+        # :command:`wget -qO - http://obs.kolabsys.com:82/Kolab:/3.2:/Updates/Ubuntu_13.10/Release.key | apt-key add -`
+
+    For Ubuntu 14.04:
+
+    .. parsed-literal::
+
+        # :command:`wget -qO - http://obs.kolabsys.com:82/Kolab:/3.2/Ubuntu_14.04/Release.key | apt-key add -`
+        # :command:`wget -qO - http://obs.kolabsys.com:82/Kolab:/3.2:/Updates/Ubuntu_14.04/Release.key | apt-key add -`
 
 3.  To ensure the Kolab packages have priority over the Ubuntu packages, such as
     must be the case for PHP as well as Cyrus IMAP, please make sure the APT

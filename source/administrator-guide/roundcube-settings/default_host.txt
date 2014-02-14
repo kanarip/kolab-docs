@@ -1,0 +1,45 @@
+.. _admin_roundcube-settings_default_host:
+
+``default_host``
+================
+
+The ``default_host`` setting configures the IMAP server address to connect to,
+and if omitted, allows the user to specify the IMAP server address.
+
+A drop-down select list could be provided by configuring ``default_host`` as
+follows:
+
+.. code-block:: php
+
+    $config['default_host'] = Array(
+            'imap.example.org',
+            'tls://imap.gmail.com',
+            (...)
+        );
+
+To show user-friendly, legible labels instead of server addresses, give each of
+the items in the list a value:
+
+.. code-block:: php
+
+    $config['default_host'] = Array(
+            'imap.example.org' => "Example",
+            'tls://imap.gmail.com' => "GMail",
+            (...)
+        );
+
+Neither of these options is used by Kolab Groupware. By default, the
+``default_host`` is set to ``tls://localhost``.
+
+For environments with multiple parent or alias domains, and hosted environments,
+and co-located service providers, we recommend using the file inclusion method
+outlined at the very start of the :ref:`admin_roundcube-settings`, for the
+flexibility required in such environments is likely to exceed just the IMAP
+server address to use.
+
+Furthermore, Kolab Groupware really likes the Cyrus IMAP Murder topology, where
+the IMAP server address used to connect to matters less.
+
+.. seealso::
+
+    *   http://trac.roundcube.net/wiki/Howto_Config#IMAPserverconnection

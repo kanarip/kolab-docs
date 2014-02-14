@@ -1,0 +1,13 @@
+.. _admin_roundcube-settings_db_dsnr:
+
+``db_dsnr``
+===========
+
+The database URI read-only operations.
+
+Read operations are executed against this URI, but -- by default -- only if
+there is no penalty requiring Roundcube to reconnect or separately connect to
+this DSN after one or more write operations.
+
+In a replicated database environment, the write vs. read operations might be
+balanced unfairly -- see :ref:`admin_roundcube-settings_db_dsnw_noread`.

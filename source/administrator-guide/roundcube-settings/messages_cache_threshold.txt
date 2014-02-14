@@ -1,0 +1,8 @@
+.. _admin_roundcube-settings_messages_cache_threshold:
+
+``messages_cache_threshold``
+============================
+
+.. include:: roundcube-settings/needs-work.txt
+
+Sadly, this setting has not yet been documented.

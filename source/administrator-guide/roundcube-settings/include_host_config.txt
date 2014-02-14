@@ -1,0 +1,8 @@
+.. _admin_roundcube-settings_include_host_config:
+
+``include_host_config``
+=======================
+
+.. include:: roundcube-settings/needs-work.txt
+
+Sadly, this setting has not yet been documented.

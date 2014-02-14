@@ -1,0 +1,8 @@
+.. _admin_roundcube-settings_generic_message_footer_html:
+
+``generic_message_footer_html``
+===============================
+
+.. include:: roundcube-settings/needs-work.txt
+
+Sadly, this setting has not yet been documented.

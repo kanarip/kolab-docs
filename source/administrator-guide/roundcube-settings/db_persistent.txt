@@ -1,0 +1,20 @@
+.. _admin_roundcube-settings_db_persistent:
+
+``db_persistent``
+=================
+
+Whether or not ``pconnect()`` or simply ``connect()`` capabilities should be
+used if at all available.
+
+Persistent connections, as the name suggests, are not closed when the processing
+of a request ends. When using persistent connections, you're trusting the
+verification routines that PHP applies to make sure a connection that was
+around already, and is being re-used, is not suddenly privileged more or less
+than it should be, and is the right database server and database.
+
+You enable persistent connections to reduce the overhead of needing to build new
+database connections on every request.
+
+.. seealso::
+
+    *   http://www.php.net/manual/en/features.persistent-connections.php

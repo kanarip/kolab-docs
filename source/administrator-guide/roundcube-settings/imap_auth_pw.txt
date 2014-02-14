@@ -1,0 +1,8 @@
+.. _admin_roundcube-settings_imap_auth_pw:
+
+``imap_auth_pw``
+================
+
+.. include:: roundcube-settings/needs-work.txt
+
+Sadly, this setting has not yet been documented.

@@ -1,0 +1,8 @@
+.. _admin_roundcube-settings_imap_ns_shared:
+
+``imap_ns_shared``
+==================
+
+.. include:: roundcube-settings/needs-work.txt
+
+Sadly, this setting has not yet been documented.

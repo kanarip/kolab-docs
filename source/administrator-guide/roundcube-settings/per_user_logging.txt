@@ -1,0 +1,45 @@
+.. _admin_roundcube-settings_per_user_logging:
+
+``per_user_logging``
+====================
+
+Extremely useful for production sites with a lot of traffic, that want to debug
+a particular user.
+
+Normally, debugging is enabled on a global level -- this is not feasible for two
+reasons:
+
+#.  Your disk I/O for logging and incurred latency in processing requests goes
+    through the proverbial roof (though more likely literally).
+
+#.  The way logging is implemented does not make a user session, or the log
+    items related to a given user, very recognizable. An insurmountable heap of
+    log messages would require analysis, and you could probably throw away 99.9%
+    of the logs you collected.
+
+This setting, when turned on, enables an administrator to make a user-specific
+directory writeable for the webserver user.
+
+If this option is enabled, and the directory for a particular exists, only then
+is all debugging turned on, and only for the relevant user.
+
+.. rubric:: Example Usage
+
+#.  User "John Doe <john.doe@example.org>" has a problem.
+
+#.  Enable ``per_user_logging``, and create the directory for the user:
+
+    .. parsed-literal::
+
+        # :command:`mkdir -p /var/log/roundcubemail/john.doe@example.org`
+        # :command:`chown apache /var/log/roundcubemail/john.doe@example.org`
+
+#.  Get a cup of coffee while John reproduces his problem.
+
+#.  Disable ``per_user_logging``.
+
+.. WARNING::
+
+    Do not "just" enable ``per_user_logging`` for the sake of it. The amount of
+    stat() calls executed are, for busy sites, causing your production to run
+    far from optimally.

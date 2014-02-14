@@ -1,0 +1,34 @@
+.. _admin_roundcube-settings-plugin_libkolab_kolab_messages_cache_bypass:
+
+``kolab_messages_cache_bypass``
+===============================
+
+.. versionadded:: roundcubemail-plugins-kolab-3.1.9
+
+This option is only relevant when
+:ref:`admin_roundcube-settings-plugin_libkolab_kolab_cache` is enabled.
+
+Three valid settings are available for ``kolab_messages_cache_bypass``:
+
+0.  Setting ``kolab_messages_cache_bypass`` to ``0`` does not bypass the
+    messages cache at all.
+
+1.  Setting ``kolab_messages_cache_bypass`` to ``1`` bypasses only the message
+    content (i.e. payload) of the core messages cache, but uses the index cache.
+
+2.  Setting ``kolab_messages_cache_bypass`` to ``2`` bypasses the core messages
+    cache completely.
+
+.. NOTE::
+
+    With :ref:`admin_roundcube-settings-plugin_libkolab_kolab_cache`
+    enabled, a set of Kolab specific database tables already cache payload. For
+    larger environments, it is certainly recommended to consider setting
+    ``kolab_messages_cache_bypass`` to at least ``1``.
+
+.. seealso::
+
+    *   :ref:`admin_roundcube-settings-plugin_libkolab_kolab_cache`
+    *   :ref:`admin_roundcube-settings_messages_cache`
+    *   :ref:`admin_roundcube-settings_messages_cache_threshold`
+    *   :ref:`admin_roundcube-settings_messages_cache_ttl`

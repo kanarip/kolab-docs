@@ -1,0 +1,47 @@
+.. _admin_roundcube-settings_messages_cache_ttl:
+
+``messages_cache_ttl``
+======================
+
+Messages are usually displayed ordered by date (of submission or arrival), with
+the most recent few first.
+
+In effect, this tends to result in a view that does underappreciate older
+messages -- they are not regularly displayed in the user's mail (list) views.
+
+Since these messages are only retrieved occasionally, it makes sense to not
+spend too much cache capacity on these messages.
+
+Set ``messages_cache_ttl`` to the maximum amount of time that may have
+passed since the message became available, during which caching is still
+considered appropriate.
+
+.. NOTE::
+
+    A rule of thumb for establishing the appropriate TTL for the messages cache
+    would be to cache 2 times a single
+    :ref:`admin_roundcube-settings_mail_pagesize` for any one mail folder (using
+    the default, that would amount to 80 messages).
+
+.. rubric:: Example: Low-turnover Sites
+
+Example settings with only a few mails per week per mail folder, and not too
+many users.
+
+.. code-block:: php
+
+    $config['messages_cache_ttl'] = '3m';       # Three months
+
+.. rubric:: Example: High-turnover Sites
+
+.. code-block:: php
+
+    $config['messages_cache_ttl'] = '5d';       # 5 days
+
+.. NOTE::
+
+    The ``messages_cache_ttl`` does not impact the
+    :ref:`admin_roundcube-settings-plugin_libkolab_kolab_cache`, but may impact
+    the applicability of
+    :ref:`admin_roundcube-settings-plugin_libkolab_kolab_messages_cache_bypass`
+    being set to ``0``.

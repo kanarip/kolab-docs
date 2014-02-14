@@ -1,0 +1,56 @@
+.. _admin_roundcube-settings_imap_cache:
+
+``imap_cache``
+==============
+
+Cache generic IMAP metadata, such as lists of mailboxes, and the last known
+status of each mailbox in that list.
+
+By default, the IMAP cache is set to ``null``, meaning not cache anything.
+
+In many deployments, disk I/O on the IMAP server is a major concern and possibly
+a bottleneck, so it is recommended to turn on caching.
+
+If caching is not enabled, Roundcube will address IMAP directly every time it
+needs metadata about IMAP folders.
+
+Valid values include one of:
+
+*   **db**
+
+    Store IMAP caches in the database configured with
+    :ref:`admin_roundcube-settings_db_dsnw`.
+
+    In Kolab Groupware, this is made the default, as it does not introduce any
+    additional requirements to the environment.
+
+    Using the database for IMAP caches however does introduce a little bit of
+    overhead, for connections need to be made, authenticated, databases
+    selected, connections authorized, queries be executed, authorized and
+    awaited the answer for. That said, IMAP caches make little use of the
+    relational capabilities of such database.
+
+*   **apc**
+
+    Store IMAP caches in the *Alternative PHP Cache* (or "APC) -- the memory
+    segment(s) for PHP originally intended to store already binary compiled PHP
+    code, so that PHP does not need to read from disk, interpret, compile and
+    execute the PHP code every time a user hits a page.
+
+    .. NOTE::
+
+        It is recommended to use APC for caching binary compiled PHP code, but
+        it is **not recommended** to use APC for IMAP caches.
+
+*   **memcache**
+
+    Store the IMAP caches in memcache, configured using
+    :ref:`admin_roundcube-settings_memcache_hosts`.
+
+    Memcache introduces far less overhead compared to a relational database, and
+    does not require authentication and authorization.
+
+    For larger deployments, this is the recommended setting. However, you would
+    need to configure memcache hosts, and making those highly available is
+    possible with replicated memcached daemons available and supported only
+    as part of Kolab Enterprise 13.

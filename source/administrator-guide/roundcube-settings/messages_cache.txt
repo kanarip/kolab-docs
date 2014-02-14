@@ -1,0 +1,19 @@
+.. _admin_roundcube-settings_messages_cache:
+
+``messages_cache``
+==================
+
+Controls whether or not to cache messages.
+
+Valid configuration values are limited to ``db`` only, for message caching makes
+extensive use of the relational capabilities of the database.
+
+Store cached messages in the database configured with
+:ref:`admin_roundcube-settings_db_dsnw`.
+
+.. seealso::
+
+    *   :ref:`admin_roundcube-settings_messages_cache_threshold`
+    *   :ref:`admin_roundcube-settings_messages_cache_ttl`
+    *   :ref:`admin_roundcube-settings-plugin_libkolab_kolab_messages_cache_bypass`
+    *   :ref:`admin_roundcube-settings-plugin_threading_as_default`

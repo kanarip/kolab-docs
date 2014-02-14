@@ -1,0 +1,8 @@
+.. _admin_roundcube-settings_mdn_default:
+
+``mdn_default``
+===============
+
+.. include:: roundcube-settings/needs-work.txt
+
+Sadly, this setting has not yet been documented.

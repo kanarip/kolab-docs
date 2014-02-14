@@ -1,0 +1,8 @@
+.. _admin_roundcube-settings_check_all_folders:
+
+``check_all_folders``
+=====================
+
+.. include:: roundcube-settings/needs-work.txt
+
+Sadly, this setting has not yet been documented.

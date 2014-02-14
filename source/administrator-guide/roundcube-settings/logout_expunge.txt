@@ -1,0 +1,7 @@
+.. _admin_roundcube-settings_logout_expunge:
+
+``logout_expunge``
+==================
+
+Expunge a user's INBOX upon logout. Note that this requires a successful logout,
+and does not kick in when the browser (tab) is simply closed.

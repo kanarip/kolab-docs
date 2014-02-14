@@ -1,0 +1,14 @@
+.. _admin_roundcube-settings_imap_debug:
+
+``imap_debug``
+==============
+
+To debug, or not do debug IMAP.
+
+When enabled, provides a near protocol level dump of events in
+the :file:`imap` file in the log directory specified by
+:ref:`admin_roundcube-settings_log_dir`.
+
+.. seealso::
+
+    *   :ref:`admin_roundcube-settings_per_user_logging`

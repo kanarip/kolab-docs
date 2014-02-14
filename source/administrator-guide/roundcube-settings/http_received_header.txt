@@ -1,0 +1,8 @@
+.. _admin_roundcube-settings_http_received_header:
+
+``http_received_header``
+========================
+
+.. include:: roundcube-settings/needs-work.txt
+
+Sadly, this setting has not yet been documented.

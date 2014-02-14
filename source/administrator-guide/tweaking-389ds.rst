@@ -2,6 +2,8 @@
 Tweaking 389 Directory Server
 =============================
 
+.. _admin_ldap_controlling_indexes_and_indexing:
+
 Controlling Indexes and Indexing
 --------------------------------
 

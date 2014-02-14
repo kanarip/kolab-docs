@@ -1,0 +1,10 @@
+.. _admin_roundcube-settings_db_dsnw:
+
+``db_dsnw``
+===========
+
+The write DSN to the database.
+
+If specified exclusively, meaning :ref:`admin_roundcube-settings_db_dsnr` is an
+empty value, or the same value, the write DSN becomes the database URI for both
+write and read operations.

@@ -1,0 +1,18 @@
+.. _admin_roundcube-settings_db_prefix:
+
+``db_prefix``
+=============
+
+Prefix Roundcube's table names with the prefix configured here.
+
+When, for example, only a single database is available to you, should multiple
+applications you wish to run both have a table named ``users``, than specify a
+``db_prefix`` to make sure the Roundcube table for users can be created next to
+an existing table ``users``, and avoid the conflict in the schema definitions
+for the tables.
+
+.. rubric:: Example Configuration
+
+.. code-block:: php
+
+    $config['db_prefix'] = 'rc_';

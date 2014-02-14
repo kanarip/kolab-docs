@@ -1,0 +1,10 @@
+.. _admin_roundcube-settings_imap_force_lsub:
+
+``imap_force_lsub``
+===================
+
+Force the use of the LSUB command over the LIST-EXTENDED command to list
+folders.
+
+Some IMAP servers (including Dovecot 1.x) return wrong results when using
+LIST-EXTENDED.

@@ -1,0 +1,34 @@
+.. _admin_roundcube-settings_memcache_hosts:
+
+``memcache_hosts``
+==================
+
+Configure a list of memcached hosts to use for caches and/or storage.
+
+Usually, it is sufficient to use one memcached host address in this list, and
+this one memcached host address might be a load-balanced, high-availability
+replicated memcached cluster.
+
+Replicated memcached is available and supported only as part of Kolab Enterprise
+13, however.
+
+Use multiple addresses in case the size of all information stored exceeds the
+capacity of one (replicated) memcached host.
+
+.. rubric:: Example Configuration for a Replicated Memcached Cluster
+
+.. code-block:: php
+
+    $config['memcache_hosts'] = Array(
+            'memcached.example.org:11211'
+        );
+
+.. rubric:: Example Configuration for Multiple Memcached Hosts
+
+.. code-block:: php
+
+    $config['memcache_hosts'] = Array(
+            'memcached1.example.org:11211',
+            'memcached2.example.org:11211'
+        );
+

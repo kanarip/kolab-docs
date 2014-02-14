@@ -4,25 +4,87 @@
 Installation on Univention Corporate Server
 ===========================================
 
-1.  Add the following line to ``/etc/apt/sources.list.d/kolab.list``:
+.. WARNING::
 
-    For UCS 3.1:
+    There are **three** versions of Kolab for UCS. Make sure you choose the correct
+    version.
+
+Kolab Enterprise 13
+-------------------
+
+To install the Enterprise edition under Kolab Systems support, execute the
+following process:
+
+#.  Configure your UCS system to obtain the repository configuration packages:
 
     .. parsed-literal::
 
-        deb http://obs.kolabsys.com:82/Kolab:/Development/UCS_3.1/ ./
+        # :command:`ucr set \\
+            repository/online/component/kolab-13=enabled \\
+            repository/online/component/kolab-13/description="Kolab Enterprise 13 Installation Repository" \\
+            repository/online/component/kolab-13/server="mirror.kolabsys.com" \\
+            repository/online/component/kolab-13/prefix="pub/ucs" \\
+            repository/online/component/kolab-13/version="current" \\
+            repository/online/component/kolab-13/parts="maintained"`
 
-2.  Obtain and install the GPG keys for the archives:
-
-    For UCS 3.1:
+#.  Install the client certificate you have obtained from Kolab Systems in the
+    following location:
 
     .. parsed-literal::
 
-        # :command:`wget http://obs.kolabsys.com:82/Kolab:/Development/UCS_3.1/Release.key`
+        /etc/apt/certs/mirror.kolabsys.com.client.pem
+
+    If you do not have an SSL client certificate from Kolab Systems, contact
+    sales@kolabsys.com.
+
+#.  Install the repository configuration package:
+
+    .. parsed-literal::
+
+        # :command:`univention-install kolab-13-enterprise-release`
+
+    When the installation complains the package cannot be verified, type [y] and
+    [Enter] to continue:
+
+    .. parsed-literal::
+
+        WARNING: The following packages cannot be authenticated!
+          kolab-13-enterprise-release-development
+        Install these packages without verification [y/N]? y
+
+#.  Install kolab:
+
+    .. parsed-literal::
+
+        # :command:`univention-install kolab`
+
+Kolab Groupware from the App Center
+-----------------------------------
+
+A version of Kolab is available in the Univention App Center.
+
+Kolab Groupware from the OBS
+----------------------------
+
+#.  Add the following line to ``/etc/apt/sources.list.d/kolab.list``:
+
+    For UCS 3.2:
+
+    .. parsed-literal::
+
+        deb http://obs.kolabsys.com:82/Kolab:/Development/UCS_3.2/ ./
+
+#.  Obtain and install the GPG keys for the archives:
+
+    For UCS 3.2:
+
+    .. parsed-literal::
+
+        # :command:`wget http://obs.kolabsys.com:82/Kolab:/Development/UCS_3.2/Release.key`
         # :command:`apt-key add Release.key`
         # :command:`rm -rf Release.key`
 
-3.  To ensure the Kolab packages have priority over the Debian packages, such as
+#.  To ensure the Kolab packages have priority over the Debian packages, such as
     must be the case for PHP as well as Cyrus IMAP, please make sure the APT
     preferences pin the obs.kolabsys.com origin as a preferred source.
 
@@ -34,19 +96,19 @@ Installation on Univention Corporate Server
         Pin: origin obs.kolabsys.com
         Pin-Priority: 501
 
-4.  Enable the unmaintained UCS software repositories:
+#.  Enable the unmaintained UCS software repositories:
 
     .. parsed-literal::
 
         # :command:`ucr set repository/online/unmaintained="yes"`
 
-5.  Update the repository metadata:
+#.  Update the repository metadata:
 
     .. parsed-literal::
 
         # :command:`univention-install kolab`
 
-6.  When asked to confirm you want to install the package and its dependencies, press Enter.
+#.  When asked to confirm you want to install the package and its dependencies, press Enter.
 
 .. WARNING::
 

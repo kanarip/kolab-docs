@@ -1,0 +1,16 @@
+.. _admin_roundcube-settings_imap_disabled_caps:
+
+``imap_disabled_caps``
+======================
+
+Specify a list of capabilities to filter from the capabilities advertised by the
+server.
+
+Useful if you do not have control over the server, so useless for Kolab
+Groupware deployments in production (but useful again in testing and
+development).
+
+Examples of capabilities advertised by a server that you may want to disable
+include ESEARCH for UW-IMAP.
+
+Default: ``Array()``

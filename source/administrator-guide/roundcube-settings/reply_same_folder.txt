@@ -1,0 +1,12 @@
+.. _admin_roundcube-settings_reply_same_folder:
+
+``reply_same_folder``
+=====================
+
+.. include:: roundcube-settings/needs-work.txt
+
+Sadly, this setting has not yet been documented.
+
+.. seealso::
+
+    *   :ref:`admin_roundcube-settings_sent_mbox`

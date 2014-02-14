@@ -1,0 +1,19 @@
+.. _admin_roundcube-settings_imap_cache_ttl:
+
+``imap_cache_ttl``
+==================
+
+The Time To Live (TTL) for the IMAP caches -- the time it should be considered
+valid, or expunged from the current caches at the first opportunity.
+
+Really applicable when used alongside a caching technology that allows the
+retention to be specified upon entry, and purges caches automatically.
+
+This setting controls, for example, how long folder lists are retained in cache.
+
+With the folder list being cached, should the user create a folder and subscribe
+the folder (using a different client), than the web client session will have to
+wait for as long as the :ref:`admin_roundcube-settings_imap_cache` is within its
+defined TTL before it is made visible automatically, or, alternatively, the user
+might look in his Settings > Folders to bypass caches and refresh the folder
+list.

@@ -10,8 +10,8 @@ Installation on Debian
 
     .. parsed-literal::
 
-        deb http://obs.kolabsys.com:82/Kolab:/3.1/Debian_7.0/ ./
-        deb http://obs.kolabsys.com:82/Kolab:/3.1:/Updates/Debian_7.0/ ./
+        deb http://obs.kolabsys.com:82/Kolab:/3.2/Debian_7.0/ ./
+        deb http://obs.kolabsys.com:82/Kolab:/3.2:/Updates/Debian_7.0/ ./
 
 2.  Obtain and install the GPG keys for the archives:
 
@@ -19,8 +19,8 @@ Installation on Debian
 
     .. parsed-literal::
 
-        # :command:`wget -qO - http://obs.kolabsys.com:82/Kolab:/3.1/Debian_7.0/Release.key | apt-key add -`
-        # :command:`wget -qO - http://obs.kolabsys.com:82/Kolab:/3.1:/Updates/Debian_7.0/Release.key | apt-key add -`
+        # :command:`wget -qO - http://obs.kolabsys.com:82/Kolab:/3.2/Debian_7.0/Release.key | apt-key add -`
+        # :command:`wget -qO - http://obs.kolabsys.com:82/Kolab:/3.2:/Updates/Debian_7.0/Release.key | apt-key add -`
 
 3.  To ensure the Kolab packages have priority over the Debian packages, such as
     must be the case for PHP as well as Cyrus IMAP, please make sure the APT

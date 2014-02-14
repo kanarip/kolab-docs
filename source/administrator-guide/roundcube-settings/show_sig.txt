@@ -1,0 +1,8 @@
+.. _admin_roundcube-settings_show_sig:
+
+``show_sig``
+============
+
+.. include:: roundcube-settings/needs-work.txt
+
+Sadly, this setting has not yet been documented.

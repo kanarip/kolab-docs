@@ -1,0 +1,8 @@
+.. _admin_roundcube-settings_read_when_deleted:
+
+``read_when_deleted``
+=====================
+
+.. include:: roundcube-settings/needs-work.txt
+
+Sadly, this setting has not yet been documented.

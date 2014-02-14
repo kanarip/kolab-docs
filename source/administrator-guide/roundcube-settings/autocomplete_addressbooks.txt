@@ -1,0 +1,19 @@
+.. _admin_roundcube-settings_autocomplete_addressbooks:
+
+``autocomplete_addressbooks``
+=============================
+
+Specify a list of address books to search for auto-completion.
+
+The list includes the names of address books as they are defined in
+:ref:`admin_roundcube-settings_ldap_public` -- i.e. we start that section by
+naming 'addressbook1' and 'addressbook2', and those are the names you use here.
+
+.. NOTE::
+
+    Names of Kolab address books do not need to be included in the list of
+    address books to use for autocompletion.
+
+.. seealso::
+
+    *   :ref:`admin_roundcube-settings-plugin_kolab_addressbook`

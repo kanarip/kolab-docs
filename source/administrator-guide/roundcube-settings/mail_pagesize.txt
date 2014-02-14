@@ -1,0 +1,27 @@
+.. _admin_roundcube-settings_mail_pagesize:
+
+``mail_pagesize``
+=================
+
+The ``mail_pagesize`` setting is a user preference default, meaning users can
+normally edit this preference in their settings.
+
+The user's preferred ``mail_pagesize`` causes the mail view to list as many
+individual messages (list view) or as many threads (thread view) to be displayed
+in message lists.
+
+To lock down the ``mail_pagesize`` to a value and not allow users to indicate
+and configure their own preference, use
+:ref:`admin_roundcube-settings_dont_override`:
+
+.. code-block:: php
+
+    $config['dont_override'] = Array('mail_pagesize');
+
+To establish a maximum page size users may select, see
+:ref:`admin_roundcube-settings_max_pagesize`.
+
+.. seealso::
+
+    *   :ref:`admin_roundcube-settings_dont_override`
+    *   :ref:`admin_roundcube-settings_max_pagesize`

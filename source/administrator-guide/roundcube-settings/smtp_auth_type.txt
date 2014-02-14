@@ -1,0 +1,8 @@
+.. _admin_roundcube-settings_smtp_auth_type:
+
+``smtp_auth_type``
+==================
+
+.. include:: roundcube-settings/needs-work.txt
+
+Sadly, this setting has not yet been documented.
