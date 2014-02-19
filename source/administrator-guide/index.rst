@@ -17,6 +17,8 @@ Administrator Guide
 
     backup-and-restore
 
+    shared-folders
+
     using-the-kolab-web-administration-panel
     using-the-kolab-command-line
 
