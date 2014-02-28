@@ -77,6 +77,10 @@ is allowed to access and admin this folder.
         Folder shared/info@kolab.example.org
           lrs           anyone
 
+    Each letter of the ACL flags stands for one right. (l=list, r=red, s=seen flag)
+    This ACLs mean anyone connected to the IMAP Server has the right to read the
+    shared folder contents.
+
 #.  Maybe you want to revoke that anyone can read this shared folder
   
     .. parsed-literal::
@@ -89,6 +93,9 @@ is allowed to access and admin this folder.
     .. parsed-literal::
     
         # :command:`kolab sam shared/info@kolab.example.org john.doe@kolab.example.org all`
+
+    The acl "all" is an alias for the imap acl "lrswipkxtecda". You can find all the
+    access rights in the IMAP reference or command line reference linked below.
 
 #.  Verify
 
@@ -127,7 +134,7 @@ If you wanto to receive mails from the outside world, you must ensure 2 things.
 
 #.  Cyrus
     
-    You must set the **post** flag/permission on the shared mail folder, to allow
+    You must set the **p (post)** flag/permission on the shared mail folder, to allow
     cyrus/lmtp to post messages into the folder. Otherwise you'll end up with 
     permission or mailbox not found error messages.
 
