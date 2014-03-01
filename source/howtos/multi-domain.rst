@@ -92,6 +92,14 @@ retain any spam headers.
 Cyrus IMAP Changes
 ==================
 
+Cyrus IMAP has, by default, been configured to allow users to login with a
+``uid``, ``mail`` or ``alias`` login username, translating that login username
+to the intended mailbox using a process called :term:`canonification`.
+
+For multi-domain deployments, additional configuration is added to make the
+process multi-domain aware (Kolab 3.2 and later), or avoid executing the process
+altogher (Kolab 3.1 and earlier).
+
 .. WARNING:: Cyrus IMAP 2.5 (Kolab 3.2 and later)
 
     Cyrus IMAP 2.5 ships with a patch created by Kolab Systems, and submitted
@@ -145,10 +153,6 @@ the ``cyrus-imapd`` service:
     that ship Cyrus IMAP 2.4. At the time of this writing, that includes Kolab
     3.1 and earlier versions, and Kolab Enterprise 13 and earlier versions of
     the enterprise edition.
-
-Cyrus IMAP has, by default, been configured to allow users to login with a
-``uid``, ``mail`` or ``alias``username, translating that login username to the
-intended mailbox using a process called :term:`canonification`.
 
 This is not (yet) available for multi-domain deployments.
 
