@@ -92,6 +92,60 @@ retain any spam headers.
 Cyrus IMAP Changes
 ==================
 
+.. WARNING:: Cyrus IMAP 2.5 (Kolab 3.2 and later)
+
+    Cyrus IMAP 2.5 ships with a patch created by Kolab Systems, and submitted
+    and accepted upstream, that allows the parent domain DIT root dn to be
+    discovered.
+
+Add the following settings to :manpage:`imapd.conf(5)` as needed, and restart
+the ``cyrus-imapd`` service:
+
+**ldap_domain_base_dn** ``""``
+
+    The base dn to search for domain name spaces. In a default Kolab Groupware
+    setup, the appropriate default is ``cn=kolab,cn=config`` -- however we do
+    not ship Cyrus IMAP with that as a default configuration value.
+
+    If this configuration option is not set, ptloader will not perform any
+    discovery.
+
+**ldap_domain_filter** ``(&(objectclass=domainrelatedobject)(associateddomain=%s))``
+
+    The filter to use when searching for a domain name space.
+
+    For default Kolab Groupware setups, the default configuration value works as
+    intended.
+
+**ldap_domain_name_attribute** ``associatedDomain``
+
+    The attribute to use when attempting to find the parent domain name space.
+
+    For default Kolab Groupware setups, the default configuration value works as
+    intended.
+
+**ldap_domain_scope** ``sub``
+
+    The scope to use when searching. One of "sub", "one", "base".
+
+    For default Kolab Groupware setups, the default configuration value works as
+    intended.
+
+**ldap_domain_result_attribute** ``inetdomainbasedn``
+
+    The attribute name of which to use the value, if the attribute is at all
+    present on entries found, that contains the domain name space DIT root dn.
+
+    For default Kolab Groupware setups, the default configuration value works as
+    intended.
+
+.. WARNING:: Cyrus IMAP 2.4
+
+    The following changes are needed only for Kolab Groupware product streams
+    that ship Cyrus IMAP 2.4. At the time of this writing, that includes Kolab
+    3.1 and earlier versions, and Kolab Enterprise 13 and earlier versions of
+    the enterprise edition.
+
 Cyrus IMAP has, by default, been configured to allow users to login with a
 ``uid``, ``mail`` or ``alias``username, translating that login username to the
 intended mailbox using a process called :term:`canonification`.
@@ -117,7 +171,7 @@ Postfix Changes
 ===============
 
 Postfix has originally been configured to use the primary domain's DIT root dn
-for LDAP lookups. So, for a system setup for ``example.org``, the LDAP lookup
+for LDAP lookups. So, for a system setup for ``example.org``, all LDAP lookup
 tables are configured to lookup entries in ``dc=example,dc=org``.
 
 The relevant lookup tables have been written out to :file:`/etc/postfix/ldap/`,
