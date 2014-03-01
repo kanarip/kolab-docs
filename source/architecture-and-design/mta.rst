@@ -52,44 +52,51 @@ mail exchanger with all features enabled.
     assumption is therefore, that only server systems are attached to the
     locally attached subnets, and not users.
 
+    Systems in :ref:`and-mta-postfix-mynetworks` are permitted to use the mail
+    exchanger as a relay host.
+
 **Mandatory Access Policy Enforcement**
 
-    Both the MSA and MTA consult the **Kolab SMTP Access Policy** for
-    mandatory access control enforcement.
+    Both the MSA and MTA consult the **Kolab SMTP Access Policy** for mandatory
+    access control enforcement.
 
     On the MSA level, the following policies are enforced:
 
-        *   The user must be authenticated successfully.
+    *   The user must be authenticated successfully.
 
-            Actually authenticating the user is the responsibility of the
-            Kolab SASL Authentication daemon, which authenticates the user
-            against LDAP.
+        Actually authenticating the user is the responsibility of the Kolab SASL
+        Authentication daemon, which authenticates the user against LDAP.
 
-        *   The authenticated user must be authorized to use the envelope
-            sender address specified in the message being submitted.
+    *   The authenticated user must be authorized to use the envelope sender
+        address specified in the message being submitted.
 
-            A user is considered authorized to use the envelope sender
-            address if either the following is true;
+        A user is considered authorized to use the envelope sender address if
+        either the following is true;
 
-            #.  The user itself is also the final recipient for messages sent to
-                the envelope sender address, such as would be the case with
-                *mail* and *alias* attribute values, or
+        #.  The user itself is also the final recipient for messages sent to the
+            envelope sender address, such as would be the case with *mail* and
+            *alias* attribute values, or
 
-            #.  The user has been specifically authorized to send "*on behalf
-                of*" the original owner of the envelope sender address.
+        #.  The user has been specifically authorized to send "*on behalf of*"
+            the original owner of the envelope sender address.
 
-        *   The user must not be disallowed to send messages to the recipients
-            listed in the message being submitted.
+    *   The user must not be disallowed to send messages to the recipients
+        listed in the message being submitted.
 
-        *   For the envelope recipient addresses that are considered local
-            recipients, each target recipient's access control policies are
-            checked requiring the sender to not be disallowed to send to the
-            intended recipient.
+    *   For the envelope recipient addresses that are considered local
+        recipients, each target recipient's access control policies are checked
+        requiring the sender to not be disallowed to send to the intended
+        recipient.
 
 **3rd Party Groupware**
 
     3rd Party Groupware solutions may be integrated into the Kolab Groupware
     environment up to and including the split of a single domain name space.
+
+**Content-Filter**
+
+    Kolab Groupware includes a content filter under the name of
+    :ref:`and_mta_wallace`.
 
 .. _and_mta_postfix:
 
@@ -124,6 +131,53 @@ relay_domains
 
 local_recipient_maps
 --------------------
+
+The Postfix setting ``local_recipient_maps``, of which the current configuration
+value can be retrieved with:
+
+.. parsed-literal::
+
+    # :command:`postconf local_recipient_maps`
+
+consists of a list of lookup tables, against which a recipient address is
+validated.
+
+Postfix queries each table, and stops processing when the lookup against a table
+returns a value -- ergo, the order of lookup tables used is important.
+
+Suppose a user "John Doe <john.doe@example.org>", a regular Kolab user, receives
+a message.
+
+#.  First, Postfix would verify whether inbound messages for the domain name
+    space of ``example.org`` are indeed to be delivered locally, using
+    :ref:`and-mta-postfix-mydestination`, or need to be relayed (using
+    :ref:`and-mta-postfix-relay_domains`).
+
+#.  For domain name spaces that are indeed to be delivered locally, Postfix
+    iterates over the lookup tables configured in ``local_recipient_maps``. In
+    a default Kolab groupware installation, this is the following list:
+
+    *   Regular Kolab users, using filter
+        ``(&(|(mail=%s)(alias=%s))(objectclass=kolabinetorgperson))``.
+
+    *   Mail recipients with forwarding address, using filter
+        ``(&(|(mail=%s)(alias=%s))(objectclass=mailrecipient)(objectclass=inetorgperson)(mailforwardingaddress=*))``.
+
+    *   Shared folders with mail delivery enabled, using filter
+        ``(&(|(mail=%s)(alias=%s))(objectclass=kolabsharedfolder))``.
+
+    *   Static distribution groups, using filter
+        ``(&(|(mail=%s)(alias=%s))(objectclass=kolabgroupofuniquenames))``.
+
+    *   Dynamic distribution groups, using filter
+        ``(&(|(mail=%s)(alias=%s))(objectclass=kolabgroupofurls))``.
+
+    Because of the nature of these individual queries, and their handling being
+    all the same, the filter can basically be concatenated into:
+
+    .. parsed-literal::
+
+        ``(&(|(mail=%s)(alias=%s))(|(objectclass=kolabinetorgperson)(objectclass=kolabsharedfolder)(objectclass=kolabgroupofuniquenames)(objectclass=kolabgroupofurls)(&(objectclass=mailrecipient)(mailforwardingaddress=*))))``
 
 .. _and-mta-postfix-relay_recipient_maps:
 
@@ -362,3 +416,23 @@ Sender Recipient Access Policy Check
 Recipient Local Check
 
 Recipient Sender Address Policy Check
+
+.. _and_mta_wallace:
+
+Wallace
+=======
+
+Wallace is a Kolab Groupware content-filter, adding functionality to the
+environment including:
+
+*   Enforcement of invitation policies,
+*   Resource scheduling,
+*   GnuPG-based encryption of inbound email to local recipients,
+*   Appending of footers (plain text and html) and signatures,
+*   Data-Loss Prevention (DLP),
+*   (...)
+
+Wallace listens on port 10026 by default, and is provided with messages by
+Postfix. After handling the message, Wallace submits the message back to Postfix
+on port 10027 (by default).
+

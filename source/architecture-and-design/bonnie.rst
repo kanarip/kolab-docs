@@ -2,7 +2,7 @@
 Archival, Backup, e-Discovery and Live Interception
 ===================================================
 
-Four different challenges could potentially be resolved by implementing a single
+Different challenges could potentially be resolved by implementing a single
 solution, providing each of the functional aspects in an integrated fashion.
 
 A brief overview of the functional components:
@@ -28,51 +28,84 @@ A brief overview of the functional components:
     Maintenance of a changelog on object entries that can change state (email
     read/deleted), or are volatile (changes to an appointment).
 
-**Live Interception**
-
-    A regulatory compliance requirement for electronic communications providers.
-
-    Authorities may require the *wiretapping* of communications, similar to how
-    law enforcement would wiretap a regular phone.
-
 An Integrated Solution
 ======================
 
 A simplistic depiction of the architecture for a Free Software solution to
-these challenges could look as follows:
+these challenges could look as follows.
+
+For our initial design, we're considering storing data and payload separately
+from relationships to be drawn, for the modelling of relational metadata to
+NoSQL is a little bit too hard to model.
 
 .. graphviz::
 
     digraph {
             subgraph cluster_imap {
+                    width = 7.0;
                     "IMAP 1" [shape=rectangle];
                     "IMAP 2" [shape=rectangle];
-                    "IMAP 3" [shape=rectangle];
+                    "IMAP #" [shape=rectangle];
                 }
 
-            "Message Bus" [shape=rectangle,width=6.0];
+            "Message Bus" [shape=rectangle,width=7.0];
 
             "IMAP 1" -> "Message Bus";
             "IMAP 2" -> "Message Bus";
-            "IMAP 3" -> "Message Bus";
+            "IMAP #" -> "Message Bus";
 
             subgraph cluster_subscribers {
-                    "Archive/Backup" [shape=rectangle];
+                    width = 7.0;
+                    "Archival" [shape=rectangle];
+                    "Backup" [shape=rectangle];
                     "e-Discovery" [shape=rectangle];
-                    "Live Interception" [shape=rectangle];
                 }
 
-            "Message Bus" -> "Archive/Backup";
+            "Message Bus" -> "Archival";
+            "Message Bus" -> "Backup";
             "Message Bus" -> "e-Discovery";
-            "Message Bus" -> "Live Interception";
+
+            "NoSQL Storage" [shape=rectangle,width=3.0];
+            "SQL Storage" [shape=rectangle,width=3.0];
+
+            "Archival", "Backup", "e-Discovery" -> "NoSQL Storage", "SQL Storage";
         }
 
 In this picture, IMAP (using Cyrus IMAP 2.5) issues so-called
-:term:`event notifications` that can be picked up by the appropriate
-subscribers.
+:term:`event notifications` to a message bus, that can be picked up by the
+appropriate subscribers.
+
+Note that the subscribers are different components to plug in and enable, or
+leave out -- not everyone has a need for Archival and e-Discovery capabilities.
+
+As such, a component plugged in could announce its presence, and start working
+backwards as well as start collecting the relevant subsets of data in a retro-
+active manner.
+
+.. graphviz::
+
+    digraph event_notification {
+            rankdir = LR;
+            splines = true;
+            overlab = prism;
+
+            edge [color=gray50, fontname=Calibri, fontsize=11]
+            node [shape=record, fontname=Calibri, fontsize=11]
+
+            "subscriber";
+            "message bus" [height=2.0];
+            "daemon";
+            "publisher";
+
+            "subscriber" -> "message bus" [label="announces presence"];
+            "daemon" -> "message bus" [label="presence announcement", dir=back];
+            "daemon" -> "message bus" [label="works backwards"];
+            "publisher" -> "message bus" [label="event notifications"];
+
+        }
 
 To allow scaling, the intermediate medium is likely a message bus such as
-ActiveMQ or AQMP.
+ActiveMQ, AMQP, ZeroMQ, etc.
 
 Between Cyrus IMAP 2.5 and the message bus must be a thin application that is
 capable of:
@@ -93,9 +126,6 @@ also be post-processed:
 
 *   e-Discovery requires post-processing to sufficiently associate the message
     in its context, and contains an audit trail.
-
-*   Live Interception requires the real-time/near-time relay of the message to
-    authorities.
 
 *   Archival and Backup require payload, and may also use post-processing to
     facilitate Restore.

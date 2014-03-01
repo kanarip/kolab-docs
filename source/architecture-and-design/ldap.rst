@@ -22,7 +22,7 @@ Kolab Groupware uses LDAP for, among other things:
 *   Mail Exchangers to decide whether to accept or reject messages, and how to
     route accepted messages based on information contained in LDAP,
 
-*   the authoritative list of mailboxes to be maintained in IMAP, though
+*   the authoritative list of mailboxes to be maintained in IMAP, through
     :ref:`and_ldap_kolabd`,
 
 *   the Global Address Book for users, distribution groups, contacts, shared
@@ -34,7 +34,12 @@ Kolab Groupware uses LDAP for, among other things:
 
 *   In Kolab 3.1 and later, for multi- parent domain deployments, translation of
     the authentication ID into the authorization ID (a process called
-    canonification).
+    canonification) for the web client only.
+
+*   In Kolab 3.2 and later, for multi- parent domain deployments, translation of
+    the authentication ID into the authorization ID (a process called
+    canonification) for both the web client and IMAP itself, as well as group
+    ACLs for IMAP based on roles or (simple) group membership.
 
 For this purpose, Kolab is configured to use a **service account**, usually
 ``uid=kolab-service,ou=Special Users`` in the primary domain's root dn.
@@ -48,11 +53,14 @@ During setup, this account is configured to circumvent **size**, **search**,
 **lookthrough** and other administrative limitations configured on normal
 accounts, that protect your LDAP server's performance.
 
+.. _and_ldap_kolabd:
+
 **kolabd**
 ==========
 
 The Kolab daemon **kolabd** is responsible for the synchronization of changes in
-LDAP to be relected on to the IMAP mail boxes and folders.
+LDAP that are to be relected on the IMAP mail boxes and folders and access
+control.
 
 It uses either searches or replication mechanisms available in the LDAP server,
 depending on the LDAP server's capabilities.
@@ -65,7 +73,7 @@ against IMAP, such as;
 *   Deleting mailboxes for entries that have been removed,
 
 as well as communicates back any further changes to LDAP should they be needed
-for the enforcement of policies.
+-- for example, the enforcement of policies such as the recipient policy.
 
 .. rubric:: See Also
 
@@ -386,8 +394,6 @@ Server-side Sorting (SSS)
     the server sort the results of a query.
 
     * :ref:`admin_ldap_configure-sss`
-
-.. _and_ldap_kolabd:
 
 Default Attribute Use
 ---------------------
