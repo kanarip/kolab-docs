@@ -227,7 +227,7 @@ while [ ${x} -lt ${#kolab_projects[@]} ]; do
             for enabled_repository in ${enabled_repositories}; do
                 # Here be version magic.
                 # osc buildinfo Kolab:3.1 389-admin Debian_7.0 x86_64 | awk '/<versrel>/,/<\/versrel>/' | sed -e 's/\s*<versrel>//g' -e 's/<\/versrel>//g'
-                if [ ! -s "osc-cache/${project}_${enabled_repository}_${package}.version" ]; then
+                if [ ! -s "osc-cache/${project}_${enabled_repository}_${package}.version" -o ${refresh} -eq 1 ]; then
                     osc buildinfo ${project} ${package} ${enabled_repository} x86_64 2>/dev/null | awk '/<versrel>/,/<\/versrel>/' | sed -e 's/\s*<versrel>//g' -e 's/<\/versrel>//g' > osc-cache/${project}_${enabled_repository}_${package}.version
                 fi
 
