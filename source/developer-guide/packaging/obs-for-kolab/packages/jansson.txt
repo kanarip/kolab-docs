@@ -1,3 +1,34 @@
+jansson
+=======
+
+.. parsed-literal::
+
+	<package name="jansson" project="Kolab:Development">
+	  <title>jansson</title>
+	  <description>C library for encoding, decoding and manipulating JSON data</description>
+	  <build>
+	    <disable repository="Fedora_18"/>
+	    <disable repository="Fedora_19"/>
+	    <disable repository="openSUSE_12.1"/>
+	    <disable/>
+	    <enable repository="CentOS_6"/>
+	    <enable repository="Debian_6.0"/>
+	    <enable repository="Debian_7.0"/>
+	    <enable repository="UCS_3.0"/>
+	    <enable repository="UCS_3.1"/>
+	    <enable repository="UCS_3.2"/>
+	    <enable repository="Ubuntu_12.04"/>
+	    <enable repository="Ubuntu_12.10"/>
+	    <enable repository="Ubuntu_13.04"/>
+	    <enable repository="Ubuntu_13.10"/>
+	    <enable repository="Ubuntu_14.04"/>
+	    <enable repository="openSUSE_12.2"/>
+	    <enable repository="openSUSE_12.3"/>
+	    <enable repository="openSUSE_13.1"/>
+	  </build>
+	  <url>http://www.digip.org/jansson/</url>
+	</package>
+
 .. table:: Version Table for jansson
 
     +-------------------+---------------+--------------------------------------+

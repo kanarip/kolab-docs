@@ -1,3 +1,19 @@
+kolab-webadmin
+==============
+
+.. parsed-literal::
+
+	<package name="kolab-webadmin" project="Kolab:Development">
+	  <title>kolab-webadmin</title>
+	  <description></description>
+	  <build>
+	    <disable repository="UCS_3.0"/>
+	    <disable repository="UCS_3.1"/>
+	    <disable repository="UCS_3.2"/>
+	  </build>
+	  <url>http://kolab.org/about/kolab-webadmin</url>
+	</package>
+
 .. table:: Version Table for kolab-webadmin
 
     +-------------------+---------------+--------------------------------------+

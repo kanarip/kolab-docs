@@ -1,3 +1,17 @@
+roundcubemail-skin-kolab
+========================
+
+.. parsed-literal::
+
+	<package name="roundcubemail-skin-kolab" project="Kolab:Development">
+	  <title>roundcubemail-skin-kolab</title>
+	  <description></description>
+	  <build>
+	    <disable/>
+	  </build>
+	  <url>http://kolab.org/about/roundcubemail-skin-kolab</url>
+	</package>
+
 .. table:: Version Table for roundcubemail-skin-kolab
 
     +-------------------+---------------+--------------------------------------+

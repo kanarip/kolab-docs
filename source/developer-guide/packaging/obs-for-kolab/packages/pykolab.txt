@@ -1,3 +1,14 @@
+pykolab
+=======
+
+.. parsed-literal::
+
+	<package name="pykolab" project="Kolab:Development">
+	  <title>pykolab</title>
+	  <description></description>
+	  <url>http://kolab.org/about/pykolab</url>
+	</package>
+
 .. table:: Version Table for pykolab
 
     +-------------------+---------------+--------------------------------------+

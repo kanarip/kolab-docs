@@ -1,3 +1,14 @@
+libkolab
+========
+
+.. parsed-literal::
+
+	<package name="libkolab" project="Kolab:Development">
+	  <title>libkolab</title>
+	  <description></description>
+	  <url>http://kolab.org/about/libkolab</url>
+	</package>
+
 .. table:: Version Table for libkolab
 
     +-------------------+---------------+--------------------------------------+

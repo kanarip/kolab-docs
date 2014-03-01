@@ -1,3 +1,24 @@
+python-pyasn1-modules
+=====================
+
+.. parsed-literal::
+
+	<package name="python-pyasn1-modules" project="Kolab:Development">
+	  <title>python-pyasn1-modules</title>
+	  <description></description>
+	  <build>
+	    <disable/>
+	    <enable repository="Debian_6.0"/>
+	    <enable repository="Debian_7.0"/>
+	    <enable repository="Ubuntu_12.04"/>
+	    <enable repository="Ubuntu_12.10"/>
+	    <enable repository="UCS_3.0"/>
+	    <enable repository="UCS_3.1"/>
+	    <enable repository="UCS_3.2"/>
+	  </build>
+	  <url>http://kolab.org/about/python-pyasn1-modules</url>
+	</package>
+
 .. table:: Version Table for python-pyasn1-modules
 
     +-------------------+---------------+--------------------------------------+

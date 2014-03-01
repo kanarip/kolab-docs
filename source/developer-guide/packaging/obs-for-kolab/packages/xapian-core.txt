@@ -1,3 +1,13 @@
+xapian-core
+===========
+
+.. parsed-literal::
+
+	<package name="xapian-core" project="Kolab:Development">
+	  <title>xapian-core</title>
+	  <description></description>
+	</package>
+
 .. table:: Version Table for xapian-core
 
     +-------------------+---------------+--------------------------------------+

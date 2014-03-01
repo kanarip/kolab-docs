@@ -1,3 +1,14 @@
+libkolabxml
+===========
+
+.. parsed-literal::
+
+	<package name="libkolabxml" project="Kolab:Development">
+	  <title>libkolabxml</title>
+	  <description></description>
+	  <url>http://kolab.org/about/libkolabxml</url>
+	</package>
+
 .. table:: Version Table for libkolabxml
 
     +-------------------+---------------+--------------------------------------+

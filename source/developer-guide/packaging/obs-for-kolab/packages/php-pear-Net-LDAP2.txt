@@ -1,3 +1,25 @@
+php-pear-Net-LDAP2
+==================
+
+.. parsed-literal::
+
+	<package name="php-pear-Net-LDAP2" project="Kolab:Development">
+	  <title>php-pear-Net-LDAP2</title>
+	  <description></description>
+	  <build>
+	    <disable/>
+	    <enable repository="openSUSE_12.3"/>
+	    <enable repository="openSUSE_12.2"/>
+	    <enable repository="openSUSE_12.1"/>
+	    <enable repository="openSUSE_13.1"/>
+	    <enable repository="Fedora_18"/>
+	    <enable repository="Fedora_19"/>
+	    <enable repository="CentOS_6"/>
+	    <enable repository="Fedora_20"/>
+	  </build>
+	  <url>http://kolab.org/about/php-pear-Net-LDAP2</url>
+	</package>
+
 .. table:: Version Table for php-pear-Net-LDAP2
 
     +-------------------+---------------+--------------------------------------+

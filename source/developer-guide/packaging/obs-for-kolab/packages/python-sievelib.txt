@@ -1,3 +1,27 @@
+python-sievelib
+===============
+
+.. parsed-literal::
+
+	<package name="python-sievelib" project="Kolab:Development">
+	  <title>python-sievelib</title>
+	  <description></description>
+	  <build>
+	    <disable/>
+	    <enable repository="Debian_6.0"/>
+	    <enable repository="Debian_7.0"/>
+	    <enable repository="UCS_3.0"/>
+	    <enable repository="UCS_3.1"/>
+	    <enable repository="UCS_3.2"/>
+	    <enable repository="Ubuntu_12.04"/>
+	    <enable repository="Ubuntu_12.10"/>
+	    <enable repository="Ubuntu_13.04"/>
+	    <enable repository="Ubuntu_13.10"/>
+	    <enable repository="Ubuntu_14.04"/>
+	  </build>
+	  <url>http://kolab.org/about/python-sievelib</url>
+	</package>
+
 .. table:: Version Table for python-sievelib
 
     +-------------------+---------------+--------------------------------------+

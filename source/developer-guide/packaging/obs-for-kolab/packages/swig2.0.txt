@@ -1,3 +1,25 @@
+swig2.0
+=======
+
+.. parsed-literal::
+
+	<package name="swig2.0" project="Kolab:Development">
+	  <title>swig2.0</title>
+	  <description></description>
+	  <build>
+	    <disable repository="CentOS_6"/>
+	    <disable repository="Debian_7.0"/>
+	    <disable repository="Fedora_18"/>
+	    <disable repository="Fedora_19"/>
+	    <disable repository="Ubuntu_12.04"/>
+	    <disable repository="Ubuntu_12.10"/>
+	    <disable repository="Ubuntu_13.04"/>
+	    <disable repository="Ubuntu_13.10"/>
+	    <disable repository="Ubuntu_14.04"/>
+	  </build>
+	  <url>http://kolab.org/about/swig2.0</url>
+	</package>
+
 .. table:: Version Table for swig2.0
 
     +-------------------+---------------+--------------------------------------+

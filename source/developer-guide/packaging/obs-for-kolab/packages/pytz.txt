@@ -1,3 +1,17 @@
+pytz
+====
+
+.. parsed-literal::
+
+	<package name="pytz" project="Kolab:Development">
+	  <title>pytz</title>
+	  <description></description>
+	  <build>
+	    <disable/>
+	  </build>
+	  <url>http://kolab.org/about/pytz</url>
+	</package>
+
 .. table:: Version Table for pytz
 
     +-------------------+---------------+--------------------------------------+

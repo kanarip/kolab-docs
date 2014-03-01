@@ -1,3 +1,17 @@
+kolab-selinux
+=============
+
+.. parsed-literal::
+
+	<package name="kolab-selinux" project="Kolab:Development">
+	  <title>kolab-selinux</title>
+	  <description></description>
+	  <build>
+	    <disable/>
+	  </build>
+	  <url>http://kolab.org/about/kolab-selinux</url>
+	</package>
+
 .. table:: Version Table for kolab-selinux
 
     +-------------------+---------------+--------------------------------------+

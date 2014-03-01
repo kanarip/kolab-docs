@@ -1,3 +1,25 @@
+php-pear-Net-URL2
+=================
+
+.. parsed-literal::
+
+	<package name="php-pear-Net-URL2" project="Kolab:Development">
+	  <title>php-pear-Net-URL2</title>
+	  <description></description>
+	  <build>
+	    <disable/>
+	    <enable repository="openSUSE_12.1"/>
+	    <enable repository="openSUSE_12.2"/>
+	    <enable repository="openSUSE_12.3"/>
+	    <enable repository="openSUSE_13.1"/>
+	    <enable repository="Ubuntu_12.04"/>
+	    <enable repository="UCS_3.0"/>
+	    <enable repository="UCS_3.1"/>
+	    <enable repository="UCS_3.2"/>
+	  </build>
+	  <url>http://kolab.org/about/php-pear-Net-URL2</url>
+	</package>
+
 .. table:: Version Table for php-pear-Net-URL2
 
     +-------------------+---------------+--------------------------------------+

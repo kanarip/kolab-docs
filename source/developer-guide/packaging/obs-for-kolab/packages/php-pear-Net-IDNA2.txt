@@ -1,3 +1,32 @@
+php-pear-Net-IDNA2
+==================
+
+.. parsed-literal::
+
+	<package name="php-pear-Net-IDNA2" project="Kolab:Development">
+	  <title>php-pear-Net-IDNA2</title>
+	  <description></description>
+	  <build>
+	    <disable repository="CentOS_6"/>
+	    <disable repository="Debian_6.0"/>
+	    <disable repository="Debian_7.0"/>
+	    <disable repository="Fedora_18"/>
+	    <disable repository="Fedora_19"/>
+	    <disable repository="Ubuntu_12.04"/>
+	    <disable repository="Ubuntu_12.10"/>
+	    <disable repository="Ubuntu_13.04"/>
+	    <disable repository="Ubuntu_13.10"/>
+	    <disable repository="UCS_3.0"/>
+	    <disable repository="UCS_3.1"/>
+	    <disable repository="UCS_3.2"/>
+	    <disable/>
+	    <enable repository="openSUSE_13.1"/>
+	    <enable repository="openSUSE_12.3"/>
+	    <enable repository="openSUSE_12.2"/>
+	  </build>
+	  <url>http://kolab.org/about/php-pear-Net-IDNA2</url>
+	</package>
+
 .. table:: Version Table for php-pear-Net-IDNA2
 
     +-------------------+---------------+--------------------------------------+

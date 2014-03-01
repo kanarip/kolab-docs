@@ -1,3 +1,17 @@
+roundcubemail-plugin-importmessages
+===================================
+
+.. parsed-literal::
+
+	<package name="roundcubemail-plugin-importmessages" project="Kolab:Development">
+	  <title>roundcubemail-plugin-importmessages</title>
+	  <description></description>
+	  <build>
+	    <disable/>
+	  </build>
+	  <url>http://kolab.org/about/roundcubemail-plugin-importmessages</url>
+	</package>
+
 .. table:: Version Table for roundcubemail-plugin-importmessages
 
     +-------------------+---------------+--------------------------------------+

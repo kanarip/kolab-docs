@@ -1,3 +1,14 @@
+kolab
+=====
+
+.. parsed-literal::
+
+	<package name="kolab" project="Kolab:Development">
+	  <title>kolab</title>
+	  <description>Kolab Groupware meta-package</description>
+	  <url>http://kolab.org</url>
+	</package>
+
 .. table:: Version Table for kolab
 
     +-------------------+---------------+--------------------------------------+

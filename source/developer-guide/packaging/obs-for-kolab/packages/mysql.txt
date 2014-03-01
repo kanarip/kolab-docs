@@ -1,3 +1,17 @@
+mysql
+=====
+
+.. parsed-literal::
+
+	<package name="mysql" project="Kolab:Development">
+	  <title>mysql</title>
+	  <description></description>
+	  <build>
+	    <disable/>
+	  </build>
+	  <url>http://mysql.com</url>
+	</package>
+
 .. table:: Version Table for mysql
 
     +-------------------+---------------+--------------------------------------+

@@ -1,3 +1,34 @@
+python-icalendar
+================
+
+.. parsed-literal::
+
+	<package name="python-icalendar" project="Kolab:Development">
+	  <title>python-icalendar</title>
+	  <description></description>
+	  <build>
+	    <disable repository="Fedora_18"/>
+	    <disable repository="Fedora_19"/>
+	    <disable repository="Fedora_20"/>
+	    <disable/>
+	    <enable repository="openSUSE_13.1"/>
+	    <enable repository="openSUSE_12.3"/>
+	    <enable repository="openSUSE_12.2"/>
+	    <enable repository="Ubuntu_14.04"/>
+	    <enable repository="Ubuntu_13.10"/>
+	    <enable repository="Ubuntu_13.04"/>
+	    <enable repository="Ubuntu_12.10"/>
+	    <enable repository="Ubuntu_12.04"/>
+	    <enable repository="UCS_3.2"/>
+	    <enable repository="UCS_3.1"/>
+	    <enable repository="UCS_3.0"/>
+	    <enable repository="Debian_7.0"/>
+	    <enable repository="Debian_6.0"/>
+	    <enable repository="CentOS_6"/>
+	  </build>
+	  <url>http://kolab.org/about/python-icalendar</url>
+	</package>
+
 .. table:: Version Table for python-icalendar
 
     +-------------------+---------------+--------------------------------------+

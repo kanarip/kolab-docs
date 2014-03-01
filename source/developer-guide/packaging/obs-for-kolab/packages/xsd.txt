@@ -1,3 +1,24 @@
+xsd
+===
+
+.. parsed-literal::
+
+	<package name="xsd" project="Kolab:Development">
+	  <title>xsd</title>
+	  <description>
+	            W3C XML Schema to C++ translator, needed for libkolabxml.
+	        </description>
+	  <build>
+	    <disable/>
+	    <enable repository="Debian_6.0"/>
+	    <enable repository="UCS_3.0"/>
+	    <enable repository="UCS_3.1"/>
+	    <enable repository="UCS_3.2"/>
+	    <enable repository="openSUSE_12.1"/>
+	  </build>
+	  <url>http://www.codesynthesis.com/projects/xsd</url>
+	</package>
+
 .. table:: Version Table for xsd
 
     +-------------------+---------------+--------------------------------------+

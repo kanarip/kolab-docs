@@ -1,3 +1,19 @@
+apr-util
+========
+
+.. parsed-literal::
+
+	<package name="apr-util" project="Kolab:Development">
+	  <title>apr-util</title>
+	  <description>
+	        Apache Portable Runtime Utility library
+	    </description>
+	  <build>
+	    <disable/>
+	  </build>
+	  <url>http://apr.apache.org</url>
+	</package>
+
 .. table:: Version Table for apr-util
 
     +-------------------+---------------+--------------------------------------+

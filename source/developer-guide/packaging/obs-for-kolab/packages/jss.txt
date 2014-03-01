@@ -1,3 +1,21 @@
+jss
+===
+
+.. parsed-literal::
+
+	<package name="jss" project="Kolab:Development">
+	  <title>Java Security Services (JSS)</title>
+	  <description>Java Security Services (JSS) is a java native interface which provides a bridge for java-based applications to use native Network Security Services (NSS). This only works with gcj. Other JREs require that JCE providers be signed.
+	</description>
+	  <build>
+	    <disable/>
+	    <enable repository="openSUSE_12.1"/>
+	    <enable repository="openSUSE_12.2"/>
+	    <enable repository="openSUSE_12.3"/>
+	    <enable repository="openSUSE_13.1"/>
+	  </build>
+	</package>
+
 .. table:: Version Table for jss
 
     +-------------------+---------------+--------------------------------------+

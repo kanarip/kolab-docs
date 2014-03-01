@@ -1,3 +1,33 @@
+python-ldap
+===========
+
+.. parsed-literal::
+
+	<package name="python-ldap" project="Kolab:Development">
+	  <title>python-ldap</title>
+	  <description></description>
+	  <build>
+	    <disable repository="Debian_7.0"/>
+	    <disable repository="Fedora_18"/>
+	    <disable repository="Fedora_19"/>
+	    <disable repository="UCS_3.0"/>
+	    <disable repository="UCS_3.1"/>
+	    <disable repository="UCS_3.2"/>
+	    <disable repository="openSUSE_12.3"/>
+	    <disable repository="openSUSE_12.2"/>
+	    <disable repository="openSUSE_12.1"/>
+	    <disable repository="Ubuntu_14.04"/>
+	    <disable repository="Ubuntu_13.10"/>
+	    <disable repository="Ubuntu_13.04"/>
+	    <disable/>
+	    <enable repository="Ubuntu_12.10"/>
+	    <enable repository="Ubuntu_12.04"/>
+	    <enable repository="Debian_6.0"/>
+	    <enable repository="CentOS_6"/>
+	  </build>
+	  <url>http://kolab.org/about/python-ldap</url>
+	</package>
+
 .. table:: Version Table for python-ldap
 
     +-------------------+---------------+--------------------------------------+

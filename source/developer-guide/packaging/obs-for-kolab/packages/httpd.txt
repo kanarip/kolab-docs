@@ -1,3 +1,19 @@
+httpd
+=====
+
+.. parsed-literal::
+
+	<package name="httpd" project="Kolab:Development">
+	  <title>httpd</title>
+	  <description></description>
+	  <build>
+	    <disable/>
+	    <enable repository="Debian_7.0"/>
+	    <enable repository="Ubuntu_12.04"/>
+	  </build>
+	  <url>http://kolab.org/about/httpd</url>
+	</package>
+
 .. table:: Version Table for httpd
 
     +-------------------+---------------+--------------------------------------+

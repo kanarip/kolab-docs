@@ -1,3 +1,14 @@
+roundcubemail-plugin-composeaddressbook
+=======================================
+
+.. parsed-literal::
+
+	<package name="roundcubemail-plugin-composeaddressbook" project="Kolab:Development">
+	  <title>roundcubemail-plugin-composeaddressbook</title>
+	  <description></description>
+	  <url>http://kolab.org/about/roundcubemail-plugin-composeaddressbook</url>
+	</package>
+
 .. table:: Version Table for roundcubemail-plugin-composeaddressbook
 
     +-------------------+---------------+--------------------------------------+

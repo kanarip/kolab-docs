@@ -1,3 +1,20 @@
+php-pear-Net-Sieve
+==================
+
+.. parsed-literal::
+
+	<package name="php-pear-Net-Sieve" project="Kolab:Development">
+	  <title>Handles talking to a sieve server.</title>
+	  <description>This package provides an API to talk to servers implementing the managesieve protocol. It can be used to install and remove sieve scripts, mark them active etc.</description>
+	  <build>
+	    <disable/>
+	    <enable repository="openSUSE_13.1"/>
+	    <enable repository="openSUSE_12.3"/>
+	    <enable repository="openSUSE_12.2"/>
+	    <enable repository="openSUSE_12.1"/>
+	  </build>
+	</package>
+
 .. table:: Version Table for php-pear-Net-Sieve
 
     +-------------------+---------------+--------------------------------------+

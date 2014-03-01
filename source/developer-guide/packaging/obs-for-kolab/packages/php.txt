@@ -1,3 +1,17 @@
+php
+===
+
+.. parsed-literal::
+
+	<package name="php" project="Kolab:Development">
+	  <title>php</title>
+	  <description></description>
+	  <build>
+	    <disable/>
+	  </build>
+	  <url>http://kolab.org/about/php</url>
+	</package>
+
 .. table:: Version Table for php
 
     +-------------------+---------------+--------------------------------------+

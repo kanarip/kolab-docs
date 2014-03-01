@@ -1,3 +1,17 @@
+roundcubemail-plugin-terms
+==========================
+
+.. parsed-literal::
+
+	<package name="roundcubemail-plugin-terms" project="Kolab:Development">
+	  <title>roundcubemail-plugin-terms</title>
+	  <description></description>
+	  <build>
+	    <disable/>
+	  </build>
+	  <url>http://kolab.org/about/roundcubemail-plugin-terms</url>
+	</package>
+
 .. table:: Version Table for roundcubemail-plugin-terms
 
     +-------------------+---------------+--------------------------------------+

@@ -1,3 +1,30 @@
+svrcore
+=======
+
+.. parsed-literal::
+
+	<package name="svrcore" project="Kolab:Development">
+	  <title>Secure PIN handling using NSS crypto</title>
+	  <description>svrcore provides applications with several ways to handle secure PIN storage e.g. in an application that must be restarted, but needs the PIN to unlock the private key and other crypto material, without user intervention.  svrcore uses the facilities provided by NSS.</description>
+	  <build>
+	    <disable repository="Fedora_19"/>
+	    <disable repository="Fedora_18"/>
+	    <disable repository="CentOS_6"/>
+	    <disable repository="Fedora_20"/>
+	    <disable/>
+	    <enable repository="openSUSE_13.1"/>
+	    <enable repository="openSUSE_12.3"/>
+	    <enable repository="openSUSE_12.2"/>
+	    <enable repository="Ubuntu_14.04"/>
+	    <enable repository="Ubuntu_13.10"/>
+	    <enable repository="Ubuntu_13.04"/>
+	    <enable repository="Ubuntu_12.10"/>
+	    <enable repository="Ubuntu_12.04"/>
+	    <enable repository="Debian_7.0"/>
+	    <enable repository="Debian_6.0"/>
+	  </build>
+	</package>
+
 .. table:: Version Table for svrcore
 
     +-------------------+---------------+--------------------------------------+

@@ -1,3 +1,17 @@
+mod_security
+============
+
+.. parsed-literal::
+
+	<package name="mod_security" project="Kolab:Development">
+	  <title>mod_security</title>
+	  <description></description>
+	  <build>
+	    <disable/>
+	  </build>
+	  <url>http://kolab.org/about/mod_security</url>
+	</package>
+
 .. table:: Version Table for mod_security
 
     +-------------------+---------------+--------------------------------------+

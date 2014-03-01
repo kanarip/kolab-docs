@@ -1,3 +1,14 @@
+chwala
+======
+
+.. parsed-literal::
+
+	<package name="chwala" project="Kolab:Development">
+	  <title>chwala</title>
+	  <description></description>
+	  <url>http://kolab.org/about/chwala</url>
+	</package>
+
 .. table:: Version Table for chwala
 
     +-------------------+---------------+--------------------------------------+

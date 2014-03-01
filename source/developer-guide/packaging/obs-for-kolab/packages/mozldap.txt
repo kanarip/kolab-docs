@@ -1,3 +1,13 @@
+mozldap
+=======
+
+.. parsed-literal::
+
+	<package name="mozldap" project="Kolab:Development">
+	  <title>mozldap</title>
+	  <description></description>
+	</package>
+
 .. table:: Version Table for mozldap
 
     +-------------------+---------------+--------------------------------------+

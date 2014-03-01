@@ -1,3 +1,18 @@
+cyrus-imapd
+===========
+
+.. parsed-literal::
+
+	<package name="cyrus-imapd" project="Kolab:Development">
+	  <title>cyrus-imapd</title>
+	  <description></description>
+	  <build>
+	    <disable repository="Fedora_18"/>
+	    <disable repository="Fedora_19"/>
+	  </build>
+	  <url>http://kolab.org/about/cyrus-imapd</url>
+	</package>
+
 .. table:: Version Table for cyrus-imapd
 
     +-------------------+---------------+--------------------------------------+

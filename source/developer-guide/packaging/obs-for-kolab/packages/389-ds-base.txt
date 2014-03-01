@@ -1,3 +1,54 @@
+389-ds-base
+===========
+
+.. parsed-literal::
+
+	<package name="389-ds-base" project="Kolab:Development">
+	  <title>389 Directory Server (base)</title>
+	  <description>
+	        The enterprise-class Open Source LDAP server for Linux. It is
+	        hardened by real-world use, is full-featured, supports multi-master
+	        replication, and already handles many of the largest LDAP
+	        deployments in the world.
+	
+	        Key Features
+	
+	        *   4-Way Multi-Master Replication, to provide fault tolerance and
+	            high write performance.
+	
+	        *   Scalability: thousands of operations per second, tens of
+	            thousands of concurrent users, tens of millions of entries,
+	            hundreds of gigabytes of data.
+	
+	        *   The code base has been developed and deployed continuously by
+	            the same team for more than a decade.
+	
+	        *   Extensive documentation, including helpful Installation and
+	            Deployment guides.
+	
+	        *   Active Directory user and group synchronization.
+	
+	        *   Secure authentication and transport (SSLv3, TLSv1, and SASL)
+	
+	        *   Support for LDAPv3
+	
+	        *   On-line, zero downtime, LDAP-based update of schema,
+	            configuration, management and in-tree Access Control Information
+	            (ACIs).
+	
+	        *   Graphical console for all facets of user, group, and server
+	            management.
+	    </description>
+	  <build>
+	    <disable/>
+	    <enable repository="Debian_7.0"/>
+	    <enable repository="openSUSE_12.1"/>
+	    <enable repository="openSUSE_12.2"/>
+	    <enable repository="openSUSE_12.3"/>
+	    <enable repository="openSUSE_13.1"/>
+	  </build>
+	</package>
+
 .. table:: Version Table for 389-ds-base
 
     +-------------------+---------------+--------------------------------------+

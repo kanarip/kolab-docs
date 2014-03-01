@@ -1,3 +1,14 @@
+iRony
+=====
+
+.. parsed-literal::
+
+	<package name="iRony" project="Kolab:Development">
+	  <title>iRony</title>
+	  <description></description>
+	  <url>http://kolab.org/about/iRony</url>
+	</package>
+
 .. table:: Version Table for iRony
 
     +-------------------+---------------+--------------------------------------+

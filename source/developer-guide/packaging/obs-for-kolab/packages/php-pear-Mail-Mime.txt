@@ -1,3 +1,26 @@
+php-pear-Mail-Mime
+==================
+
+.. parsed-literal::
+
+	<package name="php-pear-Mail-Mime" project="Kolab:Development">
+	  <title>php-pear-Mail-Mime</title>
+	  <description></description>
+	  <build>
+	    <disable/>
+	    <enable repository="CentOS_6"/>
+	    <enable repository="Debian_6.0"/>
+	    <enable repository="UCS_3.0"/>
+	    <enable repository="UCS_3.1"/>
+	    <enable repository="UCS_3.2"/>
+	    <enable repository="openSUSE_12.1"/>
+	    <enable repository="openSUSE_12.2"/>
+	    <enable repository="openSUSE_12.3"/>
+	    <enable repository="openSUSE_13.1"/>
+	  </build>
+	  <url>http://kolab.org/about/php-pear-Mail-Mime</url>
+	</package>
+
 .. table:: Version Table for php-pear-Mail-Mime
 
     +-------------------+---------------+--------------------------------------+

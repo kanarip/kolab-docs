@@ -1,3 +1,18 @@
+389-dsgw
+========
+
+.. parsed-literal::
+
+	<package name="389-dsgw" project="Kolab:Development">
+	  <title>389-dsgw</title>
+	  <description>389-dsgw</description>
+	  <build>
+	    <disable/>
+	    <enable repository="Debian_7.0"/>
+	  </build>
+	  <url>http://www.port389.org</url>
+	</package>
+
 .. table:: Version Table for 389-dsgw
 
     +-------------------+---------------+--------------------------------------+

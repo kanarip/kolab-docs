@@ -1,3 +1,21 @@
+389-console
+===========
+
+.. parsed-literal::
+
+	<package name="389-console" project="Kolab:Development">
+	  <title></title>
+	  <description></description>
+	  <build>
+	    <disable/>
+	    <enable repository="Debian_7.0"/>
+	    <enable repository="openSUSE_12.1"/>
+	    <enable repository="openSUSE_12.2"/>
+	    <enable repository="openSUSE_12.3"/>
+	    <enable repository="openSUSE_13.1"/>
+	  </build>
+	</package>
+
 .. table:: Version Table for 389-console
 
     +-------------------+---------------+--------------------------------------+

@@ -1,3 +1,17 @@
+nginx
+=====
+
+.. parsed-literal::
+
+	<package name="nginx" project="Kolab:Development">
+	  <title>nginx</title>
+	  <description></description>
+	  <build>
+	    <disable/>
+	  </build>
+	  <url>http://kolab.org/about/nginx</url>
+	</package>
+
 .. table:: Version Table for nginx
 
     +-------------------+---------------+--------------------------------------+

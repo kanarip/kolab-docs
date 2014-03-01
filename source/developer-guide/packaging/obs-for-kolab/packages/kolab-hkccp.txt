@@ -1,3 +1,17 @@
+kolab-hkccp
+===========
+
+.. parsed-literal::
+
+	<package name="kolab-hkccp" project="Kolab:Development">
+	  <title>kolab-hkccp</title>
+	  <description></description>
+	  <build>
+	    <disable/>
+	  </build>
+	  <url>http://kolab.org/about/kolab-hkccp</url>
+	</package>
+
 .. table:: Version Table for kolab-hkccp
 
     +-------------------+---------------+--------------------------------------+

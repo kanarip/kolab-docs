@@ -1,3 +1,21 @@
+perl-Mozilla-LDAP
+=================
+
+.. parsed-literal::
+
+	<package name="perl-Mozilla-LDAP" project="Kolab:Development">
+	  <title>LDAP Perl module that wraps the Mozilla C SDK</title>
+	  <description></description>
+	  <build>
+	    <disable/>
+	    <enable repository="Debian_7.0"/>
+	    <enable repository="openSUSE_12.1"/>
+	    <enable repository="openSUSE_12.2"/>
+	    <enable repository="openSUSE_12.3"/>
+	    <enable repository="openSUSE_13.1"/>
+	  </build>
+	</package>
+
 .. table:: Version Table for perl-Mozilla-LDAP
 
     +-------------------+---------------+--------------------------------------+

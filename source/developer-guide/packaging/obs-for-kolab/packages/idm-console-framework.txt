@@ -1,3 +1,21 @@
+idm-console-framework
+=====================
+
+.. parsed-literal::
+
+	<package name="idm-console-framework" project="Kolab:Development">
+	  <title>Identity Management Console Framework</title>
+	  <description>A Java Management Console framework used for remote server management.</description>
+	  <build>
+	    <disable/>
+	    <enable repository="Debian_7.0"/>
+	    <enable repository="openSUSE_12.1"/>
+	    <enable repository="openSUSE_12.2"/>
+	    <enable repository="openSUSE_12.3"/>
+	    <enable repository="openSUSE_13.1"/>
+	  </build>
+	</package>
+
 .. table:: Version Table for idm-console-framework
 
     +-------------------+---------------+--------------------------------------+

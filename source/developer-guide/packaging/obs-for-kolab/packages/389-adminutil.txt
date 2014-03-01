@@ -1,3 +1,28 @@
+389-adminutil
+=============
+
+.. parsed-literal::
+
+	<package name="389-adminutil" project="Kolab:Development">
+	  <title>Utility library for 389 administration</title>
+	  <description>389-adminutil is libraries of functions used to administer directory servers, usually in conjunction with the admin server. 389-adminutil is broken into two libraries - libadminutil contains the basic functionality, and libadmsslutil contains SSL versions and wrappers around the basic functions.  The PSET functions allow applications to store their preferences and configuration parameters in LDAP, withouthaving to know anything about LDAP.  The configuration is cached in a
+	local file, allowing applications to function even if the LDAP server is down.  The other code is typically used by CGI programs used for directory server management, containing GET/POST processing code as well as resource handling (ICU ures API).</description>
+	  <build>
+	    <disable repository="Fedora_19"/>
+	    <disable repository="Fedora_18"/>
+	    <disable repository="CentOS_6"/>
+	    <disable repository="Ubuntu_13.10"/>
+	    <disable repository="Ubuntu_13.04"/>
+	    <disable repository="Ubuntu_12.10"/>
+	    <disable repository="Ubuntu_12.04"/>
+	    <disable repository="UCS_3.2"/>
+	    <disable repository="UCS_3.1"/>
+	    <disable repository="UCS_3.0"/>
+	    <disable repository="Debian_6.0"/>
+	    <disable repository="Fedora_20"/>
+	  </build>
+	</package>
+
 .. table:: Version Table for 389-adminutil
 
     +-------------------+---------------+--------------------------------------+

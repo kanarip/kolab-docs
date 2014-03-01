@@ -1,3 +1,30 @@
+mod_nss
+=======
+
+.. parsed-literal::
+
+	<package name="mod_nss" project="Kolab:Development">
+	  <title>Mozilla SSL/TLS module for the Apache HTTP server</title>
+	  <description>
+	        The mod_nss module provides strong cryptography for the Apache Web
+	        server via the Secure Sockets Layer (SSL) and Transport Layer
+	        Security (TLS) protocols using the Network Security Services (NSS)
+	        security library.
+	    </description>
+	  <build>
+	    <disable/>
+	    <enable repository="Debian_6.0"/>
+	    <enable repository="Debian_7.0"/>
+	    <enable repository="openSUSE_12.1"/>
+	    <enable repository="openSUSE_12.2"/>
+	    <enable repository="openSUSE_12.3"/>
+	    <enable repository="Ubuntu_12.04"/>
+	    <enable repository="Ubuntu_12.10"/>
+	    <enable repository="Ubuntu_13.04"/>
+	    <enable repository="Ubuntu_13.10"/>
+	  </build>
+	</package>
+
 .. table:: Version Table for mod_nss
 
     +-------------------+---------------+--------------------------------------+

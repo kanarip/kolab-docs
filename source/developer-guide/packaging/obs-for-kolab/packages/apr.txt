@@ -1,3 +1,19 @@
+apr
+===
+
+.. parsed-literal::
+
+	<package name="apr" project="Kolab:Development">
+	  <title>apr</title>
+	  <description>
+	        Apache Portable Runtime library
+	    </description>
+	  <build>
+	    <disable/>
+	  </build>
+	  <url>http://apr.apache.org</url>
+	</package>
+
 .. table:: Version Table for apr
 
     +-------------------+---------------+--------------------------------------+

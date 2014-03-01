@@ -1,3 +1,13 @@
+roundcubemail-plugin-converse
+=============================
+
+.. parsed-literal::
+
+	<package name="roundcubemail-plugin-converse" project="Kolab:Development">
+	  <title>XMPP plugin for Roundcube</title>
+	  <description></description>
+	</package>
+
 .. table:: Version Table for roundcubemail-plugin-converse
 
     +-------------------+---------------+--------------------------------------+

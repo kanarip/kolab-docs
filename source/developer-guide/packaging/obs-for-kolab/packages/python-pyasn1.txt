@@ -1,3 +1,32 @@
+python-pyasn1
+=============
+
+.. parsed-literal::
+
+	<package name="python-pyasn1" project="Kolab:Development">
+	  <title>python-pyasn1</title>
+	  <description></description>
+	  <build>
+	    <disable repository="Debian_6.0"/>
+	    <disable repository="Debian_7.0"/>
+	    <disable repository="Fedora_18"/>
+	    <disable repository="Fedora_19"/>
+	    <disable repository="openSUSE_12.1"/>
+	    <disable repository="openSUSE_12.2"/>
+	    <disable repository="openSUSE_12.3"/>
+	    <disable repository="Ubuntu_12.04"/>
+	    <disable repository="Ubuntu_12.10"/>
+	    <disable repository="Ubuntu_13.04"/>
+	    <disable repository="Ubuntu_13.10"/>
+	    <disable repository="UCS_3.0"/>
+	    <disable repository="UCS_3.1"/>
+	    <disable repository="UCS_3.2"/>
+	    <disable/>
+	    <enable repository="CentOS_6"/>
+	  </build>
+	  <url>http://kolab.org/about/python-pyasn1</url>
+	</package>
+
 .. table:: Version Table for python-pyasn1
 
     +-------------------+---------------+--------------------------------------+

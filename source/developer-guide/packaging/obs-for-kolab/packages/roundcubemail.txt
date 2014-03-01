@@ -1,3 +1,14 @@
+roundcubemail
+=============
+
+.. parsed-literal::
+
+	<package name="roundcubemail" project="Kolab:Development">
+	  <title>roundcubemail</title>
+	  <description></description>
+	  <url>http://kolab.org/about/roundcubemail</url>
+	</package>
+
 .. table:: Version Table for roundcubemail
 
     +-------------------+---------------+--------------------------------------+

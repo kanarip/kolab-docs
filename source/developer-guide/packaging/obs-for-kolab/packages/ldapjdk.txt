@@ -1,3 +1,23 @@
+ldapjdk
+=======
+
+.. parsed-literal::
+
+	<package name="ldapjdk" project="Kolab:Development">
+	  <title>The Mozilla LDAP Java SDK</title>
+	  <description>The Mozilla LDAP SDKs enable you to write applications that access,
+	manage, and update the information stored in an LDAP directory.
+	</description>
+	  <build>
+	    <disable/>
+	    <enable repository="Debian_7.0"/>
+	    <enable repository="openSUSE_12.1"/>
+	    <enable repository="openSUSE_12.2"/>
+	    <enable repository="openSUSE_12.3"/>
+	    <enable repository="openSUSE_13.1"/>
+	  </build>
+	</package>
+
 .. table:: Version Table for ldapjdk
 
     +-------------------+---------------+--------------------------------------+

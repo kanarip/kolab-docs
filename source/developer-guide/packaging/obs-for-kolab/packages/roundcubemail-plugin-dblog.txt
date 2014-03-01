@@ -1,3 +1,14 @@
+roundcubemail-plugin-dblog
+==========================
+
+.. parsed-literal::
+
+	<package name="roundcubemail-plugin-dblog" project="Kolab:Development">
+	  <title>roundcubemail-plugin-dblog</title>
+	  <description></description>
+	  <url>http://kolab.org/about/roundcubemail-plugin-dblog</url>
+	</package>
+
 .. table:: Version Table for roundcubemail-plugin-dblog
 
     +-------------------+---------------+--------------------------------------+
