@@ -107,6 +107,29 @@ Version 1.0.1 or later is required for :term:`Perfect Forward Secrecy`.
 
 .. include:: packages/openssl.txt
 
+.. _packages-extras-postfix:
+
+postfix
+=======
+
+Postfix needs to be rebuilt against openssl-1.0.1e for Elliptic Curve encryption
+capabilities.
+
+.. parsed-literal::
+
+    # :command:`osc meta pkg Kolab:13 postfix -F -` << EOF
+    <package name="postfix">
+        <title>postfix</title>
+        <description></description>
+        <url>http://kolab.org/about/postfix</url>
+        <build>
+            <disable/>
+        </build>
+    </package>
+    EOF
+
+.. include:: packages/postfix.txt
+
 .. _packages-extras-php:
 
 php

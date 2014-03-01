@@ -1012,16 +1012,7 @@ python-pyasn1-modules
         <description></description>
         <url>http://kolab.org/about/python-pyasn1-modules</url>
         <build>
-            <disable repository="Debian_6.0"/>
-            <disable repository="Debian_7.0"/>
-            <disable repository="Fedora_18"/>
-            <disable repository="Fedora_19"/>
-            <disable repository="Ubuntu_12.04"/>
-            <disable repository="Ubuntu_12.10"/>
-            <disable repository="Ubuntu_13.04"/>
-            <disable repository="Ubuntu_13.10"/>
-            <disable repository="UCS_3.0"/>
-            <disable repository="UCS_3.1"/>
+            <disable/>
         </build>
     </package>
     EOF
@@ -1039,17 +1030,7 @@ pytz
         <description></description>
         <url>http://kolab.org/about/pytz</url>
         <build>
-            <disable repository="CentOS_6"/>
-            <disable repository="Debian_6.0"/>
-            <disable repository="Debian_7.0"/>
-            <disable repository="Fedora_18"/>
-            <disable repository="Fedora_19"/>
-            <disable repository="Ubuntu_12.04"/>
-            <disable repository="Ubuntu_12.10"/>
-            <disable repository="Ubuntu_13.04"/>
-            <disable repository="Ubuntu_13.10"/>
-            <disable repository="UCS_3.0"/>
-            <disable repository="UCS_3.1"/>
+            <disable/>
         </build>
     </package>
     EOF
@@ -1083,52 +1064,48 @@ been added for Squeeze/Wheezy:
             user intervention. svrcore uses the facilities provided by NSS.
         </description>
         <build>
-            <disable repository="CentOS_6"/>
-            <disable repository="Debian_7.0"/>
-            <disable repository="Fedora_19"/>
-            <disable repository="Fedora_18"/>
-            <disable repository="Ubuntu_12.04"/>
-            <disable repository="Ubuntu_12.10"/>
-            <disable repository="Ubuntu_13.04"/>
-            <disable repository="Ubuntu_13.10"/>
+            <disable/>
         </build>
     </package>
     EOF
 
 .. include:: packages/svrcore.txt
 
-swig2.0
-=======
+swig
+====
 
 .. parsed-literal::
 
-    # :command:`osc meta pkg Kolab:Development swig2.0 -F -` << EOF
-    <package name="swig2.0">
-        <title>swig2.0</title>
+    # :command:`osc meta pkg Kolab:Development swig -F -` << EOF
+    <package name="swig">
+        <title>swig</title>
         <description></description>
-        <url>http://kolab.org/about/swig2.0</url>
+        <url>http://kolab.org/about/swig</url>
         <build>
             <disable/>
-            <enable repository="Debian_6.0"/>
-            <enable repository="UCS_3.0"/>
-            <enable repository="UCS_3.1"/>
-            <enable repository="openSUSE_12.1"/>
-            <enable repository="openSUSE_12.2"/>
-            <enable repository="openSUSE_12.3"/>
-            <enable repository="Ubuntu_13.10"/>
-
-            <disable repository="CentOS_6"/>
-            <disable repository="Debian_7.0"/>
-            <disable repository="Fedora_18"/>
-            <disable repository="Fedora_19"/>
-            <disable repository="Ubuntu_12.04"/>
-            <disable repository="Ubuntu_12.10"/>
-            <disable repository="Ubuntu_13.04"/>
         </build>
     </package>
     EOF
 
-.. include:: packages/swig2.0.txt
+.. include:: packages/swig.txt
+
+xapian-core
+===========
+
+.. parsed-literal::
+
+    # :command:`osc meta pkg Kolab:Development xapian-core -F -` << EOF
+    <package name="xapian-core">
+        <title>xapian-core</title>
+        <description></description>
+        <url>http://kolab.org/about/xapian-core</url>
+        <build>
+            <disable/>
+        </build>
+    </package>
+    EOF
+
+.. include:: packages/xapian-core.txt
 
 xsd
 ===
