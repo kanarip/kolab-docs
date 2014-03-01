@@ -4,9 +4,40 @@ mkdir -p osc-cache/
 
 rm -f osc-info.stop
 
+refresh=0
+while [ $# -gt 0 ]; do
+    case $1 in
+        --refresh)
+            refresh=1
+            shift
+        ;;
+        *)
+            package_refresh=$1
+            shift
+        ;;
+    esac
+done
+
 # List the projects and cache them locally.
-if [ ! -f "osc_cache/obs_projects.list" ]; then
+if [ ! -f "osc_cache/obs_projects.list" -o ${refresh} -eq 1 ]; then
     osc ls | grep -vE "^(home|deleted)" > osc-cache/obs_projects.list
+fi
+
+if [ ${refresh} -eq 1 ]; then
+    # Legacy Kolab releases do not need to be updated
+    sed -i \
+        -e '/^Kolab:3.0/d' \
+        -e '/^Kolab:3.1/d' \
+        osc-cache/obs_projects.list
+
+    # Legacy target platforms do not need to be updated
+    sed -i \
+        -e '/^Debian:6.0/d' \
+        -e '/^Fedora:17/d' \
+        -e '/^Fedora:18/d' \
+        -e '/^openSUSE:12.1/d' \
+        -e '/^UCS:3.0/d' \
+        osc-cache/obs_projects.list
 fi
 
 obs_projects=$(cat osc-cache/obs_projects.list)
@@ -49,7 +80,6 @@ if [ $(echo -n "Kolab Version(s)" | wc -c) -gt ${project_column_width} ]; then
     project_column_width=$(echo -n "Kolab Version(s)" | wc -c)
 fi
 
-# Capture all names being shorter than the header.
 if [ $(echo -n "Platform(s)" | wc -c) -gt ${target_column_width} ]; then
     target_column_width=$(echo -n "Platform(s)" | wc -c)
 fi
@@ -69,7 +99,11 @@ done
 # To initialize the tables, first iterate over all unique packages (across all
 # projects).
 
-packages=$(cat osc-cache/*_packages.list | sort -u)
+if [ ! -z "${package_refresh}" ]; then
+    packages=${package_refresh}
+else
+    packages=$(cat osc-cache/*_packages.list | sort -u)
+fi
 
 for package in ${packages}; do
     target="source/developer-guide/packaging/obs-for-kolab/packages/${package}.txt"
@@ -78,6 +112,17 @@ for package in ${packages}; do
         rm -rf ${target}
     fi
 
+    if [ ! -f "osc-cache/${project}_${package}.meta" -o ${refresh} -eq 1 ]; then
+        osc meta pkg ${project} ${package} > osc-cache/${project}_${package}.meta
+    fi
+
+    echo "${package}" >> ${target}
+    echo "${package}" | sed -e 's/./=/g' >> ${target}
+    echo "" >> ${target}
+    echo ".. parsed-literal::" >> ${target}
+    echo "" >> ${target}
+    cat osc-cache/${project}_${package}.meta | sed -e 's/^/\t/g' >> ${target}
+    echo "" >> ${target}
     echo ".. table:: Version Table for ${package}" >> ${target}
     echo "" >> ${target}
     printf "%s" "    +-" >> ${target}
@@ -118,7 +163,12 @@ done
 x=0
 while [ ${x} -lt ${#kolab_projects[@]} ]; do
     project=${kolab_projects[${x}]}
-    packages=$(cat osc-cache/${project}_packages.list)
+
+    if [ ! -z "${package_refresh}" ]; then
+        packages=${package_refresh}
+    else
+        packages=$(cat osc-cache/*_packages.list | sort -u)
+    fi
 
     echo -n "${project}: "
 
@@ -130,11 +180,11 @@ while [ ${x} -lt ${#kolab_projects[@]} ]; do
         enabled_repositories=""
         target="source/developer-guide/packaging/obs-for-kolab/packages/${package}.txt"
 
-        if [ ! -f "osc-cache/${project}_${package}.meta" ]; then
-            osc meta pkg ${project} ${package} > osc-cache/${project}_${package}.meta
+        if [ -f "osc-cache/${project}_${package}.meta" ]; then
+            disabled_default=$(awk '/<build>/,/<\/build>/' osc-cache/${project}_${package}.meta | grep -E "^\s*<disable/>$")
+        else
+            disabled_default="yes"
         fi
-
-        disabled_default=$(awk '/<build>/,/<\/build>/' osc-cache/${project}_${package}.meta | grep -E "^\s*<disable/>$")
 
         if [ -z "${disabled_default}" ]; then
             disabled_repositories=$(
@@ -159,6 +209,8 @@ while [ ${x} -lt ${#kolab_projects[@]} ]; do
 
                 let y++
             done
+        elif [ "${disabled_default}" == "yes" ]; then
+            enabled_repositories=""
         else
             enabled_repositories=$(
                     awk '/<build>/,/<\/build>/' osc-cache/${project}_${package}.meta | \
