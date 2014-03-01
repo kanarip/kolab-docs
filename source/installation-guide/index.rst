@@ -24,6 +24,7 @@ Installing the Kolab Groupware software:
     rhel
     suse
     ubuntu
+    ucs
 
 Configuring Kolab Groupware:
 
