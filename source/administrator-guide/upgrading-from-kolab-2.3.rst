@@ -211,7 +211,7 @@ Login to kolab3.example.org to execute the steps in this procedure.
                 imtest -t "" \\
                     -u ${cyrus_admin} \\
                     -a ${cyrus_admin} \\
-                    -w "${cyrus_admin_pw}" \\
+                    -w '${cyrus_admin_pw}' \\
                     ${imap_host}
 
         or, alternatively;
@@ -227,7 +227,7 @@ Login to kolab3.example.org to execute the steps in this procedure.
                     -t "" \\
                     -u ${cyrus_admin} \\
                     -a ${cyrus_admin} \\
-                    -w "${cyrus_admin_pw}" \\
+                    -w '${cyrus_admin_pw}' \\
                     ${imap_host} | \\
 
                     sed -r \\
@@ -243,7 +243,7 @@ Login to kolab3.example.org to execute the steps in this procedure.
                         imtest -t "" \\
                             -u ${cyrus_admin} \\
                             -a ${cyrus_admin} \\
-                            -w "${cyrus_admin_pw}" \\
+                            -w '${cyrus_admin_pw}' \\
                             ${imap_host}
 
         On your console display, you will see some errors stating NO Permission Denied. These errors you can ignore.
