@@ -61,10 +61,16 @@ following process:
 Kolab Groupware from the App Center
 -----------------------------------
 
-A version of Kolab is available in the Univention App Center.
+A version of Kolab is also available in the Univention App Center.
 
 Kolab Groupware from the OBS
 ----------------------------
+
+.. WARNING::
+
+    This is a community version of Kolab Groupware, and it is not recommended
+    you run this version in production. Instead, for production use the version
+    from the App Center.
 
 #.  Add the following line to ``/etc/apt/sources.list.d/kolab.list``:
 
