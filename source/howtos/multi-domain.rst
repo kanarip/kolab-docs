@@ -444,7 +444,7 @@ look as follows (three sample files included):
     server_host = localhost
     server_port = 389
     version = 3
-    search_base = cn=kolab,cn=config
+    search_base = dc=example,dc=org
     scope = sub
 
     domain = ldap:/etc/postfix/ldap/example.org/mydestination.cf
