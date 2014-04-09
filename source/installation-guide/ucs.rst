@@ -49,7 +49,7 @@ following process:
     .. parsed-literal::
 
         WARNING: The following packages cannot be authenticated!
-          kolab-13-enterprise-release-development
+          kolab-13-enterprise-release
         Install these packages without verification [y/N]? y
 
 #.  Install kolab:
