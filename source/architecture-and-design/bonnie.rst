@@ -422,6 +422,165 @@ invalidate the permanent record.
 Queries and Information Distribution
 ====================================
 
+ZeroMQ
+======
+
+.. graphviz::
+
+    digraph bonnie_zeromq {
+            splines = true;
+            overlap = prism;
+
+            edge [color=gray50, fontname=Calibri, fontsize=11]
+            node [shape=record, fontname=Calibri, fontsize=11]
+
+            subgraph cluster_broker {
+                    label = "Broker";
+                    "Client Router";
+                    "Controller";
+                    "Worker Router";
+                }
+
+            "Client-%d" -> "Client Router";
+            "Worker-%d" -> "Worker Router";
+            "Worker-%d" -> "Controller";
+        }
+
+Client <-> Broker <-> Worker Message Exchange
+=============================================
+
+Modelled after an article about tracking worker status at
+http://rfc.zeromq.org/spec:14
+
+.. graphviz::
+
+    digraph bonnie_broker {
+            rankdir = LR;
+            splines = true;
+            overlap = prism;
+
+            edge [color=gray50, fontname=Calibri, fontsize=11]
+            node [shape=record, fontname=Calibri, fontsize=11]
+
+            subgraph cluster_broker {
+                    label = "Broker";
+
+                    "Client Router";
+                    "Job Queue";
+                }
+
+            subgraph cluster_clients {
+                    label = "Clients";
+                    "Client $x" [label="Client-%d"];
+                    "Client $y" [label="Client-%d"];
+                }
+
+            "Client $x", "Client $y" -> "Client Router" [label="(1) Submit"];
+            "Client Router" -> "Job Queue" [label="(2) Queue"];
+            "Client $x", "Client $y" -> "Client Router" [label="(3) Acknowledge",dir=back];
+
+        }
+
+**Client - Broker Concerns**
+
+    #.  The client is queuing without a high-water mark and without a local
+        swap defined. It is only after the broker is available this queue is
+        flushed. This could introduce a loss of notifications.
+
+    #.  The client is not awaiting confirmation in the sense that it will replay
+        the submission if needed, such as after the client has been restarted.
+        This too could introduce a loss of notifications.
+
+    #.  The client is certainly not awaiting confirmation from any worker that
+        the notification had been submitted to for handling.
+
+    #.  The client is a sub-process of the cyrus-imapd service, and should this
+        service be restarted, is not handling such signals to preserve state.
+
+**Broker Concerns**
+
+    #.  The broker is keeping the job queue in memory.
+
+.. graphviz::
+
+    digraph bonnie_broker {
+            rankdir = LR;
+            splines = true;
+            overlap = prism;
+
+            edge [color=gray50, fontname=Calibri, fontsize=11]
+            node [shape=record, fontname=Calibri, fontsize=11]
+
+            subgraph cluster_broker {
+                    label = "Broker";
+
+                    "Controller";
+                    "Job Queue";
+                    "Worker Router";
+                    "Worker List";
+                }
+
+            subgraph cluster_workers {
+                    label = "Workers";
+                    "Worker $x" [label="Worker-%d"];
+                    "Worker $y" [label="Worker-%d"];
+                }
+
+            "Worker $x", "Worker $y" -> "Controller" [label="(a) READY"];
+
+            "Controller" -> "Job Queue" [label="(b) Find Job"];
+            "Controller" -> "Worker List" [label="(c) Find Worker"];
+            "Controller" -> "Worker $x", "Worker $y" [label="(d) Assign Job"];
+
+            "Worker $x", "Worker $y" -> "Worker Router" [label="(e) Take Job"];
+            "Worker Router" -> "Worker List" [label="(f) Mark BUSY"];
+        }
+
+.. graphviz::
+
+    digraph bonnie_broker {
+            rankdir = LR;
+            splines = true;
+            overlap = prism;
+
+            edge [color=gray50, fontname=Calibri, fontsize=11]
+            node [shape=record, fontname=Calibri, fontsize=11]
+
+            subgraph cluster_broker {
+                    label = "Broker";
+
+                    "Controller";
+                    "Client Router";
+                    "Job Queue";
+                    "Worker Router";
+                    "Worker List";
+                }
+
+            subgraph cluster_clients {
+                    label = "Clients";
+                    "Client $x" [label="Client-%d"];
+                    "Client $y" [label="Client-%d"];
+                }
+
+            subgraph cluster_workers {
+                    label = "Workers";
+                    "Worker $x" [label="Worker-%d"];
+                    "Worker $y" [label="Worker-%d"];
+                }
+
+            "Client $x", "Client $y" -> "Client Router" [label="(1) Submit"];
+            "Client Router" -> "Job Queue" [label="(2) Queue"];
+            "Client $x", "Client $y" -> "Client Router" [label="(3) Acknowledge",dir=back];
+
+            "Worker $x", "Worker $y" -> "Controller" [label="(a) READY"];
+
+            "Controller" -> "Job Queue" [label="(b) Find Job"];
+            "Controller" -> "Worker List" [label="(c) Find Worker"];
+            "Controller" -> "Worker $x", "Worker $y" [label="(d) Assign Job"];
+
+            "Worker $x", "Worker $y" -> "Worker Router" [label="(e) Take Job"];
+            "Worker Router" -> "Worker List" [label="(f) Mark BUSY"];
+        }
 
 
 .. rubric:: Footnotes

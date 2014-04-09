@@ -398,6 +398,184 @@ Server-side Sorting (SSS)
 Default Attribute Use
 ---------------------
 
+.. _and_ldap_default-kolab-user:
+
+A Default Kolab User
+^^^^^^^^^^^^^^^^^^^^
+
+A Kolab user is an LDAP entry with the following object classes:
+
+    *   ``top``
+    *   ``person``
+    *   ``organizationalperson``
+    *   ``inetorgperson``
+    *   ``mailrecipient``
+    *   ``kolabinetorgperson`` (from Kolab LDAP schema extensions)
+
+and commonly at least the following attributes:
+
+    *   ``mail``
+    *   ``displayName``
+    *   ``preferredLanguage``
+    *   ``sn``
+    *   ``cn``
+    *   ``givenName``
+    *   ``uid``
+    *   ``mailHost``
+    *   ``mailQuota``
+    *   ``userPassword``
+
+Additional attributes include:
+
+    *   ``initials``
+    *   ``o``
+    *   ``title``
+    *   ``street``
+    *   ``postalCode``
+    *   ``l``
+    *   ``mobile``
+    *   ``pager``
+    *   ``alias``
+    *   ``mailAlternateAddress``
+    *   ``kolabInvitationPolicy`` (from Kolab LDAP schema extensions)
+    *   ``kolabDelegate`` (from Kolab LDAP schema extensions)
+    *   ``kolabAllowSMTPSender`` (from Kolab LDAP schema extensions)
+    *   ``kolabAllowSMTPRecipient`` (from Kolab LDAP schema extensions)
+
+Example entry:
+
+.. parsed-literal::
+
+    dn: uid=doe,ou=People,dc=example,dc=org
+    alias: doe@example.org
+    alias: j.doe@example.org
+    givenName: John
+    preferredLanguage: en_US
+    sn: Doe
+    cn: John Doe
+    displayName: Doe, John
+    mail: john.doe@example.org
+    uid: doe
+    objectClass: top
+    objectClass: inetorgperson
+    objectClass: kolabinetorgperson
+    objectClass: mailrecipient
+    objectClass: organizationalperson
+    objectClass: person
+    userPassword:: e1NTSEF9NkF4YVJ4VUE0R0FTMm1DMGlMdFNTZU90RUM0UW1PN1lPcHlwY3c9PQ=
+
+A Static Kolab Distribution Group
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Object classes for a static distribution group:
+
+    *   ``top``
+    *   ``groupofuniquenames``
+    *   ``kolabgroupofuniquenames`` (from Kolab LDAP schema extensions)
+
+Attributes:
+
+    *   ``mail``
+    *   ``uniquemember``
+
+Optional additional attributes:
+
+    *   ``kolabAllowSMTPSender`` (from Kolab LDAP schema extensions)
+    *   ``kolabAllowSMTPRecipient`` (from Kolab LDAP schema extensions)
+
+Example entry:
+
+.. parsed-literal::
+
+    # static, Groups, example.org
+    dn: cn=static,ou=Groups,dc=example,dc=org
+    cn: static
+    mail: static@example.org
+    objectClass: top
+    objectClass: groupofuniquenames
+    objectClass: kolabgroupofuniquenames
+
+A Dynamic Kolab Distribution Group
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Object classes for a dynamic distribution group:
+
+    *   ``top``
+    *   ``groupofurls``
+    *   ``kolabgroupofuniquenames`` (from Kolab LDAP schema extensions)
+
+Attributes:
+
+    *   ``mail``
+    *   ``memberurl``
+
+Optional additional attributes:
+
+    *   ``kolabAllowSMTPSender`` (from Kolab LDAP schema extensions)
+    *   ``kolabAllowSMTPRecipient`` (from Kolab LDAP schema extensions)
+
+Example entry:
+
+.. parsed-literal::
+
+    # dynamic, Groups, example.org
+    dn: cn=dynamic,ou=Groups,dc=example,dc=org
+    cn: dynamic
+    mail: dynamic@example.org
+    objectClass: top
+    objectClass: groupofurls
+    objectClass: kolabgroupofuniquenames
+
+A Kolab Resource
+^^^^^^^^^^^^^^^^
+
+Object classes:
+
+    *   ``top``
+    *   ``kolabSharedFolder`` (from Kolab LDAP schema extensions)
+    *   ``mailRecipient``
+
+Attributes:
+
+    *   ``mail``
+    *   ``kolabTargetFolder`` (from Kolab LDAP schema extensions)
+    *   ``kolabFolderType`` (from Kolab LDAP schema extensions)
+
+Example entry:
+
+.. parsed-literal::
+
+    dn: cn=Mercedes SLK,ou=Resources,dc=example,dc=org
+    cn: Mercedes SLK
+    kolabTargetFolder: shared/Resources/Mercedes SLK@example.org
+    mail: resource-car-mercedesslk@example.org
+    objectClass: top
+    objectClass: kolabsharedfolder
+    objectClass: mailrecipient
+    kolabFolderType: event
+
+A Kolab Shared Folder
+^^^^^^^^^^^^^^^^^^^^^
+
+Object classes:
+
+    *   ``top``
+    *   ``kolabSharedFolder`` (from Kolab LDAP schema extensions)
+
+Attributes:
+
+    *   ``kolabFolderType`` (from Kolab LDAP schema extensions)
+
+Example entry:
+
+.. parsed-literal::
+
+    dn: cn=Shared Address Book,ou=Shared Folders,dc=example,dc=org
+    cn: Shared Address Book
+    kolabFolderType: contact
+    objectClass: top
+    objectClass: kolabsharedfolder
+
 .. _and_ldap_use-of-mailalternateaddress:
 
 Primary Email Address (``mail``)

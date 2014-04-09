@@ -66,9 +66,16 @@ it to your own home project:
 
     $ :command:`username=<USERNAME>`
     $ :command:`osc meta prj home:vanmeeuwen | \\
+        sed -e "s/vanmeeuwen/$username/g" | \\
         osc meta prj home:$username -F -`
 
 Alternatively, use the following command:
+
+.. NOTE::
+
+    Review the target repository names here, for between the time of this
+    writing and you executing the command, some may no longer be available, and
+    others may have been added.
 
 .. parsed-literal::
 
@@ -184,15 +191,12 @@ projects:
         development environments only, and only by those that are autonomous in
         supporting such environment.
 
-    #.  **Kolab 3.1 Updates**
+    #.  **Kolab $x.$y Updates**
 
         This project provides users of Kolab Groupware with updates to the
-        base release of Kolab 3.1.
-
-    #.  Kolab 3.0 Updates
-
-        This project provides users of Kolab Groupware with updates to the
-        base release of Kolab 3.0, and is no longer actively supported.
+        base release of Kolab $x.$y, where $x and $y are the major and minor
+        version number components of the current stable product stream and ones
+        that are older (and largely unmaintained).
 
 Step 5: Branch off a Package
 ============================

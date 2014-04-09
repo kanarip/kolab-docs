@@ -324,4 +324,4 @@ For larger deployments, we also recommend reading about
 
 .. seealso::
 
-*   :ref:`admin_organizations-with-multiple-domain-namespaces`.
+    *   :ref:`admin_organizations-with-multiple-domain-namespaces`.
