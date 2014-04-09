@@ -396,9 +396,10 @@ match the parent domain name space and alias domain name spaces.
 If you don't, a hosted_duplet lookup for ``example.org`` might succeed if the
 root dn for the organizations directory information tree is indeed
 ``dc=example,dc=org``, but a lookup for alias domain name spaces that also need
-to be looked up against ``dc=example,dc=org`` will fail -- an alias domain name
-space of ``example.com`` would end up as occurring against
-``dc=example,dc=com``, which may not exist, but is definitely not the same tree.
+to be looked up against ``dc=example,dc=org`` will fail -- a lookup for a
+recipient in an alias domain name space of ``example.com`` would end up as
+occurring against ``dc=example,dc=com``, which may or may not exist, but is
+most definitely not the same tree as ``dc=example,dc=org``.
 
 .. NOTE::
 
