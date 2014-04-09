@@ -7,7 +7,7 @@ Installation on Univention Corporate Server
 .. WARNING::
 
     There are **three** versions of Kolab for UCS. Make sure you choose the correct
-    version.
+    version for your requirements.
 
 Kolab Enterprise 13
 -------------------
@@ -61,7 +61,7 @@ following process:
 Kolab Groupware from the App Center
 -----------------------------------
 
-A version of Kolab is also available in the Univention App Center.
+An evaluation version of Kolab is also available in the Univention App Center.
 
 Kolab Groupware from the OBS
 ----------------------------
@@ -69,8 +69,7 @@ Kolab Groupware from the OBS
 .. WARNING::
 
     This is a community version of Kolab Groupware, and it is not recommended
-    you run this version in production. Instead, for production use the version
-    from the App Center.
+    you run this version in production. Instead, for production use Kolab Enterprise from Kolab Systems.
 
 #.  Add the following line to ``/etc/apt/sources.list.d/kolab.list``:
 
