@@ -188,6 +188,8 @@ Login to kolab3.example.org to execute the steps in this procedure.
     .. IMPORTANT::
         Users should not yet be allowed to interact with the system at this point. We suggest closing access to the system through the firewall.
 
+9.  Upgrade the Format
+
         Use the Cyrus IMAP administrator account to select all mailboxes, to make sure the format upgrade is not taking place while the user is attempting to login / select a mailbox.
 
         Average sized mailboxes (those restricted with a reasonable quota such as 2GB) can take about 2 minutes to upgrade. A single folder can upgrade as fast as 5 seconds. Mailboxes that contain a lot of messages (such as a shared lists folder that also functions as an archive) can take up to 2-4 minutes to upgrade (approximately 40.000 messages).
@@ -252,7 +254,7 @@ Login to kolab3.example.org to execute the steps in this procedure.
             Aug  8 16:40:10 kolab imap[4644]: Index upgrade: example.org!shared.lists.example^org.memo (10 -> 12)
             Aug  8 16:40:10 kolab imap[4644]: seen_db: user cyrus-admin opened /var/lib/imap/user/c/cyrus-admin.seen
 
-9.  The annotations database may not have been upgraded correctly, causing some annotations to miss the first 4 characters of their value. The easiest way to fix the issue, that is known to work, is to get the annotation values as they were on the old (Kolab 2) IMAP server, and set them on the new (Kolab 3) IMAP server.
+10.  The annotations database may not have been upgraded correctly, causing some annotations to miss the first 4 characters of their value. The easiest way to fix the issue, that is known to work, is to get the annotation values as they were on the old (Kolab 2) IMAP server, and set them on the new (Kolab 3) IMAP server.
 
     .. parsed-literal::
 
@@ -348,7 +350,7 @@ Login to kolab3.example.org to execute the steps in this procedure.
 
         done
 
-10. Upgrade all messages from Kolab Format version 2 to Kolab Format version 3 using kolab-formatupgrade. This command is run in two parts. The first will upgrade all mailbox contents in the personal namespace:
+11. Upgrade all messages from Kolab Format version 2 to Kolab Format version 3 using kolab-formatupgrade. This command is run in two parts. The first will upgrade all mailbox contents in the personal namespace:
 
     .. parsed-literal::
 
@@ -364,7 +366,7 @@ Login to kolab3.example.org to execute the steps in this procedure.
                    localhost
            done
 
-11. The second part upgrades the contents of shared folders. Shared folders have no designated owners, and we can therefore not login as a designated user to upgrade the format.
+12. The second part upgrades the contents of shared folders. Shared folders have no designated owners, and we can therefore not login as a designated user to upgrade the format.
 
     As the user cyrus-admin normally does not have the necessary privileges to insert new messages into mail folders, so we're going to have to give out the rights first. We'll delete them again afterwards.
 
