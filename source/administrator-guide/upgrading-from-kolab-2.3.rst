@@ -107,13 +107,11 @@ Login to kolab3.example.org to execute the steps in this procedure.
         
     After the conversion, copy the files to the new kolab3 server:
     
-        .. parsed-literal::
+    .. parsed-literal::
 
-        # scp root@kolab2.example.org:/tmp/annotations.db \\
-            /var/lib/imap/annotations.db
+        # scp root@kolab2.example.org:/tmp/annotations.db /var/lib/imap/annotations.db
         (...)
-        # scp root@kolab2.example.org:/tmp/mailboxes.db \\
-            /var/lib/imap/mailboxes.db
+        # scp root@kolab2.example.org:/tmp/mailboxes.db /var/lib/imap/mailboxes.db
         (...)
 
 2.  Migrate the mail spool:
