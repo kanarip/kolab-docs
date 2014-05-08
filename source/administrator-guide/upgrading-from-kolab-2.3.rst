@@ -188,7 +188,18 @@ Login to kolab3.example.org to execute the steps in this procedure.
     .. IMPORTANT::
         Users should not yet be allowed to interact with the system at this point. We suggest closing access to the system through the firewall.
 
-9.  Upgrade the Format
+9.  Prepare some environment variables
+
+        We need the cyrus-admin user and associated password for the following steps, so we put them in environment variables:
+
+        .. parsed-literal::
+
+            cyrus_admin=$(awk '/^admin_login/ { print $3 }' /etc/kolab/kolab.conf)
+            cyrus_admin_pw=$(awk '/^admin_password/ { print $3 }' /etc/kolab/kolab.conf)
+            passwd="$cyrus_admin_pw"
+            imap_host="localhost"
+
+10.  Upgrade the Format
 
         Use the Cyrus IMAP administrator account to select all mailboxes, to make sure the format upgrade is not taking place while the user is attempting to login / select a mailbox.
 
@@ -254,7 +265,7 @@ Login to kolab3.example.org to execute the steps in this procedure.
             Aug  8 16:40:10 kolab imap[4644]: Index upgrade: example.org!shared.lists.example^org.memo (10 -> 12)
             Aug  8 16:40:10 kolab imap[4644]: seen_db: user cyrus-admin opened /var/lib/imap/user/c/cyrus-admin.seen
 
-10.  The annotations database may not have been upgraded correctly, causing some annotations to miss the first 4 characters of their value. The easiest way to fix the issue, that is known to work, is to get the annotation values as they were on the old (Kolab 2) IMAP server, and set them on the new (Kolab 3) IMAP server.
+11.  The annotations database may not have been upgraded correctly, causing some annotations to miss the first 4 characters of their value. The easiest way to fix the issue, that is known to work, is to get the annotation values as they were on the old (Kolab 2) IMAP server, and set them on the new (Kolab 3) IMAP server.
 
     .. parsed-literal::
 
@@ -350,7 +361,7 @@ Login to kolab3.example.org to execute the steps in this procedure.
 
         done
 
-11. Upgrade all messages from Kolab Format version 2 to Kolab Format version 3 using kolab-formatupgrade. This command is run in two parts. The first will upgrade all mailbox contents in the personal namespace:
+12. Upgrade all messages from Kolab Format version 2 to Kolab Format version 3 using kolab-formatupgrade. This command is run in two parts. The first will upgrade all mailbox contents in the personal namespace:
 
     .. parsed-literal::
 
