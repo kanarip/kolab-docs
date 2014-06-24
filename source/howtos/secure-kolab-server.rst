@@ -384,3 +384,11 @@ Set correct SSL parameters for HTTP_Request2. This will ensure the
         \\$config['kolab_addressbook_carddav_url']   = 'https://%h/iRony/addressbooks/%u/%i';
         EOF`
 
+#.  Additionaly, you can redirect all http traffic to https:
+
+    .. parsed-literal::
+
+        # :command:`cat >> /etc/roundcubemail/config.inc.php << EOF
+        # Force https redirect for http requests
+        \\$config['force_https'] = true;
+        EOF`
