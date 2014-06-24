@@ -373,7 +373,7 @@ Set correct SSL parameters for HTTP_Request2. This will ensure the
 
         # :command:`cat >> /etc/roundcubemail/config.inc.php << EOF
         # caldav/webdav
-        \\$config['calendar_caldav_url']             = "https://kolab.example.org/iRony/calendars/%u/%i";
-        \\$config['kolab_addressbook_carddav_url']   = 'https://kolab.example.org/iRony/addressbooks/%u/%i';
+        \\$config['calendar_caldav_url']             = "https://%h/iRony/calendars/%u/%i";
+        \\$config['kolab_addressbook_carddav_url']   = 'https://%h/iRony/addressbooks/%u/%i';
         EOF`
 
