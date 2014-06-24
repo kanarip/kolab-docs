@@ -342,6 +342,13 @@ Set correct SSL parameters for HTTP_Request2. This will ensure the
 
         # :command:`sed -i -e '/kolab_ssl/d' /etc/roundcubemail/libkolab.inc.php`
 
+
+#.  Change freebusy API url in the ``libkolab`` plugin configuration:
+
+    .. parsed-literal::
+
+        # :command:`sed -i -e 's/http:/https:/' /etc/roundcubemail/libkolab.inc.php`
+
 #.  Change Chwala API url in the ``kolab_files`` plugin configuration:
 
     .. parsed-literal::
