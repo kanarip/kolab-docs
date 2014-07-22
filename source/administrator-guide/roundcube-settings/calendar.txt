@@ -1,0 +1,213 @@
+``calendar_driver``
+==========================
+
+Calendar backend type.
+
+Possible values: 'kolab' or 'database'
+
+
+``calendar_caldav_url``
+================================
+
+Base URL to build fully qualified URIs to access calendars via CALDAV.
+Primarily used in a Kolab environment where CalDAV access is provided by the iRony service.
+
+The following replacement variables are supported
+
+``%h`` - Current HTTP host
+``%u`` - Current webmail user name
+``%n`` - Calendar name
+``%i` - Calendar UUID
+
+Example:
+
+.. code-block:: php
+
+   $config['calendar_caldav_url'] = 'http://%h/iRony/calendars/%u/%i';
+
+
+``calendar_contact_birthdays``
+==============================
+
+Boolean. Enables a read-only birthdays calendar from the user's address book(s).
+
+
+``calendar_allow_invite_shared``
+================================
+
+Boolean. Allows users to invite/edit attendees for events in shared folders
+which were created/organized by others.
+
+
+``calendar_allow_itip_uninvited``
+================================
+
+Boolean. Allow users to accecpt iTip invitations who are no explicitly listed
+as an attendee in the invitation message. This can be the case if invitations
+are sent to mailing lists or alias email addresses.
+
+
+``calendar_default_view``
+=========================
+
+Default view shown when entering the calendar screen.
+
+Possible values: 'agendaDay', 'agendaWeek', 'month', 'table'.
+
+
+``calendar_default_alarm_type``
+=========================
+
+Undocumented.
+
+
+``calendar_default_alarm_offset``
+====================
+
+Undocumented.
+
+
+``calendar_date_format_sets``
+=============================
+
+Undocumented.
+
+
+``calendar_event_coloring``
+===========================
+
+Undocumented.
+
+
+``calendar_agenda_range``
+=========================
+
+Undocumented.
+
+
+``calendar_first_day``
+======================
+
+Undocumented.
+
+
+``calendar_first_hour``
+=======================
+
+Undocumented.
+
+
+``calendar_timeslots``
+=====================
+
+Undocumented.
+
+
+``calendar_time_indicator``
+===========================
+
+Undocumented.
+
+
+``calendar_work_start``
+=======================
+
+Undocumented.
+
+
+``calendar_work_end``
+===================
+
+Undocumented.
+
+
+``calendar_itip_after_action``
+==============================
+
+Undocumented.
+
+
+``calendar_itip_smtp_server``
+=============================
+
+SMTP host to used for send iTip replies from the unauthenticated web view
+where external users can accept or decline invitations.
+
+Set to '' in order to use PHP's mail() function for email delivery.
+To override the SMTP port or connection method, provide a full URL like ``tls://somehost:587``
+
+
+``calendar_itip_smtp_user``
+===========================
+
+SMTP username used to send unauthenticated itip replies.
+
+Explicity set to '' for overriding the default configuration from ``smtp_user``.
+
+
+``calendar_itip_smtp_pass``
+===========================
+
+SMTP password used to send unauthenticated itip replies.
+
+Explicity set to '' for overriding the default configuration from ``smtp_pass``.
+
+
+``kolab_invitation_calendars``
+==============================
+
+Boolean. Show virtual calendars with pending or declined event invitations.
+
+This option only has an effect with the Kolab backend.
+
+
+``calendar_resources_driver``
+=============================
+
+Driver to provide a directory for resource booking.
+Leave empty or commented out to disable resources support.
+
+'ldap' is the only implementation and possible value yet.
+
+
+``calendar_resources_directory``
+================================
+
+LDAP directory configuration to find available resources for events.
+
+Specify a full LDAP directory as described for :ref:`admin_roundcube-settings_ldap_public`.
+
+Some special considerations apply for the LDAP filter and other properties:
+
+.. code-block:: php
+
+    $config['calendar_resources_directory'] = array(
+        (...snip...)
+        'base_dn'        => 'ou=Resources,dc=example,dc=org',
+        'filter'         => '(|(objectclass=kolabgroupofuniquenames)(objectclass=kolabsharedfolder))',
+        (...snip...)
+        'search_fields'  => array('cn'),
+        'sort'           => array('cn'),
+        (...snip...)
+        'fieldmap'       => array(
+            // Internal    => LDAP
+            'name'         => 'cn',
+            'email'        => 'mail',
+            'owner'        => 'owner',
+            'description'  => 'description',
+            'attributes'   => 'kolabdescattribute',  // "{ <name>:<VALUE> }"
+            'members'      => 'uniquemember',
+            // these mappings are required for owner display
+            'phone'        => 'telephoneNumber',
+            'mobile'       => 'mobile',
+        ),
+        'class_type_map' => array(      // Mapping of object class to _type attribute
+            'kolabsharedfolder'  => 'resource',
+            'groupofuniquenames' => 'collection',
+        ),
+        'groups'  => array(
+          'name_attr' => 'cn',  // resource collections are detected as groups
+        ),
+    );
+
+

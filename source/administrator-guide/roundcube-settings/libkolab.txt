@@ -1,0 +1,106 @@
+``kolab_format_version``
+========================
+
+Specify format version to write Kolab objects. Defaults to '3.0'
+but can be set to '2.0' for using the old Kolab v2 format for storing
+groupware objects.
+
+``kolab_freebusy_server``
+=========================
+
+Optional override of the base URL to read Free/Busy information of Kolab
+users from.
+
+Defaults to ``https://<imap-server->/freebusy``.
+
+
+``kolab_use_subscriptions``
+===========================
+
+Lists only subscribed groupware folders in the web client (e.g. calendar view
+or address books).
+
+
+``kolab_skip_namespace``
+========================
+
+A list with any of 'personal','shared','other' namespaces to be excluded from
+groupware folder listing. With the new folder searching features in Kolab 3.3,
+this setting can be used to exclude shared folders from e.g. the 'other' namespace in
+regular folder listings and searches.
+
+Example:
+
+.. code-block:: php
+
+   $config['kolab_skip_namespace'] =  array('other');
+
+.. seealso::
+
+    *  :ref:`admin_roundcube-settings-plugin_libkolab_kolab_users_directory`
+
+
+``kolab_http_request``
+======================
+
+Configuration options of HTTP requests sent from the server to external systems
+(e.g. for Free/Busy) data fetching. See `HTTP_Request2 Docs <http://pear.php.net/manual/en/package.http.http-request2.config.php>`_
+or list of supported configuration options. Provide the options as hash array
+with key-value pairs.
+
+.. _admin_roundcube-settings-plugin_libkolab_kolab_users_directory:
+
+
+``kolab_users_directory``
+========================
+
+LDAP directory to find avilable users for folder sharing. This is used when searching
+for groupware folders shared by other users. The web client will perform an LDAP search
+with the given search term and resolve the matches to shared folders in the 'other'
+namespace.
+
+Either contains an array with a full LDAP addressbook configuration or a string value
+which refers to an entry in :ref:`admin_roundcube-settings_ldap_public`.
+
+If not specified, the configuration from ``kolab_auth_addressbook`` will be used.
+
+
+``kolab_users_filter``
+======================
+
+Filter to be used for resolving user folders in LDAP.
+
+Defaults to the ``kolab_auth_filter`` configuration option from the ``kolab_auth``
+plugin.
+
+.. seealso::
+
+    *  :ref:`admin_roundcube-settings-plugin_libkolab_kolab_users_directory`
+    *  :ref:`admin_roundcube-settings-plugin_kolab_auth`
+
+
+``kolab_users_id_attrib``
+=========================
+
+Which property of the LDAP user record to use for user folder mapping in IMAP.
+
+Defaults to the ``kolab_auth_login`` configuration option from the ``kolab_auth``
+plugin.
+
+.. seealso::
+
+    *  :ref:`admin_roundcube-settings-plugin_libkolab_kolab_users_directory`
+    *  :ref:`admin_roundcube-settings-plugin_kolab_auth`
+
+
+``kolab_users_search_attrib``
+=============================
+
+List of LDAP attributes to be used when searching users in folder search queries.
+
+Defaults to ``array('cn','mail','alias')``
+
+.. seealso::
+
+    *  :ref:`admin_roundcube-settings-plugin_libkolab_kolab_users_directory`
+

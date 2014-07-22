@@ -15,7 +15,7 @@ Additional locations for applications installed include:
 
     *   chwala: ``/chwala/``
     *   iRony:  ``/iRony/``
-    *   kolab-freebusy: ``/kolab-freebusy/``
+    *   kolab-freebusy: ``/freebusy/``
     *   kolab-webadmin: ``/kolab-webadmin/``
     *   roundcubemail: ``/roundcubemail/``
 
