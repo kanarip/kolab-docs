@@ -37,7 +37,7 @@ GET requests in the following form: ``/freebusy/<user-or-resource-email-address>
 
 Example URL:
 
-.. code-block:: ini
+.. parsed-literal::
 
     http://example.org/freebusy/john.doe@example.org.ifb
 

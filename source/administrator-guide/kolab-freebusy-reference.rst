@@ -1,7 +1,7 @@
 .. _admin_kolab-freebusy-settings:
 
 =========================================
-Kolab Freebusy Servcie Settings Reference
+Kolab Freebusy Service Settings Reference
 =========================================
 
 The web service is configured using a single settings file in .ini format
@@ -81,7 +81,7 @@ A list of IPs, subnets or patterns which are considered trusted.
 
 Examples:
 
-.. code-block:: ini
+.. parsed-literal::
 
     allow = 127.0.0.1,
       192.168.0.0/16,
