@@ -523,8 +523,8 @@ Resource scheduling
 
 The resource scheduling module of Wallace picks up incoming messages and identifies
 iTip invitations which address a resource. The invited resource's calendar is consulted
-and the invitation is either accepted or declined depending on the resource's availabaility
-for the requested time. Accecpted invitations are added to the resource calendar and
+and the invitation is either accepted or declined depending on the resource's availability
+for the requested time. Accepted invitations are added to the resource calendar and
 are considered "booked". The module automatically responds to the event organizer with
 an according iTip REPLY message.
 
