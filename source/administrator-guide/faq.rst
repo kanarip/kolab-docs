@@ -26,7 +26,7 @@ No :file:`user_deny.db`
 
 .. parsed-literal::
 
-  IOERROR: opening /var/lib/imap/user_deny.db: No such file or directory
+    IOERROR: opening /var/lib/imap/user_deny.db: No such file or directory
 
 No authentication
 ------------------
@@ -36,8 +36,8 @@ No authentication
     TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits new) no authentication
 
 Debug level information, can be ignored. You can reduce verbosity by
-settings ``debug: 0`` in in :file:`imapd.conf` by not includeing debug messages
-on the mail facility in syslog.
+setting ``debug: 0`` in :man:`imapd.conf(5)`, or by not including debug
+messages on the mail facility in syslog.
 
 Unable to setsocketopt
 -----------------------
