@@ -24,7 +24,29 @@ Unable to open /etc/sasldb2
 No :file:`user_deny.db`
 -----------------------
 
-IOERROR: opening /var/lib/imap/user_deny.db: No such file or directory
+.. parsed-literal::
+
+  IOERROR: opening /var/lib/imap/user_deny.db: No such file or directory
+
+No authentication
+------------------
+
+.. parsed-literal::
+
+    TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits new) no authentication
+
+Debug level information, can be ignored. You can reduce verbosity by
+settings ``debug: 0`` in in :file:`imapd.conf` by not includeing debug messages
+on the mail facility in syslog.
+
+Unable to setsocketopt
+-----------------------
+
+.. parsed-literal::
+
+    unable to setsocketopt(IP_TOS) service ptloader/unix: Operation not supported
+
+Informational message issued on startup. Not critical.
 
 Anti-Spam
 =========
