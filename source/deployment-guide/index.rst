@@ -21,12 +21,12 @@ Standard Deployment Scenarios
 General Deployment Considerations
 =================================
 
-It is important to appreciate the use-case to which you wish to deploy Kolab,
-and map that to the appropriate deployment scenario.
+It is important to appreciate the use-case to which you wish to deploy
+Kolab, and map that to the appropriate deployment scenario.
 
-After all, Kolab Groupware is Made To Measure, and supremely flexible. It is
-best deployed after you articulate what you seek to get out of it -- especially
-for businesses.
+After all, Kolab Groupware is Made To Measure, and supremely flexible.
+It is best deployed after you articulate what you seek to get out of it
+-- especially for businesses.
 
 Generic Statements
 ------------------
