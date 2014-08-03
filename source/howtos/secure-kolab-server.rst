@@ -24,8 +24,8 @@ makes it easier to cover various hostnames (like ``smtp.example.org``,
 
 #.  Copy your personal SSL certificates on your new Kolab server.
 
-    On Debian the default location is :filename:`/etc/ssl/` instead of
-    :filename:`/etc/pki/tls/`.
+    On Debian the default location is :file:`/etc/ssl/` instead of
+    :file:`/etc/pki/tls/`.
 
     .. parsed-literal::
 
