@@ -471,7 +471,7 @@ each individual component involved, including:
 
     The availability of the functionality depends on **pykolab** setting
     up Cyrus IMAP correctly (i.e. the setting ``sieve_extensions`` in
-    :man:`imapd.conf(5)` needs the new extension name), and using
+    :manpage:`imapd.conf(5)` needs the new extension name), and using
     sievelib, the Kolab daemon may use settings from LDAP.
 
 #.  `#xxxx`_ for Sievelib
