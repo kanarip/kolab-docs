@@ -398,6 +398,9 @@ Server-side Sorting (SSS)
 Default Attribute Use
 ---------------------
 
+Kolab object types are generally based off existing LDAP object classes
+and LDAP attributes.
+
 .. _and_ldap_default-kolab-user:
 
 A Default Kolab User
@@ -464,8 +467,18 @@ Example entry:
     objectClass: person
     userPassword:: e1NTSEF9NkF4YVJ4VUE0R0FTMm1DMGlMdFNTZU90RUM0UW1PN1lPcHlwY3c9PQ=
 
+.. _and-ldap-kolab-static-distribution-group:
+
 A Static Kolab Distribution Group
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+A static distribution group is a group with one or more recipient
+addresses, for which inbound message traffic is distributed among the
+individual members of the group.
+
+Members need to be added to and removed from the distribution group
+individually, contrary to a
+:ref:`and-ldap-kolab-dynamic-distribution-group`.
 
 Object classes for a static distribution group:
 
@@ -494,9 +507,25 @@ Example entry:
     objectClass: top
     objectClass: groupofuniquenames
     objectClass: kolabgroupofuniquenames
+    uniquemember: uid=doe,ou=People,dc=example,dc=org
+
+.. _and-ldap-kolab-dynamic-distribution-group:
 
 A Dynamic Kolab Distribution Group
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+A dynamic distribution group is a group with one or more recipient
+addresses, that resolves to a set of individual members dynamically,
+through executing another search in LDAP.
+
+This means, for example, a dynamic group does not need to be updated to
+include "everyone in department $x", if the fact somebody is in
+department $x can be determined using an LDAP attribute value or OU
+structure.
+
+.. seealso::
+
+    *   :ref:`and-ldap-kolab-static-distribution-group`.
 
 Object classes for a dynamic distribution group:
 
@@ -583,9 +612,12 @@ Primary Email Address (``mail``)
 
 .. NOTE::
 
-    The primary email address may be subject to a recipient policy, which
-    applies common rules to existing user information, to compose the primary
-    email address.
+    The primary email address may be subject to a recipient policy,
+    which applies common rules to existing user information, to compose
+    the primary email address.
+
+    This recipient policy can be executed in one of three ways, see
+    :ref:`admin_rcpt-policy`.
 
 Secondary Email Address(es) (``alias``)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
