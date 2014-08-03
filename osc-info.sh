@@ -11,6 +11,7 @@ while [ $# -gt 0 ]; do
             refresh=1
             shift
         ;;
+
         *)
             package_refresh=$1
             shift
@@ -37,6 +38,7 @@ if [ ${refresh} -eq 1 ]; then
         -e '/^Fedora:18/d' \
         -e '/^openSUSE:12.1/d' \
         -e '/^UCS:3.0/d' \
+        -e '/^UCS:3.1/d' \
         osc-cache/obs_projects.list
 fi
 
