@@ -1,20 +1,15 @@
-..  Kolab Groupware documentation master file, created by
-    sphinx-quickstart on Tue Jul 16 12:32:13 2013.
-    You can adapt this file completely to your liking, but it should at least
-    contain the root `toctree` directive.
-
 About Kolab Groupware
 =====================
 
-Kolab Groupware is a Free Software groupware solution for Email communications,
-Events & Appointments, Contacts and more. It supports *mixed client
-environments* because of an *open storage format*, and the use of
-well-established, standard protocols such as IMAP and SMTP.
+Kolab Groupware is a Free Software groupware solution for Email
+communications, Events & Appointments, Contacts and more. It supports
+*mixed client environments* because of an *open storage format*, and the
+use of well-established, standard protocols such as IMAP and SMTP.
 
-For the full Kolab experience, you need a Kolab server, and one or more Kolab
-clients. What makes Kolab a unique groupware solution is its focus on security,
-scalability, data ownership (aka privacy) and the use of proven components and
-protocols.
+For the full Kolab experience, you need a Kolab server, and one or more
+Kolab clients. What makes Kolab a unique groupware solution is its focus
+on security, scalability, data ownership (aka privacy) and the use of
+proven components and protocols.
 
 .. rubric:: Main Documentation
 
