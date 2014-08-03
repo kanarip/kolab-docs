@@ -9,8 +9,6 @@ Dependency Packages
 .. include:: packages/389-ds-base.txt
 .. include:: packages/389-ds-console.txt
 .. include:: packages/389-dsgw.txt
-.. include:: packages/apr.txt
-.. include:: packages/apr-util.txt
 .. include:: packages/httpd.txt
 .. include:: packages/idm-console-framework.txt
 .. include:: packages/jansson.txt
@@ -34,7 +32,6 @@ Dependency Packages
 .. include:: packages/python-ldap.txt
 .. include:: packages/python-pyasn1.txt
 .. include:: packages/python-pyasn1-modules.txt
-.. include:: packages/pytz.txt
 .. include:: packages/svrcore.txt
 .. include:: packages/swig.txt
 .. include:: packages/xapian-core.txt

@@ -7,7 +7,6 @@ Kolab Packages
 .. include:: packages/iRony.txt
 .. include:: packages/kolab.txt
 .. include:: packages/kolab-freebusy.txt
-.. include:: packages/kolab-selinux.txt
 .. include:: packages/kolab-syncroton.txt
 .. include:: packages/kolab-utils.txt
 .. include:: packages/kolab-webadmin.txt
