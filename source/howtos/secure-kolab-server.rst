@@ -342,6 +342,13 @@ Set correct SSL parameters for HTTP_Request2. This will ensure the
 
         # :command:`sed -i -e '/kolab_ssl/d' /etc/roundcubemail/libkolab.inc.php`
 
+
+#.  Change freebusy API url in the ``libkolab`` plugin configuration:
+
+    .. parsed-literal::
+
+        # :command:`sed -i -e 's/http:/https:/' /etc/roundcubemail/libkolab.inc.php`
+
 #.  Change Chwala API url in the ``kolab_files`` plugin configuration:
 
     .. parsed-literal::
@@ -373,7 +380,15 @@ Set correct SSL parameters for HTTP_Request2. This will ensure the
 
         # :command:`cat >> /etc/roundcubemail/config.inc.php << EOF
         # caldav/webdav
-        \\$config['calendar_caldav_url']             = "https://kolab.example.org/iRony/calendars/%u/%i";
-        \\$config['kolab_addressbook_carddav_url']   = 'https://kolab.example.org/iRony/addressbooks/%u/%i';
+        \\$config['calendar_caldav_url']             = "https://%h/iRony/calendars/%u/%i";
+        \\$config['kolab_addressbook_carddav_url']   = 'https://%h/iRony/addressbooks/%u/%i';
         EOF`
 
+#.  Additionaly, you can redirect all http traffic to https:
+
+    .. parsed-literal::
+
+        # :command:`cat >> /etc/roundcubemail/config.inc.php << EOF
+        # Force https redirect for http requests
+        \\$config['force_https'] = true;
+        EOF`
