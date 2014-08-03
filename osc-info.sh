@@ -22,13 +22,12 @@ done
 # List the projects and cache them locally.
 if [ ! -f "osc_cache/obs_projects.list" -o ${refresh} -eq 1 ]; then
     osc ls | grep -vE "^(home|deleted)" > osc-cache/obs_projects.list
-fi
 
-if [ ${refresh} -eq 1 ]; then
     # Legacy Kolab releases do not need to be updated
-    sed -i \
-        -e '/^Kolab:3.0/d' \
-        -e '/^Kolab:3.1/d' \
+    sed -r -i \
+        -e '/^Kolab:3\.0/d' \
+        -e '/^Kolab:3\.1/d' \
+        -e '/^Kolab:[0-9]{2,}/d' \
         osc-cache/obs_projects.list
 
     # Legacy target platforms do not need to be updated
