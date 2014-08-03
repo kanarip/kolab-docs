@@ -1,0 +1,11 @@
+roundcubemail-skin-contargo
+===========================
+
+.. parsed-literal::
+
+
+.. table:: Version Table for roundcubemail-skin-contargo
+
+    +-------------------+---------------+--------------------------------------+
+    | Kolab Version(s)  | Platform(s)   | Version                              |
+    +===================+===============+======================================+

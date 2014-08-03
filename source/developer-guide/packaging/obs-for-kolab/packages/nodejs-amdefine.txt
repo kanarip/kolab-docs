@@ -1,0 +1,22 @@
+nodejs-amdefine
+===============
+
+.. parsed-literal::
+
+	<package name="nodejs-amdefine" project="Kolab:Development">
+	  <title>nodejs-amdefine</title>
+	  <description/>
+	  <build>
+	    <disable/>
+	    <enable repository="RHEL_7"/>
+	  </build>
+	  <url>http://kolab.org/about/nodejs-amdefine</url>
+	</package>
+
+.. table:: Version Table for nodejs-amdefine
+
+    +-------------------+---------------+--------------------------------------+
+    | Kolab Version(s)  | Platform(s)   | Version                              |
+    +===================+===============+======================================+
+    | Kolab:Development | RHEL_7        | 0.0.4-3                              |
+    +-------------------+---------------+--------------------------------------+

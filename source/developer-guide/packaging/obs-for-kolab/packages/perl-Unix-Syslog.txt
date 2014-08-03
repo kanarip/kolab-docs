@@ -1,0 +1,22 @@
+perl-Unix-Syslog
+================
+
+.. parsed-literal::
+
+	<package name="perl-Unix-Syslog" project="Kolab:Development">
+	  <title>perl-Unix-Syslog</title>
+	  <description/>
+	  <build>
+	    <disable/>
+	    <enable repository="RHEL_7"/>
+	  </build>
+	  <url>http://kolab.org/about/perl-Unix-Syslog</url>
+	</package>
+
+.. table:: Version Table for perl-Unix-Syslog
+
+    +-------------------+---------------+--------------------------------------+
+    | Kolab Version(s)  | Platform(s)   | Version                              |
+    +===================+===============+======================================+
+    | Kolab:Development | RHEL_7        | 1.1-16                               |
+    +-------------------+---------------+--------------------------------------+

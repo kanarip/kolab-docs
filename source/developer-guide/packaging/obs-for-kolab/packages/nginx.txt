@@ -5,7 +5,7 @@ nginx
 
 	<package name="nginx" project="Kolab:Development">
 	  <title>nginx</title>
-	  <description></description>
+	  <description/>
 	  <build>
 	    <disable/>
 	  </build>
@@ -17,5 +17,3 @@ nginx
     +-------------------+---------------+--------------------------------------+
     | Kolab Version(s)  | Platform(s)   | Version                              |
     +===================+===============+======================================+
-    | Kolab:13          | CentOS_6      | 1.4.2-3                              |
-    +-------------------+---------------+--------------------------------------+

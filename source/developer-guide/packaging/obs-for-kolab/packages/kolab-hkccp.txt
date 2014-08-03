@@ -5,7 +5,7 @@ kolab-hkccp
 
 	<package name="kolab-hkccp" project="Kolab:Development">
 	  <title>kolab-hkccp</title>
-	  <description></description>
+	  <description/>
 	  <build>
 	    <disable/>
 	  </build>
@@ -17,5 +17,3 @@ kolab-hkccp
     +-------------------+---------------+--------------------------------------+
     | Kolab Version(s)  | Platform(s)   | Version                              |
     +===================+===============+======================================+
-    | Kolab:13          | CentOS_6      | 0.5.4-1                              |
-    +-------------------+---------------+--------------------------------------+

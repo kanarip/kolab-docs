@@ -1,0 +1,22 @@
+expresso
+========
+
+.. parsed-literal::
+
+	<package name="expresso" project="Kolab:Development">
+	  <title>expresso</title>
+	  <description/>
+	  <build>
+	    <disable/>
+	    <enable repository="RHEL_7"/>
+	  </build>
+	  <url>http://kolab.org/about/expresso</url>
+	</package>
+
+.. table:: Version Table for expresso
+
+    +-------------------+---------------+--------------------------------------+
+    | Kolab Version(s)  | Platform(s)   | Version                              |
+    +===================+===============+======================================+
+    | Kolab:Development | RHEL_7        | 0.9.2-6                              |
+    +-------------------+---------------+--------------------------------------+

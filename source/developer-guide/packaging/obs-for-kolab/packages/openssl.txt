@@ -5,7 +5,7 @@ openssl
 
 	<package name="openssl" project="Kolab:Development">
 	  <title>openssl</title>
-	  <description></description>
+	  <description/>
 	  <build>
 	    <disable/>
 	  </build>
@@ -17,5 +17,3 @@ openssl
     +-------------------+---------------+--------------------------------------+
     | Kolab Version(s)  | Platform(s)   | Version                              |
     +===================+===============+======================================+
-    | Kolab:13          | CentOS_6      | 1.0.1e-6                             |
-    +-------------------+---------------+--------------------------------------+

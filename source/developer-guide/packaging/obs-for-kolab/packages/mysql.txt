@@ -5,7 +5,7 @@ mysql
 
 	<package name="mysql" project="Kolab:Development">
 	  <title>mysql</title>
-	  <description></description>
+	  <description/>
 	  <build>
 	    <disable/>
 	  </build>

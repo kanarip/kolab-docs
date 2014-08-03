@@ -1,0 +1,22 @@
+nodejs-optimist
+===============
+
+.. parsed-literal::
+
+	<package name="nodejs-optimist" project="Kolab:Development">
+	  <title>nodejs-optimist</title>
+	  <description/>
+	  <build>
+	    <disable/>
+	    <enable repository="RHEL_7"/>
+	  </build>
+	  <url>http://kolab.org/about/nodejs-optimist</url>
+	</package>
+
+.. table:: Version Table for nodejs-optimist
+
+    +-------------------+---------------+--------------------------------------+
+    | Kolab Version(s)  | Platform(s)   | Version                              |
+    +===================+===============+======================================+
+    | Kolab:Development | RHEL_7        | 0.4.0-2                              |
+    +-------------------+---------------+--------------------------------------+

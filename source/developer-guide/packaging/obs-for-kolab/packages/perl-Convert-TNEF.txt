@@ -1,0 +1,22 @@
+perl-Convert-TNEF
+=================
+
+.. parsed-literal::
+
+	<package name="perl-Convert-TNEF" project="Kolab:Development">
+	  <title>perl-Convert-TNEF</title>
+	  <description/>
+	  <build>
+	    <disable/>
+	    <enable repository="RHEL_7"/>
+	  </build>
+	  <url>http://kolab.org/about/perl-Convert-TNEF</url>
+	</package>
+
+.. table:: Version Table for perl-Convert-TNEF
+
+    +-------------------+---------------+--------------------------------------+
+    | Kolab Version(s)  | Platform(s)   | Version                              |
+    +===================+===============+======================================+
+    | Kolab:Development | RHEL_7        | 0.18-2                               |
+    +-------------------+---------------+--------------------------------------+

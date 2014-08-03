@@ -5,7 +5,7 @@ roundcubemail-plugin-importmessages
 
 	<package name="roundcubemail-plugin-importmessages" project="Kolab:Development">
 	  <title>roundcubemail-plugin-importmessages</title>
-	  <description></description>
+	  <description/>
 	  <build>
 	    <disable/>
 	  </build>

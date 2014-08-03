@@ -5,7 +5,7 @@ kolab-selinux
 
 	<package name="kolab-selinux" project="Kolab:Development">
 	  <title>kolab-selinux</title>
-	  <description></description>
+	  <description/>
 	  <build>
 	    <disable/>
 	  </build>

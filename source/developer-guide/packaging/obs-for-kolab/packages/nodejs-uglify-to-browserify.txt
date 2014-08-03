@@ -1,0 +1,22 @@
+nodejs-uglify-to-browserify
+===========================
+
+.. parsed-literal::
+
+	<package name="nodejs-uglify-to-browserify" project="Kolab:Development">
+	  <title>nodejs-uglify-to-browserify</title>
+	  <description/>
+	  <build>
+	    <disable/>
+	    <enable repository="RHEL_7"/>
+	  </build>
+	  <url>http://kolab.org/about/nodejs-uglify-to-browserify</url>
+	</package>
+
+.. table:: Version Table for nodejs-uglify-to-browserify
+
+    +-------------------+---------------+--------------------------------------+
+    | Kolab Version(s)  | Platform(s)   | Version                              |
+    +===================+===============+======================================+
+    | Kolab:Development | RHEL_7        | 1.0.2-3                              |
+    +-------------------+---------------+--------------------------------------+

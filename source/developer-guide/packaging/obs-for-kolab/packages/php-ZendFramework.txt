@@ -1,0 +1,30 @@
+php-ZendFramework
+=================
+
+.. parsed-literal::
+
+	<package name="php-ZendFramework" project="Kolab:Development">
+	  <title/>
+	  <description/>
+	  <build>
+	    <disable/>
+	    <enable repository="openSUSE_13.1"/>
+	    <enable repository="openSUSE_12.3"/>
+	    <enable repository="openSUSE_12.2"/>
+	    <enable repository="RHEL_7"/>
+	  </build>
+	</package>
+
+.. table:: Version Table for php-ZendFramework
+
+    +-------------------+---------------+--------------------------------------+
+    | Kolab Version(s)  | Platform(s)   | Version                              |
+    +===================+===============+======================================+
+    | Kolab:Development | openSUSE_12.2 | 1.12.5-2                             |
+    +-------------------+---------------+--------------------------------------+
+    |                   | openSUSE_12.3 | 1.12.5-2                             |
+    +-------------------+---------------+--------------------------------------+
+    |                   | openSUSE_13.1 | 1.12.5-2                             |
+    +-------------------+---------------+--------------------------------------+
+    |                   | RHEL_7        | 1.12.5-2                             |
+    +-------------------+---------------+--------------------------------------+

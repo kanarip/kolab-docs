@@ -1,0 +1,22 @@
+nodejs-wordwrap
+===============
+
+.. parsed-literal::
+
+	<package name="nodejs-wordwrap" project="Kolab:Development">
+	  <title>nodejs-wordwrap</title>
+	  <description/>
+	  <build>
+	    <disable/>
+	    <enable repository="RHEL_7"/>
+	  </build>
+	  <url>http://kolab.org/about/nodejs-wordwrap</url>
+	</package>
+
+.. table:: Version Table for nodejs-wordwrap
+
+    +-------------------+---------------+--------------------------------------+
+    | Kolab Version(s)  | Platform(s)   | Version                              |
+    +===================+===============+======================================+
+    | Kolab:Development | RHEL_7        | 0.0.2-5                              |
+    +-------------------+---------------+--------------------------------------+

@@ -5,7 +5,7 @@ mod_security
 
 	<package name="mod_security" project="Kolab:Development">
 	  <title>mod_security</title>
-	  <description></description>
+	  <description/>
 	  <build>
 	    <disable/>
 	  </build>
@@ -17,5 +17,3 @@ mod_security
     +-------------------+---------------+--------------------------------------+
     | Kolab Version(s)  | Platform(s)   | Version                              |
     +===================+===============+======================================+
-    | Kolab:13          | CentOS_6      | 2.7.5-4                              |
-    +-------------------+---------------+--------------------------------------+
