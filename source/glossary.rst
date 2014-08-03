@@ -52,6 +52,27 @@ Glossary
         realm, meaning the user will be unable to access any mailboxes for which
         the mailbox path does not end in ``@example.org``.
 
+    canonification
+
+        Canonification is the process of translating a login username in
+        to the targeted value to use throughout the rest of the
+        infrastructure.
+
+        Suppose, for example, a user *John Doe <doe@example.org>* has a
+        :term:`primary email address` of *doe@example.org*, and a user
+        ID of *doe*. Suppose therefore his mailbox is
+        ``user/doe@example.org``, and his authorization ID is
+        ``doe@example.org``.
+
+        When John logs in however, he may also use one of his secondary
+        recipient addresses, such as *john.doe@example.org* or
+        *jdoe@example.org*.
+
+        This login username needs to be translated to
+        ``doe@example.org`` in order to obtain the correct INBOX, and
+        allow applications to consistently retrieve profiles with user
+        preferences.
+
     child domain
     child domain name space
     child domain name spaces
@@ -343,6 +364,16 @@ Glossary
 
         A primary hosted domain is (...)
 
+    recipient email address
+    recipient email addresses
+
+        A recipient email address is (...)
+
+        .. seealso::
+
+            *   :term:`primary email address`
+            *   :term:`secondary email address`
+
     recipient policy
 
         The recipient policy (...)
@@ -353,7 +384,13 @@ Glossary
 
     result attribute
 
-        (...)
+        The result attribute is the name of the target attribute to use
+        the value of, when translating a login username to the
+        appropriate value (a process called :term:`canonification`).
+
+        .. seealso::
+
+            *   :term:`canonification`
 
     root dn
 
