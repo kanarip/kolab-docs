@@ -339,6 +339,8 @@ The ``archive`` Plugin
 The ``calendar`` Plugin
 =======================
 
+.. include:: roundcube-settings/calendar.txt
+
 .. _admin_roundcube-settings-plugin_kolab_activesync:
 
 The ``kolab_activesync`` Plugin
@@ -351,6 +353,8 @@ The ``kolab_activesync`` Plugin
 
 The ``kolab_auth`` Plugin
 =========================
+
+.. include:: roundcube-settings/kolab_auth.txt
 
 .. _admin_roundcube-settings-plugin_kolab_addressbook:
 
@@ -384,6 +388,7 @@ The ``libkolab`` Plugin
 
 .. include:: roundcube-settings/kolab_cache.txt
 .. include:: roundcube-settings/kolab_messages_cache_bypass.txt
+.. include:: roundcube-settings/libkolab.txt
 
 .. _admin_roundcube-settings-plugin_libcalendaring:
 

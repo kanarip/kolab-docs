@@ -436,3 +436,113 @@ Wallace listens on port 10026 by default, and is provided with messages by
 Postfix. After handling the message, Wallace submits the message back to Postfix
 on port 10027 (by default).
 
+
+Enforcement of invitation policies
+----------------------------------
+
+The invitationpolicy module of Wallace picks up incoming messages and identifies
+iTip invitations or replies which address a local user. Depending on the recipient's
+invitation policy settings or the global default, the iTip message is either
+automatically processed (e.g. accepting event invitations if available) or 
+forwarded to the user's inbox or calendar for manual confirmation.
+
+A user's invitation policy settings are stored in LDAP using the
+``kolabInvitationPolicy`` which can contain multiple values which are processed
+from top to bottom until one matches the situation. A global default can be defined
+in ``/etc/kolab/kolab.conf`` with
+
+.. code-block:: ini
+
+    [wallace]
+    (...)
+    kolab_invitation_policy = ACT_ACCEPT_IF_NO_CONFLICT:example.org, ACT_UPDATE, ACT_MANUAL
+
+The following values can be used to compose the invitation policy set:
+
+*   ``ACT_MANUAL``
+
+    Forwards the message to the user's inbox for manual processing in the client.
+
+*   ``ACT_ACCEPT``
+
+    Always accepts the event invitation. This will reply to the organizer with
+    ``PARTSTAT=ACCEPTED`` and store the event in the user's default calendar.
+
+*   ``ACT_ACCEPT_IF_NO_CONFLICT``
+
+    Same as ``ACT_ACCEPT`` but only if the invitation doesn't conflict with an
+    existing event in the user's calendar(s).
+
+*   ``ACT_TENTATIVE``
+
+    Same as ``ACT_ACCEPT`` but replying with ``PARTSTAT=TENTATIVE``.
+
+*   ``ACT_TENTATIVE_IF_NO_CONFLICT``
+
+    Same as ``ACT_ACCEPT_IF_NO_CONFLICT`` but replying with ``PARTSTAT=TENTATIVE``.
+
+*   ``ACT_REJECT``
+
+    Always rejects the event invitation. This will also store a copy of the rejected
+    invitation in the user's default calendar for later reference.
+
+*   ``ACT_REJECT_IF_CONFLICT``
+
+    Same as ``ACT_REJECT`` but only rejects invitations if they conflict with an
+    existing event in the user's calendar(s).
+
+*   ``ACT_UPDATE``
+
+    When receiving an iTip REPLY, this policy automatically updates the copy of the
+    referring event in the user's calendar with the updated participant status of the
+    replying user.
+
+*   ``ACT_UPDATE_AND_NOTIFY``
+
+    Same as ``ACT_UPDATE`` but with an additional notification email being sent to
+    the recipient reporting the updated participants status of the event.
+
+*   ``ACT_SAVE_TO_CALENDAR``
+
+    No automatic accepting or rejecting is being done for event invitations here
+    but the invitation is being saved in the user's default calendar and the iTip message
+    is not forwarded to the user's email inbox.
+
+
+Per sender domain invitation policies
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Each policy identifier can have a domain filter appended with ``:domain.tld``. If present,
+the policy will only be applied if the sender of the iTip message matches the given
+domain. Otherwise the entry will be ignored and the process continues with the next
+entry in the list.
+
+
+Resource scheduling
+-------------------
+
+The resource scheduling module of Wallace picks up incoming messages and identifies
+iTip invitations which address a resource. The invited resource's calendar is consulted
+and the invitation is either accepted or declined depending on the resource's availability
+for the requested time. Accepted invitations are added to the resource calendar and
+are considered "booked". The module automatically responds to the event organizer with
+an according iTip REPLY message.
+
+Optionally, the owner of the resource will be notified about new bookings.
+
+
+Resource collections and invitation delegation
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Kolab has the concept of organizing mutliple resources of the same type in resource
+collections. Think of a set of projector devices which are available but usually one
+wants to book "a beamer". This would be a resource collection which receives an iTip
+invitation.
+
+Such invitations will allocate a concrete member of the collection which is available
+for the requested time and delegate the invitation to the according resource.
+The delegation is reflected in the iTip replies sent to the organizer according to
+the iTip specification (`RFC 2446 <http://www.ietf.org/rfc/rfc2446.txt>`_) with the
+resource collection responding with ``PARTSTAT=DELEGATED`` and the allocated resource
+also responding to the organizer with ``PARTSTAT=ACCEPTED``.
+

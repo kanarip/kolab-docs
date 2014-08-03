@@ -426,6 +426,9 @@ the server-side Virtual List View control, ideal for sorting, pagination and --
 a particular feature of Kolab Groupware's ``Net/LDAP3`` -- responsive, fuzzy
 searching capabilities regardless of the size of the Directory Information Tree.
 
+In order to automatically delect available VLV indexes, the option ``config_root_dn``
+needs to be set as well.
+
 .. seealso::
 
     *   Administrator Guide, Tweaking LDAP, :ref:`admin_ldap_configure-sss`
@@ -434,17 +437,25 @@ searching capabilities regardless of the size of the Directory Information Tree.
 ``vlv_search``
 --------------
 
-Undocumented.
+DEPRECATED. Use Virtual List View functions for autocompletion searches. This option
+is obsolete when ``vlv`` is enabled.
 
 ``numsub_filter``
 -----------------
 
-Undocumented.
+With ``vlv`` enabled, we also use numSubOrdinates to query the total number of records.
+Set this filter to get all numSubOrdinates attributes for counting.
+
+Only set this option if your php-ldap module doesn't support the ``ldap_parse_virtuallist_control()``
+function which is part of an unofficial patch to php-ldap.
 
 ``config_root_dn``
 ------------------
 
-Undocumented.
+The base DN to be used for searching LDAP configuration sesstings such as VLV indexes.
+Set to ``cn=config`` as the default value for standard Kolab setups.
+
+Without this option, no VLV will be used for LDAP queries.
 
 ``sizelimit``
 -------------

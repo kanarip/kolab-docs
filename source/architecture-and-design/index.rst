@@ -31,6 +31,7 @@ Kolab Software Components
     kolab-daemon
     kolab-wap-api
     kolab-hkccp
+    kolab-freebusy
 
 General Documentation
 =====================
