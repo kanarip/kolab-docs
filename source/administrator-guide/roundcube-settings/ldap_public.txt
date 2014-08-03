@@ -3,13 +3,14 @@
 ``ldap_public``
 ===============
 
-A list of so-called Global Address Books, or Global Address Lists, useful for
-auto-completion of addresses being typed in to the To, CC and BCC fields when
-composing an email, and for searches from mobile devices and desktop clients
-using ActiveSync (through Syncroton) and/or CardDAV (through iRony).
+A list of so-called Global Address Books, or Global Address Lists,
+useful for auto-completion of addresses being typed in to the To, CC and
+BCC fields when composing an email, when using the ACL plugin, and for
+searches from mobile devices and desktop clients using ActiveSync
+(through Syncroton) and/or CardDAV (through iRony).
 
-The first item configured here is the identifier of the address book. That being
-said, an example would look as follows:
+The first item configured here is the identifier of the address book.
+That being said, an example would look as follows:
 
 .. code-block:: php
 
@@ -24,20 +25,21 @@ said, an example would look as follows:
         );
 
 While it is not very common to have multiple global address books, some
-organizations put one address book in the list of address books to use for
-auto-completion, and use another address book to store a copy of the local
-phone book -- you know, with residents and businesses in the area -- or address
-books of partner organizations.
+organizations put one address book in the list of address books to use
+for auto-completion, and use another address book to store a copy of the
+local phone book -- you know, with residents and businesses in the area
+-- or address books of partner organizations.
 
-Using the :ref:`admin_roundcube-settings_autocomplete_addressbooks` setting, one
-address book can be used for auto-completion, while the other address book is
-available for searching in the web client, on mobile devices and using desktop
-clients using ActiveSync (through Syncroton) and/or CardDAV (through iRony).
+Using the :ref:`admin_roundcube-settings_autocomplete_addressbooks`
+setting, one address book can be used for auto-completion, while the
+other address book is available for searching in the web client, on
+mobile devices and using desktop clients using ActiveSync (through
+Syncroton) and/or CardDAV (through iRony).
 
-A large amount of settings are available for the global address books. By
-default, Kolab Groupware configures the organization's address book to use a set
-of configuration options that is designed to provide an easy growth-path to
-beyond 1.000 entries.
+A large amount of settings are available for the global address books.
+By default, Kolab Groupware configures the organization's address book
+to use a set of configuration options that is designed to provide an
+easy growth-path to beyond 1.000 entries.
 
 ``name``
 --------
@@ -80,13 +82,15 @@ Magic configuration values are available:
         The ``$_SERVER['SERVER_NAME']`` value is not the same as the
         ``$_SERVER['HTTP_HOST']`` value.
 
-        `   ``$_SERVER['SERVER_NAME']`` is a server-side configuration item,
-        `   ``$_SERVER['HTTP_HOST']`` is an item specified by the client.
+        ``$_SERVER['SERVER_NAME']`` is a server-side configuration
+        item, ``$_SERVER['HTTP_HOST']`` is an item specified by the
+        client.
 
 ``%t``
 
-    The value of ``$_SERVER['SERVER_NAME']`` but without the hostname -- ergo,
-    this is the domain name space that ``$_SERVER['SERVER_NAME']`` resides in.
+    The value of ``$_SERVER['SERVER_NAME']`` but without the hostname --
+    ergo, this is the domain name space that ``$_SERVER['SERVER_NAME']``
+    resides in.
 
     For a webserver virtualhost named ``webmail.example.org``, ``%t`` is
     ``example.org``.
@@ -103,15 +107,17 @@ The port to use to connect to LDAP.
 
 .. NOTE::
 
-    Note that the port number specified here is used for all server addresses
-    configured in :ref:`admin_roundcube-settings_ldap_public_hosts`.
+    Note that the port number specified here is used for all server
+    addresses configured in
+    :ref:`admin_roundcube-settings_ldap_public_hosts`.
 
 ``use_tls``
 -----------
 
 Whether or not to encrypt the connection. Useful with
-:ref:`admin_roundcube-settings_ldap_public_port` set to 389 (explicit SSL
-through STARTTLS), not so much with the port set to 636 (implicit SSL).
+:ref:`admin_roundcube-settings_ldap_public_port` set to 389 (explicit
+SSL through STARTTLS), not so much with the port set to 636 (implicit
+SSL).
 
 ``ldap_version``
 ----------------
@@ -127,16 +133,17 @@ The timeout.
 ``user_specific``
 -----------------
 
-Whether or not to bind to LDAP with the user's credentials, as opposed to
-global credentials, allowing for organizations to hide or show parts of the
-Directory Information Tree hierarchy, and/or hide or show certain attributes
-of certain entries.
+Whether or not to bind to LDAP with the user's credentials, as opposed
+to global credentials, allowing for organizations to hide or show parts
+of the Directory Information Tree hierarchy, and/or hide or show certain
+attributes of certain entries.
 
 Set this to ``true`` -- the default in Kolab Groupware -- and configure
 :ref:`admin_roundcube-settings_ldap_public_search_base_dn` and
-:ref:`admin_roundcube-settings_ldap_public_search_filter`, and if anonymous
-binding is not allowed -- the default in Kolab Groupware -- or anonymous
-searches are not allowed -- the default in Kolab Groupware -- also configure
+:ref:`admin_roundcube-settings_ldap_public_search_filter`, and if
+anonymous binding is not allowed -- the default in Kolab Groupware -- or
+anonymous searches are not allowed -- the default in Kolab Groupware --
+also configure
 :ref:`admin_roundcube-settings_ldap_public_search_bind_dn` and
 :ref:`admin_roundcube-settings_ldap_public_search_bind_pw`.
 
@@ -159,14 +166,41 @@ examples on what else this allows you to do.
 -----------
 
 The bind dn to use for displaying the address book. Kolab Groupware sets
-this to ``%dn`` by default, to have the connection be bound with the user's
-credentials.
+this to ``%dn`` by default, to have the connection be bound with the
+user's credentials.
 
 ``bind_pass``
 -------------
 
-The password, which when ``bind_dn`` is set to ``%dn`` (the default), better
-be ``%p``.
+The password, which when ``bind_dn`` is set to ``%dn`` (the default),
+better be ``%p``.
+
+.. _admin_roundcube-settings_ldap_public_config_root_dn:
+
+``config_root_dn``
+------------------
+
+Use ``config_root_dn`` to search for VLV and SSS settings.
+
+.. _admin_roundcube-settings_ldap_public_domain_base_dn:
+
+``domain_base_dn``
+------------------
+
+.. _admin_roundcube-settings_ldap_public_domain_filter:
+
+``domain_filter``
+-----------------
+
+.. _admin_roundcube-settings_ldap_public_domain_name_attr:
+
+``domain_name_attr``
+------------------
+
+.. _admin_roundcube-settings_ldap_public_domain_result_attr:
+
+``domain_result_attr``
+----------------------
 
 .. _admin_roundcube-settings_ldap_public_search_base_dn:
 
@@ -176,18 +210,19 @@ be ``%p``.
 When searching for object entries that match the logged in user, start
 searching at this base DN.
 
-Useful when you want to limit who can use the address book with their own
-credentials, versus 'anonymously', and/or when attribute values searched for
-are not globally unique.
+Useful when you want to limit who can use the address book with their
+own credentials, versus 'anonymously', and/or when attribute values
+searched for are not globally unique.
 
-One could set ``base_dn`` to ``ou=People,dc=example,dc=org``, while setting
-``search_base_dn`` to
+One could set ``base_dn`` to ``ou=People,dc=example,dc=org``, while
+setting ``search_base_dn`` to
 ``ou=Management,ou=Employees,ou=People,dc=example,dc=org``.
 
-One could then set an ACL on ``ou=Employees,ou=People,dc=example,dc=org``,
-that does not permit the credentials configured in ``search_dn_default`` to
-read certain attributes of entries, such as ``street``, ``mobile``, and
-other such information that might be personal in nature.
+One could then set an ACL on
+``ou=Employees,ou=People,dc=example,dc=org``,
+that does not permit the credentials configured in ``search_dn_default``
+to read certain attributes of entries, such as ``street``, ``mobile``,
+and other such information that might be personal in nature.
 
 .. _admin_roundcube-settings_ldap_public_search_filter:
 
@@ -201,21 +236,23 @@ Magic configuration values are available:
 
 ``%fu``
 
-    The full username, usually also the user's primary email address, though
-    possibly of the form ``<username>@<imaphostname>``.
+    The full username, usually also the user's primary email address,
+    though possibly of the form ``<username>@<imaphostname>``.
 
     The full extent of possibilities (which depend on configuration
-    and plugins interacting with the authentication process) is beyond the
-    scope of this document, so suffice it to say that
+    and plugins interacting with the authentication process) is beyond
+    the scope of this document, so suffice it to say that
     :ref:`admin_roundcube-settings-plugin_kolab_auth` applies a process
-    called :term:`canonification` that makes ``%fu`` be substituted by the
-    fully qualified primary recipient email address of the Kolab user.
+    called :term:`canonification` that makes ``%fu`` be substituted by
+    the fully qualified primary recipient email address of the Kolab
+    user.
 
-    In Kolab Groupware, by default, the attribute value of ``mail`` is used.
+    In Kolab Groupware, by default, the attribute value of ``mail`` is
+    used.
 
     This is also the user's mailbox name (``user/<mail>`` or
-    ``user/john.doe@example.org`` for user ``john.doe@example.org``) and is
-    globally unique.
+    ``user/john.doe@example.org`` for user ``john.doe@example.org``) and
+    is globally unique.
 
     Example: ``(&(objectclass=kolabinetorgperson)(mail=%fu))``.
 
@@ -225,24 +262,36 @@ Magic configuration values are available:
 
     In ``john.doe@example.org``, this would become ``john.doe``.
 
-    To allow users to log in with their ``uid`` attribute value, one could
-    specify ``(&(objectclass=kolabinetorgperson)(uid=%u))``.
+    To allow users to log in with their ``uid`` attribute value, one
+    could specify ``(&(objectclass=kolabinetorgperson)(uid=%u))``.
 
 ``%d``
 
-    The domain name space of the username, or "everything after the '@'".
+    The domain name space of the username, or "everything after the
+    '@'".
 
     In ``john.doe@example.org``, this would become ``example.org``.
 
 ``%dc``
 
-    The root dn that corresponds with the domain name space used to login.
+    The root dn that corresponds with the domain name space used to
+    login.
 
     When ``john.doe@example.org`` logs in, the domain name space of
     ``example.org`` would typically correspond with a root dn of
     ``dc=example,dc=org`` -- if ``example.org`` is a
-    :term:`parent domain name space` and no :term:`domain_result_attribute`
+    :term:`parent domain name space` and no
+    :term:`domain_result_attribute`
     is available for the ``domainrelatedobject`` entry.
+
+    .. NOTE::
+
+        Using ``%dc`` requires
+        :ref:`admin_roundcube-settings_ldap_public_domain_base_dn`,
+        :ref:`admin_roundcube-settings_ldap_public_domain_filter`,
+        :ref:`admin_roundcube-settings_ldap_public_domain_name_attr`,
+        and
+        :ref:`admin_roundcube-settings_ldap_public_domain_result_attr`
 
 .. _admin_roundcube-settings_ldap_public_search_bind_dn:
 

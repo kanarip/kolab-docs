@@ -3,6 +3,18 @@
 ``ip_check``
 ============
 
-.. include:: roundcube-settings/needs-work.txt
+Enforce a session may only come from one source IP address.
 
-Sadly, this setting has not yet been documented.
+Should a user be a roaming user -- for example, connect from one source
+IP address that is one Wifi network, and later connect from another
+source IP address that is another Wifi network -- then enabling the IP
+check using this setting will force the existing session to be
+invalidated, and require the user to login again.
+
+This is useful for paranoid tracking of user's session validity with as
+many parameters as possible, but also has major caveats.
+
+To have to login again is not user-friendly, and some networks employ
+load-balanced outgoing connections (with help of proxies) -- meaning
+that the user may appear to come from two or more separate source IP
+addresses, while in fact the user has not been roaming.

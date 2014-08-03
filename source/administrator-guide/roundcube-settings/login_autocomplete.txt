@@ -3,6 +3,32 @@
 ``login_autocomplete``
 ======================
 
-.. include:: roundcube-settings/needs-work.txt
+Enable or disable parts of the login form to allow for auto-completion.
 
-Sadly, this setting has not yet been documented.
+This setting knows three distinct values:
+
+*   ``0``, meaning no parts of the login form should be remembered by
+    the browser.
+
+*   ``1``, meaning the login username may be remembered.
+
+    .. NOTE::
+
+        Note that the login username is a regular form field, and as
+        such it may be difficult for the user to opt-out of remembering
+        the form field value.
+
+*   ``2``, meaning the login username and password may both be
+    remembered.
+
+    .. WARNING::
+
+        This leaves the user to choose whether or not to store the
+        password using the browser, but still implies the login username
+        is remembered -- without too many options to opt-out of that.
+
+        As such, this setting should only be set to ``2``, if the users
+        are known to only use private and personal computers.
+
+The default in Kolab Groupware is to indicate to the browser no form
+field values should be remembered (``0``).

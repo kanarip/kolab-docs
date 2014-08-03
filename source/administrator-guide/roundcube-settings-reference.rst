@@ -156,6 +156,7 @@ LDAP Settings
 Session & Login Configuration
 -----------------------------
 
+.. include:: roundcube-settings/assets_path.txt
 .. include:: roundcube-settings/ip_check.txt
 .. include:: roundcube-settings/login_autocomplete.txt
 .. include:: roundcube-settings/login_lc.txt
@@ -170,6 +171,7 @@ Session & Login Configuration
 .. include:: roundcube-settings/user_aliases.txt
 .. include:: roundcube-settings/mail_domain.txt
 .. include:: roundcube-settings/referer_check.txt
+.. include:: roundcube-settings/use_secure_urls.txt
 .. include:: roundcube-settings/username_domain_forced.txt
 .. include:: roundcube-settings/username_domain.txt
 

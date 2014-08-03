@@ -1,0 +1,23 @@
+.. _admin_roundcube-settings-assets_path:
+
+``assets_path``
+===============
+
+The ``assets_path`` setting controls where Roundcube (and also plugins)
+point the user's browser to to obtain static content such as skin markup
+files (Cascaded Style Sheets or CSS files) and JavaScript files,
+commonly referred to as :term:`assets`.
+
+In combination with :ref:`admin_roundcube-settings-use_secure_urls`,
+which enforces a dynamic base URL to Roundcube, this helps the browsers
+retain their cached assets and prevents page load times from increasing.
+
+.. versionadded:: roundcubemail-1.0.1
+    Available for Kolab Enterprise 13
+
+.. versionadded:: roundcubemail-1.1
+    Available with Kolab 3.3
+
+.. seealso::
+
+    *   :ref:`admin_roundcube-settings-use_secure_urls`

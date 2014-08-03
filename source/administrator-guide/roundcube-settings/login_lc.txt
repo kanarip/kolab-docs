@@ -3,6 +3,7 @@
 ``login_lc``
 ============
 
-.. include:: roundcube-settings/needs-work.txt
-
-Sadly, this setting has not yet been documented.
+Should Roundcube lower-case the login username? A boolean, the default
+in Kolab Groupware is set to ``true`` -- exploiting case-sensitivity in
+email addresses, which are the default logins and result attributes, is
+prohibited.

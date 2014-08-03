@@ -3,6 +3,13 @@
 ``flag_for_deletion``
 =====================
 
-.. include:: roundcube-settings/needs-work.txt
+When a user deletes a message, should Roundcube flag the message as
+deleted in IMAP, or move the message to the Trash folder?
 
-Sadly, this setting has not yet been documented.
+The default in Kolab Groupware is to flag a message as deleted.
+
+.. seealso::
+
+    *   :ref:`admin_roundcube-settings_delete_always`
+    *   :ref:`admin_roundcube-settings_logout_expunge`
+    *   :ref:`admin_roundcube-settings_logout_purge`

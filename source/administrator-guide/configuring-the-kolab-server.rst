@@ -9,18 +9,18 @@ Configuring the Kolab Groupware Server
 Recipient Policy
 ================
 
-Kolab Groupware features the automated application of user metadata, such as a
-user's given-, surname and user ID, to form recipient email addresses for the
-user.
+Kolab Groupware features the automated application of user metadata,
+such as a user's given-, surname and user ID, to form
+:term:`recipient email addresses` for the user.
 
-This is called the :term:`recipient policy`, and serves the following important
-purposes:
+This is called the :term:`recipient policy`, and serves the following
+important purposes:
 
-#.  :ref:`admin_rcpt-policy_naming-conventions` (should they exist) are applied
-    automatically and consistently,
+#.  :ref:`admin_rcpt-policy_naming-conventions` (should they exist) are
+    applied automatically and consistently,
 
-#.  :ref:`admin_rcpt-policy_locale-transliteration` of non-ASCII characters in
-    names is applied to form valid email addresses,
+#.  :ref:`admin_rcpt-policy_locale-transliteration` of non-ASCII
+    characters in names is applied to form valid email addresses,
 
 #.  :ref:`admin_rcpt-policy_globally-unique-addresses` are automatically
     guaranteed.
@@ -30,76 +30,78 @@ purposes:
 Naming Conventions
 ------------------
 
-The recipient policy aids deployments in achieving a level of consistency
-throughout their recipient database by applying a naming convention, avoiding
-the need for Kolab Groupware administrators to need to understand and
-consistently apply naming convention rules.
+The recipient policy aids deployments in achieving a level of
+consistency throughout their recipient database by applying a naming
+convention, avoiding the need for Kolab Groupware administrators to need
+to understand and consistently apply naming convention rules.
 
-Consistency is important when considering global address book listings and
-searches in different contexts, and when anticipating what a valid recipient
-address for a given user may be -- noted that most email users do not have
-access to your global address book to verify a recipient address is valid, and
-it is likely that most communications will take place with those users.
+Consistency is important when considering global address book listings
+and searches in different contexts, and when anticipating what a valid
+recipient address for a given user may be -- noted that most email users
+do not have access to your global address book to verify a recipient
+address is valid, and it is likely that most communications will take
+place with those users.
 
 .. _admin_rcpt-policy_locale-transliteration:
 
 Locale-specific Transliteration
 -------------------------------
 
-Names can contain non-ASCII characters -- for example *Marie Möller* --, while
-recipient email addresses may not contain such characters (i.e.
+Names can contain non-ASCII characters -- for example *Marie Möller* --,
+while recipient email addresses may not contain such characters (i.e.
 *marie.möller@example.org* is an invalid email address).
 
 Without locale specific transliteration, the email address would become
-*marie.moller@example.org*. This is considered inadequate, as many users will
-experience this inappropriate, inconsiderate and/or awkward -- it is the user's
-native tongue after all and transliteration is used in every-day life. Kolab
-Groupware should therefor also be able to apply the same transliteration rules
-specific to the user's native tongue.
+*marie.moller@example.org*. This is considered inadequate, as many users
+will experience this inappropriate, inconsiderate and/or awkward -- it
+is the user's native tongue after all and transliteration is used in
+every-day life. Kolab Groupware should therefor also be able to apply
+the same transliteration rules specific to the user's native tongue.
 
-With the (presumably correct) transliteration rules for German applied, the
-email address would become *marie.moeller@example.org*.
+With the (presumably correct) transliteration rules for German applied,
+the email address would become *marie.moeller@example.org*.
 
-The recipient policy takes the value(s) of a number of attributes from an entry,
-and executes the recipient policy for primary and secondary recipient email
-addresses with help of the attribute names (referred to in the policy) and their
-values.
+The recipient policy takes the value(s) of a number of attributes from
+an entry, and executes the recipient policy for primary and secondary
+recipient email addresses with help of the attribute names (referred to
+in the policy) and their values.
 
-It will set the primary email address attribute to a singular value, though the
-LDAP schema allows multiple values for the default primary mail attribute mail.
+It will set the primary email address attribute to a singular value,
+though the LDAP schema allows multiple values for the default primary
+mail attribute mail.
 
-The secondary email address attribute (alias by default) is set to the value(s)
-returned by the recipient policy as well.
+The secondary email address attribute (alias by default) is set to the
+value(s) returned by the recipient policy as well.
 
 .. _admin_rcpt-policy_globally-unique-addresses:
 
 Globally Unique Recipient Email Addresses
 -----------------------------------------
 
-Furthermore, the recipient policy allows these automatically recipient email
-addresses to be globally unique.
+Furthermore, the recipient policy allows these automatically recipient
+email addresses to be globally unique.
 
-The primary email address attribute value is, by default, used to determine a
-user's mailbox name. Further using the previous example, user *Marie Möller
-<marie.moeller@example.org>* would get a user mailbox of
-``user/marie.moeller@example.org``.
+The primary email address attribute value is, by default, used to
+determine a user's mailbox name. Further using the previous example,
+user *Marie Möller <marie.moeller@example.org>* would get a user mailbox
+of ``user/marie.moeller@example.org``.
 
-It is important to realize that, should a second user also receive a primary
-email address attribute value of *marie.moeller@example.org*, two important
-things would happen:
+It is important to realize that, should a second user also receive a
+primary email address attribute value of *marie.moeller@example.org*,
+two important things would happen:
 
-#.  Possibly only one of the two, but likely neither user would be able to
-    authenticate,
+#.  Possibly only one of the two, but likely neither user would be able
+    to authenticate,
 
-#.  The user's mailbox and authorization ID would no longer uniquely correspond
-    to either user.
+#.  The user's mailbox and authorization ID would no longer uniquely
+    correspond to either user.
 
-Unless intentionally so, it is also important to avoid entries holding the same
-secondary email address attribute value(s).
+Unless intentionally so, it is also important to avoid entries holding
+the same secondary email address attribute value(s).
 
-To this end, for each generated value of either primary or secondary mail
-address attributes, a check is performed and -- if the address is already in
-use -- an integer is appended and incremented if necessary.
+To this end, for each generated value of either primary or secondary
+mail address attributes, a check is performed and -- if the address is
+already in use -- an integer is appended and incremented if necessary.
 
 For three people named *Marie Möller* for example, this would end up as:
 
@@ -110,14 +112,15 @@ For three people named *Marie Möller* for example, this would end up as:
 Components that Apply the Recipient Policy
 ------------------------------------------
 
-By default, the recipient policy is applied by two separate applications:
+By default, the recipient policy is applied by two separate
+applications:
 
-#.  The optional Kolab Web Administration Panel, often used for inputting new
-    users and editing existing ones, so that this interface reflects the results
-    to be expected,
+#.  The optional Kolab Web Administration Panel, often used for
+    inputting new users and editing existing ones, so that this
+    interface reflects the results to be expected,
 
-#.  The Kolab daemon (the **kolabd** service) is the primary component to apply
-    the recipient policy.
+#.  The Kolab daemon (the **kolabd** service) is the primary component
+    to apply the recipient policy.
 
 Both components use the configuration settings ``primary_mail`` and
 ``secondary_mail`` as their policy configuration.
@@ -134,37 +137,38 @@ Having added this setting, the Kolab Web Administration Panel could be
 re-configured so that the ``mail`` attribute for user entries becomes
 ``Generated`` instead of ``Generated (read-only)``.
 
-These configuration items consist of a Python notation for string formatting,
-along with a limited number of string operations.
+These configuration items consist of a Python notation for string
+formatting, along with a limited number of string operations.
 
-The ``primary_mail`` setting contains a singular basestring to be used in
-simplistic string formatting, while the ``secondary_mail`` setting contains a
-numerically ordered list of singular basestrings to be used in string
-formatting, and additionally allow the opportunity to execute some additional
-string operations such as converstion to substrings and capitalization.
+The ``primary_mail`` setting contains a singular basestring to be used
+in simplistic string formatting, while the ``secondary_mail`` setting
+contains a numerically ordered list of singular basestrings to be used
+in string formatting, and additionally allow the opportunity to execute
+some additional string operations such as converstion to substrings and
+capitalization.
 
 Application of the Default Recipient Policy Example
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-If an example.org user is created with given name John and surname Doe, the
-default recipient policy will set the primary email address to
-john.doe@example.org and the secondary email addresses to j.doe@example.org
-and doe@example.org.
+If an example.org user is created with given name John and surname Doe,
+the default recipient policy will set the primary email address to
+john.doe@example.org and the secondary email addresses to
+j.doe@example.org and doe@example.org.
 
 .. IMPORTANT::
 
-    By default, the primary recipient email address is used as a globally unique
-    identifier involving authentication (allowing login by email address), the
-    user's mailbox name, mail delivery configuration, access control and the
-    storage of user profiles.
+    By default, the primary recipient email address is used as a
+    globally unique identifier involving authentication (allowing login
+    by email address), the user's mailbox name, mail delivery
+    configuration, access control and the storage of user profiles.
 
-    It is therefore very important that no two entries share a single primary
-    recipient email address.
+    It is therefore very important that no two entries share a single
+    primary recipient email address.
 
-The primary recipient email address for an ``example.org`` domain user with
-given name *Marie*, surname *Möller* and preferred language of *en_US* is
-(incidentally **wrongly**, see further down for the "correct" way) composed as
-follows:
+The primary recipient email address for an ``example.org`` domain user
+with given name *Marie*, surname *Möller* and preferred language of
+*en_US* is (incidentally **wrongly**, see further down for the "correct"
+way) composed as follows:
 
 #.  The ``sn`` attribute is transliterated using the specified preferred
     language for the user, with the equivalent of:
@@ -187,9 +191,10 @@ follows:
 
     .. NOTE::
 
-        The attribute name for a user's surname (family name) is ``sn``. The use
-        of ``surname`` in the configuration is to indicate that the
-        transliterated version of the original (``sn``) should be used.
+        The attribute name for a user's surname (family name) is ``sn``.
+        The use of ``surname`` in the configuration is to indicate that
+        the transliterated version of the original (``sn``) should be
+        used.
 
 #.  The equivalent of the following Python is then executed:
 
@@ -202,9 +207,10 @@ follows:
     >>> primary_mail
     maria.moller@example.org
 
-#.  This return value is checked against the existing user database for global
-    uniqueness, and appended an integer to, which start at 2, and is incremented
-    by 1 for each recipient address that would not be globally unique.
+#.  This return value is checked against the existing user database for
+    global uniqueness, and appended an integer to, which starts at 2,
+    and is incremented by 1 for each recipient address that would not be
+    globally unique.
 
 The same routine applied with a preferred language of *de_DE* though:
 
@@ -229,9 +235,10 @@ The same routine applied with a preferred language of *de_DE* though:
 
     .. NOTE::
 
-        The attribute name for a user's surname (family name) is ``sn``. The use
-        of ``surname`` in the configuration is to indicate that the
-        transliterated version of the original (``sn``) should be used.
+        The attribute name for a user's surname (family name) is ``sn``.
+        The use of ``surname`` in the configuration is to indicate that
+        the transliterated version of the original (``sn``) should be
+        used.
 
 #.  The equivalent of the following Python is then executed:
 
@@ -243,16 +250,17 @@ The same routine applied with a preferred language of *de_DE* though:
     >>> primary_mail
     maria.moeller@example.org
 
-#.  This return value is checked against the existing user database for global
-    uniqueness, and appended an integer to, which start at 2, and is incremented
-    by 1 for each recipient address that would not be globally unique.
+#.  This return value is checked against the existing user database for
+    global uniqueness, and appended an integer to, which start at 2, and
+    is incremented by 1 for each recipient address that would not be
+    globally unique.
 
 Secondary Email Address Recipient Policy Example
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The secondary recipient email address for an example.org user with given name
-*Marie*, surname *Möller* and preffered language *de_DE*, is composed as
-follows:
+The secondary recipient email address for an example.org user with given
+name *Marie*, surname *Möller* and preffered language *de_DE*, is
+composed as follows:
 
 #.  The ``sn`` attribute is transliterated using the specified preferred
     language for the user, with the equivalent of:
@@ -264,8 +272,8 @@ follows:
 
     and stored as the value to key ``surname`` (now "Moeller").
 
-#.  The recipient policy is obtained from the i``secondary_mail`` setting. By
-    default, this configuration setting is set to:
+#.  The recipient policy is obtained from the i``secondary_mail``
+    setting. By default, this configuration setting is set to:
 
     .. parsed-literal::
 
@@ -282,11 +290,11 @@ follows:
                     }
             }
 
-    As the configuration indicates, the attributes for the user that will be
-    used are the given name, the surname and the uid.
+    As the configuration indicates, the attributes for the user that
+    will be used are the given name, the surname and the uid.
 
-#.  Using Python's string formatting, the resulting primary recipient email
-    address would become:
+#.  Using Python's string formatting, the resulting primary recipient
+    email address would become:
 
     >>> secondary_mail = [
                 "{0}.{1}@{2}".format('Maria'[0:1].capitalize(), 'Moeller', 'example.org'),
@@ -299,10 +307,10 @@ follows:
 #.  Any secondary email address that ends up being a duplicate of the
     established primary email address is removed,
 
-#.  The remainder addresses are checked against the existing user database for
-    global uniqueness, and appended an integer to, which start at 2, and is
-    incremented by 1 for each recipient address that would not be globally
-    unique.
+#.  The remainder addresses are checked against the existing user
+    database for global uniqueness, and appended an integer to, which
+    starts at 2, and is incremented by 1 for each recipient address that
+    would not be globally unique.
 
 Configuring the Recipient Policy
 --------------------------------
@@ -310,78 +318,84 @@ Configuring the Recipient Policy
 Setting Primary Recipient Email Address
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The primary recipient email address can be changed to reflect your naming
-convention through this procedure:
+The primary recipient email address can be changed to reflect your
+naming convention through this procedure:
 
 #.  Edit :file:`/etc/kolab/kolab.conf` and replace the value of the
     ``primary_mail`` setting in the applicable domain section.
 
-    For example, set the policy to ``%(givenname)s@%(domain)s`` to get email
-    addresses like ``john@example.org`` and ``jane@example.org``.
+    For example, set the policy to ``%(givenname)s@%(domain)s`` to get
+    email addresses like ``john@example.org`` and ``jane@example.org``.
 
-#.  Edit the user types for any user that matches the filter used by the kolab
-    daemon to determine which users are kolab users. For example, "Kolab Users"
-    and "Mail-enabled POSIX users" both include "objectclass=kolabinetorgperson"
-    (the default ``kolab_user_filter``) and therefore the Kolab daemon would
-    apply the recipient policy to these objects.
+#.  Edit the user types for any user that matches the filter used by the
+    kolab daemon to determine which users are kolab users. For example,
+    "Kolab Users" and "Mail-enabled POSIX users" both include
+    "objectclass=kolabinetorgperson" (the default ``kolab_user_filter``)
+    and therefore the Kolab daemon would apply the recipient policy to
+    these objects.
 
     For each of these user_types, make sure that the auto_form_field
-    configuration for the primary recipient email (``mail``) attribute include
-    all attributes needed to compose the address.
+    configuration for the primary recipient email (``mail``) attribute
+    include all attributes needed to compose the address.
 
     If, for example, you seek to apply a recipient policy containing
-    ``%(initials)s``, so that a user *John Frank Doe* may have an email address
-    of ``john.f.doe@example.org``, the ``initials`` attribute will need to be
-    added to the ``data`` list in the ``auto_form_field`` definition for the
-    ``mail`` attribute.
+    ``%(initials)s``, so that a user *John Frank Doe* may have an email
+    address of ``john.f.doe@example.org``, the ``initials`` attribute
+    will need to be added to the ``data`` list in the
+    ``auto_form_field`` definition for the ``mail`` attribute.
 
 Setting the Secondary Recipient Email Address
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The secondary recipient email addresses can be changed to reflect your naming
-convention through this procedure:
+The secondary recipient email addresses can be changed to reflect your
+naming convention through this procedure:
 
 #.  Edit :file:`/etc/kolab/kolab.conf` and replace the value of the
     ``secondary_mail`` setting in the applicable domain section.
 
-    For example, set a policy item to ``'{0}@{1}': "format('%(givenname)s', '%(domain)s')"``
-    to get email addresses like ``john@example.org`` and ``jane@example.org``.
+    For example, set a policy item to
+    ``'{0}@{1}': "format('%(givenname)s', '%(domain)s')"``
+    to get email addresses like ``john@example.org`` and
+    ``jane@example.org``.
 
-#.  Edit the user types for any user that matches the filter used by the kolab
-    daemon to determine which users are kolab users. For example, "Kolab Users"
-    and "Mail-enabled POSIX users" both include "objectclass=kolabinetorgperson"
-    (the default ``kolab_user_filter``) and therefore the Kolab daemon would
-    apply the recipient policy to these objects.
+#.  Edit the user types for any user that matches the filter used by the
+    kolab daemon to determine which users are kolab users. For example,
+    "Kolab Users" and "Mail-enabled POSIX users" both include
+    "objectclass=kolabinetorgperson" (the default ``kolab_user_filter``)
+    and therefore the Kolab daemon would apply the recipient policy to
+    these objects.
 
     For each of these user_types, make sure that the auto_form_field
-    configuration for the secondary recipient email (``alias``) attribute
-    include all attributes needed to compose the addresses.
+    configuration for the secondary recipient email (``alias``)
+    attribute include all attributes needed to compose the addresses.
 
 Controlling the Primary and Secondary Recipient Email Address Attributes
 ------------------------------------------------------------------------
 
-The attribute names that contain the primary and secondary recipient email
-addresses are controlled by the ``mail_attrs`` setting in the ``[$domain]``
-section of :file:`/etc/kolab/kolab.conf`.
+The attribute names that contain the primary and secondary recipient
+email addresses are controlled by the ``mail_attrs`` setting in the
+``[$domain]`` section of :file:`/etc/kolab/kolab.conf`.
 
 Should no such section or setting exist, then the fallback in the
 ``[$auth_mechanism]`` section is used, where *$auth_mechanism* is the
-authentication mechanism configured using the ``auth_mechanism`` setting in the
-``[kolab]`` section.
+authentication mechanism configured using the ``auth_mechanism`` setting
+in the ``[kolab]`` section.
 
 .. NOTE::
 
-    Note that only 'ldap' is currently supported as an authentication mechanism.
+    Note that only 'ldap' is currently supported as an authentication
+    mechanism.
 
-This setting is a comma- and/or comma-space separated list of attribute names.
+This setting is a comma- and/or comma-space separated list of attribute
+names.
 
 By default, ``mail_attrs`` is set to ``mail, alias``.
 
-The first item in the list will be used as the attribute to use for primary
-recipient email addresses.
+The first item in the list will be used as the attribute to use for
+primary recipient email addresses.
 
-The second item in the list will be used as the attribute to use for secondary
-recipient email addresses.
+The second item in the list will be used as the attribute to use for
+secondary recipient email addresses.
 
 No policy applies to any further values in this list, should they exist.
 
@@ -393,8 +407,8 @@ The following procedure describes how to disable the recipient policy.
 Disabling the Recipient Policy
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-#.  Edit :file:`/etc/kolab/kolab.conf` and navigate to the section applicable
-    for your domain (named ``[$domain]``).
+#.  Edit :file:`/etc/kolab/kolab.conf` and navigate to the section
+    applicable for your domain (named ``[$domain]``).
 
 #.  Remove the settings primary_mail and secondary_mail.
 
@@ -404,16 +418,17 @@ Disabling the Recipient Policy
 
         # :command:`service kolabd restart`
 
-#.  Copy :file:`/usr/share/doc/kolab-webadmin-*/sample-insert-user_types.php` to
-    :file:`/usr/share/kolab-webadmin/`:
+#.  Copy
+    :file:`/usr/share/doc/kolab-webadmin-*/sample-insert-user_types.php`
+    to :file:`/usr/share/kolab-webadmin/`:
 
     .. parsed-literal::
 
         # :command:`cp /usr/share/doc/kolab-webadmin-*/sample-insert-user_types.php \\
             /usr/share/kolab-webadmin/`
 
-#.  Open :file:`/usr/share/kolab-webadmin/sample-insert-user_types.php` in an
-    editor of your choice.
+#.  Open :file:`/usr/share/kolab-webadmin/sample-insert-user_types.php`
+    in an editor of your choice.
 
 #.  Remove the values of ``$attributes['auto_form_fields']['mail']`` and
     ``$attributes['auto_form_fields']['alias']``.
@@ -453,8 +468,8 @@ Disabling the Recipient Policy
                 "type" => "list"
             ),
 
-#.  Add a new value ``$attributes['form_fields']['mail']`` with the following
-    contents:
+#.  Add a new value ``$attributes['form_fields']['mail']`` with the
+    following contents:
 
         "mail" => Array(
                 "optional" => true
@@ -462,9 +477,10 @@ Disabling the Recipient Policy
 
 .. IMPORTANT::
 
-    Remember to remove the aforementioned ``$attributes['auto_form_fields']``
-    and add or chance the ``$attributes['form_fields']` for all user types that
-    have mail attributes.
+    Remember to remove the aforementioned
+    ``$attributes['auto_form_fields']`` and add or chance the
+    ``$attributes['form_fields']` for all user types that have mail
+    attributes.
 
 #.  Exit the editor, saving your changes, and check the PHP syntax:
 
@@ -481,18 +497,18 @@ Disabling the Recipient Policy
 
     .. NOTE::
 
-        You may have to log out and log back in of the Kolab Web Administration
-        Panel for the changes to take effect.
+        You may have to log out and log back in of the Kolab Web
+        Administration Panel for the changes to take effect.
 
 Storage Tiering of the IMAP Spool
 =================================
 
-Using Cyrus IMAP partitions, a single IMAP server can hold multiple spools in
-which mailboxes reside.
+Using Cyrus IMAP partitions, a single IMAP server can hold multiple
+spools in which mailboxes reside.
 
-A deployment can choose to have, for example, the INBOX and additional folders
-on fast, expensive storage, while an Archive folder may need to reside on slow,
-cheap storage.
+A deployment can choose to have, for example, the INBOX and additional
+folders on fast, expensive storage, while an Archive folder may need to
+reside on slow, cheap storage.
 
 The configuration in :manpage:`imapd.conf(5)` would look like:
 
@@ -504,8 +520,9 @@ The configuration in :manpage:`imapd.conf(5)` would look like:
     partition-archive: /path/to/slow/storage
     (...)
 
-To have Archive folders for new users be created on the archive partition, use
-the ``autocreate_folders`` setting in :manpage:`kolab.conf(5)` and adjust:
+To have Archive folders for new users be created on the archive
+partition, use the ``autocreate_folders`` setting in
+:manpage:`kolab.conf(5)` and adjust:
 
 .. parsed-literal::
 
@@ -531,53 +548,54 @@ to:
 Adding Domains
 ==============
 
-Kolab Groupware allows a single-domain setup to easily become a multi-domain
-setup, by adding additional domain name spaces through the web administration
-panel.
+Kolab Groupware allows a single-domain setup to easily become a
+multi-domain setup, by adding additional domain name spaces through the
+web administration panel.
 
 Two types of additional domain name spaces exist;
 
-#.  An alias domain name space, that is an additional namespace for an existing
-    domain name space.
+#.  An alias domain name space, that is an additional namespace for an
+    existing domain name space.
 
-    This type of domain name space is useful for additional domain name spaces
-    that should end up with the same organization or group of accounts that
-    already exists.
+    This type of domain name space is useful for additional domain name
+    spaces that should end up with the same organization or group of
+    accounts that already exists.
 
-    For example, a company with domain name space "example.us" as its primary
-    domain may want to allow email addresses for the domain name space
-    "example.com" (alias) to be used as well.
+    For example, a company with domain name space "example.us" as its
+    primary domain may want to allow email addresses for the domain name
+    space "example.com" (alias) to be used as well.
 
-#.  A new domain name space, that can be viewed as a new organization or group
-    of accounts.
+#.  A new domain name space, that can be viewed as a new organization or
+    group of accounts.
 
-    This type of domain name space creates a new, isolated space in which the
-    accounts for the domain name space(s) are to exist. It is isolated in the
-    sense that none of the accounts in the new domain name space will
-    (typically) ever know about any of the accounts in any of the other isolated
-    domain name spaces (unless you make it specifically so).
+    This type of domain name space creates a new, isolated space in
+    which the accounts for the domain name space(s) are to exist. It is
+    isolated in the sense that none of the accounts in the new domain
+    name space will (typically) ever know about any of the accounts in
+    any of the other isolated domain name spaces (unless you make it
+    specifically so).
 
-    For example, a company "redhat.com" is definitively a different organization
-    from "sco.com", and no information or accounts should leak across the
-    boundaries of each respective realm.
+    For example, a company "redhat.com" is definitively a different
+    organization from "sco.com", and no information or accounts should
+    leak across the boundaries of each respective realm.
 
 Adding an Alias Domain Name Space
 ---------------------------------
 
-#.  Login to the web administration panel as a global LDAP administrator (for
-    example, as "cn=Directory Manager", but you may have delegated this
-    authority).
+#.  Login to the web administration panel as a global LDAP administrator
+    (for example, as "cn=Directory Manager", but you may have delegated
+    this authority).
 
 #.  Navigate to "Domains".
 
-#.  From the left-hand pane -- the list of current parent domain name spaces --,
-    select the domain to add an alias domain name space to.
+#.  From the left-hand pane -- the list of current parent domain name
+    spaces --, select the domain to add an alias domain name space to.
 
-#.  In the "Domain name(s)" field, click the "[+]" to append a form field to the
-    list.
+#.  In the "Domain name(s)" field, click the "[+]" to append a form
+    field to the list.
 
-#.  Supply the new domain name space to add in the new form field appended to
-    the list.
+#.  Supply the new domain name space to add in the new form field
+    appended to the list.
 
 #.  Press "[Submit]".
 

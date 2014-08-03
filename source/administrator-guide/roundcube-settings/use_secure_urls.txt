@@ -1,0 +1,30 @@
+.. _admin_roundcube-settings-use_secure_urls:
+
+``use_secure_urls``
+===================
+
+Improve the system's security by enabling the use of secure URLs.
+
+Using secure URLs is to say that once a user's session is authenticated,
+the session is directly correlated with a unique URL that is very hard
+to guess. This way, so-called Cross-Site Rquest Forgery attacks can be
+prevented.
+
+.. NOTE::
+
+    Using this setting, which is enabled in Kolab by default, requires
+    the use of a mod_rewrite ruleset such as the following:
+
+    .. parsed-literal::
+
+        RewriteRule ^/roundcubemail/[a-f0-9]{16}/(.*) /roundcubemail/$1 [PT]
+
+.. versionadded:: roundcubemail-1.0.1
+    Available for Kolab Enterprise 13
+
+.. versionadded:: roundcubemail-1.1
+    Available with Kolab 3.3
+
+.. seealso::
+
+    *   :ref:`admin_roundcube-settings-assets_path`
