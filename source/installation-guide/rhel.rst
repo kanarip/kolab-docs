@@ -13,12 +13,12 @@ repositories, the :term:`EPEL` software repository, and the repositories for the
 Kolab Enterprise edition, provided by
 `Kolab Systems AG <https://kolabsys.com>`_.
 
-=================  ================  ================  ================  ================  ================
-Installation Type  RHEL              EPEL              Kolab             Total to Install  Total
-=================  ================  ================  ================  ================  ================
-Basic Server                     71           48 [2]_           56 [3]_               173               548
-Minimal [1]_                    197           48 [2]_           56 [3]_               299               548
-=================  ================  ================  ================  ================  ================
+=================  =====  ========  ========  =================  =======
+Installation Type  RHEL   EPEL      Kolab     Total to Install   Total
+=================  =====  ========  ========  =================  =======
+Basic Server          71   48 [2]_   56 [3]_                173      548
+Minimal [1]_         197   48 [2]_   56 [3]_                299      548
+=================  =====  ========  ========  =================  =======
 
 These numbers may vary for your installation, as packages are updated over time,
 and are for indicative purposes only.
@@ -27,7 +27,8 @@ Installation Procedure
 ======================
 
 1.  Ensure that the system is registered with the Red Hat Network, and is
-    entitled to receive updates and use the *Optional* software repository [4]_.
+    entitled to receive updates and use the *Optional* software repository.
+
     For more information on registering systems with the Red Hat Network,
     subscriptions, entitlements and support consult the vendor's product and
     service documentation.
@@ -192,78 +193,15 @@ Continue to :ref:`install-setup-kolab`.
 
     Check the number of packages installed from the :term:`EPEL` repository
     with the following command:
-
-    .. parsed-literal::
-
-        # :command:`rpm -qia | grep -E "Build Host: .*\.fedoraproject\.org" | wc -l`
-        48
+    :command:`rpm -qia | grep "Build Host" | grep "fedoraproject\.org" | wc -l`
 
 .. [3]
 
     Check the number of packages installed from the Kolab Enterprise 13 software
-    repositories with the following command:
-
-    .. parsed-literal::
-
-        # :command:`rpm -qva | grep kolab_13 | wc -l`
-        56
+    repositories with the following command
+    :command:`rpm -qva | grep kolab_13 | wc -l`
 
 .. [4]
-
-    Without the *Optional* software repository enabled, the result from
-    executing the command ``yum install kolab`` would look as follows:
-
-    .. parsed-literal::
-
-        # :command:`yum install kolab`
-        (...)
-        --> Finished Dependency Resolution
-        Error: Package: amavisd-new-2.8.0-4.el6.noarch (epel)
-                Requires: perl(MIME::Entity)
-        Error: Package: amavisd-new-2.8.0-4.el6.noarch (epel)
-                Requires: perl(MIME::Words)
-        Error: Package: perl-Convert-TNEF-0.17-10.el6.noarch (epel)
-                Requires: perl(IO::Wrap)
-        Error: Package: amavisd-new-2.8.0-4.el6.noarch (epel)
-                Requires: perl(MIME::Head)
-        Error: Package: amavisd-new-2.8.0-4.el6.noarch (epel)
-                Requires: perl(MIME::Decoder::UU)
-        Error: Package: amavisd-new-2.8.0-4.el6.noarch (epel)
-                Requires: perl(MIME::Decoder::Binary)
-        Error: Package: perl-Convert-TNEF-0.17-10.el6.noarch (epel)
-                Requires: perl(MIME::Body)
-        Error: Package: amavisd-new-2.8.0-4.el6.noarch (epel)
-                Requires: perl(MIME::Decoder::Base64)
-        Error: Package: amavisd-new-2.8.0-4.el6.noarch (epel)
-                Requires: perl(MIME::Decoder::NBit)
-        Error: Package: amavisd-new-2.8.0-4.el6.noarch (epel)
-                Requires: perl(IO::Stringy)
-        Error: Package: amavisd-new-2.8.0-4.el6.noarch (epel)
-                Requires: perl(Archive::Zip)
-        Error: Package: amavisd-new-2.8.0-4.el6.noarch (epel)
-                Requires: perl(MIME::Decoder::QuotedPrint)
-        Error: Package: amavisd-new-2.8.0-4.el6.noarch (epel)
-                Requires: perl(MIME::Body)
-        Error: Package: amavisd-new-2.8.0-4.el6.noarch (epel)
-                Requires: perl(MIME::Parser)
-        Error: Package: amavisd-new-2.8.0-4.el6.noarch (epel)
-                Requires: perl(MIME::Decoder::Gzip64)
-        You could try using --skip-broken to work around the problem
-        You could try running: rpm -Va --nofiles --nodigest
-
-    The additional software required from the *Optional* software repository are
-    therefore:
-
-    ===================  ============
-    Package Name         Repository
-    ===================  ============
-    perl-Convert-BinHex  :term:`EPEL`
-    perl-MIME-tools      :term:`EPEL`
-    perl-IO-Stringy      :term:`EPEL`
-    perl-Archive-Zip     :term:`EPEL`
-    ===================  ============
-
-.. [5]
 
     https://support.kolabsys.com/Obtaining,_Renewing_and_Using_a_Client_SSL_Certificate#Using_a_Customer_or_Partner_Client_SSL_Certificate.
 
