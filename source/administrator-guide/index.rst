@@ -38,6 +38,7 @@ Administrator Guide
     dav-autodiscovery
 
     imap-access-rights-reference
+    roundcube-settings-reference
 
     ../glossary
 
