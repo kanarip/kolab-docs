@@ -1,27 +1,19 @@
-postfix
-=======
+kolab-enterprise-release
+========================
 
 .. parsed-literal::
 
-	<package name="postfix" project="Kolab:Development">
-	  <title>postfix</title>
-	  <description/>
-	  <build>
-	    <disable/>
-	  </build>
-	  <url>http://kolab.org/about/postfix</url>
-	</package>
 
-.. table:: Version Table for postfix
+.. table:: Version Table for kolab-enterprise-release
 
     +-------------------+---------------+--------------------------------------+
     | Kolab Version(s)  | Platform(s)   | Version                              |
     +===================+===============+======================================+
-    | Kolab:13          | UCS_3.1       | 2.11.0-1                             |
+    | Kolab:13          | CentOS_6      | 6-7                                  |
     +-------------------+---------------+--------------------------------------+
-    |                   | UCS_3.2       | 2.11.0-1                             |
+    |                   | UCS_3.2       | 13.2-7                               |
     +-------------------+---------------+--------------------------------------+
-    | Kolab:13:Updates  | UCS_3.1       | N/A                                  |
+    | Kolab:13:Updates  | CentOS_6      | N/A                                  |
     +-------------------+---------------+--------------------------------------+
     |                   | UCS_3.2       | N/A                                  |
     +-------------------+---------------+--------------------------------------+

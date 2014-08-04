@@ -1,23 +1,15 @@
-php
-===
+libestr
+=======
 
 .. parsed-literal::
 
-	<package name="php" project="Kolab:Development">
-	  <title>php</title>
-	  <description/>
-	  <build>
-	    <disable/>
-	  </build>
-	  <url>http://kolab.org/about/php</url>
-	</package>
 
-.. table:: Version Table for php
+.. table:: Version Table for libestr
 
     +-------------------+---------------+--------------------------------------+
     | Kolab Version(s)  | Platform(s)   | Version                              |
     +===================+===============+======================================+
-    | Kolab:13          | CentOS_6      | 5.3.27-7                             |
+    | Kolab:13          | CentOS_6      | 0.1.9-1                              |
     +-------------------+---------------+--------------------------------------+
     | Kolab:13:Updates  | CentOS_6      | N/A                                  |
     +-------------------+---------------+--------------------------------------+
