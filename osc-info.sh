@@ -27,7 +27,6 @@ if [ ! -f "osc_cache/obs_projects.list" -o ${refresh} -eq 1 ]; then
     sed -r -i \
         -e '/^Kolab:3\.0/d' \
         -e '/^Kolab:3\.1/d' \
-        -e '/^Kolab:[0-9]{2,}/d' \
         osc-cache/obs_projects.list
 
     # Legacy target platforms do not need to be updated
@@ -113,9 +112,16 @@ for package in ${packages}; do
         rm -rf ${target}
     fi
 
-    if [ ! -f "osc-cache/${project}_${package}.meta" -o ${refresh} -eq 1 ]; then
-        osc meta pkg ${project} ${package} > osc-cache/${project}_${package}.meta
-    fi
+    x=0
+    while [ ${x} -lt ${#kolab_projects[@]} ]; do
+        project=${kolab_projects[${x}]}
+
+        if [ ! -f "osc-cache/${project}_${package}.meta" -o ${refresh} -eq 1 ]; then
+            osc meta pkg ${project} ${package} > osc-cache/${project}_${package}.meta
+        fi
+
+        let x++
+    done
 
     echo "${package}" >> ${target}
     echo "${package}" | sed -e 's/./=/g' >> ${target}
@@ -181,7 +187,7 @@ while [ ${x} -lt ${#kolab_projects[@]} ]; do
         enabled_repositories=""
         target="source/developer-guide/packaging/obs-for-kolab/packages/${package}.txt"
 
-        if [ -f "osc-cache/${project}_${package}.meta" ]; then
+        if [ -s "osc-cache/${project}_${package}.meta" ]; then
             disabled_default=$(awk '/<build>/,/<\/build>/' osc-cache/${project}_${package}.meta | grep -E "^\s*<disable/>$")
         else
             disabled_default="yes"
