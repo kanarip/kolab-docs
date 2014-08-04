@@ -203,7 +203,7 @@ Delete an ACE for a mailbox.
 
 .. seealso::
 
-    *   :ref:`admin_cli_list-mailbox-acl`
+    *   :ref:`admin_cli_list-mailbox-acls`
     *   :ref:`admin_cli_set-mailbox-acl`
 
 .. delete-user
@@ -224,7 +224,7 @@ Delete an ACE for a mailbox.
 lam
 ---
 
-Short-hand for :ref:`admin_cli_list-mailbox-acl`
+Short-hand for :ref:`admin_cli_list-mailbox-acls`
 
 list-deleted-mailboxes
 ----------------------
@@ -248,14 +248,14 @@ list-deleted-mailboxes
     Connect to the IMAP server at address <SERVER> instead of the configured
     IMAP server.
 
-.. _admin_cli_list-mailbox-acl:
+.. _admin_cli_list-mailbox-acls:
 
-list-mailbox-acl
-----------------
+list-mailbox-acls
+-----------------
 
 .. rubric:: Command-Line Options
 
-.. program:: list-mailbox-acl
+.. program:: list-mailbox-acls
 
 .. option:: pattern
 
@@ -400,7 +400,7 @@ Give access to ``jane.doe@example.org`` to read and write contacts in a folder
 
 .. seealso::
 
-    *   :ref:`admin_cli_list-mailbox-acl`
+    *   :ref:`admin_cli_list-mailbox-acls`
     *   :ref:`admin_cli_delete-mailbox-acl`
     *   :ref:`admin_imap-access-rights-reference`
 
