@@ -4,16 +4,18 @@
 Architecture & Design
 =====================
 
-This document outlines the architecture of Kolab Groupware. It outlines the
-various components included, and how they interact.
+This part of the documentation is about the architecture of Kolab
+Groupware. It outlines the various components included, and how they
+interact.
 
 .. NOTE::
 
-    If you are new to groupware environments in general, or Kolab Groupware
-    specifically, we recommend you read the :ref:`and_intro` first.
+    If you are new to groupware environments in general, or Kolab
+    Groupware specifically, we recommend you read the :ref:`and_intro`
+    first.
 
-Kolab Functional Components
-===========================
+How Kolab Groupware Works
+=========================
 
 .. toctree::
     :maxdepth: 2
@@ -22,8 +24,8 @@ Kolab Functional Components
     ldap
     mta
 
-Kolab Software Components
-=========================
+Software Components
+===================
 
 .. toctree::
     :maxdepth: 2

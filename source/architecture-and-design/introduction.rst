@@ -236,7 +236,7 @@ and their individual interactions with other functional components.
             "LDAP" [fontcolor=darkgreen];
             "MTA" [fontcolor=darkgreen];
             "Daemon" [color=red,fontcolor=darkgreen];
-            "Resource Scheduler" [fontcolor=darkgreen];
+            "Resource Scheduler" [color=red,fontcolor=darkgreen];
 
             "User" -> "Desktop Client", "Desktop Browser", "Mobile Device";
             "Desktop Browser" -> "Web Client", "Administration Panel";

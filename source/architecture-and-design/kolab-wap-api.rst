@@ -4,92 +4,100 @@
 Kolab Web Administration Panel and API
 ======================================
 
-The web administration panel comes with an API in order to allow different,
-third-party interfaces, as well as the Kolab tool-chain to Kolab Groupware, to
-execute tasks of an administrative nature.
+The web administration panel comes with an API in order to allow
+different, third-party interfaces, as well as the Kolab tool-chain to
+Kolab Groupware, to execute tasks of an administrative nature.
 
 The API uses JSON to exchange information with the API client.
 
-The calls to the Web API are made to a service handler, for its methods handle
-the request. A call therefore looks as follows:
+The calls to the Web API are made to a service handler, for its methods
+handle the request. A call therefore looks as follows:
 
     **<service>.<method>**
 
 which is a location beneath the base URL for the API.
 
-Suppose https://kolab-admin.example.org/api/ is the API base URL, then a call to
-service method **system.authenticate** would be a POST HTTP/1.1 request to
-https://kolab-admin.example.org/api/system.authenticate.
+Suppose https://kolab-admin.example.org/api/ is the API base URL, then a
+call to service method **system.authenticate** would be a POST HTTP/1.1
+request to https://kolab-admin.example.org/api/system.authenticate.
 
 HTTP Method Convention
 ======================
 
-Two HTTP methods are used: GET and POST. The GET method is generally(!) used for
-read-only operations, to obtain information, whereas the POST method is used for
-write operations (modification of objects or session state).
+Two HTTP methods are used: GET and POST. The GET method is generally(!)
+used for read-only operations, to obtain information, whereas the POST
+method is used for write operations (modification of objects or session
+state).
 
 For GET requests, the parameters (the payload) are appended to the URI
-requested, https://kolab-admin.example.org/api/domain.info?domain=example.org.
+requested,
+https://kolab-admin.example.org/api/domain.info?domain=example.org.
 
 .. NOTE::
 
     This restricts GET requests to specifying key-value pairs of payload
-    information only, even though a GET parameter key can be specified more then
-    once, creating a list of values.
+    information only, even though a GET parameter key can be specified
+    more then once, creating a list of values.
 
-Some read-only operations, such as user.find_by_attributes require the request
-to pass along multiple attributes with, potentially, multiple search parameters.
-These types read-only requests are the exception to the rule of using GET for
-read-only requests, and use POST instead.
+Some read-only operations, such as user.find_by_attributes require the
+request to pass along multiple attributes with, potentially, multiple
+search parameters. These types read-only requests are the exception to
+the rule of using GET for read-only requests, and use POST instead.
 
-For POST requests, the payload is a JSON-encoded dictionary (array) of parameter
-keys and values. Only strings are allowed as keys. Values for the payload may
-contain lists, strings, dictionaries (arrays), integers, floats, etc.
+For POST requests, the payload is a JSON-encoded dictionary (array) of
+parameter keys and values. Only strings are allowed as keys. Values for
+the payload may contain lists, strings, dictionaries (arrays), integers,
+floats, etc.
 
 Service and Method Naming Convention
 ====================================
 
-In another rule-of-thumb we outline the naming convention for services and
-methods.
+In another rule-of-thumb we outline the naming convention for services
+and methods.
 
-Service names consist of an object name either in singular or plural form. The
-singular form depicts actions are placed against a single instance of an object,
-such as **object.add**, or when at most one result entry is expected, such as
-**object.find**.
+Service names consist of an object name either in singular or plural
+form. The singular form depicts actions are placed against a single
+instance of an object, such as **object.add**, or when at most one
+result entry is expected, such as **object.find**.
 
-The plural form depicts actions that are placed against multiple instances of an
-object, such as **objects.list** or **objects.search**, and expect zero or more
-result entries to be returned.
+The plural form depicts actions that are placed against multiple
+instances of an object, such as **objects.list** or **objects.search**,
+and expect zero or more result entries to be returned.
 
-Method names often imply an action is placed against one or more objects in one
-request. Certain actions may be confusing though. For these we have the
-following rules;
+Method names often imply an action is placed against one or more objects
+in one request. Certain actions may be confusing though. For these we
+have the following rules;
 
-*   Finding an object
+**Finding an object**
 
-    The method find is always executed against the service with the singular
-    form of the object name. The target of calling a find method is to obtain
-    exactly zero or one instance of an object. The method should fail if the
-    result set contains any number of objects not zero or one.
+    The method find is always executed against the service with the
+    singular form of the object name. The target of calling a find
+    method is to obtain exactly zero or one instance of an object. The
+    method should fail if the result set contains any number of objects
+    not zero or one.
 
-    Example finding user *John Doe <john.doe@example.org>*::
+    Example finding user *John Doe <john.doe@example.org>*:
+
+    .. parsed-literal::
 
         >>> print api.get('user.find', '{"mail": "john.doe@example.org"})
         '{"status":"OK","result":(...)}'
 
-*   Searching for objects
+**Searching for objects**
 
-    The method search is always executed against the service with the plural
-    form of the object name. The target of calling a search method is to obtain
-    all matches, if any. The method should return any result set containing zero
-    or more results.
+    The method search is always executed against the service with the
+    plural form of the object name. The target of calling a search
+    method is to obtain all matches, if any. The method should return
+    any result set containing zero or more results.
 
-    Example searching for user *John Doe <john.doe@example.org>*::
+    Example searching for user *John Doe <john.doe@example.org>*:
+
+    .. parsed-literal::
 
         >>> print api.get('users.search', '{"givenname":"John"}')
         '{"status":"OK","result":(...)}'
 
-*   Listing objects
+**Listing objects**
 
     A list result set contains the following components:
 
@@ -109,7 +117,9 @@ following rules;
 
                     #. additional entry attributes
 
-    Example listing domains::
+    Example listing domains:
+
+    .. parsed-literal::
 
         >>> print api.get('domains.list')
         "{
@@ -1493,6 +1503,8 @@ The users service ...
 ---------------------
 
 Use ``users.list`` to display paginated lists of users.
+
+.. parsed-literal::
 
     >>> print api.request(
             'GET',
