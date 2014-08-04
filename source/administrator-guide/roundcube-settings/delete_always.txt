@@ -3,6 +3,16 @@
 ``delete_always``
 =================
 
-.. include:: roundcube-settings/needs-work.txt
+This setting controls whether mail should be deleted, even when moving
+the mail to the Trash folder fails.
 
-Sadly, this setting has not yet been documented.
+.. NOTE::
+
+    This setting has no effect in a default Kolab Groupware
+    installation, which does not attempt to move the mail to the Trash
+    folder in the first place.
+
+.. seealso::
+
+    *   :ref:`admin_roundcube-settings_flag_for_deletion`
+    *   :ref:`admin_roundcube-settings_trash_mbox`

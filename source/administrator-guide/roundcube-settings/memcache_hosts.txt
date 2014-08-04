@@ -5,15 +5,15 @@
 
 Configure a list of memcached hosts to use for caches and/or storage.
 
-Usually, it is sufficient to use one memcached host address in this list, and
-this one memcached host address might be a load-balanced, high-availability
-replicated memcached cluster.
+Usually, it is sufficient to use one memcached host address in this
+list, and this one memcached host address might be a load-balanced,
+high-availability replicated memcached cluster.
 
-Replicated memcached is available and supported only as part of Kolab Enterprise
-13, however.
+Replicated memcached is available and supported only as part of Kolab
+Enterprise 13, and later, however.
 
-Use multiple addresses in case the size of all information stored exceeds the
-capacity of one (replicated) memcached host.
+Use multiple addresses in case the size of all information stored
+exceeds the capacity of one (replicated) memcached host.
 
 .. rubric:: Example Configuration for a Replicated Memcached Cluster
 
@@ -31,4 +31,3 @@ capacity of one (replicated) memcached host.
             'memcached1.example.org:11211',
             'memcached2.example.org:11211'
         );
-

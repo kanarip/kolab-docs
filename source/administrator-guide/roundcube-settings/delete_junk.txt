@@ -3,6 +3,5 @@
 ``delete_junk``
 ===============
 
-.. include:: roundcube-settings/needs-work.txt
-
-Sadly, this setting has not yet been documented.
+Delete messages marked as junk right-away, and do not move them to the
+Trash folder.

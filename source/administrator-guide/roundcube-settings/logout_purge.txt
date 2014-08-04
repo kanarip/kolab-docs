@@ -3,5 +3,9 @@
 ``logout_purge``
 ================
 
-Purge the Trash folder upon successful logout. Note that this requires a
-successful logout, and does not kick in when the browser (tab) is simply closed.
+Purge the Trash folder upon successful logout.
+
+.. NOTE::
+
+    Note that this requires a successful logout, and does not kick in
+    when the browser (tab) is simply closed.

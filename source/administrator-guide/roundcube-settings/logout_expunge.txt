@@ -3,5 +3,11 @@
 ``logout_expunge``
 ==================
 
-Expunge a user's INBOX upon logout. Note that this requires a successful logout,
-and does not kick in when the browser (tab) is simply closed.
+Expunge a user's INBOX upon logout. To expunge a user's INBOX means to
+issue an *EXPUNGE* command to the IMAP server, deleting all messages
+from the mailbox that have previously been flagged as \Deleted.
+
+.. NOTE::
+
+    Note that this requires a successful logout, and does not kick in
+    when the browser (tab) is simply closed.

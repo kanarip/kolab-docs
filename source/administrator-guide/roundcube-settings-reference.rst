@@ -4,9 +4,9 @@
 Roundcube Settings Reference Guide
 ==================================
 
-Roundcube is configured using a default settings file, a settings file for site-
-specific configuration, host-specific configuration files, and configuration
-files specific to plugins.
+Roundcube is configured using a default settings file, a settings file
+for site-specific configuration, host-specific configuration files, and
+configuration files specific to plugins.
 
 The configuration inheritance model looks as follows:
 
@@ -27,7 +27,8 @@ The configuration inheritance model looks as follows:
 
     .. NOTE::
 
-        On the expanded sources (from tarball releases), this file starts out as
+        On the expanded sources (from tarball releases), this file
+        starts out as
         :file:`your/install/path/config/config.inc.php.dist`.
 
         You would rename this original ``.dist`` file to
@@ -35,32 +36,39 @@ The configuration inheritance model looks as follows:
         distributions, this is already done by the packaging. Similar to
         ``defaults.inc.php``, this configuration file also lives in
         :file:`/etc/roundcubemail/`, at
-        :file:`/etc/roundcubemail/config.inc.php` to be precise, and a symbolic
-        link is created from to original file location to this location.
+        :file:`/etc/roundcubemail/config.inc.php` to be precise, and a
+        symbolic link is created from to original file location to this
+        location.
 
 ``config/<site>.inc.php``
 
-    ``<site>`` being a placeholder for an arbitrary site name, Roundcube allows
-    the inclusion of additional configuration using the
+    ``<site>`` being a placeholder for an arbitrary site name, Roundcube
+    allows the inclusion of additional configuration using the
     :ref:`admin_roundcube-settings_include_host_config` setting.
+
+    This is, however, NOT the recommended solution.
 
 ``plugins/<plugin_name>/config.inc.php``
 
-    Each plugin that requires configuration ships a :file:`config.inc.php.dist`.
+    Each plugin that requires configuration ships a
+    :file:`config.inc.php.dist`.
 
     As you may have suspected, these configuration files too are created
-    symbolic links for, to :file:`/etc/roundcubemail/<plugin_name>.inc.php`.
+    symbolic links for, to
+    :file:`/etc/roundcubemail/<plugin_name>.inc.php`.
 
-Since the configuration files are PHP code that is being executed while the
-configuration loads, one might add include statements such that configured
-condititions load additional configuration files on top of the aforementioned
-four (types).
+Since the configuration files are PHP code that is being executed while
+the configuration loads, one might add include statements such that
+configured condititions load additional configuration files on top of
+the aforementioned four (types).
 
-For example, :file:`/etc/roundcubemail/config.inc.php` might have a segment to
-establish defaults at the start, then include a site specific configuration file:
+For example, :file:`/etc/roundcubemail/config.inc.php` might have a
+segment to establish defaults at the start, then include a site specific
+configuration file:
 
 .. code-block:: php
 
+    // Do test whether the file exists before requiring it.
     if (file_exists(dirname(__FILE__) . PATH_SEPARATOR . $_SERVER["HTTP_HOST"] . PATH_SEPARATOR . basename(__FILE__))) {
         require_once(dirname(__FILE__) . PATH_SEPARATOR . $_SERVER["HTTP_HOST"] . PATH_SEPARATOR . basename(__FILE__));
     }
@@ -71,11 +79,11 @@ and then re-apply mandatory defaults:
 
     $mandatory_plugins = Array(
             'kolab_auth',           # Applies globally required routines
-                                    # including authentication, authorization
-                                    # and canonification.
+                                    # including authentication,
+                                    # authorization and canonification.
 
-            'kolab_folders',        # Hides groupware folders if the plugins
-                                    # for them are not loaded.
+            'kolab_folders',        # Hides groupware folders if the
+                                    # plugins for them are not loaded.
         );
 
     foreach ( $mandatory_plugins as $num => $plugin ) {
@@ -99,6 +107,15 @@ Database Settings
 .. include:: roundcube-settings/db_persistent.txt
 .. include:: roundcube-settings/db_prefix.txt
 .. include:: roundcube-settings/db_table_dsn.txt
+
+.. seealso::
+
+    For more database related settings, see also:
+
+    *   :ref:`admin_roundcube-settings_imap_cache`
+    *   :ref:`admin_roundcube-settings_ldap_cache`
+    *   :ref:`admin_roundcube-settings_messages_cache`
+    *   :ref:`admin_roundcube-settings_session_storage`
 
 -------------
 IMAP Settings

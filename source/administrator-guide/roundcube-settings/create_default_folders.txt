@@ -3,9 +3,18 @@
 ``create_default_folders``
 ==========================
 
-.. include:: roundcube-settings/needs-work.txt
+Whether or not Roundcube should create the default folders configured
+for the user.
 
-Sadly, this setting has not yet been documented.
+This includes, for example, the folders for sent items and the trash
+folder.
+
+.. NOTE::
+
+    In a Kolab Groupware environment, a set of default folders is
+    usually created by the Kolab daemon. Which folders are created is
+    controlled through the ``autocreate_folders`` setting in
+    :manpage:`kolab.conf(5)`.
 
 .. seealso::
 

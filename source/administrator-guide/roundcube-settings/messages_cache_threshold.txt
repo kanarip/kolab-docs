@@ -3,6 +3,7 @@
 ``messages_cache_threshold``
 ============================
 
-.. include:: roundcube-settings/needs-work.txt
+Messages with a size over the configured threshold are not cached.
 
-Sadly, this setting has not yet been documented.
+This allows an administrator to make sure no cheap 30 MB videos of cats
+wearing a custome end up in the expensive database.

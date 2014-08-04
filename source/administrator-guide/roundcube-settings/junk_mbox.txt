@@ -3,9 +3,7 @@
 ``junk_mbox``
 =============
 
-.. include:: roundcube-settings/needs-work.txt
-
-Sadly, this setting has not yet been documented.
+The name of the folder to use as the Junk folder.
 
 .. seealso::
 
