@@ -417,3 +417,16 @@ Glossary
             *   :term:`external email address`
             *   :term:`forwarding email address`
             *   :term:`primary email address`
+
+    working domain
+
+        The working domain is the currently selected domain name space
+        to work against in the Kolab Web Administration Panel.
+
+        A user logs in to the Web Administration Panel with an initial
+        login username of ``john.doe@example.org``, but may have
+        privileges to edit users in another parent domain name space
+        such as ``company.com``. John would issue a
+        ``system.select_domain`` and his session would then be
+        associated with the ``company.com`` domain -- now his
+        :term:`working domain`.
