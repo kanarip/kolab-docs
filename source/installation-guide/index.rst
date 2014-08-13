@@ -18,7 +18,7 @@ Installing the Kolab.org Groupware Solution
 
 Kolab.org is maintained by community volunteers in their spare time.
 It has a fast release cycle and is in steady movement.
-If things do not work as expected, please consider `contributing <https://kolab.org/possible-contributions>`_.
+If things do not work as expected, please consider `contributing`_.
 
 .. toctree::
     :maxdepth: 1
@@ -53,3 +53,5 @@ Configuring Kolab Groupware:
     first-login
 
     ../glossary
+
+.. _contributing: https://kolab.org/possible-contributions

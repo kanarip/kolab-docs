@@ -77,7 +77,7 @@ Kolab Groupware from the OBS
 
     .. parsed-literal::
 
-        deb http://obs.kolabsys.com:82/Kolab:/Development/UCS_3.2/ ./
+        deb http://obs.kolabsys.com/repositories/Kolab:/Development/UCS_3.2/ ./
 
 #.  Obtain and install the GPG keys for the archives:
 
@@ -85,7 +85,7 @@ Kolab Groupware from the OBS
 
     .. parsed-literal::
 
-        # :command:`wget http://obs.kolabsys.com:82/Kolab:/Development/UCS_3.2/Release.key`
+        # :command:`wget http://obs.kolabsys.com/repositories/Kolab:/Development/UCS_3.2/Release.key`
         # :command:`apt-key add Release.key`
         # :command:`rm -rf Release.key`
 
