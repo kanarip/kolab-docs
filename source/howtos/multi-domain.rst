@@ -265,9 +265,9 @@ application):
 
         .. parsed-literal::
 
-            # :command:`postconf -e local_recipient_maps=\\
+            # :command:`postconf -e "local_recipient_maps=\\
                 ldap:/etc/postfix/ldap/hosted_triplet_local_recipient_maps.cf,\\
-                ldap:/etc/postfix/ldap/hosted_duplet_local_recipient_maps.cf`
+                ldap:/etc/postfix/ldap/hosted_duplet_local_recipient_maps.cf"`
 
 **virtual_alias_maps**
 
@@ -320,7 +320,7 @@ application):
 
         .. parsed-literal::
 
-            # :command:`postconf -e virtual_alias_maps=\\$alias_maps,\\
+            # :command:`postconf -e "virtual_alias_maps=\\$alias_maps,\\
                 ldap:/etc/postfix/ldap/hosted_triplet_virtual_alias_maps.cf,\\
                 ldap:/etc/postfix/ldap/hosted_duplet_virtual_alias_maps.cf,\\
                 ldap:/etc/postfix/ldap/hosted_triplet_virtual_alias_maps_mailforwarding.cf,\\
@@ -332,7 +332,7 @@ application):
                 ldap:/etc/postfix/ldap/hosted_triplet_mailenabled_dynamic_distgroups.cf,\\
                 ldap:/etc/postfix/ldap/hosted_duplet_mailenabled_dynamic_distgroups.cf,\\
                 ldap:/etc/postfix/ldap/hosted_triplet_virtual_alias_maps_catchall.cf,\\
-                ldap:/etc/postfix/ldap/hosted_duplet_virtual_alias_maps_catchall.cf`
+                ldap:/etc/postfix/ldap/hosted_duplet_virtual_alias_maps_catchall.cf"`
 
 **transport_maps**
 
@@ -373,9 +373,9 @@ application):
 
         .. parsed-literal::
 
-            # :command:`postconf -e transport_maps=hash:/etc/postfix/transport,\\
+            # :command:`postconf -e "transport_maps=hash:/etc/postfix/transport,\\
                 ldap:/etc/postfix/ldap/hosted_triplet_transport_maps.cf,\\
-                ldap:/etc/postfix/ldap/hosted_duplet_transport_maps.cf`
+                ldap:/etc/postfix/ldap/hosted_duplet_transport_maps.cf"`
 
         .. NOTE::
 
