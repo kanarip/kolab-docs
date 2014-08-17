@@ -229,7 +229,7 @@ If you really want/need you can also add SSL support to your LDAP Server
 
     .. parsed-literal::
 
-        # :command:`certutil -d /etc/dirsrv/slapd-ipa/ -A  -t "CT,," \\
+        # :command:`certutil -d /etc/dirsrv/slapd-\$(hostname -s)/ -A  -t "CT,," \\
             -n "StartCom Certification Authority" \\
             -i /etc/pki/tls/certs/startcom-ca.pem`
 
@@ -239,7 +239,7 @@ If you really want/need you can also add SSL support to your LDAP Server
             -out /tmp/example.p12 -name Server-Cert -passout pass:foo`
 
         # :command:`echo "foo" > /tmp/foo`
-        # :command:`pk12util -i /tmp/example.p12 -d /etc/dirsrv/slapd-ipa/ \\
+        # :command:`pk12util -i /tmp/example.p12 -d /etc/dirsrv/slapd-\$(hostname -s)/ \\
             -w /tmp/foo -k /dev/null`
         # :command:`rm /tmp/foo`
         # :command:`rm /tmp/example.p12`
