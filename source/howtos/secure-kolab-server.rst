@@ -229,7 +229,7 @@ If you really want/need you can also add SSL support to your LDAP Server
 
     .. parsed-literal::
 
-        # :command:`certutil -d /etc/dirsrv/slapd-kolab/ -A  -t "CT,," \\
+        # :command:`certutil -d /etc/dirsrv/slapd-ipa/ -A  -t "CT,," \\
             -n "StartCom Certification Authority" \\
             -i /etc/pki/tls/certs/startcom-ca.pem`
 
@@ -239,7 +239,7 @@ If you really want/need you can also add SSL support to your LDAP Server
             -out /tmp/example.p12 -name Server-Cert -passout pass:foo`
 
         # :command:`echo "foo" > /tmp/foo`
-        # :command:`pk12util -i /tmp/example.p12 -d /etc/dirsrv/slapd-kolab/ \\
+        # :command:`pk12util -i /tmp/example.p12 -d /etc/dirsrv/slapd-ipa/ \\
             -w /tmp/foo -k /dev/null`
         # :command:`rm /tmp/foo`
         # :command:`rm /tmp/example.p12`
@@ -250,7 +250,7 @@ If you really want/need you can also add SSL support to your LDAP Server
 
     .. parsed-literal::
 
-        # :command:`passwd=$(grep ^bind_pw /etc/kolab/kolab.conf | cut -d '=' -f2- | sed -e 's/\s*//g')`
+        # :command:`passwd=$(grep ^bind_pw /etc/kolab/kolab.conf | cut -d '=' -f2- | sed -e 's/\\s*//g')`
         # :command:`ldapmodify -x -h localhost -p 389 \\
             -D "cn=Directory Manager" -w "${passwd}" << EOF
         dn: cn=encryption,cn=config
