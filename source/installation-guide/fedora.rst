@@ -16,8 +16,8 @@ Installation on Fedora
         .. parsed-literal::
 
             # :command:`cd /etc/yum.repos.d/`
-            # :command:`wget http://obs.kolabsys.com/repositories/Kolab:/3.2/Fedora_20/Kolab:3.2.repo`
-            # :command:`wget http://obs.kolabsys.com/repositories/Kolab:/3.2:/Updates/Fedora_20/Kolab:3.2:Updates.repo`
+            # :command:`wget http://obs.kolabsys.com/repositories/Kolab:/3.3/Fedora_20/Kolab:3.3.repo`
+            # :command:`wget http://obs.kolabsys.com/repositories/Kolab:/3.3:/Updates/Fedora_20/Kolab:3.3:Updates.repo`
 
 3.  Install Kolab Groupware:
 

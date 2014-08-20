@@ -8,22 +8,22 @@ Installation on openSUSE
 
         .. parsed-literal::
 
-            # :command:`zypper ar http://obs.kolabsys.com/repositories/Kolab:/3.2/openSUSE_13.1/Kolab:3.2.repo`
-            # :command:`zypper ar http://obs.kolabsys.com/repositories/Kolab:/3.2:/Updates/openSUSE_13.1/Kolab:3.2:Updates.repo`
+            # :command:`zypper ar http://obs.kolabsys.com/repositories/Kolab:/3.3/openSUSE_13.1/Kolab:3.3.repo`
+            # :command:`zypper ar http://obs.kolabsys.com/repositories/Kolab:/3.3:/Updates/openSUSE_13.1/Kolab:3.3:Updates.repo`
 
     *   For openSUSE 12.3:
 
         .. parsed-literal::
 
-            # :command:`zypper ar http://obs.kolabsys.com/repositories/Kolab:/3.2/openSUSE_12.3/Kolab:3.2.repo`
-            # :command:`zypper ar http://obs.kolabsys.com/repositories/Kolab:/3.2:/Updates/openSUSE_12.3/Kolab:3.2:Updates.repo`
+            # :command:`zypper ar http://obs.kolabsys.com/repositories/Kolab:/3.3/openSUSE_12.3/Kolab:3.3.repo`
+            # :command:`zypper ar http://obs.kolabsys.com/repositories/Kolab:/3.3:/Updates/openSUSE_12.3/Kolab:3.3:Updates.repo`
 
     *   For openSUSE 12.2:
 
         .. parsed-literal::
 
-            # :command:`zypper ar http://obs.kolabsys.com/repositories/Kolab:/3.2/openSUSE_12.2/Kolab:3.2.repo`
-            # :command:`zypper ar http://obs.kolabsys.com/repositories/Kolab:/3.2:/Updates/openSUSE_12.2/Kolab:3.2:Updates.repo`
+            # :command:`zypper ar http://obs.kolabsys.com/repositories/Kolab:/3.3/openSUSE_12.2/Kolab:3.3.repo`
+            # :command:`zypper ar http://obs.kolabsys.com/repositories/Kolab:/3.3:/Updates/openSUSE_12.2/Kolab:3.3:Updates.repo`
 
 2.  Install Kolab Groupware:
 

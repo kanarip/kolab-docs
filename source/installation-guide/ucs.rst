@@ -73,7 +73,7 @@ Kolab Groupware from the OBS
 
 #.  Add the following line to ``/etc/apt/sources.list.d/kolab.list``:
 
-    For UCS 3.2:
+    For UCS 3.3:
 
     .. parsed-literal::
 
@@ -81,7 +81,7 @@ Kolab Groupware from the OBS
 
 #.  Obtain and install the GPG keys for the archives:
 
-    For UCS 3.2:
+    For UCS 3.3:
 
     .. parsed-literal::
 
