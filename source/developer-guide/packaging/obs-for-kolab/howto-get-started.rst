@@ -40,9 +40,9 @@ Consider seeding your configuration by putting the following in
 .. parsed-literal::
 
     [general]
-    apiurl = https://obs.kolabsys.com:444
+    apiurl = https://obs.kolabsys.com
 
-    [https://obs.kolabsys.com:444]
+    [https://obs.kolabsys.com]
     user=doe
     pass=VerySecret
 
