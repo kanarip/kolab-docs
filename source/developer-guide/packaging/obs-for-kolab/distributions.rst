@@ -2,27 +2,31 @@
 Distributions
 =============
 
-Kolab OBS provides community packages for the following distribution(s) and
-version(s):
+Kolab OBS provides community packages for the following distribution(s)
+and version(s):
 
-========  =======
-Name      Version
-========  =======
-CentOS    6
-Debian    6.0
-          7.0
-Fedora    18
-          19
-openSUSE  12.1
-          12.2
-          12.3
-Ubuntu    12.04
-          12.10
-          13.04
-          13.10
-UCS       3.0
-          3.1
-========  =======
+==========  =======
+Name        Version
+==========  =======
+CentOS      6
+            7
+Debian      6.0
+            7.0
+            8.0
+Fedora      19
+            20
+openSUSE    12.2
+            12.3
+            13.1
+Ubuntu      12.04
+            12.10
+            13.04
+            13.10
+            14.04
+UCS         3.0
+            3.1
+            3.2
+==========  =======
 
 Adding the Distributions
 ========================
@@ -75,6 +79,59 @@ Add CentOS 6
         # :command:`mysql api_production -e` "INSERT INTO distributions \\
             (vendor, version, name, project, reponame, repository) VALUES \\
             ('CentOS', '6', 'CentOS 6', 'CentOS:6', 'CentOS_6', 'standard');"
+
+.. NOTE::
+
+    The opensuse configuration does not have a %{rhel} macro
+
+Add CentOS 7
+------------
+
+#.  Create the project:
+
+    .. parsed-literal::
+
+        # :command:`osc meta prj CentOS:7 -F -` << EOF
+        <project name="CentOS:7">
+            <title>CentOS 7 (Maipo)</title>
+            <description>CentOS 7 (Maipo)</description>
+            <person userid="Admin" role="maintainer"/>
+            <person userid="Admin" role="bugowner"/>
+            <build>
+                <disable/>
+            </build>
+            <publish>
+                <disable/>
+            </publish>
+            <repository name="updates">
+                <arch>i586</arch>
+                <arch>x86_64</arch>
+            </repository>
+            <repository name="epel">
+                <arch>i586</arch>
+                <arch>x86_64</arch>
+            </repository>
+            <repository name="release">
+                <arch>i586</arch>
+                <arch>x86_64</arch>
+            </repository>
+        </project>
+        EOF
+
+#.  Copy the project configuration over from api.opensuse.org:
+
+    .. parsed-literal::
+
+        # :command:`osc -A https://api.opensuse.org meta prjconf CentOS:CentOS-7` | \\
+            :command:`osc meta prjconf CentOS:7 -F -`
+
+#.  Insert the project as being a distribution:
+
+    .. parsed-literal::
+
+        # :command:`mysql api_production -e` "INSERT INTO distributions \\
+            (vendor, version, name, project, reponame, repository) VALUES \\
+            ('CentOS', '7', 'CentOS 7', 'CentOS:7', 'CentOS_7', 'standard');"
 
 .. NOTE::
 
@@ -161,6 +218,47 @@ Add Debian 7.0
         # :command:`mysql api_production -e` "INSERT INTO distributions \\
             (vendor, version, name, project, reponame, repository) VALUES \\
             ('Debian', '7', 'Debian 7.0', 'Debian:7.0', 'Debian_7.0', 'standard');"
+
+Add Debian 8.0
+--------------
+
+#.  Create the project:
+
+    .. parsed-literal::
+
+        # :command:`osc meta prj Debian:8.0 -F -` << EOF
+        <project name="Debian:8.0">
+            <title>Debian 8.0 (Jessie)</title>
+            <description>Debian 8.0 (Jessie)</description>
+            <person userid="Admin" role="maintainer"/>
+            <person userid="Admin" role="bugowner"/>
+            <build>
+                <disable/>
+            </build>
+            <publish>
+                <disable/>
+            </publish>
+            <repository name="main">
+                <arch>i586</arch>
+                <arch>x86_64</arch>
+            </repository>
+        </project>
+        EOF
+
+#.  Copy the project configuration over from api.opensuse.org:
+
+    .. parsed-literal::
+
+        # :command:`osc -A https://api.opensuse.org meta prjconf Debian:8.0` | \\
+            :command:`osc meta prjconf Debian:8.0 -F -`
+
+#.  Insert the project as being a distribution:
+
+    .. parsed-literal::
+
+        # :command:`mysql api_production -e` "INSERT INTO distributions \\
+            (vendor, version, name, project, reponame, repository) VALUES \\
+            ('Debian', '8', 'Debian 8.0', 'Debian:8.0', 'Debian_8.0', 'standard');"
 
 Add Fedora 17
 -------------
@@ -615,7 +713,7 @@ Add Ubuntu 13.10
         # :command:`sed -i -e 's/version 1304/version 1310/g' Ubuntu\:13.10.prjconf`
 
         # :command:`osc meta prjconf Ubuntu:13.10 -F -` < Ubuntu\:13.10.prjconf
-    
+
     .. NOTE::
 
         At the time of this writing, the upstream openSUSE Build Service did not
