@@ -211,6 +211,7 @@ Recreatae the configuation:
 You can see the configuration differences here:
 
     http://git.kolab.org/pykolab/diff/share/templates/roundcubemail/config.inc.php.tpl?id=pykolab-0.7.1&id2=pykolab-0.6.10
+    http://git.kolab.org/pykolab/commit/?id=57a48ed5e5fed38b4bbbb088fc9425a4b407c0b0
 
 Change the plugin load order the follwing way:
 
@@ -218,6 +219,13 @@ Change the plugin load order the follwing way:
 #.  move *kolab_config* after *kolab_addressbook*
 #.  add *kolab_notes* after *kolab_folders*
 #.  add *kolab_tags* after *kolab_notes*
+
+add 2 more $config entries
+
+ .. parsed-literal::
+
+    $config['use_secure_urls'] = true;
+    $config['assets_path'] = '/assets/';
 
 
 /etc/roundcubemail/password.inc.php
@@ -232,6 +240,20 @@ Change the password driver from **ldap** to **ldap_simple**.
  .. parsed-literal::
 
     $config['password_driver'] = 'ldap_simple';
+
+
+/etc/roundcubemail/kolab_files.inc.php
+--------------------------------------
+
+You can see the configuration change here:
+
+    http://git.kolab.org/pykolab/commit/?id=172545ebeba5c73cbb502fcae859b27df7aafed2
+
+Update the kolab_files_url to /chwala/ to be protocol independent.
+
+ .. parsed-literal::
+
+    $config['kolab_files_url'] = '/chwala/';
 
 
 /etc/iRony/dav.inc.php
