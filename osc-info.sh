@@ -19,6 +19,7 @@ while [ $# -gt 0 ]; do
     esac
 done
 
+echo -n "Gathering projects ..."
 # List the projects and cache them locally.
 if [ ! -f "osc_cache/obs_projects.list" -o ${refresh} -eq 1 ]; then
     osc ls | grep -vE "^(home|deleted)" > osc-cache/obs_projects.list
@@ -27,6 +28,7 @@ if [ ! -f "osc_cache/obs_projects.list" -o ${refresh} -eq 1 ]; then
     sed -r -i \
         -e '/^Kolab:3\.0/d' \
         -e '/^Kolab:3\.1/d' \
+        -e '/^Kolab:13:Updates/d' \
         osc-cache/obs_projects.list
 
     # Legacy target platforms do not need to be updated
@@ -35,10 +37,13 @@ if [ ! -f "osc_cache/obs_projects.list" -o ${refresh} -eq 1 ]; then
         -e '/^Fedora:17/d' \
         -e '/^Fedora:18/d' \
         -e '/^openSUSE:12.1/d' \
+        -e '/^openSUSE:12.2/d' \
+        -e '/^RHEL:7/d' \
         -e '/^UCS:3.0/d' \
         -e '/^UCS:3.1/d' \
         osc-cache/obs_projects.list
 fi
+echo " DONE"
 
 obs_projects=$(cat osc-cache/obs_projects.list)
 
@@ -73,6 +78,7 @@ for project in ${obs_projects}; do
             project_column_width=$(echo -n "${project}" | wc -c)
         fi
     fi
+
 done
 
 # Capture all names being shorter than the header.
@@ -85,16 +91,28 @@ if [ $(echo -n "Platform(s)" | wc -c) -gt ${target_column_width} ]; then
 fi
 
 # List all packages in all projects
-x=0
-while [ ${x} -lt ${#kolab_projects[@]} ]; do
-    project=${kolab_projects[${x}]}
+current=0
+cur_percentage=0
+total=${#kolab_projects[@]}
 
-    if [ ! -f "osc-cache/${project}_packages.list" ]; then
+while [ ${current} -lt ${#kolab_projects[@]} ]; do
+    project=${kolab_projects[${current}]}
+
+    if [ ! -f "osc-cache/${project}_packages.list" -o ${refresh} -eq 1 ]; then
         osc ls ${project} > osc-cache/${project}_packages.list
     fi
 
-    let x++
+    if [ $(( ${current} * 100 / ${total} )) -ne ${cur_percentage} ]; then
+        echo -en "Listing packages for projects: $(printf %3d $(( ${current} * 100 / ${total} )))%\r"
+        export cur_percentage=$(( ${current} * 100 / ${total} ))
+    fi
+
+    export cur_percentage=$(( ${current} * 100 / ${total} ))
+
+    let current++
 done
+
+echo ""
 
 # To initialize the tables, first iterate over all unique packages (across all
 # projects).
@@ -104,6 +122,10 @@ if [ ! -z "${package_refresh}" ]; then
 else
     packages=$(cat osc-cache/*_packages.list | sort -u)
 fi
+
+total=$(cat osc-cache/*_packages.list | sort -u | wc -l)
+current=1
+cur_percentage=0
 
 for package in ${packages}; do
     target="source/developer-guide/packaging/obs-for-kolab/packages/${package}.txt"
@@ -117,7 +139,7 @@ for package in ${packages}; do
         project=${kolab_projects[${x}]}
 
         if [ ! -f "osc-cache/${project}_${package}.meta" -o ${refresh} -eq 1 ]; then
-            osc meta pkg ${project} ${package} > osc-cache/${project}_${package}.meta
+            osc meta pkg ${project} ${package} > osc-cache/${project}_${package}.meta 2>/dev/null
         fi
 
         let x++
@@ -159,7 +181,17 @@ for package in ${packages}; do
     printf "%s" "=+" >> ${target}
     echo "" >> ${target}
 
+    if [ $(( ${current} * 100 / ${total} )) -ne ${cur_percentage} ]; then
+        echo -en "Packages initialize tables: $(printf %3d $(( ${current} * 100 / ${total} )))%\r"
+        export cur_percentage=$(( ${current} * 100 / ${total} ))
+    fi
+
+    export cur_percentage=$(( ${current} * 100 / ${total} ))
+
+    let current++
 done
+
+echo ""
 
 # Loop through our projects,
 # then through the packages for that project,
@@ -177,10 +209,12 @@ while [ ${x} -lt ${#kolab_projects[@]} ]; do
         packages=$(cat osc-cache/*_packages.list | sort -u)
     fi
 
-    echo -n "${project}: "
-
+    current=1
+    cur_percentage=0
+    total=$(cat osc-cache/*_packages.list | sort -u | wc -l)
     for package in ${packages}; do
         if [ -f "osc-info.stop" ]; then
+            echo "Stop issued."
             exit 1
         fi
 
@@ -271,7 +305,14 @@ while [ ${x} -lt ${#kolab_projects[@]} ]; do
             done
         fi
 
-        echo -n "."
+        if [ $(( ${current} * 100 / ${total} )) -ne ${cur_percentage} ]; then
+            echo -en "${project}: $(printf %3d $(( ${current} * 100 / ${total} )))%\r"
+            export cur_percentage=$(( ${current} * 100 / ${total} ))
+        fi
+
+        export cur_percentage=$(( ${current} * 100 / ${total} ))
+
+        let current++
 
     done
     echo ""
