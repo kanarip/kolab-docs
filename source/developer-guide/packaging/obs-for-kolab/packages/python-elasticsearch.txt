@@ -1,26 +1,26 @@
-clamav
-======
+python-elasticsearch
+====================
 
 .. parsed-literal::
 
-	<package name="clamav" project="Kolab:Development">
-	  <title>clamav</title>
+	<package name="python-elasticsearch" project="Kolab:Development">
+	  <title>python-elasticsearch</title>
 	  <description/>
 	  <build>
 	    <disable/>
-	    <enable repository="RHEL_7"/>
+	    <enable repository="CentOS_6"/>
 	  </build>
-	  <url>http://kolab.org/about/clamav</url>
+	  <url>http://kolab.org/about/python-elasticsearch</url>
 	</package>
 
-.. table:: Version Table for clamav
+.. table:: Version Table for python-elasticsearch
 
     +-------------------+---------------+--------------------------------------+
     | Kolab Version(s)  | Platform(s)   | Version                              |
     +===================+===============+======================================+
-    | Kolab:3.3         | RHEL_7        | N/A                                  |
+    | Kolab:3.3         | CentOS_6      | 1.0.0-2.1                            |
     +-------------------+---------------+--------------------------------------+
-    | Kolab:3.3:Updates | RHEL_7        | N/A                                  |
+    | Kolab:3.3:Updates | CentOS_6      | 1.0.0-2.1                            |
     +-------------------+---------------+--------------------------------------+
-    | Kolab:Development | RHEL_7        | N/A                                  |
+    | Kolab:Development | CentOS_6      | 1.0.0-3                              |
     +-------------------+---------------+--------------------------------------+

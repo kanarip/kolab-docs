@@ -13,6 +13,7 @@ Kolab Packages
 .. include:: packages/libcalendaring.txt
 .. include:: packages/libkolab.txt
 .. include:: packages/libkolabxml.txt
+.. include:: packages/php-pear-Net-LDAP3.txt
 .. include:: packages/pykolab.txt
 .. include:: packages/roundcubemail.txt
 .. include:: packages/roundcubemail-plugins-kolab.txt

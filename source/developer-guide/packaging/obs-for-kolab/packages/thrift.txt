@@ -1,26 +1,26 @@
-clamav
+thrift
 ======
 
 .. parsed-literal::
 
-	<package name="clamav" project="Kolab:Development">
-	  <title>clamav</title>
+	<package name="thrift" project="Kolab:Development">
+	  <title>thrift</title>
 	  <description/>
 	  <build>
 	    <disable/>
-	    <enable repository="RHEL_7"/>
+	    <enable repository="CentOS_6"/>
 	  </build>
-	  <url>http://kolab.org/about/clamav</url>
+	  <url>http://kolab.org/about/thrift</url>
 	</package>
 
-.. table:: Version Table for clamav
+.. table:: Version Table for thrift
 
     +-------------------+---------------+--------------------------------------+
     | Kolab Version(s)  | Platform(s)   | Version                              |
     +===================+===============+======================================+
-    | Kolab:3.3         | RHEL_7        | N/A                                  |
+    | Kolab:3.3         | CentOS_6      | 0.9.1-15.1                           |
     +-------------------+---------------+--------------------------------------+
-    | Kolab:3.3:Updates | RHEL_7        | N/A                                  |
+    | Kolab:3.3:Updates | CentOS_6      | 0.9.1-15.1                           |
     +-------------------+---------------+--------------------------------------+
-    | Kolab:Development | RHEL_7        | N/A                                  |
+    | Kolab:Development | CentOS_6      | 0.9.1-16                             |
     +-------------------+---------------+--------------------------------------+
