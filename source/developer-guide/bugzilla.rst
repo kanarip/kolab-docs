@@ -299,15 +299,16 @@ Here is a more dynamic diagram:
             "REOPENED" [color=green];
 
             "UNCONFIRMED" -> "NEW" [label="(1)"];
-            "UNCONFIRMED" -> "NEEDSINFO" [label="(18)"];
+            "UNCONFIRMED" -> "NEEDSINFO" [label="(18)",dir=both];
 
             "NEW" -> "ASSIGNED" [label="(2)"];
-            "NEW" -> "NEEDSINFO" [label="(18)"];
+            "NEW" -> "NEEDSINFO" [label="(18)",dir=both];
 
             "ASSIGNED" -> "NEW" [label="(3)"];
             "ASSIGNED" -> "IN_PROGRESS" [label="(4)"];
-            "ASSIGNED" -> "NEEDSINFO" [label="(18)"];
-            "IN_PROGRESS" -> "NEEDSINFO" [label="(18)"];
+            "ASSIGNED" -> "NEEDSINFO" [label="(18)",dir=both];
+
+            "IN_PROGRESS" -> "NEEDSINFO" [label="(18)",dir=both];
 
             "IN_PROGRESS" -> "RESOLVED" [label="(5)"];
 
@@ -341,6 +342,92 @@ in the forementioned diagram.
 
 Triaging Bugzilla Tickets
 =========================
+
+Triaging tickets is the exercise of ensuring tickets are complete and
+accurate, such that;
+
+*   the ticket type field accurately reflects the type of issue raised
+    in the ticket.
+
+    While the type of ticket is unknown, uncertain or simply not yet
+    determined, the ticket types should remain ``---``.
+
+*   when a **bug** is reported, a sufficiently accurate description of
+    the symptoms is supplied.
+
+    This tends to include things like, *"Steps to reproduce"* and where
+    applicable, any configuration settings and deployment architecture.
+
+*   the version field is set to the earliest version known to exhibit
+    the symptoms, or to have the enhancement be applicable to.
+
+    .. NOTE::
+
+        The version field is usually set to the actual version
+        installed, and needs to be at most the actual version of the
+        software installed.
+
+*   the version of software used is actually still supported.
+
+    A software's currently supported versions have those versions (and
+    only those versions) listed in the version field, and corresponding
+    milestones available to them.
+
+    If a version turns out to be outdated, the ticket can be CLOSED with
+    a resolution of WONTFIX, with the version field set to
+    ``unspecified`` and the milestone set to ``---``.
+
+*   where appropriate, an attempt is made to resolve the issue without
+    requiring the involvement of developers.
+
+    This usually includes searching other tickets for the same symptoms,
+    ensuring the latest available version of the software -- available
+    to the product stream consumed -- is used.
+
+Choosing a Version and Milestone
+================================
+
+Milestones represent the target branch or tag (in source code
+management) to which the ticket's resolution is expected to be applied.
+
+For consistency across the various software components that make up
+Kolab, which commonly apply an $x.$y.$z versioning scheme, we have the
+following "special" milestone notations:
+
+*   ``$x.$y-next``
+
+    The '-next' suffix to the major and minor version of the software
+    is meant to indicate that the target of the ticket's resolution is
+    the current stable branch versioned $x.$y, and HEAD thereof -- with
+    one exception, see below.
+
+    An example milestone is ``1.0-next`` for **libkolabxml**, which is
+    HEAD of the libkolabxml-1.0 branch.
+
+*   ``$x.($y+1)-next``
+
+    It is wrong to refer to a milestone as 'master', which is what this
+    special milestone represents, because 'master' is not a qualified
+    point in the source code management history and release history --
+    or future, for that matter.
+
+    An example milestone is ``1.1-next`` for **libkolabxml**, which is
+    HEAD of the master branch.
+
+*   ``$x.$y.($z+1)`` or ``$x.($y+1).0``
+
+    The milestone that is one step beyond what is currently released is
+    used in :ref:`bugzilla-release-management`.
+
+As such, milestones relate directly to the source code management
+repository branches, and ultimately also tags (releases).
+
+This brings us to versions -- they too have ``$x.$y-next`` as valid
+versions, again representing HEAD of a particular branch, but compiled
+directly from said HEAD -- and not a released version.
+
+These special versions should continue to be available for all supported
+branches.
 
 Assigning a Bugzilla Ticket
 ===========================
@@ -411,6 +498,71 @@ As a rule of thumb, tickets that qualify for a higher priority are:
 
 Effort Involved
 ===============
+
+.. _bugzilla-release-management:
+
+Release Management
+==================
+
+Release Management includes the following steps:
+
+#.  When a release is planned, a milestone ``$x.$y.($z+1)`` or
+    ``$x.($y+1).0`` is created (exceptions apply to pre-releases, which
+    have a format of ``$x.$y-{alpha,beta,rc}[0-9]+``).
+
+    For example, when a release is planned for the stable *1.0* series
+    of **libkolabxml**, a milestone **1.0.2** is created, as *1.0.1* had
+    once been released.
+
+#.  All tickets with milestones ``$x.$y-next`` (for a teeny release) or
+    all tickets with milestones ``$x.($y+1)-next`` (for a minor
+    release) are now evaluated.
+
+    What actually happens with the tickets depends on their status:
+
+    *   All tickets with status PENDING_RELEASE are set against the new
+        milestone.
+
+    *   After verifying the related modifications are available in the
+        correct branch, all tickets with status RESOLVED are set against
+        the new milestone, and set to PENDING_RELEASE.
+
+        .. NOTE::
+
+            For a 1.0 version issue resolved in a 1.1 release, should
+            the targeted release include a backported version of the 1.1
+            resolution, then the ticket should be cloned.
+
+    *   All tickets with status IN_PACKAGING are set against the new
+        milestone, and set to PENDING_RELEASE.
+
+    *   All tickets with status ASSIGNED and IN_PROGRESS are set against
+        the new milestone.
+
+        Doing so ensures tickets are assessed before a release button is
+        triggered, and do not linger against a ``-next`` milestone
+        indefinitely.
+
+        It is at this moment that assignees are encouraged to review the
+        tickets against the new milestone, and determine which ones they
+        might be able to include resolutions for, without necessarily
+        delaying the release significantly.
+
+        The tickets that cannot be resolved within a reasonable
+        timeframe are to be re-scheduled against a new appriopriate
+        milestone.
+
+#.  Bugzilla versions and milestones are up-to-date, including their
+    active state.
+
+#.  New milestones are created when a release is planned,
+
+#.  New milestones are created when software is branched off,
+
+#.  The versioning policy is consistent,
+
+#.  The new milestone includes an assessment on each ticket of type
+    *bug* possibly relevant to the upcoming release.
 
 .. _bugzilla-example-cyrus-imapd-sieve-date-extension-support:
 
