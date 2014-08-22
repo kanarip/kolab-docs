@@ -24,11 +24,11 @@ Kolab 3.3 compared to Kolab 3.1 ships the following additional components:
     The folder structure has changed. Roundcube has moved their public
     web content into a *public_html/* folder. While it tries to be backwards
     compatible, you might want to check your virtual host configuration if
-    you actually modified it.
+    you've actually modified it.
 
 #.  **E-Mail Tagging**
 
-    The roundcube plugin *kolab_notes* supports taggging of e-mails
+    The roundcube plugin *kolab_tags* supports taggging of e-mails
 
 #.  **Notes**
 
