@@ -6,9 +6,6 @@ Administrator Guide
 .. toctree::
     :maxdepth: 2
 
-    upgrading-from-kolab-2.3
-    upgrading-from-kolab-3.0
-
     verifying-the-installation
 
     configuring-the-kolab-server
@@ -39,6 +36,10 @@ Administrator Guide
 
     imap-access-rights-reference
     roundcube-settings-reference
+
+    upgrading-from-kolab-2.3
+    upgrading-from-kolab-3.0
+    upgrading-from-kolab-3.1-to-3.3
 
     ../glossary
 
