@@ -4,9 +4,10 @@
 Installation on Debian
 ======================
 
-1.  Add the following two lines to ``/etc/apt/sources.list.d/kolab.list``:
+Debian Wheezy
+=============
 
-    For Debian Wheezy:
+1.  Add the following two lines to ``/etc/apt/sources.list.d/kolab.list``:
 
     .. parsed-literal::
 
@@ -15,12 +16,39 @@ Installation on Debian
 
 2.  Obtain and install the GPG keys for the archives:
 
-    For Debian Wheezy:
-
     .. parsed-literal::
 
         # :command:`wget -qO - http://obs.kolabsys.com/repositories/Kolab:/3.3/Debian_7.0/Release.key | apt-key add -`
         # :command:`wget -qO - http://obs.kolabsys.com/repositories/Kolab:/3.3:/Updates/Debian_7.0/Release.key | apt-key add -`
+
+Next, continue with step #3 below.
+
+Debian Jessie
+=============
+
+.. warning::
+
+    The packages for Debian Jessie are in an experimental stage, and
+    provided solely on popular demand.
+
+1.  Add the following two lines to ``/etc/apt/sources.list.d/kolab.list``:
+
+    .. parsed-literal::
+
+        deb http://obs.kolabsys.com/repositories/Kolab:/3.3/Debian_8.0/ ./
+        deb http://obs.kolabsys.com/repositories/Kolab:/3.3:/Updates/Debian_8.0/ ./
+
+2.  Obtain and install the GPG keys for the archives:
+
+    .. parsed-literal::
+
+        # :command:`wget -qO - http://obs.kolabsys.com/repositories/Kolab:/3.3/Debian_8.0/Release.key | apt-key add -`
+        # :command:`wget -qO - http://obs.kolabsys.com/repositories/Kolab:/3.3:/Updates/Debian_8.0/Release.key | apt-key add -`
+
+Next, continue with step #3 below.
+
+Both Debian Wheezy and Jessie
+=============================
 
 3.  To ensure the Kolab packages have priority over the Debian packages, such as
     must be the case for PHP as well as Cyrus IMAP, please make sure the APT
