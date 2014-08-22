@@ -124,7 +124,7 @@ Update and Upgrade the system
     # :command:`apt-get update`
     # :command:`apt-get dist-upgrade`
 
- .. WARNING::
+.. WARNING:: 
 
     You'll get ask if you want to replace your configuration files! DON'T overwrite them!
     You'll lose your configuration and credentials and end up with a broken frontend.
