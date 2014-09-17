@@ -21,6 +21,43 @@ Suppose https://kolab-admin.example.org/api/ is the API base URL, then a
 call to service method **system.authenticate** would be a POST HTTP/1.1
 request to https://kolab-admin.example.org/api/system.authenticate.
 
+Example for an API call from PHP
+================================
+
+
+     .. parsed-literal::
+        <?php
+
+        //$api_url="https://kolab.example.org/kolab-webadmin/api/";
+        $api_url="https://kolab-admin.example.org/api/";
+        $url=$api_url."system.authenticate";
+
+        $postdata = 
+            array(
+                'username' => 'cn=Directory Manager',
+                'password' => 'secret'
+            );
+        $opts = array(
+          'http'=>array(
+            'method'=>"POST",
+            'header'  => 'Content-type: application/x-www-form-urlencoded',
+            'content'=>json_encode($postdata)
+          )
+        );
+
+        $context = stream_context_create($opts);
+
+        echo $url."\n";
+
+        $result = file_get_contents($url, false, $context);
+
+        echo $result;
+
+        echo "\n";
+
+        ?>
+
+
 HTTP Method Convention
 ======================
 
