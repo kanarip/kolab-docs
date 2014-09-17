@@ -95,6 +95,11 @@ More Complex Installation
 
         # :command:`yum -y install nginx php-fpm`
 
+    Note that to get full WebDAV support, an additional module is needed for
+    nginx. It's available from https://github.com/arut/nginx-dav-ext-module/,
+    but requires a rebuild of nginx from source. Some clients work without it,
+    others don't.
+
 #.  Remove the default **php-fpm** configuration:
 
     .. parsed-literal::
@@ -126,7 +131,7 @@ More Complex Installation
         server {
             listen                      8080 default_server;
             server_name                 kolab.example.org;
-            rewrite                     ^ https://$server_name$request_uri permanent;  # enforce https
+            return                      301 https://$host:8443$request_uri; # enforce https
         }
 
         server {
@@ -139,6 +144,15 @@ More Complex Installation
             ssl                         on;
             ssl_certificate             /etc/pki/tls/certs/localhost.pem;
             ssl_certificate_key         /etc/pki/tls/certs/localhost.pem;
+
+            # These cipher settings should ensure Perfect Forward Secrecy is
+            # enabled when possible.
+            ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
+            ssl_prefer_server_ciphers on;
+            ssl_ciphers "EECDH+ECDSA+AESGCM EECDH+aRSA+AESGCM EECDH+ECDSA+SHA384 EECDH+ECDSA+SHA256 EECDH+aRSA+SHA384 EECDH+aRSA+SHA256 EECDH+aRSA+RC4 EECDH EDH+aRSA RC4 !aNULL !eNULL !LOW !3DES !MD5 !EXP !PSK !SRP !DSS";
+
+            # Tell supporting clients to always connect over HTTPS
+            add_header Strict-Transport-Security "max-age=15768000;includeSubDomains";
 
             open_file_cache             max=1024 inactive=1m;
             open_file_cache_valid       90s;
@@ -195,15 +209,23 @@ More Complex Installation
                 include fastcgi_params;
                 fastcgi_index index.php;
                 fastcgi_pass unix:/var/run/php-fpm/kolab.example.org_iRony.sock;
-                fastcgi_param SCRIPT_FILENAME $request_filename;
+                fastcgi_split_path_info ^(.+\.php)(/.*)$;
+                fastcgi_param SCRIPT_FILENAME /usr/share/iRony/public_html/index.php;
+                fastcgi_param PATH_INFO $fastcgi_path_info;
+                # Enable this if you want to be able to browse iRony with a web browser.
+                #fastcgi_param DAVBROWSER 1;
             }
 
             ##
             ## Kolab Webclient
             ##
+
+            # For roundcube CSRF token support.
+            rewrite "^/roundcubemail/[a-f0-9]{16}/(.*)" /roundcubemail/$1 last;
+
             location /roundcubemail {
                 index index.php;
-                alias //usr/share/roundcubemail;
+                alias /usr/share/roundcubemail;
 
                 client_max_body_size 30M; # set maximum upload size for mail attachments
 
@@ -225,7 +247,7 @@ More Complex Installation
                     include fastcgi_params;
                     fastcgi_split_path_info ^(.+\\.php)(/.*)$;
                     fastcgi_pass unix:/var/run/php-fpm/kolab.example.org_roundcubemail.sock;
-                    fastcgi_param SCRIPT_FILENAME \\$request_filename;
+                    fastcgi_param SCRIPT_FILENAME $request_filename;
                 }
             }
 
@@ -235,7 +257,7 @@ More Complex Installation
             location /kolab-webadmin {
                 index index.php;
                 alias /usr/share/kolab-webadmin/public_html;
-                try_files \\$uri \\$uri/ @kolab-wapapi;
+                try_files $uri $uri/ @kolab-wapapi;
 
                 # enable php
                 location ~ \\.php$ {
