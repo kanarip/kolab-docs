@@ -111,14 +111,14 @@ Operational Requirements
                 subgraph cluster_broker {
                         label="broker";
 
-                        "client_router";
+                        "dealer_router";
                         "collector_router";
                         "worker_router";
                         "controller_router";
 
                         "queue";
 
-                        "client_router" -> "queue" -> "controller_router" -> "worker_router";
+                        "dealer_router" -> "queue" -> "controller_router" -> "worker_router";
                     }
 
                 subgraph cluster_worker {
@@ -134,7 +134,7 @@ Operational Requirements
                         "dealer";
                     }
 
-                "client_router" -> "*:5570";
+                "dealer_router" -> "*:5570";
                 "collector_router" -> "*:5569";
                 "worker_router" -> "*:5560";
                 "controller_router" -> "*:5561";
@@ -155,13 +155,13 @@ Broker -- Worker Interaction
 
 When the broker starts up, it creates three listener sockets:
 
-#.  A client router,
+#.  A dealer router,
 
-    used for incoming event notifications from IMAP servers.
+    used for incoming event notifications from IMAP servers passed through the Dealer component.
 
 #.  A worker router,
 
-    used to exchange job information with workers.
+    used to exchange job information and notification payload with workers.
 
 #.  A control router,
 
@@ -192,8 +192,8 @@ worker router.
         worker to allow it to determine whether or not it is still
         available.
 
-#.  The broker, maintaining a queue of jobs to assign to workers, let's
-    the worker know about a job -- again using the controller channel.
+#.  The broker, maintaining a queue of jobs to assign to workers, lets
+    the worker know about a newly assigned job -- again using the controller channel.
 
     .. graphviz::
 
@@ -222,6 +222,7 @@ worker router.
                 node [shape=record, fontname=Calibri, fontsize=11];
 
                 "broker" -> "worker" [label="GET $ID",dir=back];
+                "broker" -> "worker" [label="JOB $ID $PAYLOAD"];
             }
 
 #.  The worker is now in state BUSY and must respond within a set
@@ -245,15 +246,16 @@ The following components will be pluggable and configurable:
 *   subscribing to a message bus or queue, as ``inputs``, initially
     including only ``zmq``.
 
-*   event handling, as ``handlers``, initially including only
-    ``changelog``, ``freebusy``, and one handler per event notification
-    type.
+*   event handling, as ``handlers``, initially including only one
+    handler per event notification and higher level processors
+    ``changelog`` and ``freebusy`` to detect changes in groupwware
+    objects.
 
 *   result output, as ``output``, initially including only
     ``elasticsearch``.
 
-*   storage for transactions pending, as ``storage``, initialy including
-    only ``elasticsearch``.
+*   storage for transactions pending or aggregated meta information,
+    as ``storage``, initialy including only ``elasticsearch``.
 
 Assuming an installation path of :file:`bonnie/worker/`, the following
 depicts its tree layout:
@@ -261,16 +263,17 @@ depicts its tree layout:
 .. parsed-literal::
 
     handlers/
-        `-  changelog/
-        `-  freebusy/
+        `-  changelog.py
+        `-  freebusy.py
         `-  mailboxcreate.py
+        `-  messageappend.py
+        `-  ...
     inputs/
         `-  zmq_input.py
     outputs/
         `-  elasticsearch_output.py
     storage/
         `-  elasticsearch_storage.py
-    constants.py
 
 To take the changelog and freebusy handlers as an example, the following
 event notification types may need to be subscribed to.
@@ -322,25 +325,11 @@ event notification types may need to be subscribed to.
 .. NOTE::
 
     Plugins that are interested in the vendor/kolab/folder-type METADATA
-    value(s) of a folder should register a hook into the various mailbox
-    related event handlers, which can then be made responsible of
-    retrieving the associated information and issuing a callback.
+    value(s) of a folder can reply with additional commands for the collector
+    component which will put the current job back into the PENDING state and
+    send it through the handler again once the requested information was added
+    to the notification payload.
 
-.. graphviz::
-
-    digraph event_notification_flow {
-            splines = true;
-            overlab = prism;
-
-            edge [color=gray50, fontname=Calibri, fontsize=11];
-            node [shape=record, fontname=Calibri, fontsize=11];
-
-            "bus/queue" -> "worker" -> "thread pool";
-            "thread pool" -> "thread" -> "non-base handlers" [label="register_hooks()"];
-            "non-base handlers" -> "thread";
-            "thread" -> "base handlers" [label="handle_event()"]
-            "base handlers" -> "thread";
-        }
 
 .. _and-bonnie-event-notification-types:
 
@@ -667,238 +656,10 @@ It is possible to run Cyrus IMAP 2.5 notifications in a blocking fashion,
 allowing the (post-)processing operation(s) to complete in full before the IMAP
 session is allowed to continue / confirms the modification/mutation.
 
-Application Logic and Database Design Considerations
-====================================================
 
-Database Technology
--------------------
+.. Removed ORM model description after moving to elasticsearch for storage
+.. __ include:: bonnie-orm.rst
 
-NoSQL storing key value pairs, trick is to store as many keys as is necessary to
-get to the related value.
-
-Relationships problematic. Possibly for data only, use ORM for relationships.
-
-Object Relationship Manager
----------------------------
-
-*   User
-
-    An individual human being with physical presence (in the here and now, past
-    and/or future).
-
-*   Group
-
-    A group of individual User objects.
-
-*   Role
-
-    A role attached to one or more User objects, functionally the inverse of
-    a Group.
-
-*   IMAP Folder
-
-    *   METADATA, including:
-
-        *   Unique ID (persistent)
-        *   Shared seen, important to Read/Unread status tracking,
-        *
-
-    *   ACL
-    *   Payload
-
-Change Recording in ORM
------------------------
-
-Rather than recording the changes to objects explicitly, it is more effective to
-define the objects themselves as volatile objects, in such a way that updates to
-them imply a changelog record be created.
-
-In summary, it is better to reduce the processor's workload and code base from:
-
-.. graphviz::
-
-    digraph event_notification {
-            rankdir = LR;
-            splines = true;
-            overlab = prism;
-
-            edge [color=gray50, fontname=Calibri, fontsize=11]
-            node [shape=record, fontname=Calibri, fontsize=11]
-
-            "object record";
-            "object changelog record";
-
-            "change" -> "processor";
-
-            "processor" -> "object record" [label="updates"];
-            "processor" -> "object changelog record" [label="creates"];
-
-        }
-
-to:
-
-.. graphviz::
-
-    digraph event_notification {
-            rankdir = LR;
-            splines = true;
-            overlab = prism;
-
-            edge [color=gray50, fontname=Calibri, fontsize=11]
-            node [shape=record, fontname=Calibri, fontsize=11]
-
-            "object record";
-            "object changelog record";
-
-            "change" -> "processor";
-
-            "processor" -> "object record" [label="updates"];
-            "object record" -> "object changelog record" [label="record change implies creation of"];
-
-        }
-
-The basis of this implementation is simple (in Python):
-
-*   Declare a class for individual change records,
-*   Declare a declarative class inherited by individual object table
-    definitions,
-*   Use the declarative class in addition to the declarative base class in the
-    definition of the individual object table class,
-*   Use ``__setattr__()`` to catch any changes to existing objects,
-*   Process the current value of the object that is being changed, if any,
-*   Record the object name, object id, current value (if any), and the value it
-    is about to change to,
-*   Insert the new changelog record in to the current transaction.
-
-.. code-block:: python
-
-    class Change(DeclarativeBase):
-        """
-            This object represents an entry of a ChangeLog-type table.
-        """
-
-        __tablename__ = 'changes'
-
-        # Depending on the size of these tables, adjust the following
-        # table name that updates automatically. This example does so monthly.
-        #
-        # Note that this only affects every initialization of the engine.
-        #
-
-        #__tablename__ = eval(
-        #        '"changes_%s"' % (
-        #                datetime.strftime(datetime.utcnow(), "%Y_%m")
-        #            )
-        #    )
-
-        id = Column(Integer, primary_key=True)
-        object_name = Column(String(64))
-        object_id = Column(Integer)
-        value_from = Column(Text)
-        value_to = Column(Text)
-
-        # Add:
-        #
-        #   - who
-        #   - when
-
-    class ChangeRecordDeclarativeBase(object):
-        """
-            This abstract base class must be used for DeclarativeBase class
-            definitions for which we want to record changes to individual entries.
-        """
-
-        def __setattr__(self, key, value):
-            current_value = None
-
-            if hasattr(self, key):
-                current_value = getattr(self, key)
-
-            if not current_value == None and not current_value == value:
-                # Record the change
-                change = Change()
-                change.object_name = self.__class__.__name__
-                change.object_id = self.id
-                change.value_from = current_value
-                change.value_to = value
-
-                DBSession.add(change)
-
-            DeclarativeBase.__setattr__(self, key, value)
-
-    class Folder(ChangeRecordDeclarativeBase, DeclarativeBase):
-        """
-            An IMAP folder.
-        """
-
-        __tablename__ = 'folders'
-
-        id = Column(Integer, primary_key=True)
-        path = Column(Text, nullable=False)
-        uniqueid = Column(String(16))
-        created = Column(DateTime)
-
-        _metadata = relation("FolderMetadata")
-        _acl = relation("FolderACL")
-
-
-Users are Volatile and Groups do not Exist
-------------------------------------------
-
-Usernames as issued by Cyrus IMAP 2.5 notifications are volatile, in that the
-same physical human being (jane.gi@example.org) could change email addresses for
-any of many unrelated causes (jane.doe@example.org).
-
-It is therefore mandatory to:
-
-*   resolve IMAP login usernames to canonified IMAP login usernames,
-
-    User ``jdoe2`` could in fact be the same physical human being as
-    ``j.doe2@example.org`` and ``jane.doe@example.org``.
-
-*   relate canonified IMAP login usernames to persistent user attribute values,
-*   relate mail folder names, paths and URIs in personal namespaces to
-    persistent user attribute values,
-*   resolve IMAP ACE subject entries to their persistent attribute values, for
-    both users and groups,
-*   store membership information about groups at the time of an event,
-*   store roles attached to users.
-
-This needs to happen in a timely fashion, for intermediate changes to the
-authoritative, canonical user and group information database, in the period of
-time between the event notification and the collection of information, could
-invalidate the permanent record.
-
-.. graphviz::
-
-    digraph bonnie_user {
-            splines = true;
-            overlap = prism;
-
-            edge [color=gray50, fontname=Calibri, fontsize=11]
-            node [shape=record, fontname=Calibri, fontsize=11]
-
-            subgraph cluster_dbuser {
-                    label = "User (Database)";
-                    dbuser_id [label="ID", color=blue, fontcolor=blue];
-                    dbuser_uniqueid [label="UniqueID", color=blue, fontcolor=blue];
-                }
-
-            subgraph cluster_ldapuser {
-                    label = "User (LDAP)";
-                    ldapuser_dn [label="Entry DN", color=blue, fontcolor=blue];
-                    ldapuser_uniqueid [label="UniqueID", color=blue, fontcolor=blue];
-                }
-
-            subgraph cluster_dbdata {
-                    label = "Database Data";
-                    dbcolumn_dbuser_id [label="UserID", color=blue, fontcolor=blue];
-                }
-
-            dbuser_id -> dbuser_uniqueid [label="resolves to"];
-            dbuser_id -> dbcolumn_dbuser_id [label="FOREIGN KEY",dir=back];
-            dbuser_uniqueid -> ldapuser_uniqueid [label="equals"];
-        }
 
 Queries and Information Distribution
 ====================================
@@ -927,7 +688,7 @@ ZeroMQ
             "Worker-%d" -> "Controller";
         }
 
-Client <-> Broker <-> Worker Message Exchange
+Dealer <-> Broker <-> Worker Message Exchange
 =============================================
 
 Modelled after an article about tracking worker status at
@@ -946,41 +707,46 @@ http://rfc.zeromq.org/spec:14
             subgraph cluster_broker {
                     label = "Broker";
 
-                    "Client Router";
+                    "Dealer Router";
                     "Job Queue";
                 }
 
             subgraph cluster_clients {
-                    label = "Clients";
-                    "Client $x" [label="Client-%d"];
-                    "Client $y" [label="Client-%d"];
+                    label = "Dealers";
+                    "Dealer $x" [label="Dealer-%d"];
+                    "Dealer $y" [label="Dealer-%d"];
                 }
 
-            "Client $x", "Client $y" -> "Client Router" [label="(1) Submit"];
-            "Client Router" -> "Job Queue" [label="(2) Queue"];
-            "Client $x", "Client $y" -> "Client Router" [label="(3) Acknowledge",dir=back];
+            "Dealer $x", "Dealer $y" -> "Dealer Router" [label="(1) Submit"];
+            "Dealer Router" -> "Job Queue" [label="(2) Queue"];
+            "Dealer $x", "Dealer $y" -> "Dealer Router" [label="(3) Acknowledge",dir=back];
 
         }
 
-**Client - Broker Concerns**
+**Dealer - Broker Concerns**
 
-    #.  The client is queuing without a high-water mark and without a local
+    #.  The dealer is queuing without a high-water mark and without a local
         swap defined. It is only after the broker is available this queue is
         flushed. This could introduce a loss of notifications.
 
-    #.  The client is not awaiting confirmation in the sense that it will replay
-        the submission if needed, such as after the client has been restarted.
+    #.  The dealer is not awaiting confirmation in the sense that it will replay
+        the submission if needed, such as after the dealer has been restarted.
         This too could introduce a loss of notifications.
 
-    #.  The client is certainly not awaiting confirmation from any worker that
+    #.  The dealer is certainly not awaiting confirmation from any worker that
         the notification had been submitted to for handling.
 
-    #.  The client is a sub-process of the cyrus-imapd service, and should this
+    #.  The dealer is a sub-process of the cyrus-imapd service, and should this
         service be restarted, is not handling such signals to preserve state.
 
 **Broker Concerns**
 
-    #.  The broker is keeping the job queue in memory.
+    #.  The broker is keeping the job queue in memory for fast updates and responses.
+
+    .. NOTE::
+        The broker component shall periodically dump the job queue and registered
+        worker and collector connections into a persistant storage layer which has yet
+        to be defined.
 
 .. graphviz::
 
@@ -1031,16 +797,16 @@ http://rfc.zeromq.org/spec:14
                     label = "Broker";
 
                     "Controller";
-                    "Client Router";
+                    "Dealer Router";
                     "Job Queue";
                     "Worker Router";
                     "Worker List";
                 }
 
             subgraph cluster_clients {
-                    label = "Clients";
-                    "Client $x" [label="Client-%d"];
-                    "Client $y" [label="Client-%d"];
+                    label = "Dealers";
+                    "Dealer $x" [label="Dealer-%d"];
+                    "Dealer $y" [label="Dealer-%d"];
                 }
 
             subgraph cluster_workers {
@@ -1049,9 +815,9 @@ http://rfc.zeromq.org/spec:14
                     "Worker $y" [label="Worker-%d"];
                 }
 
-            "Client $x", "Client $y" -> "Client Router" [label="(1) Submit"];
-            "Client Router" -> "Job Queue" [label="(2) Queue"];
-            "Client $x", "Client $y" -> "Client Router" [label="(3) Acknowledge",dir=back];
+            "Dealer $x", "Dealer $y" -> "Dealer Router" [label="(1) Submit"];
+            "Dealer Router" -> "Job Queue" [label="(2) Queue"];
+            "Dealer $x", "Dealer $y" -> "Dealer Router" [label="(3) Acknowledge",dir=back];
 
             "Worker $x", "Worker $y" -> "Controller" [label="(a) READY"];
 
@@ -1061,6 +827,183 @@ http://rfc.zeromq.org/spec:14
 
             "Worker $x", "Worker $y" -> "Worker Router" [label="(e) Take Job"];
             "Worker Router" -> "Worker List" [label="(f) Mark BUSY"];
+        }
+
+
+.. _and-bonnie-storage-layout-schema:
+
+Storage Layout and Schema
+=========================
+
+Logging Event Notifications
+---------------------------
+
+Logging event notification into the storage backend (currently elasticsearch)
+is inspired by logstash and writes to daily rotated indexes ``logstash-Y-m-d``
+using document type ``logs``. The basic schema of an event notification
+contains the following attributes:
+
+.. code-block:: json
+
+    {
+      "@timestamp": "2014-10-11T23:10:20.536000Z",
+      "@version": 1,
+      "event": "SomeEvent",
+      "client_ip": "::1",
+      "folder_id": "4ed7903ebd7722d12596a2e2ed57bbdf",
+      "folder_uniqueid": "f83c6305-f884-440a-b93d-eff285ada1f4",
+      "service": "imap",
+      "session_id": "kolab.example.org-2819-1413069020-1",
+      "uri": "imap://john.doe@example.org@kolab.example.org/INBOX;UIDVALIDITY=1411487701",
+      "user": "john.doe@example.org",
+      "user_id": "f6c10801-1dd111b2-9d31a2a8-bebbcb98",
+    }
+
+The very minimal attributes required for an event notification entry are
+
+*   ``@timestamp``: The UTC time when the event was logged
+*   ``@version``: Bonnie data API version
+*   ``event``: The Cyrus IMAP event
+*   ``service``: "imap" denoting that this logstash entry represents an IMAP event notification
+*   ``session_id``: The Cyrus IMAP session identifier
+*   ``user``: The authenticated user who triggered the event
+
+Depending on the event type, additional attributes containg message IDs, message
+headers or payload, flag names or ACL. For message or mailbox based events the ``uri``
+attribute is added and refers to the mailbox/folder the operation was executed on.
+
+From the basic attributes, some relations to metadata (see :ref:`and-bonnie-storing-metadata`)
+are extracted and the logstash entry is extended with identifiers referring to user
+and folder metadata entries:
+
+*   ``folder_uniqueid``: The gobally unique folder identifer of a mailbox folder from IMAP.
+
+*   ``folder_id``: Links to a folder entry representing the current state of a mailbox folder
+    at the time the event occurred. This includes folder name, metadata and access rights.
+
+*   ``user_id``: Unique identifier (from the LDAP ``nsuniqueid`` attribute) of the
+    use who executed the logged operation in IMAP.
+
+
+.. _and-bonnie-storing-metadata:
+
+Storing Metadata
+----------------
+
+Metadata records are used to amend log data with more complete and persistent
+information of rather volatile attributes like username and mailbox URIs issued
+by Cyrus IMAP 2.5 notifications. For example, the same physical human being
+(jane.gi@example.org) could change email addresses for any of many unrelated
+causes (jane.doe@example.org) and IMAP folders can be renamed at any given time.
+
+Users
+^^^^^
+
+Stored in ``objects/user`` with the following schema:
+
+.. code-block:: json
+
+    {
+      "@timestamp": "2014-10-11T19:30:24.330029Z",
+      "dn": "uid=doe,ou=People,dc=example,dc=org",
+      "user": "john.doe@example.org",
+      "cn": "John Doe"
+    }
+
+The ``nsuniqueid`` attribute from the LDAP is used as the primary key/id
+of user records.
+
+Folders
+^^^^^^^
+
+Stored in ``objects/folder`` with the following schema:
+
+.. code-block:: json
+
+    {
+      "@timestamp": "2014-10-11T23:10:54.055272Z",
+      "@version": 1,
+      "acl": {
+        "anyone": "lrswiptedn",
+        "f6c10801-1dd111b2-9d31a2a8-bebbcb98": "lrswipkxtecdan"
+      },
+      "metadata": {
+        "/shared/vendor/cmu/cyrus-imapd/duplicatedeliver": "false",
+        "/shared/vendor/cmu/cyrus-imapd/lastupdate": "12-Oct-2014 01:10:20 +0200",
+        "/shared/vendor/cmu/cyrus-imapd/partition": "default",
+        "/shared/vendor/cmu/cyrus-imapd/pop3newuidl": "true",
+        "/shared/vendor/cmu/cyrus-imapd/sharedseen": "false",
+        "/shared/vendor/cmu/cyrus-imapd/size": "2593",
+        "/shared/vendor/cmu/cyrus-imapd/uniqueid": "f83c6305-f884-440a-b93d-eff285ada1f4",
+        "/shared/vendor/kolab/folder-type": "mail"
+      },
+      "name": "INBOX",
+      "owner": "john.doe",
+      "server": "kolab.example.org",
+      "type": "mail",
+      "uniqueid": "f83c6305-f884-440a-b93d-eff285ada1f4",
+      "uri": "imap://john.doe@example.org@kolab.example.org/INBOX"
+    }
+
+The primary key/id of folder records is computed as a checksum of all
+attributes and metadata entries considered relevant for the "state" of
+a folder. This means that a new folder record is created when ACLs or
+folder type metadata is changed.
+
+The keys of ``acl`` entries provided by the Collector module from IMAP data
+are translated into static user identifers.
+
+.. NOTE::
+
+    In order to compute the folder identifier, the complete set of
+    folder information like metadata and acl has to be pulled from
+    IMAP using a collector job on every single event notification.
+    Once Cyrus IMAP supports notifications for metadata changes
+    (`#3698 <https://issues.kolab.org/show_bug.cgi?id=3698>`_),
+    this could be skipped and the folder metadata records can be
+    updated on specific events only.
+
+
+Object Relations
+----------------
+
+Although elasticsearch isn't a relational database, the Bonnie storage model implies
+a simple object relation model between logs and metadata.
+
+.. graphviz::
+
+    digraph bonnie_relations {
+            splines = true;
+            overlap = prism;
+
+            edge [color=gray50, fontname=Calibri, fontsize=11]
+            node [shape=record, fontname=Calibri, fontsize=11]
+
+            subgraph cluster_user {
+                    label = "User (objects/user)";
+                    user_user_id [label="_id", color=blue, fontcolor=blue];
+                    user_user_dn [label="dn", color=blue, fontcolor=blue];
+                    user_user_cn [label="cn", color=blue, fontcolor=blue];
+                }
+
+            subgraph cluster_folder {
+                    label = "Folder (objects/folder)";
+                    folder_id [label="_id", color=blue, fontcolor=blue];
+                    folder_uniqueid [label="uniqueid", color=blue, fontcolor=blue];
+                }
+
+            subgraph cluster_log {
+                    label = "Log Entry (logstash-*/log)";
+                    log_user [label="user", color=blue, fontcolor=blue];
+                    log_uri [label="uri", color=blue, fontcolor=blue];
+                    log_user_id [label="user_id", color=blue, fontcolor=blue];
+                    log_folder_id [label="folder_id", color=blue, fontcolor=blue];
+                }
+
+            log_user -> log_user_id [label="resolves to"];
+            log_uri -> log_folder_id [label="resolves to"];
+            log_user_id -> user_user_id [label="FOREIGN KEY"];
+            log_folder_id -> folder_id [label="FOREIGN KEY"];
         }
 
 
