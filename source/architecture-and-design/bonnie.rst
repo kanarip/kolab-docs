@@ -861,12 +861,12 @@ contains the following attributes:
 
 The very minimal attributes required for an event notification entry are
 
-#.  ``@timestamp``: The UTC time when the event was logged
-#.  ``@version``: Bonnie data API version
-#.  ``event``: The Cyrus IMAP event
-#.  ``service``: "imap" denoting that this logstash entry represents an IMAP event notification
-#.  ``session_id``: The Cyrus IMAP session identifier
-#.  ``user``: The authenticated user who triggered the event
+*   ``@timestamp``: The UTC time when the event was logged
+*   ``@version``: Bonnie data API version
+*   ``event``: The Cyrus IMAP event
+*   ``service``: "imap" denoting that this logstash entry represents an IMAP event notification
+*   ``session_id``: The Cyrus IMAP session identifier
+*   ``user``: The authenticated user who triggered the event
 
 Depending on the event type, additional attributes containg message IDs, message
 headers or payload, flag names or ACL. For message or mailbox based events the ``uri``
@@ -876,12 +876,12 @@ From the basic attributes, some relations to metadata (see :ref:`and-bonnie-stor
 are extracted and the logstash entry is extended with identifiers referring to user
 and folder metadata entries:
 
-#.  ``folder_uniqueid``: The gobally unique folder identifer of a mailbox folder from IMAP.
+*   ``folder_uniqueid``: The gobally unique folder identifer of a mailbox folder from IMAP.
 
-#.  ``folder_id``: Links to a folder entry representing the current state of a mailbox folder
+*   ``folder_id``: Links to a folder entry representing the current state of a mailbox folder
     at the time the event occurred. This includes folder name, metadata and access rights.
 
-#.  ``user_id``: Unique identifier (from the LDAP ``nsuniqueid`` attribute) of the
+*   ``user_id``: Unique identifier (from the LDAP ``nsuniqueid`` attribute) of the
     use who executed the logged operation in IMAP.
 
 
